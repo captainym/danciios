@@ -116,10 +116,9 @@
     if([segue.identifier isEqualToString:@"gotoStudy"]){
         [segue.destinationViewController setAlbumName: [self.albumSelected objectForKey:ALBUM_NAME]];
         [segue.destinationViewController setWordPoint: [[self.albumSelected objectForKey:ALBUM_WORD_POINT] intValue] ];
-        [segue.destinationViewController setPointStudy:[[self.albumSelected objectForKey:ALBUM_WORD_POINT] intValue]];
-         [segue.destinationViewController setWords:[self.albumSelected objectForKey:ALBUM_WORDS]];
-        //set delegate. 更新album的断点 
-        //[segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setWords:[self.albumSelected objectForKey:ALBUM_WORDS]];
+        [segue.destinationViewController setIsNewStudy:TRUE];
+        [segue.destinationViewController setIsReview:FALSE];
     }
 }
 

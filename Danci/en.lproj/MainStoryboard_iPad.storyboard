@@ -89,7 +89,7 @@
                                             <constraint firstAttribute="height" constant="210" id="sqz-TN-PCz"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="auf-XX-lI3" style="IBUITableViewCellStyleDefault" id="59P-nv-4pL">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="auf-XX-lI3" style="IBUITableViewCellStyleDefault" id="59P-nv-4pL">
                                                 <rect key="frame" x="0.0" y="22" width="748" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -116,7 +116,7 @@
                                             <constraint firstAttribute="height" constant="250" id="jDX-vP-1Gh"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="tipSentensesCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vMX-bq-rDB">
+                                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="tipSentensesCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="vMX-bq-rDB">
                                                 <rect key="frame" x="0.0" y="22" width="748" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
