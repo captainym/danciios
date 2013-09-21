@@ -9,6 +9,8 @@
 #import "DanciAlbumTableViewController.h"
 #import "DanciWordViewController.h"
 
+#define ALBUM_CATEGORY @"category"
+#define ALBUM_LIST @"albums"
 #define ALBUM_NAME @"albumName"
 #define ALBUM_WORD_POINT @"wordPoint"
 #define ALBUM_WORDS @"words"
@@ -79,7 +81,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.albums objectAtIndex:section] count];
+    return [[[self.albums objectAtIndex:section] objectForKey:ALBUM_LIST] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,14 +90,21 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if(cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
-    NSDictionary *tmpAlbum = [[self.albums objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    NSLog(@"the name of the album:%@", [tmpAlbum objectForKey:ALBUM_NAME]);
+    NSDictionary *tmpAlbum = [[[self.albums objectAtIndex:indexPath.section] objectForKey:ALBUM_LIST] objectAtIndex:indexPath.row];
+    //NSLog(@"the name of the album:%@", [tmpAlbum objectForKey:ALBUM_NAME]);
     cell.textLabel.text = [tmpAlbum objectForKey:ALBUM_NAME];
-    
+    int wordsNum = [[tmpAlbum objectForKey:ALBUM_WORDS] count];
+    int wordPoint = [[tmpAlbum objectForKey:ALBUM_WORD_POINT] intValue];
+    cell.detailTextLabel.text = [[NSString class] stringWithFormat:@"总量%d。 学习到第%d个单词", wordsNum, wordPoint];
     return cell;
 }
 
-#pragma mark - Table view delegate
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSDictionary *tmpAlbums = [self.albums objectAtIndex:section];
+    NSString *sectionTitle = [tmpAlbums objectForKey:ALBUM_CATEGORY];
+    return sectionTitle;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -107,11 +116,13 @@
     if([segue.identifier isEqualToString:@"gotoStudy"]){
         [segue.destinationViewController setAlbumName: [self.albumSelected objectForKey:ALBUM_NAME]];
         [segue.destinationViewController setWordPoint: [[self.albumSelected objectForKey:ALBUM_WORD_POINT] intValue] ];
+        [segue.destinationViewController setPointStudy:[[self.albumSelected objectForKey:ALBUM_WORD_POINT] intValue]];
          [segue.destinationViewController setWords:[self.albumSelected objectForKey:ALBUM_WORDS]];
         //set delegate. 更新album的断点 
         //[segue.destinationViewController setDelegate:self];
     }
 }
 
+#pragma mark - Table view delegate
 
 @end

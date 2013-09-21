@@ -12,10 +12,14 @@
 
 //album info
 @property (nonatomic, strong) NSString *albumName;
-//单词本中用户的学习断点。 由album指定 通常是用户第一个没有学习过的单词（未反馈>认识、不认识）
+//单词本中用户的学习断点。 由album指定 通常是用户第一个没有学习过的单词（未反馈>认识、不认识）的下标
 @property (nonatomic) int wordPoint;
 // words of the album
 @property (nonatomic, strong) NSArray *words;
+// 正在学习的单词下标和正在复习的单词下标
+@property int pointStudy;
+@property int pointCurReview;
+
 
 //助记图片的tableview
 @property (weak, nonatomic) IBOutlet UITableView *tblTipImgs;

@@ -7,8 +7,11 @@
 //
 
 #import "DanciWordViewController.h"
+#import "PPImageScrollingTableViewCell.h"
 
-@interface DanciWordViewController ()
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate>
+
+@property (nonatomic, strong) NSArray *images;
 
 @end
 
@@ -18,9 +21,14 @@
 @synthesize albumName = _albumName;
 @synthesize wordPoint = _wordPoint;
 @synthesize words = _words;
+@synthesize pointStudy = _pointStudy;
+@synthesize pointCurReview = _pointCurReview;
+
 @synthesize tblTipImgs = _tblTipImgs;
 @synthesize tblTipTxts = _tblTipTxts;
 @synthesize tblTipSentens = _tblTipSentens;
+
+@synthesize images = _images;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,6 +48,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //title显示当前正在学习或复习的单词
+    self.title = [self.words objectAtIndex:self.pointStudy];
+    
+    //造些img的假数据
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,9 +65,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    if(tableView == self.tblTipImgs){
+        return 1;
+    }else if (tableView == self.tblTipTxts){
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -74,45 +89,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -125,5 +101,24 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+#pragma mark - PPImageScrollingTableViewCellDelegate
+
+- (void)scrollingTableViewCell:(PPImageScrollingTableViewCell *)scrollingTableViewCell didSelectImageAtIndexPath:(NSIndexPath*)indexPathOfImage atCategoryRowIndex:(NSInteger)categoryRowIndex
+{
+    
+    NSDictionary *images = [self.images objectAtIndex:categoryRowIndex];
+    NSArray *imageCollection = [images objectForKey:@"images"];
+    NSString *imageTitle = [[imageCollection objectAtIndex:[indexPathOfImage row]]objectForKey:@"title"];
+    NSString *categoryTitle = [[self.images objectAtIndex:categoryRowIndex] objectForKey:@"category"];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imageTitle]
+                                                    message:[NSString stringWithFormat: @"in %@",categoryTitle]
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
+}
+
 
 @end
