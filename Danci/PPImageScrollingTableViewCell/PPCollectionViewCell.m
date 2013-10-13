@@ -30,6 +30,12 @@
 -(void)setImage:(UIImage *)image
 {
     self.imageView.image = image;
+    if ([self.contentView subviews]){
+        for (UILabel *subview in [self.contentView subviews]) {
+            [subview removeFromSuperview];
+        }
+    }
+    [self.contentView addSubview:self.imageView];
 }
 
 /*

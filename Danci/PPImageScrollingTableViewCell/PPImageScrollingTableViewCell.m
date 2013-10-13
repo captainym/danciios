@@ -10,8 +10,8 @@
 #import "PPImageScrollingCellView.h"
 
 #define kScrollingViewHieght 140
-#define kCategoryLabelWidth 200
-#define kCategoryLabelHieght 30
+//#define kCategoryLabelWidth 200
+//#define kCategoryLabelHieght 30
 #define kStartPointY 30
 
 @interface PPImageScrollingTableViewCell() <PPImageScrollingViewDelegate>
@@ -46,7 +46,7 @@
 - (void)initialize
 {
     // Set ScrollImageTableCellView
-    _imageScrollingView = [[PPImageScrollingCellView alloc] initWithFrame:CGRectMake(0., kStartPointY, 700., kScrollingViewHieght)];
+    _imageScrollingView = [[PPImageScrollingCellView alloc] initWithFrame:CGRectMake(0., kStartPointY, 768., kScrollingViewHieght)];
     _imageScrollingView.delegate = self;
 }
 
