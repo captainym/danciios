@@ -43,7 +43,7 @@
                       @[
                         @{
                           @"albumName": @"六级高频词汇",
-                          @"wordPoint": @"3",
+                          @"wordPoint": @"1",
                           @"words":@[@"accident",@"sex",@"friend"],
                          },
                         ]
