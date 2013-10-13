@@ -108,11 +108,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.albumSelected = [[self.albums objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    self.albumSelected = [[[self.albums objectAtIndex:indexPath.section] objectForKey:ALBUM_LIST] objectAtIndex:indexPath.row];
+    NSLog(@"now albumSelected. albumName[%@] wordPoint[%@] wordNum[%d]",
+          [self.albumSelected objectForKey: ALBUM_NAME],
+          [self.albumSelected objectForKey: ALBUM_WORD_POINT],
+          [[self.albumSelected objectForKey: ALBUM_WORDS] count]);
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+//    self.albumSelected = [[[self.albums objectAtIndex:1] objectForKey:ALBUM_LIST] objectAtIndex:0];
+//    NSLog(@"now albumSelected. albumName[%@] wordPoint[%@] wordNum[%d]",
+//          [self.albumSelected objectForKey: ALBUM_NAME],
+//          [self.albumSelected objectForKey: ALBUM_WORD_POINT],
+//          [[self.albumSelected objectForKey: ALBUM_WORDS] count]);
+    
     if([segue.identifier isEqualToString:@"gotoStudy"]){
         [segue.destinationViewController setAlbumName: [self.albumSelected objectForKey:ALBUM_NAME]];
         [segue.destinationViewController setWordPoint: [[self.albumSelected objectForKey:ALBUM_WORD_POINT] intValue] ];

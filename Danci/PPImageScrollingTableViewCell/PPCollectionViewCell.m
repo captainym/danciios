@@ -32,6 +32,7 @@
     self.imageView.image = image;
 }
 
+/*
 - (void)setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height
 {
     self.imageTitle = [[UITextView alloc] initWithFrame:CGRectMake(0., _imageView.frame.size.height/2+5, width,height)];
@@ -58,6 +59,7 @@
     [self.contentView addSubview:self.imageTitle];
     
 }
+ */
 
 /*
 // Only override drawRect: if you perform custom drawing.

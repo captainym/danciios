@@ -14,11 +14,10 @@
 @property (strong, nonatomic) PPCollectionViewCell *myCollectionViewCell;
 @property (strong, nonatomic) UICollectionView *myCollectionView;
 @property (strong, nonatomic) NSArray *collectionImageData;
-@property (nonatomic) CGFloat imagetitleWidth;
-@property (nonatomic) CGFloat imagetitleHeight;
-@property (strong, nonatomic) UIColor *imageTilteBackgroundColor;
-@property (strong, nonatomic) UIColor *imageTilteTextColor;
-
+//@property (nonatomic) CGFloat imagetitleWidth;
+//@property (nonatomic) CGFloat imagetitleHeight;
+//@property (strong, nonatomic) UIColor *imageTilteBackgroundColor;
+//@property (strong, nonatomic) UIColor *imageTilteTextColor;
 
 @end
 
@@ -62,6 +61,7 @@
     [_myCollectionView reloadData];
 }
 
+/*
 - (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height{
     _imagetitleWidth = width;
     _imagetitleHeight = height;
@@ -70,7 +70,7 @@
     
     _imageTilteTextColor = textColor;
     _imageTilteBackgroundColor = bgColor;
-}
+}*/
 
 #pragma mark - UICollectionViewDataSource methods
 
@@ -83,14 +83,14 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
     PPCollectionViewCell *cell = (PPCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"PPCollectionCell" forIndexPath:indexPath];
     NSDictionary *imageDic = [self.collectionImageData objectAtIndex:[indexPath row]];
     
-    [cell setImage:[UIImage imageNamed:[imageDic objectForKey:@"name"]]];
-    [cell setImageTitleLabelWitdh:_imagetitleWidth withHeight:_imagetitleHeight];
-    [cell setImageTitleTextColor:_imageTilteTextColor withBackgroundColor:_imageTilteBackgroundColor];
-    [cell setTitle:[imageDic objectForKey:@"title"]];
+    [cell setImage:[UIImage imageNamed:[imageDic objectForKey:@"url"]]];
+    //[cell setImageTitleLabelWitdh:_imagetitleWidth withHeight:_imagetitleHeight];
+    //[cell setImageTitleTextColor:_imageTilteTextColor withBackgroundColor:_imageTilteBackgroundColor];
+    //[cell setTitle:[imageDic objectForKey:@"title"]];
     return cell;
 }
 

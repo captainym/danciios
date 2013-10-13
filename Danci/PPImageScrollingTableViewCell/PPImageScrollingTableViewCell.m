@@ -16,9 +16,9 @@
 
 @interface PPImageScrollingTableViewCell() <PPImageScrollingViewDelegate>
 
-@property (strong,nonatomic) UIColor *categoryTitleColor;
+//@property (strong,nonatomic) UIColor *categoryTitleColor;
 @property(strong, nonatomic) PPImageScrollingCellView *imageScrollingView;
-@property (strong, nonatomic) NSString *categoryLabelText;
+//@property (strong, nonatomic) NSString *categoryLabelText;
 
 @end
 
@@ -54,12 +54,13 @@
     // Configure the view for the selected state
 }
 
-- (void)setImageData:(NSDictionary*)collectionImageData
+- (void)setImageData:(NSArray *)images
 {
-    [_imageScrollingView setImageData:[collectionImageData objectForKey:@"images"]];
-    _categoryLabelText = [collectionImageData objectForKey:@"category"];
+    [_imageScrollingView setImageData: images];
+    //_categoryLabelText = [collectionImageData objectForKey:@"category"];
 }
 
+/*
 - (void)setCategoryLabelText:(NSString*)text withColor:(UIColor*)color{
     
     if ([self.contentView subviews]){
@@ -73,17 +74,18 @@
     categoryTitle.textColor = color;
     categoryTitle.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:categoryTitle];
-}
-    
+}*/
+
+/*
 - (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height {
 
     [_imageScrollingView setImageTitleLabelWitdh:width withHeight:height];
-}
-
+}*/
+/*
 - (void) setImageTitleTextColor:(UIColor *)textColor withBackgroundColor:(UIColor *)bgColor{
 
     [_imageScrollingView setImageTitleTextColor:textColor withBackgroundColor:bgColor];
-}
+}*/
 
 - (void)setCollectionViewBackgroundColor:(UIColor *)color{
     
@@ -94,8 +96,8 @@
 #pragma mark - PPImageScrollingViewDelegate
 
 - (void)collectionView:(PPImageScrollingCellView *)collectionView didSelectImageItemAtIndexPath:(NSIndexPath*)indexPath {
-
-    [self.delegate scrollingTableViewCell:self didSelectImageAtIndexPath:indexPath atCategoryRowIndex:self.tag];
+    
+    [self.delegate scrollingTableViewCell:self didSelectImageAtIndexPath:indexPath];
 }
 
 @end

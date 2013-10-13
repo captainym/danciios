@@ -20,9 +20,9 @@
 
 @property (weak, nonatomic) id<PPImageScrollingViewDelegate> delegate;
 
-- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;
-- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor;
-- (void) setImageData:(NSArray*)collectionImageData;
+//- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;
+//- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor;
+- (void) setImageData:(NSArray*)images;
 - (void) setBackgroundColor:(UIColor*)color;
 
 @end

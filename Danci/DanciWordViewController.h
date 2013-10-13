@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DanciWordViewController : UITableViewController
+@interface DanciWordViewController : UIViewController
 
 //指示当前页面是新学习还是复习；
 @property BOOL isNewStudy;
@@ -35,19 +35,20 @@
 //单词词根词缀信息
 @property (nonatomic, strong) NSString *wordGern;
 //单词的图片助记: [{tipImgId tipImgUrl adoptNum createTime}]
-@property (nonatomic, strong) NSMutableArray *tipImgs;
+@property (nonatomic, strong) NSArray *tipImgs;
 //单词的文字助记：[{tipTxtid tipTxt adoptNum createTime}]
 @property (nonatomic, strong) NSMutableArray *tipTxts;
 //单词的例句: [{例句 中文意思、Mp3}]
 @property (nonatomic, strong) NSMutableArray *tipSentences;
 
+//控件
+@property (weak, nonatomic) IBOutlet UILabel *lblMeaning;
+@property (weak, nonatomic) IBOutlet UILabel *lblStem;
+@property (weak, nonatomic) IBOutlet UIImageView *imgTipimg;
 
-//助记图片的tableview
-@property (weak, nonatomic) IBOutlet UITableView *tblTipImgs;
-//助记文字的tableview
-@property (weak, nonatomic) IBOutlet UITableView *tblTipTxts;
-//助记 例句
-@property (weak, nonatomic) IBOutlet UITableView *tblTipSentens;
+@property (weak, nonatomic) IBOutlet UITableView *tblTipimgs;
+@property (weak, nonatomic) IBOutlet UITableView *tblTiptxtSentense;
 
 
+ 
 @end

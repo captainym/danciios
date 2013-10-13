@@ -12,7 +12,7 @@
 @protocol PPImageScrollingTableViewCellDelegate <NSObject>
 
 // Notifies the delegate when user click image
-- (void)scrollingTableViewCell:(PPImageScrollingTableViewCell *)scrollingTableViewCell didSelectImageAtIndexPath:(NSIndexPath*)indexPathOfImage atCategoryRowIndex:(NSInteger)categoryRowIndex;
+- (void)scrollingTableViewCell:(PPImageScrollingTableViewCell *)sender didSelectImageAtIndexPath:(NSIndexPath*)indexPathOfImage;
 
 @end
 
@@ -21,10 +21,10 @@
 @property (weak, nonatomic) id<PPImageScrollingTableViewCellDelegate> delegate;
 @property (nonatomic) CGFloat height;
 
-- (void) setImageData:(NSDictionary*) image;
+- (void) setImageData:(NSArray *) image;
 - (void) setCollectionViewBackgroundColor:(UIColor*) color;
-- (void) setCategoryLabelText:(NSString*)text withColor:(UIColor*)color;
-- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;
-- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor;
+//- (void) setCategoryLabelText:(NSString*)text withColor:(UIColor*)color;
+//- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;
+//- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor;
 
 @end
