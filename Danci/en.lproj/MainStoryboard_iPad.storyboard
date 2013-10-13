@@ -176,14 +176,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lUQ-SP-2gu" firstAttribute="top" secondItem="fMf-XL-u6W" secondAttribute="top" type="default" id="1RH-Dc-QdE"/>
+                            <constraint firstItem="1at-iG-o2B" firstAttribute="baseline" secondItem="fMf-XL-u6W" secondAttribute="baseline" type="default" id="4Xk-gi-Nzr"/>
                             <constraint firstItem="KV5-kP-Bhu" firstAttribute="top" secondItem="1at-iG-o2B" secondAttribute="top" type="default" id="854-nH-cOC"/>
                             <constraint firstItem="lUQ-SP-2gu" firstAttribute="top" secondItem="IsN-kh-ELJ" secondAttribute="top" type="default" id="AIn-Mh-OIA"/>
+                            <constraint firstItem="IsN-kh-ELJ" firstAttribute="baseline" secondItem="KV5-kP-Bhu" secondAttribute="baseline" type="default" id="B09-ta-zkU"/>
                             <constraint firstItem="Egk-0M-o5T" firstAttribute="trailing" secondItem="Dop-0l-WFK" secondAttribute="trailing" type="default" id="CaZ-tf-4nV"/>
                             <constraint firstItem="4A8-bs-mol" firstAttribute="top" secondItem="JoM-1S-eTg" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ELG-Yo-a7W"/>
                             <constraint firstItem="Egk-0M-o5T" firstAttribute="top" secondItem="Dop-0l-WFK" secondAttribute="top" type="default" id="EgJ-dF-O5h"/>
+                            <constraint firstItem="lUQ-SP-2gu" firstAttribute="baseline" secondItem="IsN-kh-ELJ" secondAttribute="baseline" type="default" id="G0G-yg-Ltp"/>
                             <constraint firstItem="Egk-0M-o5T" firstAttribute="leading" secondItem="Dop-0l-WFK" secondAttribute="leading" type="default" id="G1O-p2-ppP"/>
                             <constraint firstItem="KV5-kP-Bhu" firstAttribute="leading" secondItem="Dop-0l-WFK" secondAttribute="leading" constant="171" id="IFO-Ar-vOD"/>
                             <constraint firstAttribute="trailing" secondItem="fMf-XL-u6W" secondAttribute="trailing" constant="29" id="JYY-F0-45Z"/>
+                            <constraint firstItem="lUQ-SP-2gu" firstAttribute="baseline" secondItem="KV5-kP-Bhu" secondAttribute="baseline" type="default" id="Q9B-4Z-JeS"/>
                             <constraint firstItem="4A8-bs-mol" firstAttribute="leading" secondItem="Dop-0l-WFK" secondAttribute="leading" type="default" id="QFl-Vs-Rrh"/>
                             <constraint firstAttribute="trailing" secondItem="lUQ-SP-2gu" secondAttribute="trailing" constant="252" id="QUn-xE-m8m"/>
                             <constraint firstItem="JoM-1S-eTg" firstAttribute="leading" secondItem="Dop-0l-WFK" secondAttribute="leading" type="default" id="UCe-vQ-zqr"/>
@@ -246,6 +250,7 @@
                 <relationship kind="outlet" name="lblMeaning" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblStem" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tblTipimgs" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tblTiptxtSentense" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">

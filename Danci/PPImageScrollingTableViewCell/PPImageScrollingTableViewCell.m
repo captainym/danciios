@@ -9,7 +9,7 @@
 #import "PPImageScrollingTableViewCell.h"
 #import "PPImageScrollingCellView.h"
 
-#define kScrollingViewHieght 120
+#define kScrollingViewHieght 140
 #define kCategoryLabelWidth 200
 #define kCategoryLabelHieght 30
 #define kStartPointY 30
@@ -23,6 +23,8 @@
 @end
 
 @implementation PPImageScrollingTableViewCell
+
+@synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -44,7 +46,7 @@
 - (void)initialize
 {
     // Set ScrollImageTableCellView
-    _imageScrollingView = [[PPImageScrollingCellView alloc] initWithFrame:CGRectMake(0., kStartPointY, 320., kScrollingViewHieght)];
+    _imageScrollingView = [[PPImageScrollingCellView alloc] initWithFrame:CGRectMake(0., kStartPointY, 700., kScrollingViewHieght)];
     _imageScrollingView.delegate = self;
 }
 
@@ -57,6 +59,13 @@
 - (void)setImageData:(NSArray *)images
 {
     [_imageScrollingView setImageData: images];
+    
+    if ([self.contentView subviews]){
+        for (UIView *subview in [self.contentView subviews]) {
+            [subview removeFromSuperview];
+        }
+    }
+    [self.contentView addSubview:_imageScrollingView];
     //_categoryLabelText = [collectionImageData objectForKey:@"category"];
 }
 
@@ -80,7 +89,8 @@
 - (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height {
 
     [_imageScrollingView setImageTitleLabelWitdh:width withHeight:height];
-}*/
+}
+*/
 /*
 - (void) setImageTitleTextColor:(UIColor *)textColor withBackgroundColor:(UIColor *)bgColor{
 
@@ -88,9 +98,8 @@
 }*/
 
 - (void)setCollectionViewBackgroundColor:(UIColor *)color{
-    
     _imageScrollingView.backgroundColor = color;
-    [self.contentView addSubview:_imageScrollingView];
+//    [self.contentView addSubview:_imageScrollingView];
 }
 
 #pragma mark - PPImageScrollingViewDelegate

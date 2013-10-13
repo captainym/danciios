@@ -33,7 +33,7 @@
         /* Set flowLayout for CollectionView*/
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.itemSize = CGSizeMake(100.0, 110.0);
+        flowLayout.itemSize = CGSizeMake(135.0, 135.0);
         flowLayout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 10);
         flowLayout.minimumLineSpacing = 10;
 
@@ -50,7 +50,6 @@
 }
 
 - (void) setImageData:(NSArray*)collectionImageData{
-
     _collectionImageData = collectionImageData;
     [_myCollectionView reloadData];
 }

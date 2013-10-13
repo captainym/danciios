@@ -12,7 +12,7 @@
 //图片的tableView需要150的宽度。ipad下可以考虑更大
 #define HEIGHT_IMG_ROW 150.0
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate>
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate>
 
 @end
 
@@ -76,6 +76,10 @@
     if(_tipSentences == nil) _tipSentences = [[NSMutableArray alloc] init];
     return _tipSentences;
 }
+- (void)setWordPoint:(int)wordPoint
+{
+    _wordPoint = wordPoint - 1;
+}
 - (NSString *) word
 {
     _word = [self.words objectAtIndex:self.wordPoint];
@@ -94,12 +98,12 @@
     self.comment = @"朋友";
     self.wordGern = @"词根词缀";
     self.tipImgs = @[
-                     @{ @"name":@"sample_1.jpeg", @"url":@"A-0"},
-                     @{ @"name":@"sample_2.jpeg", @"url":@"A-1"},
-                     @{ @"name":@"sample_3.jpeg", @"url":@"A-2"},
-                     @{ @"name":@"sample_4.jpeg", @"url":@"A-3"},
-                     @{ @"name":@"sample_5.jpeg", @"url":@"A-4"},
-                     @{ @"name":@"sample_6.jpeg", @"url":@"A-5"}
+                     @{ @"name":@"name-sample_1.jpeg", @"url":@"sample_1.jpeg"},
+                     @{ @"name":@"name-sample_2.jpeg", @"url":@"sample_2.jpeg"},
+                     @{ @"name":@"name-sample_3.jpeg", @"url":@"sample_3.jpeg"},
+                     @{ @"name":@"name-sample_4.jpeg", @"url":@"sample_4.jpeg"},
+                     @{ @"name":@"name-sample_5.jpeg", @"url":@"sample_5.jpeg"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"sample_6.jpeg"}
                      ];
     [self.tipTxts addObjectsFromArray: @[
      @{@"tip":@"文字助记1", @"adoptNum": @"50" , @"optTime":@"18000" },
@@ -146,6 +150,18 @@
     self.title = self.word;
     self.lblMeaning.text = self.comment;
     self.lblStem.text= self.wordGern;
+    
+    //注册cell
+//    [self.tblTipimgs registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTipimg];
+    static NSString *CellIdentifier = cellTipimg;
+    [self.tblTipimgs registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    [self.tblTiptxtSentense registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTiptxt];
+    [self.tblTiptxtSentense registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTipsentence];
+    
+    [self.tblTipimgs setDataSource:self];
+    [self.tblTipimgs setDelegate:self];
+    [self.tblTiptxtSentense setDataSource:self];
+    [self.tblTiptxtSentense setDataSource:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -173,9 +189,9 @@
     if(tableView == self.tblTipimgs){
         return 1;
     }else if (tableView == self.tblTiptxtSentense){
-        if(section == 1){
+        if(section == 0){
             return [self.tipTxts count];
-        }else if(section == 2){
+        }else if(section == 1){
             return [self.tipSentences count];
         }else{
             return 0;
@@ -189,40 +205,33 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
-    
-    
-    /*
-    if(tableView == self.tblTipImgs){
-        /
-        static NSString *CellIdentifier = @"CellTipImg";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-         /
-        
+    if(tableView == self.tblTipimgs){
         //显示图片
-        static NSString *CellIdentifier = @"CellTipImg";
+        static NSString *CellIdentifier = cellTipimg;
         PPImageScrollingTableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         NSArray *cellData = self.tipImgs;
         [customCell setBackgroundColor:[UIColor grayColor]];
         [customCell setDelegate:self];
         [customCell setImageData:cellData];
-        //[customCell setCategoryLabelText:[cellData objectForKey:@"category"] withColor:[UIColor whiteColor]];
-        [customCell setTag:[indexPath section]];
-        //[customCell setImageTitleTextColor:[UIColor whiteColor] withBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
-        //[customCell setImageTitleLabelWitdh:90 withHeight:45];
+//        [customCell setCategoryLabelText:[cellData objectForKey:@"category"] withColor:[UIColor whiteColor]];
+//        [customCell setTag:[indexPath section]];
+//        [customCell setImageTitleTextColor:[UIColor whiteColor] withBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
+//        [customCell setImageTitleLabelWitdh:90 withHeight:45];
         [customCell setCollectionViewBackgroundColor:[UIColor darkGrayColor]];
-         
-    }else if (tableView == self.tblTipTxts){
-        static NSString *CellIdentifier = @"CellTipTxt";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        //显示txt tip¬
-    }else if (tableView == self.tblTipSentens){
-        static NSString *CellIdentifier = @"CellTipSentence";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        //显示例句
+        return customCell;
+    }else if (tableView == self.tblTiptxtSentense){
+        if(indexPath.section == 0){
+            //显示txt tip
+            cell = [tableView dequeueReusableCellWithIdentifier:cellTiptxt forIndexPath:indexPath];
+            cell.textLabel.text = @"tiptxt";
+        }else if(indexPath.section ==1){
+            //显示txt tip
+            cell = [tableView dequeueReusableCellWithIdentifier:cellTipsentence forIndexPath:indexPath];
+            cell.textLabel.text = @"tipsentence";
+        }
     }else{
         NSLog(@"DANCI WARNING: loading cell. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
     }
-*/
     
     return cell;
 }
@@ -231,14 +240,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    if(tableView == self.tblTipImgs){
-    }else if (tableView == self.tblTipTxts){
-    }else if (tableView == self.tblTipSentens){
-    }else{
-        NSLog(@"DANCI WARNING: didSelected. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
-    }
-     */
+    
 }
 
 
@@ -265,6 +267,7 @@
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
+    self.imgTipimg.image = [UIImage imageNamed:imgUrl];
     [alert show];
 }
 

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#define cellTipimg @"CellTipImg"
+#define cellTiptxt @"CellTipTxt"
+#define cellTipsentence @"CellTipSentence"
+
 @interface DanciWordViewController : UIViewController
 
 //指示当前页面是新学习还是复习；
