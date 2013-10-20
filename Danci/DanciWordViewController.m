@@ -5,6 +5,7 @@
 //  Created by HuHao on 13-9-20.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
+#import <AVFoundation/AVFoundation.h>
 
 #import "DanciWordViewController.h"
 #import "PPImageScrollingTableViewCell.h"
@@ -101,18 +102,7 @@
     self.fayinMp3Url = @"wordmp3/p/psychology.arm";
     self.tipImgFilepath = @"psychology_md51.jpeg";
     self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思；\n cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 \n psy-cho-logy连起来就是“知道心的学说”。";
-//    self.tipImgs = @[
-//                     @{ @"name":@"psychology_md51.jpeg", @"url":@"psychology_md51.jpeg"},
-//                     @{ @"name":@"name-sample_2.jpeg", @"url":@"psychology_md52.jpg"},
-//                     @{ @"name":@"name-sample_3.jpeg", @"url":@"psychology_md53.jpg"},
-//                     @{ @"name":@"name-sample_4.jpeg", @"url":@"psychology_md54.jpg"},
-//                     @{ @"name":@"name-sample_5.jpeg", @"url":@"psychology_md55.jpg"},
-//                     @{ @"name":@"name-sample_2.jpeg", @"url":@"psychology_md56.png"},
-//                     @{ @"name":@"name-sample_3.jpeg", @"url":@"psychology_md57.jpg"},
-//                     @{ @"name":@"name-sample_4.jpeg", @"url":@"psychology_md58.gif"},
-//                     @{ @"name":@"name-sample_5.jpeg", @"url":@"psychology_md59.jpg"},
-//                     @{ @"name":@"name-sample_6.jpeg", @"url":@"psychology_md519.jpg"}
-//                     ];
+
     self.tipImgs = @[
                      @{ @"name":@"psychology_md51.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4606907701657645&w=125&h=145&c=7&rs=1&pid=1.7"},
                      @{ @"name":@"name-sample_2.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4798712300766788&w=186&h=145&c=7&rs=1&pid=1.7"},
@@ -141,8 +131,8 @@
      @{@"tip":@"文字助记2", @"adoptNum": @"50" , @"optTime":@"18000" },
      ]];
     [self.tipSentences addObjectsFromArray:@[
-     @{@"sentence":@"friend is so good", @"mp3":@"./xxx.mp3"},
-     @{@"sentence":@"friend is so NICE", @"mp3":@"./xxx2.mp3"},
+     @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://dbl-rdtest-3-04.vm.baidu.com:8090/psychology.mp3"},
+     @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
      ]];
     NSLog(@"tipImg count%d ", [self.tipImgs count]);
 }
@@ -203,7 +193,12 @@
     [self.tblTipimgs setDataSource:self];
     [self.tblTipimgs setDelegate:self];
     [self.tblTiptxt setDataSource:self];
+    [self.tblTiptxt setDelegate:self];
     [self.tblTipsentense setDataSource:self];
+    [self.tblTipsentense setDelegate:self];
+    
+    //播放器初始化
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -262,11 +257,11 @@
     }else if (tableView == self.tblTiptxt){
         //显示txt tip
         cell = [tableView dequeueReusableCellWithIdentifier:cellTiptxt forIndexPath:indexPath];
-        cell.textLabel.text = @"tiptxt";
+        cell.textLabel.text = [[self.tipTxts objectAtIndex:[indexPath row]] objectForKey:@"tip"];
     }else if (tableView == self.tblTipsentense){
         //显示txt tip
         cell = [tableView dequeueReusableCellWithIdentifier:cellTipsentence forIndexPath:indexPath];
-        cell.textLabel.text = @"tipsentence";
+        cell.textLabel.text = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"sentence"]; 
     }else{
         NSLog(@"DANCI WARNING: loading cell. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
     }
@@ -278,7 +273,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if(tableView == self.tblTipsentense){
+        NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"mp3"];
+        NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
+        NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
+        NSError *myerror = nil;
+//        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:mp3urlNet error:&myerror];
+        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
+        if(player){
+            if ([player prepareToPlay]) {
+                [player play];
+            }else{
+                NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
+            }
+        }else{
+            NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
+        }
+    }
 }
 
 
