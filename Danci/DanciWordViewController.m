@@ -95,16 +95,47 @@
 - (void) getWordInfo
 {
     //先用假数据
-    self.comment = @"朋友";
-    self.wordGern = @"词根词缀";
+    _word = @"psychology";
+    self.fayin = @"[saɪˈkɒlədʒɪ]";
+    self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
+    self.fayinMp3Url = @"wordmp3/p/psychology.arm";
+    self.tipImgFilepath = @"psychology_md51.jpeg";
+    self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思；\n cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 \n psy-cho-logy连起来就是“知道心的学说”。";
+//    self.tipImgs = @[
+//                     @{ @"name":@"psychology_md51.jpeg", @"url":@"psychology_md51.jpeg"},
+//                     @{ @"name":@"name-sample_2.jpeg", @"url":@"psychology_md52.jpg"},
+//                     @{ @"name":@"name-sample_3.jpeg", @"url":@"psychology_md53.jpg"},
+//                     @{ @"name":@"name-sample_4.jpeg", @"url":@"psychology_md54.jpg"},
+//                     @{ @"name":@"name-sample_5.jpeg", @"url":@"psychology_md55.jpg"},
+//                     @{ @"name":@"name-sample_2.jpeg", @"url":@"psychology_md56.png"},
+//                     @{ @"name":@"name-sample_3.jpeg", @"url":@"psychology_md57.jpg"},
+//                     @{ @"name":@"name-sample_4.jpeg", @"url":@"psychology_md58.gif"},
+//                     @{ @"name":@"name-sample_5.jpeg", @"url":@"psychology_md59.jpg"},
+//                     @{ @"name":@"name-sample_6.jpeg", @"url":@"psychology_md519.jpg"}
+//                     ];
     self.tipImgs = @[
-                     @{ @"name":@"name-sample_1.jpeg", @"url":@"sample_1.jpeg"},
-                     @{ @"name":@"name-sample_2.jpeg", @"url":@"sample_2.jpeg"},
-                     @{ @"name":@"name-sample_3.jpeg", @"url":@"sample_3.jpeg"},
-                     @{ @"name":@"name-sample_4.jpeg", @"url":@"sample_4.jpeg"},
-                     @{ @"name":@"name-sample_5.jpeg", @"url":@"sample_5.jpeg"},
-                     @{ @"name":@"name-sample_6.jpeg", @"url":@"sample_6.jpeg"}
+                     @{ @"name":@"psychology_md51.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4606907701657645&w=125&h=145&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_2.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4798712300766788&w=186&h=145&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_3.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.5012038975817713&w=201&h=145&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_4.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4721716456259760&w=215&h=145&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_5.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4616249229050600&w=109&h=145&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_2.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4684302965671129&w=200&h=145&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_3.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4866306521369249&w=249&h=155&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_4.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4728584091535132&w=208&h=151&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_5.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4904497335305733&w=222&h=135&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.5000532789101397&w=220&h=146&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4845055009882817&w=221&h=146&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4573840716727463&pid=1.9&w=300&h=300&p=0"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4907069983819353&w=194&h=146&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.5043869011348364&w=161&h=154&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4594465161085808&pid=1.9&w=300&h=300&p=0"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts4.mm.bing.net/th?id=H.4681597146629555&w=177&h=149&c=7&rs=1&pid=1.7"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4630886486248195&pid=1.9&w=300&h=300&p=0"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4530835230425413&pid=1.9&w=300&h=300&p=0"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
+                     @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      ];
+    
     [self.tipTxts addObjectsFromArray: @[
      @{@"tip":@"文字助记1", @"adoptNum": @"50" , @"optTime":@"18000" },
      @{@"tip":@"文字助记2", @"adoptNum": @"50" , @"optTime":@"18000" },
@@ -147,21 +178,32 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     //title显示当前正在学习或复习的单词
-    self.title = self.word;
+    self.title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
     self.lblMeaning.text = self.comment;
     self.lblStem.text= self.wordGern;
+    //读图片
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
+                                                       , NSUserDomainMask
+                                                       , YES);
+    NSString *filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:self.word];
+    NSLog(@"load filepath[%@]", filepath);
+    NSFileManager *filemanager = [NSFileManager defaultManager];
+    if([filemanager fileExistsAtPath: filepath]){
+        NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
+        self.imgTipimg.image = [UIImage imageWithData:imagedata];
+    }
     
     //注册cell
 //    [self.tblTipimgs registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTipimg];
     static NSString *CellIdentifier = cellTipimg;
     [self.tblTipimgs registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    [self.tblTiptxtSentense registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTiptxt];
-    [self.tblTiptxtSentense registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTipsentence];
+    [self.tblTiptxt registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTiptxt];
+    [self.tblTipsentense registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTipsentence];
     
     [self.tblTipimgs setDataSource:self];
     [self.tblTipimgs setDelegate:self];
-    [self.tblTiptxtSentense setDataSource:self];
-    [self.tblTiptxtSentense setDataSource:self];
+    [self.tblTiptxt setDataSource:self];
+    [self.tblTipsentense setDataSource:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -176,8 +218,10 @@
 {
     if(tableView == self.tblTipimgs){
         return 1;
-    }else if (tableView == self.tblTiptxtSentense){
-        return 2;
+    }else if (tableView == self.tblTiptxt){
+        return 1;
+    }else if(tableView == self.tblTipsentense){
+        return 1;
     }else{
         NSLog(@"DANCI WARNING: see sections. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
         return 0;
@@ -188,14 +232,10 @@
 {
     if(tableView == self.tblTipimgs){
         return 1;
-    }else if (tableView == self.tblTiptxtSentense){
-        if(section == 0){
-            return [self.tipTxts count];
-        }else if(section == 1){
-            return [self.tipSentences count];
-        }else{
-            return 0;
-        }
+    }else if (tableView == self.tblTiptxt){
+        return [self.tipTxts count];
+    }else if(tableView == self.tblTipsentense){
+        return [self.tipSentences count];
     }else{
         NSLog(@"DANCI WARNING: see sections. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
         return 0;
@@ -219,16 +259,14 @@
 //        [customCell setImageTitleLabelWitdh:90 withHeight:45];
         [customCell setCollectionViewBackgroundColor:[UIColor darkGrayColor]];
         return customCell;
-    }else if (tableView == self.tblTiptxtSentense){
-        if(indexPath.section == 0){
-            //显示txt tip
-            cell = [tableView dequeueReusableCellWithIdentifier:cellTiptxt forIndexPath:indexPath];
-            cell.textLabel.text = @"tiptxt";
-        }else if(indexPath.section ==1){
-            //显示txt tip
-            cell = [tableView dequeueReusableCellWithIdentifier:cellTipsentence forIndexPath:indexPath];
-            cell.textLabel.text = @"tipsentence";
-        }
+    }else if (tableView == self.tblTiptxt){
+        //显示txt tip
+        cell = [tableView dequeueReusableCellWithIdentifier:cellTiptxt forIndexPath:indexPath];
+        cell.textLabel.text = @"tiptxt";
+    }else if (tableView == self.tblTipsentense){
+        //显示txt tip
+        cell = [tableView dequeueReusableCellWithIdentifier:cellTipsentence forIndexPath:indexPath];
+        cell.textLabel.text = @"tipsentence";
     }else{
         NSLog(@"DANCI WARNING: loading cell. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
     }
@@ -261,14 +299,27 @@
 {
     NSString *imgName = [[self.tipImgs objectAtIndex:indexPathOfImage.row]objectForKey:@"name"];
     NSString *imgUrl = [[self.tipImgs objectAtIndex:indexPathOfImage.row] objectForKey:@"url"];
+    NSLog(@"selected img info: imgName:[%@] imgUrl:[%@]", imgName, imgUrl);
+    NSData *imgdata = [NSData dataWithContentsOfURL: [NSURL URLWithString:imgUrl]];
+    self.imgTipimg.image = [UIImage imageWithData:imgdata];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
-                                                    message:[NSString stringWithFormat: @"in %@",imgUrl]
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles: nil];
-    self.imgTipimg.image = [UIImage imageNamed:imgUrl];
-    [alert show];
+    //图片保存到本地
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
+                                                       , NSUserDomainMask
+                                                       , YES);
+    NSLog(@"Get document path: %@",[paths objectAtIndex:0]);
+    
+    NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:self.word];
+    NSLog(@"fileName:[%@]", fileName);
+    if ([imgdata writeToFile:fileName atomically:YES]) {
+        NSLog(@">>write ok.");
+    }
+    //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
+    //                                                    message:[NSString stringWithFormat: @"in %@",imgUrl]
+    //                                                   delegate:self
+    //                                          cancelButtonTitle:@"OK"
+    //                                          otherButtonTitles: nil];
+//    [alert show];
 }
 
 

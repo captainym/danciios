@@ -34,6 +34,8 @@
 //单词的发音 以便和单词一起作为navigation的title
 @property (nonatomic, strong) NSString *fayin;
 @property (nonatomic, strong) NSString *fayinMp3Url;
+//单词的助记图片
+@property (nonatomic, strong) NSString *tipImgFilepath;
 //单词的中文释义
 @property (nonatomic, strong) NSString *comment;
 //单词词根词缀信息
@@ -51,7 +53,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgTipimg;
 
 @property (weak, nonatomic) IBOutlet UITableView *tblTipimgs;
-@property (weak, nonatomic) IBOutlet UITableView *tblTiptxtSentense;
+@property (weak, nonatomic) IBOutlet UITableView *tblTipsentense;
+@property (weak, nonatomic) IBOutlet UITableView *tblTiptxt;
 
 
  

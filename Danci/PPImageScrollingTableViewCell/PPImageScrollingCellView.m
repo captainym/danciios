@@ -86,7 +86,18 @@
     PPCollectionViewCell *cell = (PPCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"PPCollectionCell" forIndexPath:indexPath];
     NSDictionary *imageDic = [self.collectionImageData objectAtIndex:[indexPath row]];
     
-    [cell setImage:[UIImage imageNamed:[imageDic objectForKey:@"url"]]];
+    NSString *imgurl = [imageDic objectForKey:@"url"];
+    NSLog(@"now load img with url:[%@]",imgurl);
+    dispatch_queue_t downloadImg = dispatch_queue_create("download one img", NULL);
+    dispatch_async(downloadImg, ^{
+        NSURL *imgurlnet = [NSURL URLWithString:imgurl];
+        NSData *imgData = [NSData dataWithContentsOfURL:imgurlnet];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:imgData];
+            [cell setImage:image];
+        });
+    });
+//    [cell setImage:[UIImage imageNamed:[imageDic objectForKey:@"url"]]];
     //[cell setImageTitleLabelWitdh:_imagetitleWidth withHeight:_imagetitleHeight];
     //[cell setImageTitleTextColor:_imageTilteTextColor withBackgroundColor:_imageTilteBackgroundColor];
     //[cell setTitle:[imageDic objectForKey:@"title"]];

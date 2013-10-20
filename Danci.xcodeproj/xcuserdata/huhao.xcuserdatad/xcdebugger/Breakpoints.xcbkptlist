@@ -17,15 +17,15 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "403350938.357614"
+         timestampString = "403954503.415422"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "300"
+         endingLineNumber = "300"
          landmarkName = "-scrollingTableViewCell:didSelectImageAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,19 +79,6 @@
          startingLineNumber = "81"
          endingLineNumber = "81"
          landmarkName = "-collectionView:numberOfItemsInSection:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Danci/PPImageScrollingTableViewCell/PPImageScrollingCellView.m"
-         timestampString = "403346027.801894"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
-         landmarkName = "-collectionView:cellForItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -190,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "403350938.357614"
+         timestampString = "403954503.415422"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "211"
-         endingLineNumber = "211"
+         startingLineNumber = "251"
+         endingLineNumber = "251"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
