@@ -5,7 +5,6 @@
 //  Created by HuHao on 13-9-20.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
-#import <AVFoundation/AVFoundation.h>
 
 #import "DanciWordViewController.h"
 #import "PPImageScrollingTableViewCell.h"
@@ -13,7 +12,7 @@
 //图片的tableView需要150的宽度。ipad下可以考虑更大
 #define HEIGHT_IMG_ROW 150.0
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate>
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate>
 
 @end
 
@@ -33,6 +32,7 @@
 @synthesize tipImgs = _tipImgs;
 @synthesize tipTxts = _tipTxts;
 @synthesize tipSentences = _tipSentences;
+@synthesize player = _player;
 
 - (void) setIsReview:(BOOL)isReview
 {
@@ -83,8 +83,11 @@
 }
 - (NSString *) word
 {
-    _word = [self.words objectAtIndex:self.wordPoint];
-    [self getWordInfo];
+    if(![_word isEqualToString: [self.words objectAtIndex:self.wordPoint]]){
+        NSLog(@"word not equal. load again. _word[%@] new word[%@]", _word,[self.words objectAtIndex:self.wordPoint]);
+        _word = [self.words objectAtIndex:self.wordPoint];
+        [self getWordInfo];
+    }
     return _word;
 }
 - (NSString *) wordGern
@@ -125,7 +128,6 @@
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      ];
-    
     [self.tipTxts addObjectsFromArray: @[
      @{@"tip":@"文字助记1", @"adoptNum": @"50" , @"optTime":@"18000" },
      @{@"tip":@"文字助记2", @"adoptNum": @"50" , @"optTime":@"18000" },
@@ -197,8 +199,6 @@
     [self.tblTipsentense setDataSource:self];
     [self.tblTipsentense setDelegate:self];
     
-    //播放器初始化
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -228,8 +228,10 @@
     if(tableView == self.tblTipimgs){
         return 1;
     }else if (tableView == self.tblTiptxt){
+        NSLog(@"now number of rows of tblTiptxt:[%d]", [self.tipTxts count]);
         return [self.tipTxts count];
     }else if(tableView == self.tblTipsentense){
+        NSLog(@"now number of rows of tblSentence:[%d]", [self.tipSentences count]);
         return [self.tipSentences count];
     }else{
         NSLog(@"DANCI WARNING: see sections. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
@@ -275,23 +277,34 @@
 {
     if(tableView == self.tblTipsentense){
         NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"mp3"];
-        NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
-        NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
-        NSError *myerror = nil;
-//        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:mp3urlNet error:&myerror];
-        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
-        if(player){
-            if ([player prepareToPlay]) {
-                [player play];
+        dispatch_queue_t play_q = dispatch_queue_create("play mp3", NULL);
+        dispatch_async(play_q, ^{
+            NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
+            NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
+            NSError *myerror = nil;
+            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
+            [self.player setDelegate:self];
+            if(self.player){
+                if ([self.player prepareToPlay]) {
+                    [self.player setVolume:0.5f];
+                    if([self.player play]){
+                        NSLog(@"play successed. mp3url[%@]", mp3url);
+                    }else{
+                        NSLog(@"play failed! mp3url[%@]", mp3url);
+                    }
+                }else{
+                    NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
+                }
             }else{
-                NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
+                NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
             }
-        }else{
-            NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
-        }
+        });
     }
 }
 
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    NSLog(@"播放完毕 %d",flag);
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -311,25 +324,30 @@
     NSString *imgName = [[self.tipImgs objectAtIndex:indexPathOfImage.row]objectForKey:@"name"];
     NSString *imgUrl = [[self.tipImgs objectAtIndex:indexPathOfImage.row] objectForKey:@"url"];
     NSLog(@"selected img info: imgName:[%@] imgUrl:[%@]", imgName, imgUrl);
-    NSData *imgdata = [NSData dataWithContentsOfURL: [NSURL URLWithString:imgUrl]];
-    self.imgTipimg.image = [UIImage imageWithData:imgdata];
+    dispatch_queue_t downloadImg = dispatch_queue_create("downloadImg", NULL);
+    dispatch_async(downloadImg, ^{
+        NSURL *imgUrlNet = [NSURL URLWithString:imgUrl];
+        NSData * imgData = [NSData dataWithContentsOfURL:imgUrlNet];
+        dispatch_async(dispatch_get_main_queue(),^{
+            UIImage *img = [UIImage imageWithData:imgData];
+            self.imgTipimg.image = img;
+        });
+        
+        //图片保存到本地
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *fileName = [[paths objectAtIndex:0] stringByAppendingString:self.word];
+        if([imgData writeToFile:fileName atomically:YES]){
+            NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
+        }else{
+            NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
+        }
+    });
     
-    //图片保存到本地
-    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
-                                                       , NSUserDomainMask
-                                                       , YES);
-    NSLog(@"Get document path: %@",[paths objectAtIndex:0]);
-    
-    NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:self.word];
-    NSLog(@"fileName:[%@]", fileName);
-    if ([imgdata writeToFile:fileName atomically:YES]) {
-        NSLog(@">>write ok.");
-    }
-    //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
-    //                                                    message:[NSString stringWithFormat: @"in %@",imgUrl]
-    //                                                   delegate:self
-    //                                          cancelButtonTitle:@"OK"
-    //                                          otherButtonTitles: nil];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
+//                                                    message:[NSString stringWithFormat: @"in %@",imgUrl]
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"OK"
+//                                          otherButtonTitles: nil];
 //    [alert show];
 }
 

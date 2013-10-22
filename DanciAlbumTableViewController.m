@@ -44,7 +44,7 @@
                         @{
                           @"albumName": @"六级高频词汇",
                           @"wordPoint": @"1",
-                          @"words":@[@"accident",@"sex",@"friend"],
+                          @"words":@[@"accident",@"sex",@"psychology"],
                          },
                         ]
                       },
@@ -54,12 +54,12 @@
                               @{
                                   @"albumName": @"四级高频词汇",
                                   @"wordPoint": @"2",
-                                  @"words":@[@"hello",@"girl",@"friend"],
+                                  @"words":@[@"hello",@"psychology",@"psychology"],
                                   },
                               @{
                                   @"albumName": @"六级高频词汇",
                                   @"wordPoint": @"3",
-                                  @"words":@[@"accident",@"sex",@"friend"],
+                                  @"words":@[@"accident",@"sex",@"psychology"],
                                   },
                             ]
                       },

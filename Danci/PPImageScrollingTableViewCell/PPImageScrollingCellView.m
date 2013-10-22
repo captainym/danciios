@@ -98,9 +98,9 @@
         });
     });
 //    [cell setImage:[UIImage imageNamed:[imageDic objectForKey:@"url"]]];
-    //[cell setImageTitleLabelWitdh:_imagetitleWidth withHeight:_imagetitleHeight];
-    //[cell setImageTitleTextColor:_imageTilteTextColor withBackgroundColor:_imageTilteBackgroundColor];
-    //[cell setTitle:[imageDic objectForKey:@"title"]];
+//    [cell setImageTitleLabelWitdh:_imagetitleWidth withHeight:_imagetitleHeight];
+//    [cell setImageTitleTextColor:_imageTilteTextColor withBackgroundColor:_imageTilteBackgroundColor];
+//    [cell setTitle:[imageDic objectForKey:@"title"]];
     return cell;
 }
 

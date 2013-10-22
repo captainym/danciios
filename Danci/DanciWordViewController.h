@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define cellTipimg @"CellTipImg"
 #define cellTiptxt @"CellTipTxt"
@@ -46,6 +47,8 @@
 @property (nonatomic, strong) NSMutableArray *tipTxts;
 //单词的例句: [{例句 中文意思、Mp3}]
 @property (nonatomic, strong) NSMutableArray *tipSentences;
+//播放器
+@property (nonatomic,strong) AVAudioPlayer *player;
 
 //控件
 @property (weak, nonatomic) IBOutlet UILabel *lblMeaning;
