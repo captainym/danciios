@@ -10,9 +10,9 @@
 #import "PPImageScrollingTableViewCell.h"
 
 //图片的tableView需要150的宽度。ipad下可以考虑更大
-#define HEIGHT_IMG_ROW 150.0
+#define HEIGHT_IMG_ROW 100.0
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate>
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate>
 
 @end
 
@@ -104,7 +104,8 @@
     self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
     self.fayinMp3Url = @"wordmp3/p/psychology.arm";
     self.tipImgFilepath = @"psychology_md51.jpeg";
-    self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思；\n cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 \n psy-cho-logy连起来就是“知道心的学说”。";
+    self.tipTxt = @"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) ";
+    self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思； cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 psy-cho-logy连起来就是“知道心的学说”。";
 
     self.tipImgs = @[
                      @{ @"name":@"psychology_md51.jpeg", @"url":@"http://ts2.mm.bing.net/th?id=H.4606907701657645&w=125&h=145&c=7&rs=1&pid=1.7"},
@@ -129,8 +130,10 @@
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      ];
     [self.tipTxts addObjectsFromArray: @[
-     @{@"tip":@"文字助记1", @"adoptNum": @"50" , @"optTime":@"18000" },
-     @{@"tip":@"文字助记2", @"adoptNum": @"50" , @"optTime":@"18000" },
+     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y)", @"adoptNum": @"271" , @"optTime":@"18000" },
+     @{@"tip":@"PSY鸟叔，心理变态", @"adoptNum": @"93" , @"optTime":@"18000" },
+     @{@"tip":@"各种常见的学 psychology 心理学 chemistry 化学 physics 物理学 mathematics 数学 literature 文学 astronomy 天文学", @"adoptNum": @"48" , @"optTime":@"18000" },
+     @{@"tip":@"psych=mind, logy=某种学问，关于mind的学问，心理学", @"adoptNum": @"28" , @"optTime":@"18000" },
      ]];
     [self.tipSentences addObjectsFromArray:@[
      @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://dbl-rdtest-3-04.vm.baidu.com:8090/psychology.mp3"},
@@ -173,6 +176,8 @@
     self.title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
     self.lblMeaning.text = self.comment;
     self.lblStem.text= self.wordGern;
+    self.lblMeaningStemIphone.text = [@"简明释义：" stringByAppendingString:[[self.comment stringByAppendingString:@"\n词根词缀："] stringByAppendingString:self.wordGern]];
+    self.lblMeaningStemIphone.adjustsFontSizeToFitWidth = TRUE;
     //读图片
     NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
                                                        , NSUserDomainMask
@@ -183,22 +188,27 @@
     if([filemanager fileExistsAtPath: filepath]){
         NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
         self.imgTipimg.image = [UIImage imageWithData:imagedata];
+        self.imgTipimgIphone.image = [UIImage imageWithData:imagedata];
     }
     
     //注册cell
-//    [self.tblTipimgs registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTipimg];
     static NSString *CellIdentifier = cellTipimg;
     [self.tblTipimgs registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    [self.tblTiptxt registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTiptxt];
-    [self.tblTipsentense registerClass:[UITableViewCell class] forCellReuseIdentifier:cellTipsentence];
-    
     [self.tblTipimgs setDataSource:self];
     [self.tblTipimgs setDelegate:self];
-    [self.tblTiptxt setDataSource:self];
-    [self.tblTiptxt setDelegate:self];
-    [self.tblTipsentense setDataSource:self];
-    [self.tblTipsentense setDelegate:self];
     
+    //iphone
+    [self.tblTipimgsIphone registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:cellTipimg];
+    [self.tblTipimgsIphone setDelegate:self];
+    [self.tblTipimgsIphone setDataSource:self];
+    
+    //iphone－tip sentence 的multisagetableview
+//    CGRect mFrame = CGRectMake(self.svTiptxtsentence.frame.origin.x, self.svTiptxtsentence.frame.origin.y, self.svTiptxtsentence.frame.size.width, self.svTiptxtsentence.frame.size.height - 1);
+    CGRect mFrame = CGRectMake(0.0, 0.0, 314.0, 230.0);
+    self.tblMultipsIphone = [[TQMultistageTableView alloc] initWithFrame: mFrame];
+    self.tblMultipsIphone.delegate = self;
+    self.tblMultipsIphone.dataSource = self;
+    [self.vtip addSubview:self.tblMultipsIphone];
 }
 
 - (void)didReceiveMemoryWarning
@@ -211,7 +221,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(tableView == self.tblTipimgs){
+    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
         return 1;
     }else if (tableView == self.tblTiptxt){
         return 1;
@@ -225,7 +235,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(tableView == self.tblTipimgs){
+    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
         return 1;
     }else if (tableView == self.tblTiptxt){
         NSLog(@"now number of rows of tblTiptxt:[%d]", [self.tipTxts count]);
@@ -242,7 +252,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
-    if(tableView == self.tblTipimgs){
+    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
         //显示图片
         static NSString *CellIdentifier = cellTipimg;
         PPImageScrollingTableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -309,7 +319,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //图片的tableView需要150的宽度。ipad下可以考虑更大。其他默认
-    if(tableView == self.tblTipimgs){
+    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
         return HEIGHT_IMG_ROW;
     }else{
         return 50.0f;
@@ -331,11 +341,12 @@
         dispatch_async(dispatch_get_main_queue(),^{
             UIImage *img = [UIImage imageWithData:imgData];
             self.imgTipimg.image = img;
+            self.imgTipimgIphone.image = img;
         });
         
         //图片保存到本地
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *fileName = [[paths objectAtIndex:0] stringByAppendingString:self.word];
+        NSString *fileName = [[[paths objectAtIndex:0] stringByAppendingString:@"/" ] stringByAppendingString:self.word];
         if([imgData writeToFile:fileName atomically:YES]){
             NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
         }else{
@@ -351,5 +362,143 @@
 //    [alert show];
 }
 
+#pragma mark - TQMultistageTableView datasource
+- (NSInteger)numberOfSectionsInMTableView:(TQMultistageTableView *)tableView
+{
+    //第一个section是tipxtxt； 第二个section是sentence
+    return 2;
+}
+
+- (NSInteger)mTableView:(TQMultistageTableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(section == 0){
+        return [self.tipTxts count];
+    }else{
+        return [self.tipSentences count];
+    }
+}
+
+- (UITableViewCell *)mTableView:(TQMultistageTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"TQMultistageTableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        NSLog(@"init a cell. section[%d] row[%d]", indexPath.section, indexPath.row);
+    }
+    UIView *view = [[UIView alloc] initWithFrame:cell.bounds] ;
+    
+    view.backgroundColor = [UIColor colorWithRed:128/255.0 green:156/255.0 blue:151/255.0 alpha:1];
+    cell.backgroundView = view;
+    
+    //加载tips
+    if(indexPath.section == 0){
+        cell.textLabel.text = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
+    }else{
+    //加载sentence
+        cell.textLabel.text = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:@"sentence"];
+    }
+    
+    return cell;
+}
+
+- (UIView *)mTableView:(TQMultistageTableView *)tableView openCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 100)];
+    view.backgroundColor = [UIColor colorWithRed:187/255.0 green:206/255.0 blue:190/255.0 alpha:1];;
+    return view;
+}
+
+#pragma mark - TQMultistageTableView delegate
+- (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return HEIGHT_TQ_ROW;
+}
+
+- (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == 0 && [self.tipTxt length] > 0){
+        return HEIGHT_TIP_TXT;
+    }else{
+        return HEIGHT_SENTENCE;
+    }
+}
+
+- (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForOpenCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    return HEIGHT_TQ_CELL;
+}
+
+- (UIView *)mTableView:(TQMultistageTableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * control = [[UIView alloc] init];
+    control.backgroundColor = [UIColor whiteColor];
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor blackColor];
+    UILabel *label = [[UILabel alloc] init];
+    label.textColor = [UIColor blackColor];
+    UILabel *labelPin = [[UILabel alloc] init];
+    labelPin.text = @">";
+    labelPin.textColor = [UIColor greenColor];
+    if(section == 0){
+        if([self.tipTxt length] > 1){
+            label.text = [@"助记：" stringByAppendingString: self.tipTxt];
+            label.lineBreakMode = NSLineBreakByWordWrapping;
+            label.numberOfLines = 0;
+            label.frame = CGRectMake(20, 0, tableView.frame.size.width, HEIGHT_TIP_TXT - 2);
+            view.frame = CGRectMake(0, HEIGHT_TIP_TXT - 2, tableView.frame.size.width,2);
+            labelPin.frame = CGRectMake(0, 0, 20, HEIGHT_TIP_TXT - 2);
+        }else{
+            label.text = @"采纳助记";
+            label.frame = CGRectMake(20, 0, 200, HEIGHT_SENTENCE - 2);
+            view.frame = CGRectMake(0, HEIGHT_SENTENCE - 2, tableView.frame.size.width,2);
+            labelPin.frame = CGRectMake(0, 0, 20, HEIGHT_TIP_TXT - 2);
+        }
+    }else{
+        label.text = @"例句";
+        label.frame = CGRectMake(20, 0, 200, HEIGHT_SENTENCE - 2);
+        view.frame = CGRectMake(0, HEIGHT_SENTENCE - 2, tableView.frame.size.width,2);
+        labelPin.frame = CGRectMake(0, 0, 20, HEIGHT_SENTENCE - 2);
+    }
+    [control addSubview:labelPin];
+    [control addSubview:label];
+    [control addSubview:view];
+    return control;
+}
+
+- (void)mTableView:(TQMultistageTableView *)tableView didSelectHeaderAtSection:(NSInteger)section
+{
+    NSLog(@"headerClick%d",section);
+}
+
+//celll点击
+- (void)mTableView:(TQMultistageTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"cellClick%@",indexPath);
+}
+
+//header展开
+- (void)mTableView:(TQMultistageTableView *)tableView willOpenHeaderAtSection:(NSInteger)section
+{
+    NSLog(@"headerOpen%d",section);
+}
+
+//header关闭
+- (void)mTableView:(TQMultistageTableView *)tableView willCloseHeaderAtSection:(NSInteger)section
+{
+    NSLog(@"headerClose%d",section);
+}
+
+- (void)mTableView:(TQMultistageTableView *)tableView willOpenCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"OpenCell%@",indexPath);
+}
+
+- (void)mTableView:(TQMultistageTableView *)tableView willCloseCellAtIndexPath:(NSIndexPath *)indexPath;
+{
+    NSLog(@"CloseCell%@",indexPath);
+}
 
 @end
+

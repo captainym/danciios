@@ -14,4 +14,7 @@
 //album的内容是：albumid albumName pointword words
 @property (nonatomic, strong) NSArray *albums;
 
+@property (strong, nonatomic) IBOutlet UITableView *tblAlbumIphone;
+@property (strong, nonatomic) IBOutlet UITableView *tblAlbumIpad;
+
 @end

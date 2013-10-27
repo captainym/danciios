@@ -1,9 +1,176 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ShM-Tp-Htp">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Danci Album Table View Controller - 单词本-->
+        <scene sceneID="dMT-Ge-VW3">
+            <objects>
+                <tableViewController id="X7F-8a-pC4" customClass="DanciAlbumTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AXq-17-w1s">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="theAlbum" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="theAlbum" textLabel="U0u-YZ-81i" detailTextLabel="Wu0-Vd-ZRO" style="IBUITableViewCellStyleSubtitle" id="8Jq-qt-88W">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0u-YZ-81i">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wu0-Vd-ZRO">
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="mjP-vE-xCc" kind="push" identifier="gotoStudy" trigger="accessoryAction" id="lz9-je-svB"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="X7F-8a-pC4" id="LNB-qi-HBk"/>
+                            <outlet property="delegate" destination="X7F-8a-pC4" id="HF2-qM-Yoi"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="单词本" id="xnp-ta-uJw"/>
+                    <connections>
+                        <outlet property="tblAlbumIphone" destination="AXq-17-w1s" id="fJi-gt-KFh"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J7g-wg-Xr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-164" y="-445"/>
+        </scene>
+        <!--Danci Word View Controller-->
+        <scene sceneID="vKy-ar-mwD">
+            <objects>
+                <viewController id="mjP-vE-xCc" customClass="DanciWordViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BBJ-ze-Q1d">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Y1q-cU-evM">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="46G-cH-Ron"/>
+                                    <constraint firstAttribute="width" constant="120" id="hd1-Q0-5Jy"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="23" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4eT-kr-dOs">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Rbd-pj-Ac4"/>
+                                    <constraint firstAttribute="width" constant="314" id="zkm-ff-60H"/>
+                                </constraints>
+                            </tableView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xej-D0-DfV">
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-fy-qfK">
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="190" id="0jM-kV-NWW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="dFK-fy-qfK" firstAttribute="top" secondItem="Xej-D0-DfV" secondAttribute="top" type="default" id="Je3-in-dNh"/>
+                                    <constraint firstAttribute="trailing" secondItem="dFK-fy-qfK" secondAttribute="trailing" constant="3" id="Jvz-Jz-cOG"/>
+                                    <constraint firstItem="dFK-fy-qfK" firstAttribute="leading" secondItem="Xej-D0-DfV" secondAttribute="leading" type="default" id="MC6-VU-sIl"/>
+                                    <constraint firstItem="dFK-fy-qfK" firstAttribute="bottom" secondItem="Xej-D0-DfV" secondAttribute="bottom" type="default" id="wTr-FD-BXk"/>
+                                    <constraint firstItem="dFK-fy-qfK" firstAttribute="centerY" secondItem="Xej-D0-DfV" secondAttribute="centerY" type="default" id="zhA-NV-cOw"/>
+                                </constraints>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g72-VM-36N">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="g72-VM-36N" secondAttribute="bottom" constant="54" id="1Ax-nv-Ph2"/>
+                            <constraint firstAttribute="trailing" secondItem="Xej-D0-DfV" secondAttribute="trailing" constant="124" id="3CU-ol-EaN"/>
+                            <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="Xej-D0-DfV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3Ma-8v-ExT"/>
+                            <constraint firstItem="g72-VM-36N" firstAttribute="centerX" secondItem="BBJ-ze-Q1d" secondAttribute="centerX" type="default" id="4OO-b5-bqC"/>
+                            <constraint firstItem="4eT-kr-dOs" firstAttribute="trailing" secondItem="Y1q-cU-evM" secondAttribute="trailing" type="default" id="7kq-IL-TuK"/>
+                            <constraint firstItem="g72-VM-36N" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="IKW-Ns-UIA"/>
+                            <constraint firstItem="g72-VM-36N" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="207" id="LxC-sy-NcY"/>
+                            <constraint firstItem="g72-VM-36N" firstAttribute="trailing" secondItem="4eT-kr-dOs" secondAttribute="trailing" type="default" id="Nj1-Jw-GtG"/>
+                            <constraint firstItem="Xej-D0-DfV" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="Piw-Ke-4ep"/>
+                            <constraint firstItem="Xej-D0-DfV" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="5" id="gHk-2s-zkM"/>
+                            <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="Y1q-cU-evM" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="h5D-iZ-hGn"/>
+                            <constraint firstItem="Xej-D0-DfV" firstAttribute="top" secondItem="Y1q-cU-evM" secondAttribute="top" type="default" id="pWv-Lg-VYJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OYq-89-cg2"/>
+                    <connections>
+                        <outlet property="imgTipimgIphone" destination="Y1q-cU-evM" id="XIS-zi-N9P"/>
+                        <outlet property="lblMeaningStemIphone" destination="dFK-fy-qfK" id="JK7-J4-lnz"/>
+                        <outlet property="tblTipimgsIphone" destination="4eT-kr-dOs" id="0x9-lc-dac"/>
+                        <outlet property="vtip" destination="g72-VM-36N" id="c1H-9D-heP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h8z-63-1Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="260" y="-445"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nRu-sO-GGS">
+            <objects>
+                <navigationController id="ShM-Tp-Htp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9OJ-0b-Svf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="X7F-8a-pC4" kind="relationship" relationship="rootViewController" id="iz2-Gc-Ux4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5L7-oI-rw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-639" y="-445"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="DanciAlbumTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciAlbumTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tblAlbumIpad" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tblAlbumIphone" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="DanciWordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciWordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgTipimg" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgTipimgIphone" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblMeaning" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblMeaningStemIphone" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblStem" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tblTipimgs" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tblTipsentense" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tblTiptxt" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="vtip" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

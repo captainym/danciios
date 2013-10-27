@@ -31,6 +31,7 @@
 		79859B6317ED9E8D008F8EFD /* sample_6.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 79859B5C17ED9E8D008F8EFD /* sample_6.jpeg */; };
 		79859B6417ED9E8D008F8EFD /* sample_7.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 79859B5D17ED9E8D008F8EFD /* sample_7.jpeg */; };
 		798D36D31813FDF300260FC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798D36D21813FDF300260FC6 /* AVFoundation.framework */; };
+		798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D36D6181BE1B800260FC6 /* TQMultistageTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,8 @@
 		79859B5C17ED9E8D008F8EFD /* sample_6.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_6.jpeg; sourceTree = "<group>"; };
 		79859B5D17ED9E8D008F8EFD /* sample_7.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_7.jpeg; sourceTree = "<group>"; };
 		798D36D21813FDF300260FC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		798D36D5181BE1B800260FC6 /* TQMultistageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQMultistageTableView.h; sourceTree = "<group>"; };
+		798D36D6181BE1B800260FC6 /* TQMultistageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQMultistageTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,7 @@
 		79859B1017EC0E75008F8EFD /* Danci */ = {
 			isa = PBXGroup;
 			children = (
+				798D36D4181BE1B700260FC6 /* TQMultistageTableView */,
 				79859B5617ED9E8D008F8EFD /* images */,
 				79859B4C17ED9E65008F8EFD /* PPImageScrollingTableViewCell */,
 				79859B3017EC54EA008F8EFD /* DanciAlbumTableViewController.h */,
@@ -169,6 +173,15 @@
 				79859B5D17ED9E8D008F8EFD /* sample_7.jpeg */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		798D36D4181BE1B700260FC6 /* TQMultistageTableView */ = {
+			isa = PBXGroup;
+			children = (
+				798D36D5181BE1B800260FC6 /* TQMultistageTableView.h */,
+				798D36D6181BE1B800260FC6 /* TQMultistageTableView.m */,
+			);
+			path = TQMultistageTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +266,7 @@
 				79859B5317ED9E65008F8EFD /* PPCollectionViewCell.m in Sources */,
 				79859B5417ED9E65008F8EFD /* PPImageScrollingCellView.m in Sources */,
 				79859B5517ED9E65008F8EFD /* PPImageScrollingTableViewCell.m in Sources */,
+				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +364,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Danci/Danci-Prefix.pch";
 				INFOPLIST_FILE = "Danci/Danci-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -361,7 +377,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Danci/Danci-Prefix.pch";
 				INFOPLIST_FILE = "Danci/Danci-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

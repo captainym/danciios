@@ -12,6 +12,11 @@
 #define cellTipimg @"CellTipImg"
 #define cellTiptxt @"CellTipTxt"
 #define cellTipsentence @"CellTipSentence"
+#define HEIGHT_TIP_TXT 70
+#define HEIGHT_SENTENCE 40
+#define HEIGHT_TQ_ROW 60
+#define HEIGHT_TQ_CELL 30
+#import "TQMultistageTableView.h"
 
 @interface DanciWordViewController : UIViewController
 
@@ -35,12 +40,14 @@
 //单词的发音 以便和单词一起作为navigation的title
 @property (nonatomic, strong) NSString *fayin;
 @property (nonatomic, strong) NSString *fayinMp3Url;
-//单词的助记图片
-@property (nonatomic, strong) NSString *tipImgFilepath;
 //单词的中文释义
 @property (nonatomic, strong) NSString *comment;
 //单词词根词缀信息
 @property (nonatomic, strong) NSString *wordGern;
+//单词的助记图片
+@property (nonatomic, strong) NSString *tipImgFilepath;
+//单词的文字助记
+@property (nonatomic, strong) NSString *tipTxt;
 //单词的图片助记: [{tipImgId tipImgUrl adoptNum createTime}]
 @property (nonatomic, strong) NSArray *tipImgs;
 //单词的文字助记：[{tipTxtid tipTxt adoptNum createTime}]
@@ -49,6 +56,9 @@
 @property (nonatomic, strong) NSMutableArray *tipSentences;
 //播放器
 @property (nonatomic,strong) AVAudioPlayer *player;
+
+//iphone的tip控件
+@property (nonatomic,strong) TQMultistageTableView *tblMultipsIphone;
 
 //控件
 @property (weak, nonatomic) IBOutlet UILabel *lblMeaning;
@@ -59,6 +69,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *tblTipsentense;
 @property (weak, nonatomic) IBOutlet UITableView *tblTiptxt;
 
+//iphone控件
+@property (weak, nonatomic) IBOutlet UILabel *lblMeaningStemIphone;
+@property (weak, nonatomic) IBOutlet UIImageView *imgTipimgIphone;
+@property (weak, nonatomic) IBOutlet UITableView *tblTipimgsIphone;
+@property (weak, nonatomic) IBOutlet UIView *vtip;
 
- 
 @end

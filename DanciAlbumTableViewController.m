@@ -14,6 +14,7 @@
 #define ALBUM_NAME @"albumName"
 #define ALBUM_WORD_POINT @"wordPoint"
 #define ALBUM_WORDS @"words"
+#define ALBUM_CELL_ID @"theAlbum"
 
 @interface DanciAlbumTableViewController ()
 //用户选中的album
@@ -29,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -86,16 +87,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"theAlbum";
+    static NSString *CellIdentifier = ALBUM_CELL_ID;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if(cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
     NSDictionary *tmpAlbum = [[[self.albums objectAtIndex:indexPath.section] objectForKey:ALBUM_LIST] objectAtIndex:indexPath.row];
-    //NSLog(@"the name of the album:%@", [tmpAlbum objectForKey:ALBUM_NAME]);
+    NSLog(@"the name of the album:%@", [tmpAlbum objectForKey:ALBUM_NAME]);
     cell.textLabel.text = [tmpAlbum objectForKey:ALBUM_NAME];
     int wordsNum = [[tmpAlbum objectForKey:ALBUM_WORDS] count];
     int wordPoint = [[tmpAlbum objectForKey:ALBUM_WORD_POINT] intValue];
     cell.detailTextLabel.text = [[NSString class] stringWithFormat:@"总量%d。 学习到第%d个单词", wordsNum, wordPoint];
+    NSLog(@"总量%d。 学习到第%d个单词. label[%@]", wordsNum, wordPoint, cell.detailTextLabel.text);
     return cell;
 }
 
