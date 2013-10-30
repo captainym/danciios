@@ -75,7 +75,7 @@
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xej-D0-DfV">
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-fy-qfK">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label单词释义Label单词释义Label单词释义Label单词释义Label单词释义" lineBreakMode="wordWrap" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-fy-qfK">
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="190" id="0jM-kV-NWW"/>
@@ -93,24 +93,22 @@
                                     <constraint firstItem="dFK-fy-qfK" firstAttribute="centerY" secondItem="Xej-D0-DfV" secondAttribute="centerY" type="default" id="zhA-NV-cOw"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g72-VM-36N">
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ob4-sL-nbo"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="g72-VM-36N" secondAttribute="bottom" constant="54" id="1Ax-nv-Ph2"/>
                             <constraint firstAttribute="trailing" secondItem="Xej-D0-DfV" secondAttribute="trailing" constant="124" id="3CU-ol-EaN"/>
                             <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="Xej-D0-DfV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3Ma-8v-ExT"/>
-                            <constraint firstItem="g72-VM-36N" firstAttribute="centerX" secondItem="BBJ-ze-Q1d" secondAttribute="centerX" type="default" id="4OO-b5-bqC"/>
                             <constraint firstItem="4eT-kr-dOs" firstAttribute="trailing" secondItem="Y1q-cU-evM" secondAttribute="trailing" type="default" id="7kq-IL-TuK"/>
-                            <constraint firstItem="g72-VM-36N" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="IKW-Ns-UIA"/>
-                            <constraint firstItem="g72-VM-36N" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="207" id="LxC-sy-NcY"/>
-                            <constraint firstItem="g72-VM-36N" firstAttribute="trailing" secondItem="4eT-kr-dOs" secondAttribute="trailing" type="default" id="Nj1-Jw-GtG"/>
+                            <constraint firstItem="4eT-kr-dOs" firstAttribute="centerX" secondItem="BBJ-ze-Q1d" secondAttribute="centerX" type="default" id="Kyb-oJ-82M"/>
+                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="trailing" secondItem="4eT-kr-dOs" secondAttribute="trailing" type="default" id="O59-bZ-djv"/>
                             <constraint firstItem="Xej-D0-DfV" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="Piw-Ke-4ep"/>
+                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="Wap-l2-r4H"/>
+                            <constraint firstAttribute="bottom" secondItem="Ob4-sL-nbo" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="bFu-5Q-ZTd"/>
                             <constraint firstItem="Xej-D0-DfV" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="5" id="gHk-2s-zkM"/>
                             <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="Y1q-cU-evM" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="h5D-iZ-hGn"/>
                             <constraint firstItem="Xej-D0-DfV" firstAttribute="top" secondItem="Y1q-cU-evM" secondAttribute="top" type="default" id="pWv-Lg-VYJ"/>
+                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="top" secondItem="4eT-kr-dOs" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uks-uG-aZj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OYq-89-cg2"/>
@@ -118,7 +116,7 @@
                         <outlet property="imgTipimgIphone" destination="Y1q-cU-evM" id="XIS-zi-N9P"/>
                         <outlet property="lblMeaningStemIphone" destination="dFK-fy-qfK" id="JK7-J4-lnz"/>
                         <outlet property="tblTipimgsIphone" destination="4eT-kr-dOs" id="0x9-lc-dac"/>
-                        <outlet property="vtip" destination="g72-VM-36N" id="c1H-9D-heP"/>
+                        <outlet property="vtip" destination="Ob4-sL-nbo" id="Fqb-yo-fMI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8z-63-1Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -164,7 +162,7 @@
                 <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="tblTipsentense" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="tblTiptxt" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="vtip" candidateClass="UIView"/>
+                <relationship kind="outlet" name="vtip" candidateClass="UIScrollView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">

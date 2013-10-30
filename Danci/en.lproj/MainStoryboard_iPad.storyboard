@@ -288,33 +288,6 @@
     <resources>
         <image name="sample_1.jpeg" width="790" height="600"/>
     </resources>
-    <classes>
-        <class className="DanciAlbumTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciAlbumTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tblAlbumIpad" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblAlbumIphone" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="DanciWordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciWordViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgTipimg" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgTipimgIphone" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblMeaning" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblMeaningStemIphone" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStem" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tblTipimgs" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTipsentense" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTipstxtsentence" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTiptxt" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

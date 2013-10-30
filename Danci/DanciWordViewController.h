@@ -73,6 +73,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblMeaningStemIphone;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTipimgIphone;
 @property (weak, nonatomic) IBOutlet UITableView *tblTipimgsIphone;
-@property (weak, nonatomic) IBOutlet UIView *vtip;
+//@property (weak, nonatomic) IBOutlet UIView *vtip;
+@property (weak, nonatomic) IBOutlet UIScrollView *vtip;
 
 @end

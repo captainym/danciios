@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "404571672.017844"
+         timestampString = "404747214.04293"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "383"
-         endingLineNumber = "383"
+         startingLineNumber = "390"
+         endingLineNumber = "390"
          landmarkName = "-mTableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "404571672.017844"
+         timestampString = "404747214.04293"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "408"
-         endingLineNumber = "408"
+         startingLineNumber = "421"
+         endingLineNumber = "421"
          landmarkName = "-mTableView:openCellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -515,11 +515,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "404571672.017844"
+         timestampString = "404747214.04293"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "325"
-         endingLineNumber = "325"
+         startingLineNumber = "332"
+         endingLineNumber = "332"
          landmarkName = "-tableView:heightForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>

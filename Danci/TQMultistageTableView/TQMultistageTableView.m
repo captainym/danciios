@@ -13,7 +13,7 @@
 @property (nonatomic,TQ_STRONG) UIView * viewForExpand;
 
 @property (nonatomic,assign) BOOL selectIndexPathIsOpen;
-@property (nonatomic,TQ_STRONG) NSIndexPath *selectIndexPath;
+//@property (nonatomic,TQ_STRONG) NSIndexPath *selectIndexPath;
 
 @property (nonatomic,assign) BOOL selectOldIndexPathIsOpen;
 @property (nonatomic,TQ_STRONG) NSIndexPath *selectOldIndexPath;

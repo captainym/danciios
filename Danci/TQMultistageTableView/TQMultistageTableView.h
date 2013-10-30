@@ -92,6 +92,7 @@
 @property (nonatomic,TQ_WEAK) id <TQTableViewDataSource> dataSource;
 @property (nonatomic,TQ_WEAK) id <TQTableViewDelegate>   delegate;
 @property (nonatomic,TQ_STRONG) UITableView *tableView;
+@property (nonatomic,TQ_STRONG) NSIndexPath *selectIndexPath;
 
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 - (void)openCellViewWithIndexPath:(NSIndexPath *)indexPath;

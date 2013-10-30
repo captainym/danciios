@@ -13,6 +13,7 @@
 #define HEIGHT_IMG_ROW 100.0
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate>
+@property (nonatomic, strong) UILabel *lblHeaderTip;
 
 @end
 
@@ -130,7 +131,7 @@
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      ];
     [self.tipTxts addObjectsFromArray: @[
-     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y)", @"adoptNum": @"271" , @"optTime":@"18000" },
+     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) psychology n 心理学（paych 心理+o+log psychology n 心理学（paych 心理+o+log", @"adoptNum": @"271" , @"optTime":@"18000" },
      @{@"tip":@"PSY鸟叔，心理变态", @"adoptNum": @"93" , @"optTime":@"18000" },
      @{@"tip":@"各种常见的学 psychology 心理学 chemistry 化学 physics 物理学 mathematics 数学 literature 文学 astronomy 天文学", @"adoptNum": @"48" , @"optTime":@"18000" },
      @{@"tip":@"psych=mind, logy=某种学问，关于mind的学问，心理学", @"adoptNum": @"28" , @"optTime":@"18000" },
@@ -190,6 +191,12 @@
         self.imgTipimg.image = [UIImage imageWithData:imagedata];
         self.imgTipimgIphone.image = [UIImage imageWithData:imagedata];
     }
+    
+    //全局控件
+    self.lblHeaderTip = [[UILabel alloc] init];
+    self.lblHeaderTip.textColor = [UIColor blackColor];
+    self.lblHeaderTip.lineBreakMode = NSLineBreakByWordWrapping;
+    self.lblHeaderTip.numberOfLines = 0;
     
     //注册cell
     static NSString *CellIdentifier = cellTipimg;
@@ -392,11 +399,17 @@
     view.backgroundColor = [UIColor colorWithRed:128/255.0 green:156/255.0 blue:151/255.0 alpha:1];
     cell.backgroundView = view;
     
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
     //加载tips
     if(indexPath.section == 0){
+        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+        cell.textLabel.font = fontDetail;
         cell.textLabel.text = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
     }else{
     //加载sentence
+        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:12];
+        cell.textLabel.font = fontDetail;
         cell.textLabel.text = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:@"sentence"];
     }
     
@@ -432,37 +445,42 @@
 
 - (UIView *)mTableView:(TQMultistageTableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    //http://blog.csdn.net/onlyou930/article/details/7422097
+    UIFont *fontTitle = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
     UIView * control = [[UIView alloc] init];
     control.backgroundColor = [UIColor whiteColor];
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor blackColor];
-    UILabel *label = [[UILabel alloc] init];
-    label.textColor = [UIColor blackColor];
     UILabel *labelPin = [[UILabel alloc] init];
     labelPin.text = @">";
     labelPin.textColor = [UIColor greenColor];
     if(section == 0){
         if([self.tipTxt length] > 1){
-            label.text = [@"助记：" stringByAppendingString: self.tipTxt];
-            label.lineBreakMode = NSLineBreakByWordWrapping;
-            label.numberOfLines = 0;
-            label.frame = CGRectMake(20, 0, tableView.frame.size.width, HEIGHT_TIP_TXT - 2);
+            self.lblHeaderTip.font = fontDetail;
+            self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
+            self.lblHeaderTip.frame = CGRectMake(20, 0, tableView.frame.size.width, HEIGHT_TIP_TXT - 2);
             view.frame = CGRectMake(0, HEIGHT_TIP_TXT - 2, tableView.frame.size.width,2);
             labelPin.frame = CGRectMake(0, 0, 20, HEIGHT_TIP_TXT - 2);
         }else{
-            label.text = @"采纳助记";
-            label.frame = CGRectMake(20, 0, 200, HEIGHT_SENTENCE - 2);
+            self.lblHeaderTip.text = @"采纳助记";
+            self.lblHeaderTip.frame = CGRectMake(20, 0, 200, HEIGHT_SENTENCE - 2);
             view.frame = CGRectMake(0, HEIGHT_SENTENCE - 2, tableView.frame.size.width,2);
             labelPin.frame = CGRectMake(0, 0, 20, HEIGHT_TIP_TXT - 2);
         }
+        [control addSubview:labelPin];
+        [control addSubview:self.lblHeaderTip];
     }else{
+        UILabel *label = [[UILabel alloc] init];
+        label.textColor = [UIColor blackColor];
+        label.font = fontTitle;
         label.text = @"例句";
         label.frame = CGRectMake(20, 0, 200, HEIGHT_SENTENCE - 2);
         view.frame = CGRectMake(0, HEIGHT_SENTENCE - 2, tableView.frame.size.width,2);
         labelPin.frame = CGRectMake(0, 0, 20, HEIGHT_SENTENCE - 2);
+        [control addSubview:labelPin];
+        [control addSubview:label];
     }
-    [control addSubview:labelPin];
-    [control addSubview:label];
     [control addSubview:view];
     return control;
 }
@@ -476,12 +494,33 @@
 - (void)mTableView:(TQMultistageTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"cellClick%@",indexPath);
+    if(indexPath.section == 0){
+        //tiptxt的采纳
+        NSString *tipadopt = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
+        if(![tipadopt isEqualToString:self.tipTxt]){
+            NSLog(@"新采纳助记 old[%@] new[%@]", self.tipTxt, tipadopt);
+            self.tipTxt = tipadopt;
+            self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
+        }else{
+            NSLog(@"采纳助记无变化 old[%@] new[%@]", self.tipTxt, tipadopt);
+        }
+    }else if(indexPath.section ==1){
+        //sentence的选择。
+    }
 }
 
 //header展开
 - (void)mTableView:(TQMultistageTableView *)tableView willOpenHeaderAtSection:(NSInteger)section
 {
     NSLog(@"headerOpen%d",section);
+//    CGRect mFrameClose = CGRectMake(0.0, 207.0, 314.0, 230.0);
+//    CGRect mFrameOpen = CGRectMake(0.0, 103.0, 314.0, 230.0);
+//    if(self.tblMultipsIphone.selectIndexPath.section >= 0 && self.tblMultipsIphone.selectIndexPath.row >=0){
+//        self.vtip.frame = mFrameOpen;
+//    }else{
+//        self.vtip.frame = mFrameClose;
+//    }
+//    [self.vtip setNeedsDisplay];
 }
 
 //header关闭
@@ -493,6 +532,20 @@
 - (void)mTableView:(TQMultistageTableView *)tableView willOpenCellAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"OpenCell%@",indexPath);
+    if(indexPath.section == 0){
+        //tip中相应的tip的采纳次数、发布事件 采纳按钮. 绘制在cell的展开view中 而不是直接在cell里面！
+//        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//        for(UIView * sview in cell.subviews){
+//            [sview removeFromSuperview];
+//            NSLog(@"cell remove a subview[%@]", sview);
+//        }
+//        cell.textLabel.frame = CGRectMake(10, 1, HEIGHT_TQ_CELL - 2, HEIGHT_TQ_CELL -2);
+//        cell.textLabel.text = [@"采纳：" stringByAppendingString:[[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"adoptNum"]];
+//        UILabel *lblTipAdopNum = [[UILabel alloc]init];
+//        lblTipAdopNum.text = [@"采纳：" stringByAppendingString:[[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"adoptNum"]];
+//        lblTipAdopNum.frame = CGRectMake(10, 1, HEIGHT_TQ_CELL - 2, HEIGHT_TQ_CELL -2);
+//        [cell addSubview:lblTipAdopNum];
+    }
 }
 
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseCellAtIndexPath:(NSIndexPath *)indexPath;
