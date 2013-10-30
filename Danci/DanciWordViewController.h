@@ -15,7 +15,7 @@
 #define HEIGHT_TIP_TXT 70
 #define HEIGHT_SENTENCE 40
 #define HEIGHT_TQ_ROW 60
-#define HEIGHT_TQ_CELL 30
+#define HEIGHT_TQ_CELL 0
 #import "TQMultistageTableView.h"
 
 @interface DanciWordViewController : UIViewController

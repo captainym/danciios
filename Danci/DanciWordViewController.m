@@ -137,7 +137,7 @@
      @{@"tip":@"psych=mind, logy=某种学问，关于mind的学问，心理学", @"adoptNum": @"28" , @"optTime":@"18000" },
      ]];
     [self.tipSentences addObjectsFromArray:@[
-     @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://dbl-rdtest-3-04.vm.baidu.com:8090/psychology.mp3"},
+     @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
      @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
      ]];
     NSLog(@"tipImg count%d ", [self.tipImgs count]);
@@ -532,7 +532,7 @@
 - (void)mTableView:(TQMultistageTableView *)tableView willOpenCellAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"OpenCell%@",indexPath);
-    if(indexPath.section == 0){
+//    if(indexPath.section == 0){
         //tip中相应的tip的采纳次数、发布事件 采纳按钮. 绘制在cell的展开view中 而不是直接在cell里面！
 //        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 //        for(UIView * sview in cell.subviews){
@@ -545,6 +545,33 @@
 //        lblTipAdopNum.text = [@"采纳：" stringByAppendingString:[[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"adoptNum"]];
 //        lblTipAdopNum.frame = CGRectMake(10, 1, HEIGHT_TQ_CELL - 2, HEIGHT_TQ_CELL -2);
 //        [cell addSubview:lblTipAdopNum];
+//    }
+    
+    if(indexPath.section == 1){
+        //播放例句发音
+        NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"mp3"];
+        dispatch_queue_t play_q = dispatch_queue_create("play mp3", NULL);
+        dispatch_async(play_q, ^{
+            NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
+            NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
+            NSError *myerror = nil;
+            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
+            [self.player setDelegate:self];
+            if(self.player){
+                if ([self.player prepareToPlay]) {
+                    [self.player setVolume:0.5f];
+                    if([self.player play]){
+                        NSLog(@"play successed. mp3url[%@]", mp3url);
+                    }else{
+                        NSLog(@"play failed! mp3url[%@]", mp3url);
+                    }
+                }else{
+                    NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
+                }
+            }else{
+                NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
+            }
+        });
     }
 }
 
