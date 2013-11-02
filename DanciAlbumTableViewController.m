@@ -54,8 +54,8 @@
                           @[
                               @{
                                   @"albumName": @"四级高频词汇",
-                                  @"wordPoint": @"2",
-                                  @"words":@[@"hello",@"psychology",@"psychology"],
+                                  @"wordPoint": @"1",
+                                  @"words":@[@"psychology",@"psychology2",@"psychology3"],
                                   },
                               @{
                                   @"albumName": @"六级高频词汇",
@@ -125,7 +125,7 @@
     
     if([segue.identifier isEqualToString:@"gotoStudy"]){
         [segue.destinationViewController setAlbumName: [self.albumSelected objectForKey:ALBUM_NAME]];
-        [segue.destinationViewController setWordPoint: [[self.albumSelected objectForKey:ALBUM_WORD_POINT] intValue] ];
+        [segue.destinationViewController setWordPoint: [[self.albumSelected objectForKey:ALBUM_WORD_POINT] intValue] - 1 ];
         [segue.destinationViewController setWords:[self.albumSelected objectForKey:ALBUM_WORDS]];
         [segue.destinationViewController setIsNewStudy:TRUE];
         [segue.destinationViewController setIsReview:FALSE];

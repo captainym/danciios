@@ -34,6 +34,8 @@
 @synthesize tipTxts = _tipTxts;
 @synthesize tipSentences = _tipSentences;
 @synthesize player = _player;
+@synthesize svExpFrame = _svExpFrame;
+@synthesize svNormFrame = _svNormFrame;
 
 - (void) setIsReview:(BOOL)isReview
 {
@@ -80,7 +82,7 @@
 }
 - (void)setWordPoint:(int)wordPoint
 {
-    _wordPoint = wordPoint - 1;
+    _wordPoint = wordPoint;
 }
 - (NSString *) word
 {
@@ -91,20 +93,31 @@
     }
     return _word;
 }
-- (NSString *) wordGern
+-(CGRect) svExpFrame
 {
-    return _wordGern;
+    if(_svExpFrame.origin.x < 1){
+        _svExpFrame = CGRectMake(3.0, 103, 314, 320);
+        NSLog(@"after _svExpFrame. x[%f] y[%f] height[%f] width[%f]",_svExpFrame.origin.x,_svExpFrame.origin.y,_svExpFrame.size.height,_svExpFrame.size.width);
+    }
+    return _svExpFrame;
+}
+-(CGRect) svNormFrame
+{
+    if(_svNormFrame.origin.x < 1){
+        _svNormFrame = CGRectMake(3.0, 211, 314, 212);
+        NSLog(@"after _svNormFrame. x[%f] y[%f] height[%f] width[%f]",_svNormFrame.origin.x,_svNormFrame.origin.y,_svNormFrame.size.height,_svNormFrame.size.width);
+    }
+    return _svNormFrame;
 }
 
 //从coredata中取出当前word的各种信息： 发音 真人发音mp3 中文释义 词根词缀 例句 例句mp3地址 从网络获取tipImgs tipTxts 例句mp3
 - (void) getWordInfo
 {
     //先用假数据
-    _word = @"psychology";
     self.fayin = @"[saɪˈkɒlədʒɪ]";
     self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
     self.fayinMp3Url = @"wordmp3/p/psychology.arm";
-    self.tipImgFilepath = @"psychology_md51.jpeg";
+    self.tipImgFilepath = @"psychology1.jpeg";
     self.tipTxt = @"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) ";
     self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思； cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 psy-cho-logy连起来就是“知道心的学说”。";
 
@@ -140,7 +153,6 @@
      @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
      @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
      ]];
-    NSLog(@"tipImg count%d ", [self.tipImgs count]);
 }
 
 
@@ -166,37 +178,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    //title显示当前正在学习或复习的单词
-    self.title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
-    self.lblMeaning.text = self.comment;
-    self.lblStem.text= self.wordGern;
-    self.lblMeaningStemIphone.text = [@"简明释义：" stringByAppendingString:[[self.comment stringByAppendingString:@"\n词根词缀："] stringByAppendingString:self.wordGern]];
-    self.lblMeaningStemIphone.adjustsFontSizeToFitWidth = TRUE;
-    //读图片
-    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
-                                                       , NSUserDomainMask
-                                                       , YES);
-    NSString *filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:self.word];
-    NSLog(@"load filepath[%@]", filepath);
-    NSFileManager *filemanager = [NSFileManager defaultManager];
-    if([filemanager fileExistsAtPath: filepath]){
-        NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
-        self.imgTipimg.image = [UIImage imageWithData:imagedata];
-        self.imgTipimgIphone.image = [UIImage imageWithData:imagedata];
-    }
-    
-    //全局控件
-    self.lblHeaderTip = [[UILabel alloc] init];
-    self.lblHeaderTip.textColor = [UIColor blackColor];
-    self.lblHeaderTip.lineBreakMode = NSLineBreakByWordWrapping;
-    self.lblHeaderTip.numberOfLines = 0;
     
     //注册cell
     static NSString *CellIdentifier = cellTipimg;
@@ -209,19 +190,70 @@
     [self.tblTipimgsIphone setDelegate:self];
     [self.tblTipimgsIphone setDataSource:self];
     
-    //iphone－tip sentence 的multisagetableview
-//    CGRect mFrame = CGRectMake(self.svTiptxtsentence.frame.origin.x, self.svTiptxtsentence.frame.origin.y, self.svTiptxtsentence.frame.size.width, self.svTiptxtsentence.frame.size.height - 1);
-    CGRect mFrame = CGRectMake(0.0, 0.0, 314.0, 230.0);
-    self.tblMultipsIphone = [[TQMultistageTableView alloc] initWithFrame: mFrame];
-    self.tblMultipsIphone.delegate = self;
-    self.tblMultipsIphone.dataSource = self;
-    [self.vtip addSubview:self.tblMultipsIphone];
+    //控件属性设置
+    self.lblMeaningStemIphone.textColor = [UIColor blackColor];
+    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+    self.lblMeaningStemIphone.font = fontDetail;
+    self.lblMeaningStemIphone.numberOfLines = 0;
+//    self.lblMeaningStemIphone.lineBreakMode = NSLineBreakByCharWrapping;
+    
+    self.lblHeaderTip = [[UILabel alloc] init];
+    self.lblHeaderTip.textColor = [UIColor blackColor];
+    self.lblHeaderTip.lineBreakMode = NSLineBreakByWordWrapping;
+    self.lblHeaderTip.numberOfLines = 0;
+
+    [self drawMyView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) drawMyView
+{
+    UIButton *btnCover = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btnCover.frame = CGRectMake(0, 0, 320, 540);
+    btnCover.titleLabel.text = [self.word stringByAppendingString:@" 是什么意思？"];
+    [btnCover setTitle:[self.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
+    btnCover.backgroundColor = [UIColor clearColor];
+    [btnCover addTarget:self action:@selector(drawMyViewReal:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnCover];
+}
+
+- (void)drawMyViewReal:(UIButton *)sender
+{
+    [sender removeFromSuperview];
+    //title显示当前正在学习或复习的单词
+    self.title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
+    self.lblMeaning.text = self.comment;
+    self.lblStem.text= self.wordGern;
+    self.lblMeaningStemIphone.text = [@"简明释义：" stringByAppendingString:[[self.comment stringByAppendingString:@"\n词根词缀："] stringByAppendingString:self.wordGern]];
+    //读图片
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
+                                                       , NSUserDomainMask
+                                                       , YES);
+    NSString *filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:self.word];
+    NSLog(@"load filepath[%@]", filepath);
+    NSFileManager *filemanager = [NSFileManager defaultManager];
+    if([filemanager fileExistsAtPath: filepath]){
+        NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
+        UIImage *wordImg = [UIImage imageWithData:imagedata];
+        self.imgTipimg.image = wordImg;
+        
+        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateHighlighted];
+        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
+    }
+        
+    //iphone－tip sentence 的multisagetableview
+    CGRect mFrame = CGRectMake(0.0, 0.0, self.svExpFrame.size.width, self.svExpFrame.size.height);
+    self.tblMultipsIphone = [[TQMultistageTableView alloc] initWithFrame: mFrame];
+    self.tblMultipsIphone.delegate = self;
+    self.tblMultipsIphone.dataSource = self;
+    self.tblTipimgsIphone.hidden = TRUE;
+    self.vtip.frame = self.svExpFrame;
+    [self.vtip addSubview:self.tblMultipsIphone];
 }
 
 #pragma mark - Table view data source
@@ -348,7 +380,8 @@
         dispatch_async(dispatch_get_main_queue(),^{
             UIImage *img = [UIImage imageWithData:imgData];
             self.imgTipimg.image = img;
-            self.imgTipimgIphone.image = img;
+            [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
+            [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
         });
         
         //图片保存到本地
@@ -359,6 +392,8 @@
         }else{
             NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
         }
+        
+        //将采纳发送到server
     });
     
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
@@ -432,14 +467,17 @@
 - (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if(section == 0 && [self.tipTxt length] > 0){
+        NSLog(@"height for section0");
         return HEIGHT_TIP_TXT;
     }else{
+        NSLog(@"height for section[%d]", section);
         return HEIGHT_SENTENCE;
     }
 }
 
 - (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForOpenCellAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"height for row[%@]", indexPath);
     return HEIGHT_TQ_CELL;
 }
 
@@ -501,6 +539,7 @@
             NSLog(@"新采纳助记 old[%@] new[%@]", self.tipTxt, tipadopt);
             self.tipTxt = tipadopt;
             self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
+            //更新到server
         }else{
             NSLog(@"采纳助记无变化 old[%@] new[%@]", self.tipTxt, tipadopt);
         }
@@ -512,40 +551,36 @@
 //header展开
 - (void)mTableView:(TQMultistageTableView *)tableView willOpenHeaderAtSection:(NSInteger)section
 {
-    NSLog(@"headerOpen%d",section);
-//    CGRect mFrameClose = CGRectMake(0.0, 207.0, 314.0, 230.0);
-//    CGRect mFrameOpen = CGRectMake(0.0, 103.0, 314.0, 230.0);
-//    if(self.tblMultipsIphone.selectIndexPath.section >= 0 && self.tblMultipsIphone.selectIndexPath.row >=0){
-//        self.vtip.frame = mFrameOpen;
-//    }else{
-//        self.vtip.frame = mFrameClose;
-//    }
-//    [self.vtip setNeedsDisplay];
+    NSLog(@"headerOpencc%d",section);
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.4];
+    [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
+    self.tblTipimgsIphone.hidden = TRUE;
+    self.vtip.frame = self.svExpFrame;
+    CGRect mFrame = CGRectMake(0.0, 0.0, self.svExpFrame.size.width, self.svExpFrame.size.height);
+    self.tblTipsentense.frame = mFrame;
+    [UIView commitAnimations];
+    
 }
 
 //header关闭
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseHeaderAtSection:(NSInteger)section
 {
     NSLog(@"headerClose%d",section);
+//    //show the tbl
+//    CATransition *animation = [CATransition animation];
+//    animation.type = kCATransitionFade;
+//    animation.duration = 0.5;
+//    [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
+//    self.tblTipimgsIphone.hidden = FALSE;
+//    self.vtip.frame = self.svNormFrame;
 }
 
 - (void)mTableView:(TQMultistageTableView *)tableView willOpenCellAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"OpenCell%@",indexPath);
-//    if(indexPath.section == 0){
-        //tip中相应的tip的采纳次数、发布事件 采纳按钮. 绘制在cell的展开view中 而不是直接在cell里面！
-//        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//        for(UIView * sview in cell.subviews){
-//            [sview removeFromSuperview];
-//            NSLog(@"cell remove a subview[%@]", sview);
-//        }
-//        cell.textLabel.frame = CGRectMake(10, 1, HEIGHT_TQ_CELL - 2, HEIGHT_TQ_CELL -2);
-//        cell.textLabel.text = [@"采纳：" stringByAppendingString:[[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"adoptNum"]];
-//        UILabel *lblTipAdopNum = [[UILabel alloc]init];
-//        lblTipAdopNum.text = [@"采纳：" stringByAppendingString:[[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"adoptNum"]];
-//        lblTipAdopNum.frame = CGRectMake(10, 1, HEIGHT_TQ_CELL - 2, HEIGHT_TQ_CELL -2);
-//        [cell addSubview:lblTipAdopNum];
-//    }
     
     if(indexPath.section == 1){
         //播放例句发音
@@ -579,6 +614,34 @@
 {
     NSLog(@"CloseCell%@",indexPath);
 }
+
+#pragma mark - event hander
+
+- (IBAction)showImgTips:(id)sender {
+    //show the tbl
+    if(self.tblTipimgsIphone.hidden){
+        CATransition *animation = [CATransition animation];
+        animation.type = kCATransitionFade;
+        animation.duration = 0.5;
+        [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
+        self.tblTipimgsIphone.hidden = FALSE;
+        self.vtip.frame = self.svNormFrame;
+        CGRect mFrame = CGRectMake(0.0, 0.0, self.svNormFrame.size.width, self.svNormFrame.size.height);
+        self.tblTipsentense.frame = mFrame;
+    }
+}
+
+- (IBAction)showNextWord:(UIButton *)sender {
+    self.wordPoint += 1;
+    NSLog(@"reflush .. now wordPoint[%d] album length[%d]", self.wordPoint, [self.words count]);
+    if(self.wordPoint < [self.words count]){
+        [self.view setNeedsDisplay];
+        [self drawMyView];
+    }else{
+        NSLog(@"all words of current album has Done!");
+    }
+}
+
 
 @end
 

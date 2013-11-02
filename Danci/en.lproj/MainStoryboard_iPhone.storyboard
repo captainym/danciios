@@ -60,13 +60,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Y1q-cU-evM">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="46G-cH-Ron"/>
-                                    <constraint firstAttribute="width" constant="120" id="hd1-Q0-5Jy"/>
-                                </constraints>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="23" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4eT-kr-dOs">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="23" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4eT-kr-dOs">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Rbd-pj-Ac4"/>
@@ -75,45 +69,109 @@
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xej-D0-DfV">
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label单词释义Label单词释义Label单词释义Label单词释义Label单词释义" lineBreakMode="wordWrap" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-fy-qfK">
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label单词释义Label单词释义Label单词释义Label单词释义Label单词释义" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-fy-qfK">
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="190" id="0jM-kV-NWW"/>
+                                            <constraint firstAttribute="height" constant="110" id="oOJ-gW-fZa"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dFK-fy-qfK" firstAttribute="top" secondItem="Xej-D0-DfV" secondAttribute="top" type="default" id="Je3-in-dNh"/>
-                                    <constraint firstAttribute="trailing" secondItem="dFK-fy-qfK" secondAttribute="trailing" constant="3" id="Jvz-Jz-cOG"/>
                                     <constraint firstItem="dFK-fy-qfK" firstAttribute="leading" secondItem="Xej-D0-DfV" secondAttribute="leading" type="default" id="MC6-VU-sIl"/>
-                                    <constraint firstItem="dFK-fy-qfK" firstAttribute="bottom" secondItem="Xej-D0-DfV" secondAttribute="bottom" type="default" id="wTr-FD-BXk"/>
-                                    <constraint firstItem="dFK-fy-qfK" firstAttribute="centerY" secondItem="Xej-D0-DfV" secondAttribute="centerY" type="default" id="zhA-NV-cOw"/>
+                                    <constraint firstAttribute="trailing" secondItem="dFK-fy-qfK" secondAttribute="trailing" constant="-5" id="Uwb-Vy-xMk"/>
+                                    <constraint firstAttribute="bottom" secondItem="dFK-fy-qfK" secondAttribute="bottom" constant="-20" id="ftV-BT-IMW"/>
                                 </constraints>
                             </scrollView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ob4-sL-nbo"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="Ob4-sL-nbo">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGu-4i-ODq">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="不认识">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showNextWord:" destination="mjP-vE-xCc" eventType="touchUpInside" id="BpT-Cz-OA7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QU2-7i-v5j">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="模糊">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showNextWord:" destination="mjP-vE-xCc" eventType="touchUpInside" id="Msg-ot-bKm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-Bm-gs1">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="已掌握">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showNextWord:" destination="mjP-vE-xCc" eventType="touchUpInside" id="Tch-KO-hRX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jod-NU-44h">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="dfe-Lv-XhZ"/>
+                                    <constraint firstAttribute="height" constant="110" id="qaI-MZ-Dvt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Button" image="addImg3.png" backgroundImage="addImg3.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showImgTips:" destination="mjP-vE-xCc" eventType="touchUpInside" id="nyI-Lx-cbP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Xej-D0-DfV" secondAttribute="trailing" constant="124" id="3CU-ol-EaN"/>
                             <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="Xej-D0-DfV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="3Ma-8v-ExT"/>
-                            <constraint firstItem="4eT-kr-dOs" firstAttribute="trailing" secondItem="Y1q-cU-evM" secondAttribute="trailing" type="default" id="7kq-IL-TuK"/>
-                            <constraint firstItem="4eT-kr-dOs" firstAttribute="centerX" secondItem="BBJ-ze-Q1d" secondAttribute="centerX" type="default" id="Kyb-oJ-82M"/>
+                            <constraint firstItem="QU2-7i-v5j" firstAttribute="trailing" secondItem="Xej-D0-DfV" secondAttribute="trailing" type="default" id="4Qg-N1-PWL"/>
+                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="top" secondItem="Xej-D0-DfV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="H24-rp-bOz"/>
+                            <constraint firstAttribute="trailing" secondItem="9ef-Bm-gs1" secondAttribute="trailing" constant="28" id="NP5-ik-GOZ"/>
                             <constraint firstItem="Ob4-sL-nbo" firstAttribute="trailing" secondItem="4eT-kr-dOs" secondAttribute="trailing" type="default" id="O59-bZ-djv"/>
                             <constraint firstItem="Xej-D0-DfV" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="Piw-Ke-4ep"/>
+                            <constraint firstItem="Xej-D0-DfV" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="5" id="Uek-aJ-9Tw"/>
+                            <constraint firstItem="QU2-7i-v5j" firstAttribute="baseline" secondItem="qGu-4i-ODq" secondAttribute="baseline" type="default" id="Vht-EA-YdX"/>
                             <constraint firstItem="Ob4-sL-nbo" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="Wap-l2-r4H"/>
-                            <constraint firstAttribute="bottom" secondItem="Ob4-sL-nbo" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="bFu-5Q-ZTd"/>
-                            <constraint firstItem="Xej-D0-DfV" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="5" id="gHk-2s-zkM"/>
-                            <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="Y1q-cU-evM" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="h5D-iZ-hGn"/>
-                            <constraint firstItem="Xej-D0-DfV" firstAttribute="top" secondItem="Y1q-cU-evM" secondAttribute="top" type="default" id="pWv-Lg-VYJ"/>
-                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="top" secondItem="4eT-kr-dOs" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uks-uG-aZj"/>
+                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="centerX" secondItem="BBJ-ze-Q1d" secondAttribute="centerX" type="default" id="a0V-HG-2eR"/>
+                            <constraint firstAttribute="bottom" secondItem="Ob4-sL-nbo" secondAttribute="bottom" constant="189" id="a1y-4i-0Tf"/>
+                            <constraint firstItem="Jod-NU-44h" firstAttribute="trailing" secondItem="4eT-kr-dOs" secondAttribute="trailing" type="default" id="iQg-5f-Kii"/>
+                            <constraint firstItem="Jod-NU-44h" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" type="default" id="jpr-Cz-Tok"/>
+                            <constraint firstAttribute="bottom" secondItem="qGu-4i-ODq" secondAttribute="bottom" constant="14" id="jwZ-wM-dDl"/>
+                            <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="103" id="qxt-mm-3uf"/>
+                            <constraint firstItem="QU2-7i-v5j" firstAttribute="baseline" secondItem="9ef-Bm-gs1" secondAttribute="baseline" type="default" id="tJZ-Gx-OBF"/>
+                            <constraint firstItem="qGu-4i-ODq" firstAttribute="leading" secondItem="BBJ-ze-Q1d" secondAttribute="leading" constant="28" id="wvE-H6-Ukj"/>
+                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="centerX" secondItem="QU2-7i-v5j" secondAttribute="centerX" type="default" id="zJm-mQ-7k0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OYq-89-cg2"/>
                     <connections>
-                        <outlet property="imgTipimgIphone" destination="Y1q-cU-evM" id="XIS-zi-N9P"/>
+                        <outlet property="btnTipImgIphone" destination="Jod-NU-44h" id="qRr-Ue-Wwg"/>
                         <outlet property="lblMeaningStemIphone" destination="dFK-fy-qfK" id="JK7-J4-lnz"/>
                         <outlet property="tblTipimgsIphone" destination="4eT-kr-dOs" id="0x9-lc-dac"/>
                         <outlet property="vtip" destination="Ob4-sL-nbo" id="Fqb-yo-fMI"/>
@@ -142,6 +200,9 @@
             <point key="canvasLocation" x="-639" y="-445"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="addImg3.png" width="256" height="256"/>
+    </resources>
     <classes>
         <class className="DanciAlbumTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciAlbumTableViewController.h"/>
@@ -153,8 +214,10 @@
         <class className="DanciWordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciWordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="showImgTips:"/>
+                <relationship kind="action" name="showNextWord:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnTipImgIphone" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="imgTipimg" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgTipimgIphone" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblMeaning" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblMeaningStemIphone" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblStem" candidateClass="UILabel"/>
@@ -162,7 +225,7 @@
                 <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="tblTipsentense" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="tblTiptxt" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="vtip" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="vtip" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">

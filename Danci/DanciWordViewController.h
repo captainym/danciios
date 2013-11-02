@@ -56,6 +56,9 @@
 @property (nonatomic, strong) NSMutableArray *tipSentences;
 //播放器
 @property (nonatomic,strong) AVAudioPlayer *player;
+//frame
+@property (nonatomic) CGRect svNormFrame;
+@property (nonatomic) CGRect svExpFrame;
 
 //iphone的tip控件
 @property (nonatomic,strong) TQMultistageTableView *tblMultipsIphone;
@@ -71,9 +74,10 @@
 
 //iphone控件
 @property (weak, nonatomic) IBOutlet UILabel *lblMeaningStemIphone;
-@property (weak, nonatomic) IBOutlet UIImageView *imgTipimgIphone;
+//@property (weak, nonatomic) IBOutlet UIImageView *imgTipimgIphone;
+@property (weak, nonatomic) IBOutlet UIButton *btnTipImgIphone;
 @property (weak, nonatomic) IBOutlet UITableView *tblTipimgsIphone;
-//@property (weak, nonatomic) IBOutlet UIView *vtip;
-@property (weak, nonatomic) IBOutlet UIScrollView *vtip;
+@property (weak, nonatomic) IBOutlet UIView *vtip;
+
 
 @end
