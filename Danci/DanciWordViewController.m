@@ -96,7 +96,7 @@
 -(CGRect) svExpFrame
 {
     if(_svExpFrame.origin.x < 1){
-        _svExpFrame = CGRectMake(3.0, 103, 314, 320);
+        _svExpFrame = CGRectMake(3.0, 110, 314, 320);
         NSLog(@"after _svExpFrame. x[%f] y[%f] height[%f] width[%f]",_svExpFrame.origin.x,_svExpFrame.origin.y,_svExpFrame.size.height,_svExpFrame.size.width);
     }
     return _svExpFrame;
@@ -104,7 +104,7 @@
 -(CGRect) svNormFrame
 {
     if(_svNormFrame.origin.x < 1){
-        _svNormFrame = CGRectMake(3.0, 211, 314, 212);
+        _svNormFrame = CGRectMake(3.0, 218, 314, 212);
         NSLog(@"after _svNormFrame. x[%f] y[%f] height[%f] width[%f]",_svNormFrame.origin.x,_svNormFrame.origin.y,_svNormFrame.size.height,_svNormFrame.size.width);
     }
     return _svNormFrame;
@@ -144,7 +144,7 @@
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      ];
     [self.tipTxts addObjectsFromArray: @[
-     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) psychology n 心理学（paych 心理+o+log psychology n 心理学（paych 心理+o+log", @"adoptNum": @"271" , @"optTime":@"18000" },
+     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) psychology n 心理学（paych 心理+o+log psychology n 心理学（paych 心理+o+logabcdefghigklmnopqrstuvwxyzxyz abc1 abc2 abc3 abc4 abc5 abc6", @"adoptNum": @"271" , @"optTime":@"18000" },
      @{@"tip":@"PSY鸟叔，心理变态", @"adoptNum": @"93" , @"optTime":@"18000" },
      @{@"tip":@"各种常见的学 psychology 心理学 chemistry 化学 physics 物理学 mathematics 数学 literature 文学 astronomy 天文学", @"adoptNum": @"48" , @"optTime":@"18000" },
      @{@"tip":@"psych=mind, logy=某种学问，关于mind的学问，心理学", @"adoptNum": @"28" , @"optTime":@"18000" },
@@ -200,6 +200,7 @@
     self.lblHeaderTip = [[UILabel alloc] init];
     self.lblHeaderTip.textColor = [UIColor blackColor];
     self.lblHeaderTip.lineBreakMode = NSLineBreakByWordWrapping;
+//    self.lblMeaningStemIphone.lineBreakMode = NSLineBreakByCharWrapping;
     self.lblHeaderTip.numberOfLines = 0;
 
     [self drawMyView];
@@ -229,7 +230,7 @@
     self.title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
     self.lblMeaning.text = self.comment;
     self.lblStem.text= self.wordGern;
-    self.lblMeaningStemIphone.text = [@"简明释义：" stringByAppendingString:[[self.comment stringByAppendingString:@"\n词根词缀："] stringByAppendingString:self.wordGern]];
+    self.lblMeaningStemIphone.text = [@" " stringByAppendingString:[[self.comment stringByAppendingString:@"\n★："] stringByAppendingString:self.wordGern]];
     //读图片
     NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
                                                        , NSUserDomainMask
