@@ -104,13 +104,18 @@
 -(CGRect) svNormFrame
 {
     if(_svNormFrame.origin.x < 1){
-        _svNormFrame = CGRectMake(3.0, 218, 314, 212);
+        _svNormFrame = CGRectMake(3.0, 218, 314, 230);
         NSLog(@"after _svNormFrame. x[%f] y[%f] height[%f] width[%f]",_svNormFrame.origin.x,_svNormFrame.origin.y,_svNormFrame.size.height,_svNormFrame.size.width);
     }
     return _svNormFrame;
 }
 
 //从coredata中取出当前word的各种信息： 发音 真人发音mp3 中文释义 词根词缀 例句 例句mp3地址 从网络获取tipImgs tipTxts 例句mp3
+//- (void) getWordInfo
+//{
+//    
+//}
+
 - (void) getWordInfo
 {
     //先用假数据
@@ -150,8 +155,10 @@
      @{@"tip":@"psych=mind, logy=某种学问，关于mind的学问，心理学", @"adoptNum": @"28" , @"optTime":@"18000" },
      ]];
     [self.tipSentences addObjectsFromArray:@[
-     @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
-     @{@"sentence":@"It seems to me that the psychology is abundantly clear.", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
+     @{@"sentence":@"It seems to me that the psychology is abundantly clear.\n在我看来，这种心理非常清楚。", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
+     @{@"sentence":@"It seems to me that the psychology is abundantly clear.\n在我看来，这种心理非常清楚。", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
+     @{@"sentence":@"It seems to me that the psychology is abundantly clear.\n在我看来，这种心理非常清楚。", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
+     @{@"sentence":@"It seems to me that the psychology is abundantlyA substitute teacher was trying to make use of her psychology background.\n代课教师试图运用她的心理学知识。", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
      ]];
 }
 
@@ -560,16 +567,20 @@
     [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
     self.tblTipimgsIphone.hidden = TRUE;
     self.vtip.frame = self.svExpFrame;
-    CGRect mFrame = CGRectMake(0.0, 0.0, self.svExpFrame.size.width, self.svExpFrame.size.height);
-    self.tblTipsentense.frame = mFrame;
+    CGRect mFrame = CGRectMake(0.0, 0.0, self.svExpFrame.size.width, self.svExpFrame.size.height - HEIGHT_TIP_TXT);
+    self.tblMultipsIphone.frame = mFrame;
     [UIView commitAnimations];
     
+    NSLog(@"header展开 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+    NSLog(@"header展开 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
 }
 
 //header关闭
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseHeaderAtSection:(NSInteger)section
 {
     NSLog(@"headerClose%d",section);
+    NSLog(@"header关闭 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+    NSLog(@"header关闭 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
 //    //show the tbl
 //    CATransition *animation = [CATransition animation];
 //    animation.type = kCATransitionFade;
@@ -627,8 +638,10 @@
         [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
         self.tblTipimgsIphone.hidden = FALSE;
         self.vtip.frame = self.svNormFrame;
-        CGRect mFrame = CGRectMake(0.0, 0.0, self.svNormFrame.size.width, self.svNormFrame.size.height);
-        self.tblTipsentense.frame = mFrame;
+        CGRect mFrame = CGRectMake(0.0, 0.0, self.svNormFrame.size.width, self.svNormFrame.size.height - self.svExpFrame.origin.y);
+        self.tblMultipsIphone.frame = mFrame;
+        NSLog(@"showImgTips frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+        NSLog(@"showImgTips frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
     }
 }
 

@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "405085309.700057"
+         timestampString = "405263052.284634"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "426"
-         endingLineNumber = "426"
+         startingLineNumber = "433"
+         endingLineNumber = "433"
          landmarkName = "-mTableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "405085309.700057"
+         timestampString = "405263052.284634"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "457"
-         endingLineNumber = "457"
+         startingLineNumber = "464"
+         endingLineNumber = "464"
          landmarkName = "-mTableView:openCellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -515,11 +515,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "405085309.700057"
+         timestampString = "405263052.284634"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "365"
-         endingLineNumber = "365"
+         startingLineNumber = "372"
+         endingLineNumber = "372"
          landmarkName = "-tableView:heightForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -528,11 +528,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Danci/DanciWordViewController.m"
-         timestampString = "405085309.700057"
+         timestampString = "405263052.284634"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "555"
-         endingLineNumber = "555"
+         startingLineNumber = "562"
+         endingLineNumber = "562"
          landmarkName = "-mTableView:willOpenHeaderAtSection:"
          landmarkType = "5">
       </FileBreakpoint>
