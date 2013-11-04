@@ -202,12 +202,10 @@
     UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
     self.lblMeaningStemIphone.font = fontDetail;
     self.lblMeaningStemIphone.numberOfLines = 0;
-//    self.lblMeaningStemIphone.lineBreakMode = NSLineBreakByCharWrapping;
     
     self.lblHeaderTip = [[UILabel alloc] init];
     self.lblHeaderTip.textColor = [UIColor blackColor];
     self.lblHeaderTip.lineBreakMode = NSLineBreakByWordWrapping;
-//    self.lblMeaningStemIphone.lineBreakMode = NSLineBreakByCharWrapping;
     self.lblHeaderTip.numberOfLines = 0;
 
     [self drawMyView];
@@ -225,8 +223,12 @@
     btnCover.frame = CGRectMake(0, 0, 320, 540);
     btnCover.titleLabel.text = [self.word stringByAppendingString:@" 是什么意思？"];
     [btnCover setTitle:[self.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
-    btnCover.backgroundColor = [UIColor clearColor];
+    UIColor *clearColor = [UIColor clearColor];
+    btnCover.backgroundColor = clearColor;
     [btnCover addTarget:self action:@selector(drawMyViewReal:) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnCover.tintColor = [UIColor whiteColor];
+    
     [self.view addSubview:btnCover];
 }
 
