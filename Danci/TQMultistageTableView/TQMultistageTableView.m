@@ -37,6 +37,10 @@
         _tableView = [[UITableView alloc] initWithFrame:frame];
         _tableView.delegate     = self;
         _tableView.dataSource   = self;
+//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        UIView *clearView = [[UIView alloc] init];
+        clearView.backgroundColor = [UIColor clearColor];
+        [_tableView setTableFooterView: clearView];
         [self addSubview:_tableView];
     }
     return self;

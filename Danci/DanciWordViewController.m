@@ -230,8 +230,7 @@
     [self.view addSubview:btnCover];
 }
 
-- (void)drawMyViewReal:(UIButton *)sender
-{
+- (void)drawMyViewReal:(UIButton *)sender {
     [sender removeFromSuperview];
     //title显示当前正在学习或复习的单词
     self.title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
@@ -261,7 +260,7 @@
     self.tblMultipsIphone.dataSource = self;
     self.tblTipimgsIphone.hidden = TRUE;
     self.vtip.frame = self.svExpFrame;
-    [self.vtip addSubview:self.tblMultipsIphone];
+    [self.vtip addSubview:self.tblMultipsIphone]; 
 }
 
 #pragma mark - Table view data source
