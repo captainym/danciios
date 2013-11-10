@@ -20,6 +20,9 @@
 
 @interface DanciWordViewController : UIViewController
 
+//用户帐户信息
+@property (nonatomic, strong) NSString *userMid;
+
 //指示当前页面是新学习还是复习；
 @property BOOL isNewStudy;
 //指示当前的单词是学习还是复习。如果是复习单词，这个值将一直是TRUE，否则按照马上复习的逻辑来设置，该值指示界面是否切换到复习界面：反馈按钮的title及其逻辑、tips的折叠与否、助记图片加载。只要是学习过的单词，这个值都是TRUE。

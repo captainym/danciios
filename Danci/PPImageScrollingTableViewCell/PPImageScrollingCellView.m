@@ -7,13 +7,9 @@
 //
 
 #import "PPImageScrollingCellView.h"
-#import "PPCollectionViewCell.h"
 
 @interface  PPImageScrollingCellView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (strong, nonatomic) PPCollectionViewCell *myCollectionViewCell;
-@property (strong, nonatomic) UICollectionView *myCollectionView;
-@property (strong, nonatomic) NSArray *collectionImageData;
 //@property (nonatomic) CGFloat imagetitleWidth;
 //@property (nonatomic) CGFloat imagetitleHeight;
 //@property (strong, nonatomic) UIColor *imageTilteBackgroundColor;
@@ -22,6 +18,10 @@
 @end
 
 @implementation PPImageScrollingCellView
+
+@synthesize myCollectionView = _myCollectionView;
+@synthesize myCollectionViewCell = _myCollectionViewCell;
+@synthesize collectionImageData = _collectionImageData;
 
 - (id)initWithFrame:(CGRect)frame
 {

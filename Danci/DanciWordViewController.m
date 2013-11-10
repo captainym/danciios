@@ -8,11 +8,13 @@
 
 #import "DanciWordViewController.h"
 #import "PPImageScrollingTableViewCell.h"
+#import "UIPopoverListView.h"
+#import "PPCollectionViewCell.h"
 
 //图片的tableView需要150的宽度。ipad下可以考虑更大
 #define HEIGHT_IMG_ROW 100.0
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate>
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate>
 @property (nonatomic, strong) UILabel *lblHeaderTip;
 
 @end
@@ -22,6 +24,8 @@
 //properties synthesize
 @synthesize isNewStudy = _isNewStudy;
 @synthesize isReview = _isReview;
+
+@synthesize userMid = _userMid;
 
 @synthesize albumName = _albumName;
 @synthesize wordPoint = _wordPoint;
@@ -36,6 +40,8 @@
 @synthesize player = _player;
 @synthesize svExpFrame = _svExpFrame;
 @synthesize svNormFrame = _svNormFrame;
+
+#pragma mark- properties
 
 - (void) setIsReview:(BOOL)isReview
 {
@@ -109,6 +115,20 @@
     }
     return _svNormFrame;
 }
+
+-(NSString *) userMid
+{
+    if([_userMid length] < 1 ){
+        //core data 取值
+//        _userMid = @"18601920512";
+    }
+    if([_userMid length] < 1){
+        return nil;
+    }
+    return _userMid;
+}
+
+#pragma mark -  methods
 
 //从coredata中取出当前word的各种信息： 发音 真人发音mp3 中文释义 词根词缀 例句 例句mp3地址 从网络获取tipImgs tipTxts 例句mp3
 //- (void) getWordInfo
@@ -219,12 +239,11 @@
 
 - (void) drawMyView
 {
-    UIButton *btnCover = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
     btnCover.frame = CGRectMake(0, 0, 320, 540);
-    btnCover.titleLabel.text = [self.word stringByAppendingString:@" 是什么意思？"];
     [btnCover setTitle:[self.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
-    UIColor *clearColor = [UIColor clearColor];
-    btnCover.backgroundColor = clearColor;
+    [btnCover setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btnCover.backgroundColor = [UIColor whiteColor];
     [btnCover addTarget:self action:@selector(drawMyViewReal:) forControlEvents:UIControlEventTouchUpInside];
     
     btnCover.tintColor = [UIColor whiteColor];
@@ -263,6 +282,17 @@
     self.tblTipimgsIphone.hidden = TRUE;
     self.vtip.frame = self.svExpFrame;
     [self.vtip addSubview:self.tblMultipsIphone]; 
+}
+
+-(void) popLoginView:(int)popType
+{
+    CGFloat xWidth = self.view.bounds.size.width - 80.0f;
+    CGFloat yHeight = 272.0f;
+    CGFloat yOffset = (self.view.bounds.size.height - yHeight)/2.0f;
+    UIPopoverListView *poplistview = [[UIPopoverListView alloc] initWithFrameType:CGRectMake(10, yOffset, xWidth, yHeight) popType:popType];
+    poplistview.delegate = self;
+    [poplistview setTitle:@"登陆"];
+    [poplistview show];
 }
 
 #pragma mark - Table view data source
@@ -379,31 +409,56 @@
 //用户选择了一个图片之后
 - (void)scrollingTableViewCell:(PPImageScrollingTableViewCell *)sender didSelectImageAtIndexPath:(NSIndexPath*)indexPathOfImage
 {
+    //判断是否登陆
+    if(self.userMid == nil){
+        [self popLoginView:TYPE_LOGIN];
+        return;
+    }
     NSString *imgName = [[self.tipImgs objectAtIndex:indexPathOfImage.row]objectForKey:@"name"];
     NSString *imgUrl = [[self.tipImgs objectAtIndex:indexPathOfImage.row] objectForKey:@"url"];
+    PPCollectionViewCell *cell = (PPCollectionViewCell *) [sender.imageScrollingView.myCollectionView cellForItemAtIndexPath:indexPathOfImage];
+    NSData *imgData = UIImageJPEGRepresentation(cell.imageView.image, 0.0f);
+    UIImage *img = [UIImage imageWithData:imgData];
+    [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
+    [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
     NSLog(@"selected img info: imgName:[%@] imgUrl:[%@]", imgName, imgUrl);
-    dispatch_queue_t downloadImg = dispatch_queue_create("downloadImg", NULL);
-    dispatch_async(downloadImg, ^{
-        NSURL *imgUrlNet = [NSURL URLWithString:imgUrl];
-        NSData * imgData = [NSData dataWithContentsOfURL:imgUrlNet];
-        dispatch_async(dispatch_get_main_queue(),^{
-            UIImage *img = [UIImage imageWithData:imgData];
-            self.imgTipimg.image = img;
-            [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
-            [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
-        });
+    
+    //图片保存到本地
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *fileName = [[[paths objectAtIndex:0] stringByAppendingString:@"/" ] stringByAppendingString:self.word];
+    if([imgData length] > 0 && [imgData writeToFile:fileName atomically:YES]){
+        NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
+    }else{
+        NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
+    }
+    
+//    dispatch_queue_t downloadImg = dispatch_queue_create("downloadImg", NULL);
+//    dispatch_async(downloadImg, ^{
+//        NSURL *imgUrlNet = [NSURL URLWithString:imgUrl];
+//        NSData *imgData = UIImageJPEGRepresentation(sender.imageView.image, 0.0f);
+//        if(imgData){
+//            [self.btnTipImgIphone setImage:sender.imageView.image forState:UIControlStateNormal];
+//            [self.btnTipImgIphone setImage:sender.imageView.image forState:UIControlStateHighlighted];
+//        }
+//        NSData * imgData = [NSData dataWithContentsOfURL:imgUrlNet];
+//        dispatch_async(dispatch_get_main_queue(),^{
+//            UIImage *img = [UIImage imageWithData:imgData];
+//            self.imgTipimg.image = img;
+//            [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
+//            [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
+//        });
         
-        //图片保存到本地
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *fileName = [[[paths objectAtIndex:0] stringByAppendingString:@"/" ] stringByAppendingString:self.word];
-        if([imgData writeToFile:fileName atomically:YES]){
-            NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
-        }else{
-            NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
-        }
+//        //图片保存到本地
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *fileName = [[[paths objectAtIndex:0] stringByAppendingString:@"/" ] stringByAppendingString:self.word];
+//        if([imgData writeToFile:fileName atomically:YES]){
+//            NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
+//        }else{
+//            NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
+//        }
         
         //将采纳发送到server
-    });
+//    });
     
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
 //                                                    message:[NSString stringWithFormat: @"in %@",imgUrl]
@@ -542,6 +597,10 @@
 {
     NSLog(@"cellClick%@",indexPath);
     if(indexPath.section == 0){
+        if(self.userMid == nil){
+            [self popLoginView:TYPE_LOGIN];
+            return;
+        }
         //tiptxt的采纳
         NSString *tipadopt = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
         if(![tipadopt isEqualToString:self.tipTxt]){
@@ -626,6 +685,27 @@
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseCellAtIndexPath:(NSIndexPath *)indexPath;
 {
     NSLog(@"CloseCell%@",indexPath);
+}
+
+#pragma mark - popListViewDelegate
+
+-(void) popoverListViewCancel:(UIPopoverListView *)popoverListView
+{
+    //应该纪录下来 计算流失率
+    NSLog(@"user do not want to reg or login");
+}
+
+-(void) popoverListViewLogin:(UIPopoverListView *)popoverListView oldUser:(NSDictionary *)userInfo
+{
+    self.userMid = [userInfo objectForKey:@"userMid"];
+    NSLog(@"user login in");
+}
+
+-(void) popoverListViewRegist:(UIPopoverListView *)popoverListView newUser:(NSDictionary *)userInfo
+{
+    self.userMid = [userInfo objectForKey:@"userMid"];
+    NSLog(@"user regist. ");
+    //持久化保存用户信息在本地
 }
 
 #pragma mark - event hander

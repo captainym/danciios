@@ -7,7 +7,6 @@
 //
 
 #import "PPImageScrollingTableViewCell.h"
-#import "PPImageScrollingCellView.h"
 
 #define kScrollingViewHieght 96
 //#define kCategoryLabelWidth 200
@@ -17,13 +16,13 @@
 @interface PPImageScrollingTableViewCell() <PPImageScrollingViewDelegate>
 
 //@property (strong,nonatomic) UIColor *categoryTitleColor;
-@property(strong, nonatomic) PPImageScrollingCellView *imageScrollingView;
 //@property (strong, nonatomic) NSString *categoryLabelText;
 
 @end
 
 @implementation PPImageScrollingTableViewCell
 
+@synthesize imageScrollingView = _imageScrollingView;
 @synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -46,8 +45,8 @@
 - (void)initialize
 {
     // Set ScrollImageTableCellView
-    _imageScrollingView = [[PPImageScrollingCellView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320., kScrollingViewHieght)];
-    _imageScrollingView.delegate = self;
+    self.imageScrollingView = [[PPImageScrollingCellView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320., kScrollingViewHieght)];
+    self.imageScrollingView.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -58,7 +57,7 @@
 
 - (void)setImageData:(NSArray *)images
 {
-    [_imageScrollingView setImageData: images];
+    [self.imageScrollingView setImageData: images];
     
     if ([self.contentView subviews]){
         for (UIView *subview in [self.contentView subviews]) {
@@ -98,7 +97,7 @@
 }*/
 
 - (void)setCollectionViewBackgroundColor:(UIColor *)color{
-    _imageScrollingView.backgroundColor = color;
+    self.imageScrollingView.backgroundColor = color;
 //    [self.contentView addSubview:_imageScrollingView];
 }
 

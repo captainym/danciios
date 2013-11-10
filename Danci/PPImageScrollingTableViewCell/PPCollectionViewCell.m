@@ -10,12 +10,12 @@
 
 @interface PPCollectionViewCell ()
 
-@property (strong, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) UITextView *imageTitle;
-
 @end
 
 @implementation PPCollectionViewCell
+
+@synthesize imageView = _imageView;
+@synthesize imageTitle = _imageTitle;
 
 - (id)initWithFrame:(CGRect)frame
 {

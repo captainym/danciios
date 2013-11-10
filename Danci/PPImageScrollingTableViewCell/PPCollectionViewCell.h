@@ -10,6 +10,9 @@
 
 @interface PPCollectionViewCell : UICollectionViewCell
 
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UITextView *imageTitle;
+
 - (void)setImage:(UIImage*) image;
 //- (void)setTitle:(NSString*) title;
 //- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;

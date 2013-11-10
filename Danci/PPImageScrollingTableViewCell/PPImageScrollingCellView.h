@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 popochess. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import "PPCollectionViewCell.h"
 
 @class PPImageScrollingCellView;
 
@@ -19,6 +20,10 @@
 @interface PPImageScrollingCellView : UIView
 
 @property (weak, nonatomic) id<PPImageScrollingViewDelegate> delegate;
+
+@property (strong, nonatomic) PPCollectionViewCell *myCollectionViewCell;
+@property (strong, nonatomic) UICollectionView *myCollectionView;
+@property (strong, nonatomic) NSArray *collectionImageData;
 
 //- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;
 //- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor;
