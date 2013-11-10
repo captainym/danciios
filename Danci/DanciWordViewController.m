@@ -131,17 +131,13 @@
 #pragma mark -  methods
 
 //从coredata中取出当前word的各种信息： 发音 真人发音mp3 中文释义 词根词缀 例句 例句mp3地址 从网络获取tipImgs tipTxts 例句mp3
-//- (void) getWordInfo
-//{
-//    
-//}
-
 - (void) getWordInfo
 {
     //先用假数据
     self.fayin = @"[saɪˈkɒlədʒɪ]";
     self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
-    self.fayinMp3Url = @"wordmp3/p/psychology.arm";
+//    self.fayinMp3Url = @"wordmp3/p/psychology.arm";
+    self.fayinMp3Url = @"/Users/huhao/Developer/psychology.mp3";
     self.tipImgFilepath = @"psychology1.jpeg";
     self.tipTxt = @"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) ";
     self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思； cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 psy-cho-logy连起来就是“知道心的学说”。";
@@ -181,7 +177,6 @@
      @{@"sentence":@"It seems to me that the psychology is abundantlyA substitute teacher was trying to make use of her psychology background.\n代课教师试图运用她的心理学知识。", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
      ]];
 }
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -237,6 +232,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void) playWordMp3
+{
+    NSLog(@"title button has been touch");
+    NSError *myerror = nil;
+    NSData *mp3data = [[NSData alloc] initWithContentsOfFile:self.fayinMp3Url];
+    if(!mp3data){
+        NSLog(@"发音文件不存在! path[%@]", self.fayinMp3Url);
+        return;
+    }
+    self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
+    [self.player setDelegate:self];
+    if(self.player){
+        if ([self.player prepareToPlay]) {
+            [self.player setVolume:0.5f];
+            if([self.player play]){
+                NSLog(@"play successed. mp3url[%@]", self.fayinMp3Url);
+            }else{
+                NSLog(@"play failed! mp3url[%@]", self.fayinMp3Url);
+            }
+        }else{
+            NSLog(@"player prepareToPlay failed! mp3url[%@]", self.fayinMp3Url);
+        }
+    }else{
+        NSLog(@"player init failed! mp3url[%@] msg:[%@]",self.fayinMp3Url,[myerror description]);
+    }
+}
+
 - (void) drawMyView
 {
     UIButton *btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -253,8 +276,17 @@
 
 - (void)drawMyViewReal:(UIButton *)sender {
     [sender removeFromSuperview];
+    
     //title显示当前正在学习或复习的单词
-    self.title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
+    NSString *title = [[self.word stringByAppendingString:@" "] stringByAppendingString:self.fayin];
+    UIButton *btnTitle = [[UIButton alloc] init];
+    [btnTitle setTitle:title forState:UIControlStateNormal];
+    [btnTitle addTarget:self
+                 action:@selector(playWordMp3)
+       forControlEvents:UIControlEventTouchDown];
+    [btnTitle setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [self.navigationItem setTitleView:btnTitle];
+    
     self.lblMeaning.text = self.comment;
     self.lblStem.text= self.wordGern;
     self.lblMeaningStemIphone.text = [@" " stringByAppendingString:[[self.comment stringByAppendingString:@"\n★："] stringByAppendingString:self.wordGern]];
