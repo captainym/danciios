@@ -203,12 +203,8 @@
     
     //注册cell
     static NSString *CellIdentifier = cellTipimg;
-    [self.tblTipimgs registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    [self.tblTipimgs setDataSource:self];
-    [self.tblTipimgs setDelegate:self];
-    
     //iphone
-    [self.tblTipimgsIphone registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:cellTipimg];
+    [self.tblTipimgsIphone registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:CellIdentifier];
     [self.tblTipimgsIphone setDelegate:self];
     [self.tblTipimgsIphone setDataSource:self];
     
@@ -262,16 +258,21 @@
 
 - (void) drawMyView
 {
-    UIButton *btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
-    btnCover.frame = CGRectMake(0, 0, 320, 540);
-    [btnCover setTitle:[self.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
-    [btnCover setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnCover.backgroundColor = [UIColor whiteColor];
-    [btnCover addTarget:self action:@selector(drawMyViewReal:) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
+//    if(_btnCover.superview){
+//        NSLog(@"_btnConver remove from supper.");
+//        [_btnCover removeFromSuperview];
+//    }
+    _btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
+    _btnCover.frame = CGRectMake(0, 0, 320, 540);
+    [_btnCover setTitle:[self.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
+    [_btnCover setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _btnCover.backgroundColor = [UIColor whiteColor];
+    [_btnCover addTarget:self action:@selector(drawMyViewReal:) forControlEvents:UIControlEventTouchUpInside];
     
-    btnCover.tintColor = [UIColor whiteColor];
+    _btnCover.tintColor = [UIColor whiteColor];
     
-    [self.view addSubview:btnCover];
+    [self.view addSubview:_btnCover];
 }
 
 - (void)drawMyViewReal:(UIButton *)sender {
@@ -287,9 +288,34 @@
     [btnTitle setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     [self.navigationItem setTitleView:btnTitle];
     
-    self.lblMeaning.text = self.comment;
-    self.lblStem.text= self.wordGern;
-    self.lblMeaningStemIphone.text = [@" " stringByAppendingString:[[self.comment stringByAppendingString:@"\n★："] stringByAppendingString:self.wordGern]];
+//    self.lblMeaning.text = self.comment;
+//    self.lblStem.text= self.wordGern;
+//    UILabel *lblM
+    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+    NSString *content = [@" " stringByAppendingString:[[self.comment stringByAppendingString:@"\n\n词根词源：\n"] stringByAppendingString:self.wordGern]];
+    CGSize contentSize = [content sizeWithFont:fontDetail constrainedToSize:CGSizeMake(180, 400)  lineBreakMode:NSLineBreakByWordWrapping];//求文本的大小
+    UILabel *lbltmp = [[UILabel alloc] init];
+    lbltmp.font = fontDetail;
+    lbltmp.text = content;
+    lbltmp.frame = CGRectMake(0, 0, contentSize.width, contentSize.height);
+    lbltmp.lineBreakMode = NSLineBreakByWordWrapping;
+    lbltmp.numberOfLines = 0;
+    lbltmp.backgroundColor = [UIColor clearColor];
+    self.svMeaningStem.frame = CGRectMake(0, 0, 200, 400);
+    self.svMeaningStem.contentSize = contentSize;//self.lblMeaningStemIphone.frame.size;
+    if(lbltmp.superview != self.svMeaningStem){
+        [self.svMeaningStem addSubview:lbltmp];
+    }
+//    self.lblMeaningStemIphone.font = [UIFont systemFontOfSize:12];
+//    self.lblMeaningStemIphone.text = content;
+//    self.lblMeaningStemIphone.frame = CGRectMake(0, 0, contentSize.width, contentSize.height);
+//    self.lblMeaningStemIphone.lineBreakMode = NSLineBreakByWordWrapping;
+//    self.lblMeaningStemIphone.numberOfLines = 0;
+//    self.lblMeaningStemIphone.backgroundColor = [UIColor clearColor];
+//    self.svMeaningStem.contentSize = contentSize;//self.lblMeaningStemIphone.frame.size;
+//    if(self.lblMeaningStemIphone.superview != self.svMeaningStem){
+//        [self.svMeaningStem addSubview:self.lblMeaningStemIphone];
+//    }
     //读图片
     NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory
                                                        , NSUserDomainMask
@@ -300,8 +326,6 @@
     if([filemanager fileExistsAtPath: filepath]){
         NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
         UIImage *wordImg = [UIImage imageWithData:imagedata];
-        self.imgTipimg.image = wordImg;
-        
         [self.btnTipImgIphone setImage:wordImg forState:UIControlStateHighlighted];
         [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
     }
@@ -331,11 +355,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
-        return 1;
-    }else if (tableView == self.tblTiptxt){
-        return 1;
-    }else if(tableView == self.tblTipsentense){
+    if(tableView == self.tblTipimgsIphone){
         return 1;
     }else{
         NSLog(@"DANCI WARNING: see sections. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
@@ -345,14 +365,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
+    if(tableView == self.tblTipimgsIphone){
         return 1;
-    }else if (tableView == self.tblTiptxt){
-        NSLog(@"now number of rows of tblTiptxt:[%d]", [self.tipTxts count]);
-        return [self.tipTxts count];
-    }else if(tableView == self.tblTipsentense){
-        NSLog(@"now number of rows of tblSentence:[%d]", [self.tipSentences count]);
-        return [self.tipSentences count];
     }else{
         NSLog(@"DANCI WARNING: see sections. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
         return 0;
@@ -362,7 +376,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
-    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
+    if(tableView == self.tblTipimgsIphone){
         //显示图片
         static NSString *CellIdentifier = cellTipimg;
         PPImageScrollingTableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -376,14 +390,6 @@
 //        [customCell setImageTitleLabelWitdh:90 withHeight:45];
         [customCell setCollectionViewBackgroundColor:[UIColor darkGrayColor]];
         return customCell;
-    }else if (tableView == self.tblTiptxt){
-        //显示txt tip
-        cell = [tableView dequeueReusableCellWithIdentifier:cellTiptxt forIndexPath:indexPath];
-        cell.textLabel.text = [[self.tipTxts objectAtIndex:[indexPath row]] objectForKey:@"tip"];
-    }else if (tableView == self.tblTipsentense){
-        //显示txt tip
-        cell = [tableView dequeueReusableCellWithIdentifier:cellTipsentence forIndexPath:indexPath];
-        cell.textLabel.text = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"sentence"]; 
     }else{
         NSLog(@"DANCI WARNING: loading cell. tableview is Nagative! tableViewId[%@]", tableView.restorationIdentifier);
     }
@@ -395,31 +401,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView == self.tblTipsentense){
-        NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"mp3"];
-        dispatch_queue_t play_q = dispatch_queue_create("play mp3", NULL);
-        dispatch_async(play_q, ^{
-            NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
-            NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
-            NSError *myerror = nil;
-            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
-            [self.player setDelegate:self];
-            if(self.player){
-                if ([self.player prepareToPlay]) {
-                    [self.player setVolume:0.5f];
-                    if([self.player play]){
-                        NSLog(@"play successed. mp3url[%@]", mp3url);
-                    }else{
-                        NSLog(@"play failed! mp3url[%@]", mp3url);
-                    }
-                }else{
-                    NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
-                }
-            }else{
-                NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
-            }
-        });
-    }
+//    if(tableView == self.tblTipsentense){
+//        NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"mp3"];
+//        dispatch_queue_t play_q = dispatch_queue_create("play mp3", NULL);
+//        dispatch_async(play_q, ^{
+//            NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
+//            NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
+//            NSError *myerror = nil;
+//            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
+//            [self.player setDelegate:self];
+//            if(self.player){
+//                if ([self.player prepareToPlay]) {
+//                    [self.player setVolume:0.5f];
+//                    if([self.player play]){
+//                        NSLog(@"play successed. mp3url[%@]", mp3url);
+//                    }else{
+//                        NSLog(@"play failed! mp3url[%@]", mp3url);
+//                    }
+//                }else{
+//                    NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
+//                }
+//            }else{
+//                NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
+//            }
+//        });
+//    }
 }
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
@@ -429,7 +435,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //图片的tableView需要150的宽度。ipad下可以考虑更大。其他默认
-    if(tableView == self.tblTipimgs || tableView == self.tblTipimgsIphone){
+    if(tableView == self.tblTipimgsIphone){
         return HEIGHT_IMG_ROW;
     }else{
         return 50.0f;

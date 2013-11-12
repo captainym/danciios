@@ -18,7 +18,9 @@
 #define HEIGHT_TQ_CELL 0
 #import "TQMultistageTableView.h"
 
-@interface DanciWordViewController : UIViewController
+@interface DanciWordViewController : UIViewController{
+    UIButton *_btnCover;
+}
 
 //用户帐户信息
 @property (nonatomic, strong) NSString *userMid;
@@ -66,18 +68,10 @@
 //iphone的tip控件
 @property (nonatomic,strong) TQMultistageTableView *tblMultipsIphone;
 
-//控件
-@property (weak, nonatomic) IBOutlet UILabel *lblMeaning;
-@property (weak, nonatomic) IBOutlet UILabel *lblStem;
-@property (weak, nonatomic) IBOutlet UIImageView *imgTipimg;
-
-@property (weak, nonatomic) IBOutlet UITableView *tblTipimgs;
-@property (weak, nonatomic) IBOutlet UITableView *tblTipsentense;
-@property (weak, nonatomic) IBOutlet UITableView *tblTiptxt;
-
+#pragma - mark 控件
 //iphone控件
+@property (weak, nonatomic) IBOutlet UIScrollView *svMeaningStem;
 @property (weak, nonatomic) IBOutlet UILabel *lblMeaningStemIphone;
-//@property (weak, nonatomic) IBOutlet UIImageView *imgTipimgIphone;
 @property (weak, nonatomic) IBOutlet UIButton *btnTipImgIphone;
 @property (weak, nonatomic) IBOutlet UITableView *tblTipimgsIphone;
 @property (weak, nonatomic) IBOutlet UIView *vtip;

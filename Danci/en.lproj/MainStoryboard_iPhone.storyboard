@@ -64,7 +64,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Rbd-pj-Ac4"/>
-                                    <constraint firstAttribute="width" constant="314" id="zkm-ff-60H"/>
+                                    <constraint firstAttribute="width" constant="314" id="btH-qz-tVb"/>
                                 </constraints>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="Ob4-sL-nbo"/>
@@ -110,6 +110,7 @@
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jod-NU-44h">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="dfe-Lv-XhZ"/>
+                                    <constraint firstAttribute="height" constant="110" id="wk0-GF-Hd9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="addImg3.png" backgroundImage="addImg3.png">
@@ -123,42 +124,34 @@
                                     <action selector="showImgTips:" destination="mjP-vE-xCc" eventType="touchUpInside" id="nyI-Lx-cbP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label单词释义Label单词释义Label单词释义Label单词释义Label单词释义" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-fy-qfK">
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="b0B-ui-6KQ"/>
-                                    <constraint firstAttribute="height" constant="110" id="oOJ-gW-fZa"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ht2-LN-QCp"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="centerX" secondItem="QU2-7i-v5j" secondAttribute="centerX" type="default" id="0Ux-1F-mCq"/>
                             <constraint firstItem="qGu-4i-ODq" firstAttribute="leading" secondItem="BBJ-ze-Q1d" secondAttribute="leading" constant="34" id="22t-FI-yhP"/>
-                            <constraint firstItem="dFK-fy-qfK" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" type="default" id="8Hn-OE-Rbl"/>
+                            <constraint firstItem="4eT-kr-dOs" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="110" id="68F-Xe-LEN"/>
                             <constraint firstItem="Ob4-sL-nbo" firstAttribute="top" secondItem="4eT-kr-dOs" secondAttribute="top" type="default" id="9PC-Qb-atb"/>
                             <constraint firstAttribute="trailing" secondItem="9ef-Bm-gs1" secondAttribute="trailing" constant="33" id="9xc-WX-sEL"/>
+                            <constraint firstItem="ht2-LN-QCp" firstAttribute="bottom" secondItem="Jod-NU-44h" secondAttribute="bottom" type="default" id="CUi-cK-agA"/>
                             <constraint firstItem="4eT-kr-dOs" firstAttribute="centerX" secondItem="BBJ-ze-Q1d" secondAttribute="centerX" type="default" id="F7j-Zy-X3J"/>
                             <constraint firstAttribute="bottom" secondItem="Ob4-sL-nbo" secondAttribute="bottom" constant="74" id="Hoc-BR-rCW"/>
-                            <constraint firstItem="dFK-fy-qfK" firstAttribute="bottom" secondItem="Jod-NU-44h" secondAttribute="bottom" type="default" id="MTG-me-f9f"/>
                             <constraint firstItem="Ob4-sL-nbo" firstAttribute="trailing" secondItem="4eT-kr-dOs" secondAttribute="trailing" type="default" id="O59-bZ-djv"/>
                             <constraint firstItem="QU2-7i-v5j" firstAttribute="baseline" secondItem="qGu-4i-ODq" secondAttribute="baseline" type="default" id="Vht-EA-YdX"/>
                             <constraint firstItem="Ob4-sL-nbo" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="Wap-l2-r4H"/>
-                            <constraint firstItem="Ob4-sL-nbo" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" constant="110" id="gcD-9d-Uab"/>
-                            <constraint firstItem="Jod-NU-44h" firstAttribute="trailing" secondItem="4eT-kr-dOs" secondAttribute="trailing" type="default" id="iQg-5f-Kii"/>
+                            <constraint firstItem="ht2-LN-QCp" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" type="default" id="Xxx-v5-Mlz"/>
+                            <constraint firstAttribute="trailing" secondItem="Jod-NU-44h" secondAttribute="trailing" constant="6" id="edI-nj-8Kf"/>
                             <constraint firstItem="Jod-NU-44h" firstAttribute="top" secondItem="BBJ-ze-Q1d" secondAttribute="top" type="default" id="jpr-Cz-Tok"/>
-                            <constraint firstItem="dFK-fy-qfK" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="npr-q9-CR6"/>
                             <constraint firstAttribute="bottom" secondItem="qGu-4i-ODq" secondAttribute="bottom" constant="9" id="o4m-a6-5l1"/>
+                            <constraint firstItem="4eT-kr-dOs" firstAttribute="centerX" secondItem="QU2-7i-v5j" secondAttribute="centerX" type="default" id="pm5-Ln-cV7"/>
+                            <constraint firstAttribute="trailing" secondItem="ht2-LN-QCp" secondAttribute="trailing" constant="117" id="qiD-9H-aBz"/>
                             <constraint firstItem="QU2-7i-v5j" firstAttribute="baseline" secondItem="9ef-Bm-gs1" secondAttribute="baseline" type="default" id="tJZ-Gx-OBF"/>
+                            <constraint firstItem="ht2-LN-QCp" firstAttribute="leading" secondItem="4eT-kr-dOs" secondAttribute="leading" type="default" id="xrM-At-QpC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OYq-89-cg2"/>
                     <connections>
                         <outlet property="btnTipImgIphone" destination="Jod-NU-44h" id="qRr-Ue-Wwg"/>
-                        <outlet property="lblMeaningStemIphone" destination="dFK-fy-qfK" id="JK7-J4-lnz"/>
+                        <outlet property="svMeaningStem" destination="ht2-LN-QCp" id="5vJ-0p-wKP"/>
                         <outlet property="tblTipimgsIphone" destination="4eT-kr-dOs" id="0x9-lc-dac"/>
                         <outlet property="vtip" destination="Ob4-sL-nbo" id="Fqb-yo-fMI"/>
                     </connections>
@@ -200,15 +193,12 @@
         <class className="DanciWordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciWordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="showImgTips:"/>
+                <relationship kind="action" name="showNextWord:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnTipImgIphone" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgTipimg" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblMeaning" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblMeaningStemIphone" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStem" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tblTipimgs" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="svMeaningStem" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTipsentense" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTiptxt" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="vtip" candidateClass="UIView"/>
             </relationships>
         </class>
