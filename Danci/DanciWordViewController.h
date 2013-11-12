@@ -64,6 +64,8 @@
 //frame
 @property (nonatomic) CGRect svNormFrame;
 @property (nonatomic) CGRect svExpFrame;
+//other
+@property (nonatomic,strong) UIFont *fontDetail;
 
 //iphone的tip控件
 @property (nonatomic,strong) TQMultistageTableView *tblMultipsIphone;
@@ -71,7 +73,7 @@
 #pragma - mark 控件
 //iphone控件
 @property (weak, nonatomic) IBOutlet UIScrollView *svMeaningStem;
-@property (weak, nonatomic) IBOutlet UILabel *lblMeaningStemIphone;
+//@property (weak, nonatomic) IBOutlet UILabel *lblMeaningStemIphone;
 @property (weak, nonatomic) IBOutlet UIButton *btnTipImgIphone;
 @property (weak, nonatomic) IBOutlet UITableView *tblTipimgsIphone;
 @property (weak, nonatomic) IBOutlet UIView *vtip;

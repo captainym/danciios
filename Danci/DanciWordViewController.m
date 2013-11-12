@@ -40,6 +40,7 @@
 @synthesize player = _player;
 @synthesize svExpFrame = _svExpFrame;
 @synthesize svNormFrame = _svNormFrame;
+@synthesize fontDetail = _fontDetail;
 
 #pragma mark- properties
 
@@ -128,6 +129,14 @@
     return _userMid;
 }
 
+-(UIFont *) fontDetail
+{
+    if(!_fontDetail){
+        _fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+    }
+    return _fontDetail;
+}
+
 #pragma mark -  methods
 
 //从coredata中取出当前word的各种信息： 发音 真人发音mp3 中文释义 词根词缀 例句 例句mp3地址 从网络获取tipImgs tipTxts 例句mp3
@@ -209,11 +218,6 @@
     [self.tblTipimgsIphone setDataSource:self];
     
     //控件属性设置
-    self.lblMeaningStemIphone.textColor = [UIColor blackColor];
-    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
-    self.lblMeaningStemIphone.font = fontDetail;
-    self.lblMeaningStemIphone.numberOfLines = 0;
-    
     self.lblHeaderTip = [[UILabel alloc] init];
     self.lblHeaderTip.textColor = [UIColor blackColor];
     self.lblHeaderTip.lineBreakMode = NSLineBreakByWordWrapping;
@@ -291,11 +295,11 @@
 //    self.lblMeaning.text = self.comment;
 //    self.lblStem.text= self.wordGern;
 //    UILabel *lblM
-    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+//    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
     NSString *content = [@" " stringByAppendingString:[[self.comment stringByAppendingString:@"\n\n词根词源：\n"] stringByAppendingString:self.wordGern]];
-    CGSize contentSize = [content sizeWithFont:fontDetail constrainedToSize:CGSizeMake(180, 400)  lineBreakMode:NSLineBreakByWordWrapping];//求文本的大小
+    CGSize contentSize = [content sizeWithFont:self.fontDetail constrainedToSize:CGSizeMake(180, 400)  lineBreakMode:NSLineBreakByWordWrapping];//求文本的大小
     UILabel *lbltmp = [[UILabel alloc] init];
-    lbltmp.font = fontDetail;
+    lbltmp.font = self.fontDetail;
     lbltmp.text = content;
     lbltmp.frame = CGRectMake(0, 0, contentSize.width, contentSize.height);
     lbltmp.lineBreakMode = NSLineBreakByWordWrapping;
@@ -303,9 +307,10 @@
     lbltmp.backgroundColor = [UIColor clearColor];
     self.svMeaningStem.frame = CGRectMake(0, 0, 200, 400);
     self.svMeaningStem.contentSize = contentSize;//self.lblMeaningStemIphone.frame.size;
-    if(lbltmp.superview != self.svMeaningStem){
-        [self.svMeaningStem addSubview:lbltmp];
+    for( UIView *subview in self.svMeaningStem.subviews){
+        [subview removeFromSuperview];
     }
+    [self.svMeaningStem addSubview:lbltmp];
 //    self.lblMeaningStemIphone.font = [UIFont systemFontOfSize:12];
 //    self.lblMeaningStemIphone.text = content;
 //    self.lblMeaningStemIphone.frame = CGRectMake(0, 0, contentSize.width, contentSize.height);
@@ -540,13 +545,13 @@
     cell.textLabel.numberOfLines = 0;
     //加载tips
     if(indexPath.section == 0){
-        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
-        cell.textLabel.font = fontDetail;
+//        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+        cell.textLabel.font = self.fontDetail;
         cell.textLabel.text = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
     }else{
     //加载sentence
-        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:12];
-        cell.textLabel.font = fontDetail;
+//        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:12];
+        cell.textLabel.font = self.fontDetail;
         cell.textLabel.text = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:@"sentence"];
     }
     
@@ -587,7 +592,7 @@
 {
     //http://blog.csdn.net/onlyou930/article/details/7422097
     UIFont *fontTitle = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+//    UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
     UIView * control = [[UIView alloc] init];
     control.backgroundColor = [UIColor whiteColor];
     UIView *view = [[UIView alloc] init];
@@ -597,7 +602,7 @@
     labelPin.textColor = [UIColor greenColor];
     if(section == 0){
         if([self.tipTxt length] > 1){
-            self.lblHeaderTip.font = fontDetail;
+            self.lblHeaderTip.font = self.fontDetail;
             self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
             self.lblHeaderTip.frame = CGRectMake(20, 0, tableView.frame.size.width, HEIGHT_TIP_TXT - 2);
             view.frame = CGRectMake(0, HEIGHT_TIP_TXT - 2, tableView.frame.size.width,2);
