@@ -10,6 +10,7 @@
 #import "PPImageScrollingTableViewCell.h"
 #import "UIPopoverListView.h"
 #import "PPCollectionViewCell.h"
+#import "DanciEditTipTxtViewController.h"
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate>
 @property (nonatomic, strong) UILabel *lblHeaderTip;
@@ -161,6 +162,13 @@
 //成功返回0 失败返回－1或其他数字
 - (int) getWordInfo
 {
+    
+    
+    [self getWordInfo_bak];
+    return 0;
+    
+    
+    
     NSDictionary *infoDict = [self.wordClient getWordInfo:self.word];
     if(infoDict == nil || [infoDict count] < 1)
     {
@@ -213,11 +221,13 @@
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      ];
+    //INFO_GOTOEDIT
     [self.tipTxts addObjectsFromArray: @[
-     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) psychology n 心理学（paych 心理+o+log psychology n 心理学（paych 心理+o+logabcdefghigklmnopqrstuvwxyzxyz abc1 abc2 abc3 abc4 abc5 abc6", @"adoptNum": @"271" , @"optTime":@"18000" },
-     @{@"tip":@"PSY鸟叔，心理变态", @"adoptNum": @"93" , @"optTime":@"18000" },
-     @{@"tip":@"各种常见的学 psychology 心理学 chemistry 化学 physics 物理学 mathematics 数学 literature 文学 astronomy 天文学", @"adoptNum": @"48" , @"optTime":@"18000" },
+     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) psychology n 心理学（paych 心理+o+log psychology n 心理学（paych 心理+o+logabcdefghigklmnopqrstuvwxyzxyz abc1 abc2 abc3 abc4 abc5 abc6"},
+     @{@"tip":@"PSY鸟叔，心理变态"},
+     @{@"tip":@"各种常见的学 psychology 心理学 chemistry 化学 physics 物理学 mathematics 数学 literature 文学 astronomy 天文学"},
      @{@"tip":@"psych=mind, logy=某种学问，关于mind的学问，心理学", @"adoptNum": @"28" , @"optTime":@"18000" },
+     @{@"tip":INFO_GOTOEDIT},
      ]];
     [self.tipSentences addObjectsFromArray:@[
      @{@"sentence":@"It seems to me that the psychology is abundantly clear.\n在我看来，这种心理非常清楚。", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
@@ -394,6 +404,18 @@
     poplistview.delegate = self;
     [poplistview setTitle:@"登陆"];
     [poplistview show];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //用户选择自己编辑助记
+    if([segue.identifier isEqualToString:SEGUE_EDIT])
+    {
+        NSString *content = [@" " stringByAppendingString:[[self.comment stringByAppendingString:@"\n\n词根词源：\n"] stringByAppendingString:self.wordGern]];
+        [segue.destinationViewController setWord:self.word];
+        [segue.destinationViewController setMeaningstem:content];
+        [segue.destinationViewController setTipTxtOld:self.tipTxt];
+    }
 }
 
 #pragma mark - Table view data source
@@ -585,12 +607,17 @@
     cell.textLabel.numberOfLines = 0;
     //加载tips
     if(indexPath.section == 0){
-//        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
-        cell.textLabel.font = self.fontDetail;
-        cell.textLabel.text = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
+        NSString *tip = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
+        if([tip isEqualToString:INFO_GOTOEDIT]){
+            cell.textLabel.font = [UIFont fontWithName:@"Verdana" size:13];
+            cell.textLabel.textColor = [UIColor lightGrayColor];
+        }
+        else{
+            cell.textLabel.font = self.fontDetail;
+        }
+        cell.textLabel.text = tip;
     }else{
-    //加载sentence
-//        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:12];
+        //加载sentence
         cell.textLabel.font = self.fontDetail;
         cell.textLabel.text = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:@"sentence"];
     }
@@ -686,13 +713,21 @@
         }
         //tiptxt的采纳
         NSString *tipadopt = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
-        if(![tipadopt isEqualToString:self.tipTxt]){
-            NSLog(@"新采纳助记 old[%@] new[%@]", self.tipTxt, tipadopt);
-            self.tipTxt = tipadopt;
-            self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
-            //更新到server
-        }else{
-            NSLog(@"采纳助记无变化 old[%@] new[%@]", self.tipTxt, tipadopt);
+        //若选择的是自己编辑助记
+        if([tipadopt isEqualToString:INFO_GOTOEDIT])
+        {
+            [self performSegueWithIdentifier:SEGUE_EDIT sender:self];
+        }
+        else
+        {
+            if(![tipadopt isEqualToString:self.tipTxt]){
+                NSLog(@"新采纳助记 old[%@] new[%@]", self.tipTxt, tipadopt);
+                self.tipTxt = tipadopt;
+                self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
+                //更新到server
+            }else{
+                NSLog(@"采纳助记无变化 old[%@] new[%@]", self.tipTxt, tipadopt);
+            }
         }
     }else if(indexPath.section ==1){
         //sentence的选择。

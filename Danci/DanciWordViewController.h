@@ -29,6 +29,9 @@
 #define WORD_TIP_TXTS @"tipTxts"
 #define WORD_TIP_SENTENCES @"tipSentences"
 
+#define SEGUE_EDIT @"sgEditTipTxt"
+#define INFO_GOTOEDIT @"还没有满意的tips？自己编辑一个吧>>>>"
+
 @interface DanciWordViewController : UIViewController{
     UIButton *_btnCover;
 }
