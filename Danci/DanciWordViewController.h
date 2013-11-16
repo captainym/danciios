@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "WordHttpClient.h"
+#import "TQMultistageTableView.h"
 
 #define cellTipimg @"CellTipImg"
 #define cellTiptxt @"CellTipTxt"
@@ -16,7 +18,16 @@
 #define HEIGHT_SENTENCE 40
 #define HEIGHT_TQ_ROW 60
 #define HEIGHT_TQ_CELL 0
-#import "TQMultistageTableView.h"
+//图片的tableView需要150的宽度。ipad下可以考虑更大
+#define HEIGHT_IMG_ROW 100.0
+#define WORD_FAYIN @"fayin"
+#define WORD_COMMENT @"comment"
+#define WORD_FAYIN_MP3URL @"fayinMp3Url"
+#define WORD_TIP_TXT @"tipTxt" //若有 则取自本地
+#define WORD_GERN @"wordGern" //若有 取自本地
+#define WORD_TIP_IMGS @"tipImgs"
+#define WORD_TIP_TXTS @"tipTxts"
+#define WORD_TIP_SENTENCES @"tipSentences"
 
 @interface DanciWordViewController : UIViewController{
     UIButton *_btnCover;
@@ -66,6 +77,9 @@
 @property (nonatomic) CGRect svExpFrame;
 //other
 @property (nonatomic,strong) UIFont *fontDetail;
+
+//other tool Instance
+@property (nonatomic,strong) WordHttpClient *wordClient;
 
 //iphone的tip控件
 @property (nonatomic,strong) TQMultistageTableView *tblMultipsIphone;

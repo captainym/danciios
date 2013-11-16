@@ -101,14 +101,8 @@
                 <relationship kind="action" name="showImgTips:"/>
                 <relationship kind="action" name="showNextWord:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnTipImgIphone" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imgTipimg" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblMeaning" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblMeaningStemIphone" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblStem" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tblTipimgs" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="svMeaningStem" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTipsentense" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tblTiptxt" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="vtip" candidateClass="UIView"/>
             </relationships>
         </class>

@@ -11,9 +11,6 @@
 #import "UIPopoverListView.h"
 #import "PPCollectionViewCell.h"
 
-//图片的tableView需要150的宽度。ipad下可以考虑更大
-#define HEIGHT_IMG_ROW 100.0
-
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate>
 @property (nonatomic, strong) UILabel *lblHeaderTip;
 
@@ -41,6 +38,7 @@
 @synthesize svExpFrame = _svExpFrame;
 @synthesize svNormFrame = _svNormFrame;
 @synthesize fontDetail = _fontDetail;
+@synthesize wordClient = _wordClient;
 
 #pragma mark- properties
 
@@ -65,11 +63,13 @@
     }
     return _words;
 }
+
 - (NSArray *) wordsReviewNow
 {
     if(_wordsReviewNow == nil) _wordsReviewNow = [[NSArray alloc] init];
     return _wordsReviewNow;
 }
+
 - (NSArray *) tipImgs
 {
     if(_tipImgs == nil){
@@ -77,29 +77,37 @@
     }
     return _tipImgs;
 }
+
 - (NSMutableArray *) tipTxts
 {
     if(_tipTxts == nil) _tipTxts = [[NSMutableArray alloc] init];
     return _tipTxts;
 }
+
 - (NSMutableArray *) tipSentences
 {
     if(_tipSentences == nil) _tipSentences = [[NSMutableArray alloc] init];
     return _tipSentences;
 }
+
 - (void)setWordPoint:(int)wordPoint
 {
     _wordPoint = wordPoint;
 }
+
 - (NSString *) word
 {
     if(![_word isEqualToString: [self.words objectAtIndex:self.wordPoint]]){
         NSLog(@"word not equal. load again. _word[%@] new word[%@]", _word,[self.words objectAtIndex:self.wordPoint]);
         _word = [self.words objectAtIndex:self.wordPoint];
-        [self getWordInfo];
+        if ([self getWordInfo] != 0) {
+            NSLog(@"get wordinfo failed. word would be nil. word[%@]", self.word);
+            return nil;
+        }
     }
     return _word;
 }
+
 -(CGRect) svExpFrame
 {
     if(_svExpFrame.origin.x < 1){
@@ -121,7 +129,7 @@
 {
     if([_userMid length] < 1 ){
         //core data 取值
-//        _userMid = @"18601920512";
+        _userMid = @"18601920512";
     }
     if([_userMid length] < 1){
         return nil;
@@ -137,17 +145,49 @@
     return _fontDetail;
 }
 
+-(WordHttpClient *) wordClient
+{
+    if(_wordClient == nil)
+    {
+        _wordClient = [[WordHttpClient alloc] init];
+        NSLog(@"wordClient init OK!");
+    }
+    return _wordClient;
+}
+
 #pragma mark -  methods
 
 //从coredata中取出当前word的各种信息： 发音 真人发音mp3 中文释义 词根词缀 例句 例句mp3地址 从网络获取tipImgs tipTxts 例句mp3
-- (void) getWordInfo
+//成功返回0 失败返回－1或其他数字
+- (int) getWordInfo
+{
+    NSDictionary *infoDict = [self.wordClient getWordInfo:self.word];
+    if(infoDict == nil || [infoDict count] < 1)
+    {
+        NSLog(@"get word info Failed!");
+        return -1;
+    }
+    
+    //填充wordinfo
+    self.fayin = [infoDict objectForKey:WORD_FAYIN];
+    self.comment = [infoDict objectForKey:WORD_COMMENT];
+    self.fayinMp3Url = [infoDict objectForKey:WORD_FAYIN_MP3URL];
+    self.tipTxt = [infoDict objectForKey:WORD_TIP_TXT];
+    self.wordGern = [infoDict objectForKey:WORD_GERN];
+    self.tipImgs = [infoDict objectForKey:WORD_TIP_IMGS];
+    self.tipTxts = [infoDict objectForKey:WORD_TIP_TXTS];
+    self.tipSentences = [infoDict objectForKey:WORD_TIP_SENTENCES];
+
+    return 0;
+}
+
+- (void) getWordInfo_bak
 {
     //先用假数据
     self.fayin = @"[saɪˈkɒlədʒɪ]";
     self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
 //    self.fayinMp3Url = @"wordmp3/p/psychology.arm";
     self.fayinMp3Url = @"/Users/huhao/Developer/psychology.mp3";
-    self.tipImgFilepath = @"psychology1.jpeg";
     self.tipTxt = @"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) ";
     self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思； cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 psy-cho-logy连起来就是“知道心的学说”。";
 

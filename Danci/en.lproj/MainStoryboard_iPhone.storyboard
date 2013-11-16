@@ -193,6 +193,8 @@
         <class className="DanciWordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciWordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="showImgTips:"/>
+                <relationship kind="action" name="showNextWord:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnTipImgIphone" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="svMeaningStem" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>
