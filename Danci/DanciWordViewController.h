@@ -20,14 +20,14 @@
 #define HEIGHT_TQ_CELL 0
 //图片的tableView需要150的宽度。ipad下可以考虑更大
 #define HEIGHT_IMG_ROW 100.0
-#define WORD_FAYIN @"fayin"
-#define WORD_COMMENT @"comment"
+#define WORD_FAYIN @"yinbiao"
+#define WORD_COMMENT @"meaning"
 #define WORD_FAYIN_MP3URL @"fayinMp3Url"
-#define WORD_TIP_TXT @"tipTxt" //若有 则取自本地
-#define WORD_GERN @"wordGern" //若有 取自本地
-#define WORD_TIP_IMGS @"tipImgs"
-#define WORD_TIP_TXTS @"tipTxts"
-#define WORD_TIP_SENTENCES @"tipSentences"
+#define WORD_TIP_TXT @"txtTip" //若有 则取自本地
+#define WORD_GERN @"wordStem" //若有 取自本地
+#define WORD_TIP_IMGS @"img_tip_list"
+#define WORD_TIP_TXTS @"txt_tip_list"
+#define WORD_TIP_SENTENCES @"sentence"
 
 @interface DanciWordViewController : UIViewController{
     UIButton *_btnCover;

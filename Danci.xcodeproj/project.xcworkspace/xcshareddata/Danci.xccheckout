@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>47DE8CC5-7012-40DD-8A38-A2F59F9268D0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Danci</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>15A6DCEB-9D49-4D73-B74E-55BBE74FBCE1</key>
+		<string>https://github.com/captainym/danciios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Danci.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>15A6DCEB-9D49-4D73-B74E-55BBE74FBCE1</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/captainym/danciios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>15A6DCEB-9D49-4D73-B74E-55BBE74FBCE1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>15A6DCEB-9D49-4D73-B74E-55BBE74FBCE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>danciios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

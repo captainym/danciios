@@ -10,6 +10,7 @@
 #import "PPImageScrollingTableViewCell.h"
 #import "UIPopoverListView.h"
 #import "PPCollectionViewCell.h"
+#import "BIDAppDelegate.h"
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate>
 @property (nonatomic, strong) UILabel *lblHeaderTip;
@@ -161,12 +162,19 @@
 //成功返回0 失败返回－1或其他数字
 - (int) getWordInfo
 {
-    NSDictionary *infoDict = [self.wordClient getWordInfo:self.word];
+//    NSDictionary *infoDict = [self.wordClient getWordInfo:self.word];
+    NSDictionary *infoDict = [self.wordClient getWordInfo:_word];
     if(infoDict == nil || [infoDict count] < 1)
     {
         NSLog(@"get word info Failed!");
         return -1;
     }
+    if ([[infoDict objectForKey:@"status"] intValue] != 0) {
+        NSLog(@"get word info Failed!");
+        return -1;
+    }
+    
+    infoDict = [infoDict objectForKey:@"data"];
     
     //填充wordinfo
     self.fayin = [infoDict objectForKey:WORD_FAYIN];
@@ -177,7 +185,22 @@
     self.tipImgs = [infoDict objectForKey:WORD_TIP_IMGS];
     self.tipTxts = [infoDict objectForKey:WORD_TIP_TXTS];
     self.tipSentences = [infoDict objectForKey:WORD_TIP_SENTENCES];
+    
+    
+    //先用假数据
+    NSDictionary *wordInfo = [self getWordInfoByCoredata:_word];
+    if(wordInfo != nil) {
+        self.fayin = [wordInfo valueForKey:WORD_FAYIN];
+        self.comment = [wordInfo valueForKey:WORD_COMMENT];
+        self.wordGern = [wordInfo valueForKey:WORD_GERN];
+    }
+    self.fayin = @"[saɪˈkɒlədʒɪ]";
+    self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
+    self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思； cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 psy-cho-logy连起来就是“知道心的学说”。";
 
+    //    self.fayinMp3Url = @"wordmp3/p/psychology.arm";
+    self.fayinMp3Url = @"/Users/huhao/Developer/psychology.mp3";
+    
     return 0;
 }
 
@@ -819,6 +842,52 @@
         NSLog(@"all words of current album has Done!");
     }
 }
+
+-(NSDictionary*) getWordInfoByCoredata:(NSString*) word {
+    BIDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Words" inManagedObjectContext:context];
+    [request setEntity:entityDescription];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"word=%@", word];
+    [request setPredicate:predicate];
+    
+    NSManagedObject *obj = nil;
+    NSError* error = nil;
+    NSArray *objects = [context executeFetchRequest:request error:&error];
+    if(objects == nil) {
+        NSLog(@"there was an error, %@", error);
+        return nil;
+    }
+    
+    NSLog(@"get all word:%@, count:%d", objects, [objects count]);
+    
+    if ([objects count] > 0) {
+        obj = [objects objectAtIndex:0];
+        NSDictionary* rs = [[NSDictionary alloc] init];
+        
+        NSString* meaning = [obj valueForKey:@"meaning"];
+        NSString* yinbiao = [obj valueForKey:@"yinbiao"];
+        NSString* wordStem = [obj valueForKey:@"word_stem"];
+        NSString* txtTip = [obj valueForKey:@"txt_tip"];
+        
+        
+        [rs setValue:word forKey:@"word"];
+        [rs setValue:meaning forKey:@"meaning"];
+        [rs setValue:yinbiao forKey:@"yinbiao"];
+        [rs setValue:txtTip forKey:@"txtTip"];
+        [rs setValue:wordStem forKey:@"wordStem"];
+
+        return rs;
+    }
+    
+    return nil;
+}
+
+
+
 
 
 @end
