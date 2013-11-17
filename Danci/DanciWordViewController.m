@@ -130,7 +130,7 @@
 {
     if([_userMid length] < 1 ){
         //core data 取值
-        _userMid = @"18601920512";
+//        _userMid = @"18601920512";
     }
     if([_userMid length] < 1){
         return nil;
@@ -398,11 +398,10 @@
 -(void) popLoginView:(int)popType
 {
     CGFloat xWidth = self.view.bounds.size.width - 80.0f;
-    CGFloat yHeight = 272.0f;
-    CGFloat yOffset = (self.view.bounds.size.height - yHeight)/2.0f;
+    CGFloat yHeight = HEIGHT_LOGIN;
+    CGFloat yOffset = (self.view.bounds.size.height - yHeight - 100)/2.0f;
     UIPopoverListView *poplistview = [[UIPopoverListView alloc] initWithFrameType:CGRectMake(10, yOffset, xWidth, yHeight) popType:popType];
     poplistview.delegate = self;
-    [poplistview setTitle:@"登陆"];
     [poplistview show];
 }
 
