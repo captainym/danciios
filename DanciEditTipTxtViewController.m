@@ -18,6 +18,7 @@
 @synthesize meaningstem = _meaningstem;
 @synthesize tipTxtNew = _tipTxtNew;
 @synthesize tipTxtOld = _tipTxtOld;
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +58,8 @@
         NSLog(@"tip is to shoot to save");
     }
     //返回
+    [self.delegate eidtTipTxt:self didEditTipTxtOk:newtip];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView

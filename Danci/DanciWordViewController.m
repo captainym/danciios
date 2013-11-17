@@ -12,7 +12,7 @@
 #import "PPCollectionViewCell.h"
 #import "DanciEditTipTxtViewController.h"
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate>
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate>
 @property (nonatomic, strong) UILabel *lblHeaderTip;
 
 @end
@@ -415,6 +415,7 @@
         [segue.destinationViewController setWord:self.word];
         [segue.destinationViewController setMeaningstem:content];
         [segue.destinationViewController setTipTxtOld:self.tipTxt];
+        [segue.destinationViewController setDelegate:self];
     }
 }
 
@@ -608,9 +609,10 @@
     //加载tips
     if(indexPath.section == 0){
         NSString *tip = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
+        cell.textLabel.font = self.fontDetail;
         if([tip isEqualToString:INFO_GOTOEDIT]){
             cell.textLabel.font = [UIFont fontWithName:@"Verdana" size:13];
-            cell.textLabel.textColor = [UIColor lightGrayColor];
+//            cell.textLabel.textColor = [UIColor lightGrayColor];
         }
         else{
             cell.textLabel.font = self.fontDetail;
@@ -824,6 +826,15 @@
     self.userMid = [userInfo objectForKey:@"userMid"];
     NSLog(@"user regist. ");
     //持久化保存用户信息在本地
+}
+
+#pragma mark - DanciEditTipTxtDelegate
+
+-(void) eidtTipTxt:(DanciEditTipTxtViewController *)sender didEditTipTxtOk:(NSString *)tipTxt
+{
+    self.tipTxt = tipTxt;
+    //设置view的相关控件
+    self.lblHeaderTip.text = tipTxt;
 }
 
 #pragma mark - event hander
