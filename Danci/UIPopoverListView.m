@@ -215,7 +215,8 @@
     
     //注册验证
     
-    //通过检验后 回调主页面
+    //通过检验后 持久化保存用户信息在本地
+    //回调主页面
     NSDictionary *userInfo = @{@"userMid": userMid};
     [self.delegate popoverListViewRegist:self newUser:userInfo];
     [self dismiss];

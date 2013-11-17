@@ -469,35 +469,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if(tableView == self.tblTipsentense){
-//        NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"mp3"];
-//        dispatch_queue_t play_q = dispatch_queue_create("play mp3", NULL);
-//        dispatch_async(play_q, ^{
-//            NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
-//            NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
-//            NSError *myerror = nil;
-//            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
-//            [self.player setDelegate:self];
-//            if(self.player){
-//                if ([self.player prepareToPlay]) {
-//                    [self.player setVolume:0.5f];
-//                    if([self.player play]){
-//                        NSLog(@"play successed. mp3url[%@]", mp3url);
-//                    }else{
-//                        NSLog(@"play failed! mp3url[%@]", mp3url);
-//                    }
-//                }else{
-//                    NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
-//                }
-//            }else{
-//                NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
-//            }
-//        });
-//    }
-}
-
--(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    NSLog(@"播放完毕 %d",flag);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -537,34 +508,8 @@
     }else{
         NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
     }
-    
-//    dispatch_queue_t downloadImg = dispatch_queue_create("downloadImg", NULL);
-//    dispatch_async(downloadImg, ^{
-//        NSURL *imgUrlNet = [NSURL URLWithString:imgUrl];
-//        NSData *imgData = UIImageJPEGRepresentation(sender.imageView.image, 0.0f);
-//        if(imgData){
-//            [self.btnTipImgIphone setImage:sender.imageView.image forState:UIControlStateNormal];
-//            [self.btnTipImgIphone setImage:sender.imageView.image forState:UIControlStateHighlighted];
-//        }
-//        NSData * imgData = [NSData dataWithContentsOfURL:imgUrlNet];
-//        dispatch_async(dispatch_get_main_queue(),^{
-//            UIImage *img = [UIImage imageWithData:imgData];
-//            self.imgTipimg.image = img;
-//            [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
-//            [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
-//        });
-        
-//        //图片保存到本地
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *fileName = [[[paths objectAtIndex:0] stringByAppendingString:@"/" ] stringByAppendingString:self.word];
-//        if([imgData writeToFile:fileName atomically:YES]){
-//            NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
-//        }else{
-//            NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
-//        }
-        
-        //将采纳发送到server
-//    });
+    //将采纳发送到server
+    //发送失败则写入本地
     
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
 //                                                    message:[NSString stringWithFormat: @"in %@",imgUrl]
@@ -643,17 +588,17 @@
 - (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if(section == 0 && [self.tipTxt length] > 0){
-        NSLog(@"height for section0");
+//        NSLog(@"height for section0");
         return HEIGHT_TIP_TXT;
     }else{
-        NSLog(@"height for section[%d]", section);
+//        NSLog(@"height for section[%d]", section);
         return HEIGHT_SENTENCE;
     }
 }
 
 - (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForOpenCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"height for row[%@]", indexPath);
+//    NSLog(@"height for row[%@]", indexPath);
     return HEIGHT_TQ_CELL;
 }
 
@@ -701,7 +646,7 @@
 
 - (void)mTableView:(TQMultistageTableView *)tableView didSelectHeaderAtSection:(NSInteger)section
 {
-    NSLog(@"headerClick%d",section);
+//    NSLog(@"headerClick%d",section);
 }
 
 //celll点击
@@ -751,16 +696,16 @@
     self.tblMultipsIphone.frame = mFrame;
     [UIView commitAnimations];
     
-    NSLog(@"header展开 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
-    NSLog(@"header展开 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
+//    NSLog(@"header展开 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+//    NSLog(@"header展开 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
 }
 
 //header关闭
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseHeaderAtSection:(NSInteger)section
 {
-    NSLog(@"headerClose%d",section);
-    NSLog(@"header关闭 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
-    NSLog(@"header关闭 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
+//    NSLog(@"headerClose%d",section);
+//    NSLog(@"header关闭 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+//    NSLog(@"header关闭 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
 //    //show the tbl
 //    CATransition *animation = [CATransition animation];
 //    animation.type = kCATransitionFade;
@@ -804,7 +749,7 @@
 
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseCellAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSLog(@"CloseCell%@",indexPath);
+//    NSLog(@"CloseCell%@",indexPath);
 }
 
 #pragma mark - popListViewDelegate
@@ -825,7 +770,6 @@
 {
     self.userMid = [userInfo objectForKey:@"userMid"];
     NSLog(@"user regist. ");
-    //持久化保存用户信息在本地
 }
 
 #pragma mark - DanciEditTipTxtDelegate
@@ -835,6 +779,12 @@
     self.tipTxt = tipTxt;
     //设置view的相关控件
     self.lblHeaderTip.text = tipTxt;
+}
+
+#pragma mark - videoplaydelegate
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    NSLog(@"播放完毕 %d",flag);
 }
 
 #pragma mark - event hander
