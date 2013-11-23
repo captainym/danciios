@@ -10,9 +10,13 @@
 #import "PPImageScrollingTableViewCell.h"
 #import "UIPopoverListView.h"
 #import "PPCollectionViewCell.h"
+
 #import "BIDAppDelegate.h"
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate>
+#import "DanciEditTipTxtViewController.h"
+
+
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate,TQTableViewDataSource, TQTableViewDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate>
 @property (nonatomic, strong) UILabel *lblHeaderTip;
 
 @end
@@ -130,7 +134,7 @@
 {
     if([_userMid length] < 1 ){
         //core data 取值
-        _userMid = @"18601920512";
+//        _userMid = @"18601920512";
     }
     if([_userMid length] < 1){
         return nil;
@@ -162,8 +166,10 @@
 //成功返回0 失败返回－1或其他数字
 - (int) getWordInfo
 {
-//    NSDictionary *infoDict = [self.wordClient getWordInfo:self.word];
-    NSDictionary *infoDict = [self.wordClient getWordInfo:_word];
+//    [self getWordInfo_bak];
+//    return 0;
+    
+    NSDictionary *infoDict = [self.wordClient getWordInfo:self.word];
     if(infoDict == nil || [infoDict count] < 1)
     {
         NSLog(@"get word info Failed!");
@@ -236,11 +242,13 @@
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      @{ @"name":@"name-sample_6.jpeg", @"url":@"http://ts1.mm.bing.net/th?id=H.4980913397302872&pid=1.9&w=300&h=300&p=0"},
                      ];
+    //INFO_GOTOEDIT
     [self.tipTxts addObjectsFromArray: @[
-     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) psychology n 心理学（paych 心理+o+log psychology n 心理学（paych 心理+o+logabcdefghigklmnopqrstuvwxyzxyz abc1 abc2 abc3 abc4 abc5 abc6", @"adoptNum": @"271" , @"optTime":@"18000" },
-     @{@"tip":@"PSY鸟叔，心理变态", @"adoptNum": @"93" , @"optTime":@"18000" },
-     @{@"tip":@"各种常见的学 psychology 心理学 chemistry 化学 physics 物理学 mathematics 数学 literature 文学 astronomy 天文学", @"adoptNum": @"48" , @"optTime":@"18000" },
+     @{@"tip":@"log=science,表示\"科学,学科\"。psychology n 心理学（paych 心理+o+log+y) psychology n 心理学（paych 心理+o+log psychology n 心理学（paych 心理+o+logabcdefghigklmnopqrstuvwxyzxyz abc1 abc2 abc3 abc4 abc5 abc6"},
+     @{@"tip":@"PSY鸟叔，心理变态"},
+     @{@"tip":@"各种常见的学 psychology 心理学 chemistry 化学 physics 物理学 mathematics 数学 literature 文学 astronomy 天文学"},
      @{@"tip":@"psych=mind, logy=某种学问，关于mind的学问，心理学", @"adoptNum": @"28" , @"optTime":@"18000" },
+     @{@"tip":INFO_GOTOEDIT},
      ]];
     [self.tipSentences addObjectsFromArray:@[
      @{@"sentence":@"It seems to me that the psychology is abundantly clear.\n在我看来，这种心理非常清楚。", @"mp3":@"http://media.engkoo.com:8129/en-us/2CC9D118D62C36D1CBF69744F3BC85F9.mp3"},
@@ -411,12 +419,24 @@
 -(void) popLoginView:(int)popType
 {
     CGFloat xWidth = self.view.bounds.size.width - 80.0f;
-    CGFloat yHeight = 272.0f;
-    CGFloat yOffset = (self.view.bounds.size.height - yHeight)/2.0f;
+    CGFloat yHeight = HEIGHT_LOGIN;
+    CGFloat yOffset = (self.view.bounds.size.height - yHeight - 100)/2.0f;
     UIPopoverListView *poplistview = [[UIPopoverListView alloc] initWithFrameType:CGRectMake(10, yOffset, xWidth, yHeight) popType:popType];
     poplistview.delegate = self;
-    [poplistview setTitle:@"登陆"];
     [poplistview show];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //用户选择自己编辑助记
+    if([segue.identifier isEqualToString:SEGUE_EDIT])
+    {
+        NSString *content = [@" " stringByAppendingString:[[self.comment stringByAppendingString:@"\n\n词根词源：\n"] stringByAppendingString:self.wordGern]];
+        [segue.destinationViewController setWord:self.word];
+        [segue.destinationViewController setMeaningstem:content];
+        [segue.destinationViewController setTipTxtOld:self.tipTxt];
+        [segue.destinationViewController setDelegate:self];
+    }
 }
 
 #pragma mark - Table view data source
@@ -469,35 +489,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if(tableView == self.tblTipsentense){
-//        NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:@"mp3"];
-//        dispatch_queue_t play_q = dispatch_queue_create("play mp3", NULL);
-//        dispatch_async(play_q, ^{
-//            NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
-//            NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
-//            NSError *myerror = nil;
-//            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
-//            [self.player setDelegate:self];
-//            if(self.player){
-//                if ([self.player prepareToPlay]) {
-//                    [self.player setVolume:0.5f];
-//                    if([self.player play]){
-//                        NSLog(@"play successed. mp3url[%@]", mp3url);
-//                    }else{
-//                        NSLog(@"play failed! mp3url[%@]", mp3url);
-//                    }
-//                }else{
-//                    NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
-//                }
-//            }else{
-//                NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
-//            }
-//        });
-//    }
-}
-
--(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    NSLog(@"播放完毕 %d",flag);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -537,34 +528,8 @@
     }else{
         NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
     }
-    
-//    dispatch_queue_t downloadImg = dispatch_queue_create("downloadImg", NULL);
-//    dispatch_async(downloadImg, ^{
-//        NSURL *imgUrlNet = [NSURL URLWithString:imgUrl];
-//        NSData *imgData = UIImageJPEGRepresentation(sender.imageView.image, 0.0f);
-//        if(imgData){
-//            [self.btnTipImgIphone setImage:sender.imageView.image forState:UIControlStateNormal];
-//            [self.btnTipImgIphone setImage:sender.imageView.image forState:UIControlStateHighlighted];
-//        }
-//        NSData * imgData = [NSData dataWithContentsOfURL:imgUrlNet];
-//        dispatch_async(dispatch_get_main_queue(),^{
-//            UIImage *img = [UIImage imageWithData:imgData];
-//            self.imgTipimg.image = img;
-//            [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
-//            [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
-//        });
-        
-//        //图片保存到本地
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *fileName = [[[paths objectAtIndex:0] stringByAppendingString:@"/" ] stringByAppendingString:self.word];
-//        if([imgData writeToFile:fileName atomically:YES]){
-//            NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
-//        }else{
-//            NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
-//        }
-        
-        //将采纳发送到server
-//    });
+    //将采纳发送到server
+    //发送失败则写入本地
     
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat: @"Image %@",imgName]
 //                                                    message:[NSString stringWithFormat: @"in %@",imgUrl]
@@ -608,12 +573,18 @@
     cell.textLabel.numberOfLines = 0;
     //加载tips
     if(indexPath.section == 0){
-//        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:11];
+        NSString *tip = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
         cell.textLabel.font = self.fontDetail;
-        cell.textLabel.text = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
+        if([tip isEqualToString:INFO_GOTOEDIT]){
+            cell.textLabel.font = [UIFont fontWithName:@"Verdana" size:13];
+//            cell.textLabel.textColor = [UIColor lightGrayColor];
+        }
+        else{
+            cell.textLabel.font = self.fontDetail;
+        }
+        cell.textLabel.text = tip;
     }else{
-    //加载sentence
-//        UIFont *fontDetail = [UIFont fontWithName:@"Verdana" size:12];
+        //加载sentence
         cell.textLabel.font = self.fontDetail;
         cell.textLabel.text = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:@"sentence"];
     }
@@ -637,17 +608,17 @@
 - (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if(section == 0 && [self.tipTxt length] > 0){
-        NSLog(@"height for section0");
+//        NSLog(@"height for section0");
         return HEIGHT_TIP_TXT;
     }else{
-        NSLog(@"height for section[%d]", section);
+//        NSLog(@"height for section[%d]", section);
         return HEIGHT_SENTENCE;
     }
 }
 
 - (CGFloat)mTableView:(TQMultistageTableView *)tableView heightForOpenCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"height for row[%@]", indexPath);
+//    NSLog(@"height for row[%@]", indexPath);
     return HEIGHT_TQ_CELL;
 }
 
@@ -695,7 +666,7 @@
 
 - (void)mTableView:(TQMultistageTableView *)tableView didSelectHeaderAtSection:(NSInteger)section
 {
-    NSLog(@"headerClick%d",section);
+//    NSLog(@"headerClick%d",section);
 }
 
 //celll点击
@@ -709,13 +680,21 @@
         }
         //tiptxt的采纳
         NSString *tipadopt = [[self.tipTxts objectAtIndex:indexPath.row] objectForKey:@"tip"];
-        if(![tipadopt isEqualToString:self.tipTxt]){
-            NSLog(@"新采纳助记 old[%@] new[%@]", self.tipTxt, tipadopt);
-            self.tipTxt = tipadopt;
-            self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
-            //更新到server
-        }else{
-            NSLog(@"采纳助记无变化 old[%@] new[%@]", self.tipTxt, tipadopt);
+        //若选择的是自己编辑助记
+        if([tipadopt isEqualToString:INFO_GOTOEDIT])
+        {
+            [self performSegueWithIdentifier:SEGUE_EDIT sender:self];
+        }
+        else
+        {
+            if(![tipadopt isEqualToString:self.tipTxt]){
+                NSLog(@"新采纳助记 old[%@] new[%@]", self.tipTxt, tipadopt);
+                self.tipTxt = tipadopt;
+                self.lblHeaderTip.text = [@"助记：" stringByAppendingString: self.tipTxt];
+                //更新到server
+            }else{
+                NSLog(@"采纳助记无变化 old[%@] new[%@]", self.tipTxt, tipadopt);
+            }
         }
     }else if(indexPath.section ==1){
         //sentence的选择。
@@ -737,16 +716,16 @@
     self.tblMultipsIphone.frame = mFrame;
     [UIView commitAnimations];
     
-    NSLog(@"header展开 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
-    NSLog(@"header展开 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
+//    NSLog(@"header展开 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+//    NSLog(@"header展开 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
 }
 
 //header关闭
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseHeaderAtSection:(NSInteger)section
 {
-    NSLog(@"headerClose%d",section);
-    NSLog(@"header关闭 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
-    NSLog(@"header关闭 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
+//    NSLog(@"headerClose%d",section);
+//    NSLog(@"header关闭 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+//    NSLog(@"header关闭 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
 //    //show the tbl
 //    CATransition *animation = [CATransition animation];
 //    animation.type = kCATransitionFade;
@@ -790,7 +769,7 @@
 
 - (void)mTableView:(TQMultistageTableView *)tableView willCloseCellAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSLog(@"CloseCell%@",indexPath);
+//    NSLog(@"CloseCell%@",indexPath);
 }
 
 #pragma mark - popListViewDelegate
@@ -811,7 +790,21 @@
 {
     self.userMid = [userInfo objectForKey:@"userMid"];
     NSLog(@"user regist. ");
-    //持久化保存用户信息在本地
+}
+
+#pragma mark - DanciEditTipTxtDelegate
+
+-(void) eidtTipTxt:(DanciEditTipTxtViewController *)sender didEditTipTxtOk:(NSString *)tipTxt
+{
+    self.tipTxt = tipTxt;
+    //设置view的相关控件
+    self.lblHeaderTip.text = tipTxt;
+}
+
+#pragma mark - videoplaydelegate
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    NSLog(@"播放完毕 %d",flag);
 }
 
 #pragma mark - event hander

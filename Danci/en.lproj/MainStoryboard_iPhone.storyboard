@@ -113,7 +113,7 @@
                                     <constraint firstAttribute="height" constant="110" id="wk0-GF-Hd9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="addImg3.png" backgroundImage="addImg3.png">
+                                <state key="normal" image="addImg4.jpg" backgroundImage="addImg4.jpg">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -154,11 +154,84 @@
                         <outlet property="svMeaningStem" destination="ht2-LN-QCp" id="5vJ-0p-wKP"/>
                         <outlet property="tblTipimgsIphone" destination="4eT-kr-dOs" id="0x9-lc-dac"/>
                         <outlet property="vtip" destination="Ob4-sL-nbo" id="Fqb-yo-fMI"/>
+                        <segue destination="F3X-2G-RWg" kind="push" identifier="sgEditTipTxt" id="oc2-nr-j6S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8z-63-1Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="260" y="-445"/>
+        </scene>
+        <!--Danci Edit Tip Txt View Controller-->
+        <scene sceneID="KSW-ge-m9O">
+            <objects>
+                <viewController id="F3X-2G-RWg" customClass="DanciEditTipTxtViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZdP-uv-qP1">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BO0-hT-0XY">
+                                <color key="backgroundColor" red="0.93540499382626818" green="0.94930636502752497" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="153" id="BiO-mX-6XM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69x-Sb-okK">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="3gJ-qO-pqA"/>
+                                    <constraint firstAttribute="width" constant="126" id="Tlu-s0-ZF0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="OK 这样就记住了">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveTipTxt:" destination="F3X-2G-RWg" eventType="touchUpInside" id="XGP-Lw-qcq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="简明释义、词根词源：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pa7-2B-2PA">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="aNv-9D-6lq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="rG0-zD-qzu">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rG0-zD-qzu" firstAttribute="leading" secondItem="ZdP-uv-qP1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7KT-as-7Ym"/>
+                            <constraint firstAttribute="trailing" secondItem="rG0-zD-qzu" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="7Wb-vO-L6a"/>
+                            <constraint firstItem="69x-Sb-okK" firstAttribute="top" secondItem="BO0-hT-0XY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CQh-5h-x86"/>
+                            <constraint firstItem="rG0-zD-qzu" firstAttribute="top" secondItem="pa7-2B-2PA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DYm-h6-2D1"/>
+                            <constraint firstItem="pa7-2B-2PA" firstAttribute="leading" secondItem="ZdP-uv-qP1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="E1v-I2-Yey"/>
+                            <constraint firstItem="BO0-hT-0XY" firstAttribute="trailing" secondItem="ZdP-uv-qP1" secondAttribute="trailing" type="default" id="Uud-Tn-8Pc"/>
+                            <constraint firstItem="BO0-hT-0XY" firstAttribute="leading" secondItem="ZdP-uv-qP1" secondAttribute="leading" type="default" id="iW4-UK-Lff"/>
+                            <constraint firstItem="pa7-2B-2PA" firstAttribute="top" secondItem="69x-Sb-okK" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="pzV-YA-Mv9"/>
+                            <constraint firstItem="BO0-hT-0XY" firstAttribute="top" secondItem="ZdP-uv-qP1" secondAttribute="top" type="default" id="qLN-pD-FlJ"/>
+                            <constraint firstItem="69x-Sb-okK" firstAttribute="leading" secondItem="ZdP-uv-qP1" secondAttribute="leading" constant="89" id="sQ2-aR-Jcx"/>
+                            <constraint firstAttribute="bottom" secondItem="rG0-zD-qzu" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="uCk-Qv-YhI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="s6W-od-S5P"/>
+                    <connections>
+                        <outlet property="lblMeaningStemTip" destination="rG0-zD-qzu" id="wSf-FQ-mgW"/>
+                        <outlet property="txtTipTxtEditor" destination="BO0-hT-0XY" id="7LA-Q0-SNr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdK-XW-MXN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682" y="-445"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nRu-sO-GGS">
@@ -180,7 +253,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="addImg3.png" width="256" height="256"/>
+        <image name="addImg4.jpg" width="300" height="300"/>
     </resources>
     <classes>
         <class className="DanciAlbumTableViewController" superclassName="UITableViewController">
@@ -190,11 +263,16 @@
                 <relationship kind="outlet" name="tblAlbumIphone" candidateClass="UITableView"/>
             </relationships>
         </class>
+        <class className="DanciEditTipTxtViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciEditTipTxtViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblMeaningStemTip" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtTipTxtEditor" candidateClass="UITextView"/>
+            </relationships>
+        </class>
         <class className="DanciWordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DanciWordViewController.h"/>
             <relationships>
-                <relationship kind="action" name="showImgTips:"/>
-                <relationship kind="action" name="showNextWord:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnTipImgIphone" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="svMeaningStem" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="tblTipimgsIphone" candidateClass="UITableView"/>

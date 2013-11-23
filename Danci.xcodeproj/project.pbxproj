@@ -32,6 +32,7 @@
 		79CF93301823E3F5005E41FA /* addImg4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79CF932C1823E3F5005E41FA /* addImg4.jpg */; };
 		79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9335182E9DC2005E41FA /* UIPopoverListView.m */; };
 		79CF933A18374927005E41FA /* WordHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933918374927005E41FA /* WordHttpClient.m */; };
+		79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,8 @@
 		79CF9335182E9DC2005E41FA /* UIPopoverListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverListView.m; sourceTree = "<group>"; };
 		79CF933818374927005E41FA /* WordHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordHttpClient.h; sourceTree = "<group>"; };
 		79CF933918374927005E41FA /* WordHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordHttpClient.m; sourceTree = "<group>"; };
+		79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciEditTipTxtViewController.h; sourceTree = SOURCE_ROOT; };
+		79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanciEditTipTxtViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,8 @@
 				79859B2517EC0E75008F8EFD /* MainStoryboard_iPad.storyboard */,
 				79859B3F17EC7551008F8EFD /* DanciWordViewController.h */,
 				79859B4017EC7551008F8EFD /* DanciWordViewController.m */,
+				79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */,
+				79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */,
 				79CF933818374927005E41FA /* WordHttpClient.h */,
 				79CF933918374927005E41FA /* WordHttpClient.m */,
 				79859B1117EC0E75008F8EFD /* Supporting Files */,
@@ -271,6 +276,7 @@
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,
 				79CF933A18374927005E41FA /* WordHttpClient.m in Sources */,
+				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

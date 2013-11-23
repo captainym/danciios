@@ -11,8 +11,6 @@
 
 //#define FRAME_X_INSET 20.0f
 //#define FRAME_Y_INSET 40.0f
-#define HEIGHT_LOGIN 180
-#define HEIGHT_REG 272
 
 @interface UIPopoverListView () <UITextFieldDelegate>
 
@@ -58,10 +56,6 @@
         self.frame = frameLogin;
         NSLog(@"frame of register");
     }
-    
-    float height = 28.0f;
-    float splitHeight = 4.0f;
-    float widthLeft = 60.0f;
     float heightTitle = 32.0f;
     
     self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -69,32 +63,65 @@
     self.layer.cornerRadius = 10.0f;
     self.clipsToBounds = TRUE;
     
-    //title
-    _titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    _titleView.font = [UIFont systemFontOfSize:17.0f];
-    _titleView.backgroundColor = [UIColor colorWithRed:59./255.
+    //segment
+    CGFloat xWidth = self.bounds.size.width;
+    _segments = [[UISegmentedControl alloc] initWithItems:@[@"登陆", @"注册"]];
+    _segments.frame = CGRectMake((xWidth - 100)/2, 2, 100, heightTitle);
+    [_segments addTarget:self action:@selector(showPopView:) forControlEvents:UIControlEventValueChanged];
+    [self addSubview:_segments];
+    _segments.selectedSegmentIndex = type;
+    [self showPopView:nil];
+    _overlayView = [[UIControl alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    _overlayView.backgroundColor = [UIColor colorWithRed:.16 green:.17 blue:.21 alpha:.5];
+    [_overlayView addTarget:self
+                     action:@selector(dismiss)
+           forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void) showPopView:(UIPopoverController *)sender
+{
+    UIColor *colorLblBackGroud = [UIColor colorWithRed:59./255.
                                                  green:89./255.
                                                   blue:152./255.
                                                  alpha:1.0f];
-    
-    _titleView.textAlignment = NSTextAlignmentCenter;
-    _titleView.textColor = [UIColor whiteColor];
     CGFloat xWidth = self.bounds.size.width;
-    _titleView.lineBreakMode = NSLineBreakByTruncatingTail;
-    _titleView.frame = CGRectMake((xWidth - 60)/2, 0, 60, heightTitle);
-    [self addSubview:_titleView];
+    float height = 28.0f;
+    float splitHeight = 4.0f;
+    float widthLeft = 60.0f;
+    float heightTitle = 32.0f;
+    type = _segments.selectedSegmentIndex;
     
-    UIColor *colorLblBackGroud = [UIColor colorWithRed:59./255.
-                                                green:89./255.
-                                                 blue:152./255.
-                                                alpha:1.0f];
+    //清理控件
+    [_btnEnter removeFromSuperview];
+    [_lblTip removeFromSuperview];
+    [_lblMid removeFromSuperview];
+    [_txtMid removeFromSuperview];
+    [_lblPwd removeFromSuperview];
+    [_txtPwd removeFromSuperview];
+    [_lblPwdConfirm removeFromSuperview];
+    [_txtPwdConfirm removeFromSuperview];
+    [_lblTuijian removeFromSuperview];
+    [_txtTuijian removeFromSuperview];
+    
+    if(type == TYPE_LOGIN){
+        CGRect frameLogin = CGRectMake(self.frame.origin.x, self.frame.origin.y,
+                                       self.frame.size.width, HEIGHT_LOGIN);
+        self.frame = frameLogin;
+        NSLog(@"frame of login");
+    }else{
+        CGRect frameLogin = CGRectMake(self.frame.origin.x, self.frame.origin.y,
+                                       self.frame.size.width, HEIGHT_REG);
+        self.frame = frameLogin;
+        NSLog(@"frame of register");
+    }
+    
     //login img
     _imgLogin.image = [UIImage imageNamed:@"login.jpg"];
     
     //Mid 用户名
     _lblMid = [[UILabel alloc] initWithFrame:CGRectZero];
     _lblMid.text = @"用户名:";
-    _lblMid.textAlignment = NSTextAlignmentRight;   
+    _lblMid.textAlignment = NSTextAlignmentRight;
     _lblMid.frame = CGRectMake(1, heightTitle + height * 0 + splitHeight * 1, widthLeft, height);
     [self addSubview:_lblMid];
     _txtMid = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -107,8 +134,8 @@
     _lblPwd = [[UILabel alloc] initWithFrame:CGRectZero];
     _lblPwd.text = @"密码:";
     _lblPwd.textAlignment = NSTextAlignmentRight;
-//    _lblPwd.backgroundColor = colorLblBackGroud;
-//    _lblPwd.textColor = [UIColor whiteColor];
+    //    _lblPwd.backgroundColor = colorLblBackGroud;
+    //    _lblPwd.textColor = [UIColor whiteColor];
     _lblPwd.frame = CGRectMake(1, heightTitle + height * 1 + splitHeight * 2, widthLeft, height);
     [self addSubview: _lblPwd];
     _txtPwd = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -135,6 +162,10 @@
                       action:@selector(login)
             forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnEnter];
+        
+        //清除注册控件
+        [_lblTuijian removeFromSuperview];
+        [_txtTuijian removeFromSuperview];
     }else{
         //推荐人
         _lblTuijian = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -146,7 +177,7 @@
         _txtTuijian.borderStyle = UITextBorderStyleLine;
         _txtTuijian.placeholder = @"推荐人的学号(选填)";
         _txtTuijian.frame = CGRectMake(widthLeft + splitHeight, heightTitle + height * 2 + splitHeight * 3, xWidth - widthLeft - splitHeight * 2, height);
-        _txtMid.delegate = self;
+        _txtTuijian.delegate = self;
         [self addSubview:_txtTuijian];
         
         //tip
@@ -167,11 +198,6 @@
         [self addSubview:_btnEnter];
     }
     
-    _overlayView = [[UIControl alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    _overlayView.backgroundColor = [UIColor colorWithRed:.16 green:.17 blue:.21 alpha:.5];
-    [_overlayView addTarget:self
-                     action:@selector(dismiss)
-           forControlEvents:UIControlEventTouchUpInside];
     self.backgroundColor = [UIColor whiteColor];
 }
 
@@ -215,7 +241,8 @@
     
     //注册验证
     
-    //通过检验后 回调主页面
+    //通过检验后 持久化保存用户信息在本地
+    //回调主页面
     NSDictionary *userInfo = @{@"userMid": userMid};
     [self.delegate popoverListViewRegist:self newUser:userInfo];
     [self dismiss];

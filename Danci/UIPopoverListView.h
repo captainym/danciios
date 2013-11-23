@@ -2,12 +2,14 @@
 //  UIPopoverListView.h
 //  Danci
 //
-//  Created by HuHao on 13-9-20.
+//  Created by shiyuming on 13-9-20.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
-#define TYPE_LOGIN 1
-#define TYPE_REG 2
+#define TYPE_LOGIN 0
+#define TYPE_REG 1
+#define HEIGHT_LOGIN 180
+#define HEIGHT_REG 220
 
 @class UIPopoverListView;
 
@@ -28,6 +30,9 @@
 {
     // 1:login 2:regiest
     int type;
+    
+    UISegmentedControl *_segments;
+    
     UIControl   *_overlayView;
     UILabel     *_titleView;
     UIImageView *_imgLogin;
