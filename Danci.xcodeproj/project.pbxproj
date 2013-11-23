@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67E981184078B800510FA7 /* CoreData.framework */; };
 		79859B0B17EC0E75008F8EFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79859B0A17EC0E75008F8EFD /* UIKit.framework */; };
 		79859B0D17EC0E75008F8EFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79859B0C17EC0E75008F8EFD /* Foundation.framework */; };
 		79859B0F17EC0E75008F8EFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79859B0E17EC0E75008F8EFD /* CoreGraphics.framework */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C67E981184078B800510FA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		79859B0717EC0E75008F8EFD /* Danci.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Danci.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79859B0A17EC0E75008F8EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		79859B0C17EC0E75008F8EFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */,
 				798D370C1822979500260FC6 /* QuartzCore.framework in Frameworks */,
 				798D36D31813FDF300260FC6 /* AVFoundation.framework in Frameworks */,
 				79859B0B17EC0E75008F8EFD /* UIKit.framework in Frameworks */,
@@ -115,6 +118,7 @@
 		79859B0917EC0E75008F8EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C67E981184078B800510FA7 /* CoreData.framework */,
 				79859B0A17EC0E75008F8EFD /* UIKit.framework */,
 				79859B0C17EC0E75008F8EFD /* Foundation.framework */,
 				79859B0E17EC0E75008F8EFD /* CoreGraphics.framework */,

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define SERVER_URL @"http://dbl-rdtest-3-04.vm.baidu.com:8060/bdc"
+#define SERVER_URL @"http://acodingfarmer.com/bdc"
 
 @interface WordHttpClient : NSObject
 
