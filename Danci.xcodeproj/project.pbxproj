@@ -33,6 +33,13 @@
 		79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9335182E9DC2005E41FA /* UIPopoverListView.m */; };
 		79CF933A18374927005E41FA /* WordHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933918374927005E41FA /* WordHttpClient.m */; };
 		79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */; };
+		79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */; };
+		79CF93561841206C005E41FA /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF93551841206C005E41FA /* Album.m */; };
+		79CF93591841206C005E41FA /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF93581841206C005E41FA /* Word.m */; };
+		79CF935C1841206C005E41FA /* StudyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935B1841206C005E41FA /* StudyOperation.m */; };
+		79CF935F1841212D005E41FA /* Word+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935E1841212D005E41FA /* Word+Server.m */; };
+		79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF936118412159005E41FA /* StudyOperation+Server.m */; };
+		79CF9365184196E8005E41FA /* DanciServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9364184196E7005E41FA /* DanciServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +82,19 @@
 		79CF933918374927005E41FA /* WordHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordHttpClient.m; sourceTree = "<group>"; };
 		79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciEditTipTxtViewController.h; sourceTree = SOURCE_ROOT; };
 		79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanciEditTipTxtViewController.m; sourceTree = SOURCE_ROOT; };
+		79CF935218411F11005E41FA /* DBDanci.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBDanci.xcdatamodel; sourceTree = "<group>"; };
+		79CF93541841206C005E41FA /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		79CF93551841206C005E41FA /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		79CF93571841206C005E41FA /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
+		79CF93581841206C005E41FA /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		79CF935A1841206C005E41FA /* StudyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyOperation.h; sourceTree = "<group>"; };
+		79CF935B1841206C005E41FA /* StudyOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyOperation.m; sourceTree = "<group>"; };
+		79CF935D1841212D005E41FA /* Word+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Word+Server.h"; sourceTree = "<group>"; };
+		79CF935E1841212D005E41FA /* Word+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Word+Server.m"; sourceTree = "<group>"; };
+		79CF936018412159005E41FA /* StudyOperation+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StudyOperation+Server.h"; sourceTree = "<group>"; };
+		79CF936118412159005E41FA /* StudyOperation+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StudyOperation+Server.m"; sourceTree = "<group>"; };
+		79CF9363184196E6005E41FA /* DanciServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciServer.h; sourceTree = "<group>"; };
+		79CF9364184196E7005E41FA /* DanciServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanciServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,10 +145,10 @@
 		79859B1017EC0E75008F8EFD /* Danci */ = {
 			isa = PBXGroup;
 			children = (
+				79CF9341183CEBAC005E41FA /* coredata */,
 				79CF9334182E9DC2005E41FA /* UIPopoverListView.h */,
 				79CF9335182E9DC2005E41FA /* UIPopoverListView.m */,
 				798D36D4181BE1B700260FC6 /* TQMultistageTableView */,
-				79859B5617ED9E8D008F8EFD /* images */,
 				79859B4C17ED9E65008F8EFD /* PPImageScrollingTableViewCell */,
 				79859B3017EC54EA008F8EFD /* DanciAlbumTableViewController.h */,
 				79859B3117EC54EB008F8EFD /* DanciAlbumTableViewController.m */,
@@ -140,6 +160,8 @@
 				79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */,
 				79CF933818374927005E41FA /* WordHttpClient.h */,
 				79CF933918374927005E41FA /* WordHttpClient.m */,
+				79CF9363184196E6005E41FA /* DanciServer.h */,
+				79CF9364184196E7005E41FA /* DanciServer.m */,
 				79859B1117EC0E75008F8EFD /* Supporting Files */,
 			);
 			path = Danci;
@@ -148,6 +170,7 @@
 		79859B1117EC0E75008F8EFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				79859B5617ED9E8D008F8EFD /* images */,
 				79859B1917EC0E75008F8EFD /* DanciAppDelegate.h */,
 				79859B1A17EC0E75008F8EFD /* DanciAppDelegate.m */,
 				79859B1217EC0E75008F8EFD /* Danci-Info.plist */,
@@ -192,6 +215,24 @@
 				798D36D6181BE1B800260FC6 /* TQMultistageTableView.m */,
 			);
 			path = TQMultistageTableView;
+			sourceTree = "<group>";
+		};
+		79CF9341183CEBAC005E41FA /* coredata */ = {
+			isa = PBXGroup;
+			children = (
+				79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */,
+				79CF935A1841206C005E41FA /* StudyOperation.h */,
+				79CF935B1841206C005E41FA /* StudyOperation.m */,
+				79CF93571841206C005E41FA /* Word.h */,
+				79CF93581841206C005E41FA /* Word.m */,
+				79CF93541841206C005E41FA /* Album.h */,
+				79CF93551841206C005E41FA /* Album.m */,
+				79CF935D1841212D005E41FA /* Word+Server.h */,
+				79CF935E1841212D005E41FA /* Word+Server.m */,
+				79CF936018412159005E41FA /* StudyOperation+Server.h */,
+				79CF936118412159005E41FA /* StudyOperation+Server.m */,
+			);
+			name = coredata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +318,13 @@
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,
 				79CF933A18374927005E41FA /* WordHttpClient.m in Sources */,
 				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
+				79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */,
+				79CF93561841206C005E41FA /* Album.m in Sources */,
+				79CF93591841206C005E41FA /* Word.m in Sources */,
+				79CF935C1841206C005E41FA /* StudyOperation.m in Sources */,
+				79CF935F1841212D005E41FA /* Word+Server.m in Sources */,
+				79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */,
+				79CF9365184196E8005E41FA /* DanciServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +464,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				79CF935218411F11005E41FA /* DBDanci.xcdatamodel */,
+			);
+			currentVersion = 79CF935218411F11005E41FA /* DBDanci.xcdatamodel */;
+			path = DBDanci.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 79859AFF17EC0E74008F8EFD /* Project object */;
 }

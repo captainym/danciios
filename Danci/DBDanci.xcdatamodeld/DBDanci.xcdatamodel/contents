@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Album" representedClassName="Album" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="point" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="words" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="StudyOperation" representedClassName="StudyOperation" syncable="YES">
+        <attribute name="is_upload" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="opt_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="otype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="ovalue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Word" representedClassName="Word" syncable="YES">
+        <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="txt_tip" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yin_biao" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Album" positionX="178" positionY="72" width="128" height="88"/>
+        <element name="Word" positionX="27" positionY="186" width="128" height="118"/>
+        <element name="StudyOperation" positionX="394" positionY="192" width="128" height="118"/>
+    </elements>
+</model>
