@@ -10,4 +10,8 @@
 
 @interface Word (Server)
 
++ (Word *) getWord:(NSString *) paraWord inManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (Word *) getWordWithInfo:(NSDictionary *) wordinfo inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end

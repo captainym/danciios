@@ -45,6 +45,10 @@ typedef enum
     ServerFeedbackTypePostRegistFailForUsernameNagative = 22,
     ServerFeedbackTypePostRegistFailForServerError  = 23,
     ServerFeedbackTypePostRegistFailForNetError = 24,
+    
+    ServerFeedbackTypeQueryOk = 31,
+    ServerFeedbackTypeQueryFailed = 32,
+    ServerFeedbackTypeQueryFailForNetError = 33,
 } ServerFeedbackType;
 
 @interface DanciServer : NSObject
