@@ -2,7 +2,7 @@
 //  main.m
 //  Danci
 //
-//  Created by HuHao on 13-9-20.
+//  Created by ShiYuming on 13-9-20.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 

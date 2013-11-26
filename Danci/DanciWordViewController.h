@@ -2,7 +2,7 @@
 //  DanciWordViewController.h
 //  Danci
 //
-//  Created by HuHao on 13-9-20.
+//  Created by ShiYuming on 13-9-20.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
@@ -10,10 +10,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import "WordHttpClient.h"
 #import "TQMultistageTableView.h"
+#import "Album+Server.h"
+#import "Word+Server.h"
 
 #define cellTipimg @"CellTipImg"
 #define cellTiptxt @"CellTipTxt"
 #define cellTipsentence @"CellTipSentence"
+
 #define HEIGHT_TIP_TXT 70
 #define HEIGHT_SENTENCE 40
 #define HEIGHT_TQ_ROW 60
@@ -44,7 +47,12 @@
 //指示当前的单词是学习还是复习。如果是复习单词，这个值将一直是TRUE，否则按照马上复习的逻辑来设置，该值指示界面是否切换到复习界面：反馈按钮的title及其逻辑、tips的折叠与否、助记图片加载。只要是学习过的单词，这个值都是TRUE。
 @property BOOL isReview;
 
+//database
+@property (nonatomic, strong) UIManagedDocument *danciDatabase;
+
 //album info
+@property (nonatomic, strong) Album *album;
+
 @property (nonatomic, strong) NSString *albumName;
 //单词本中用户的学习断点。 由album指定 通常是用户第一个没有学习过的单词（未反馈>认识、不认识）的下标
 @property (nonatomic) int wordPoint;

@@ -2,17 +2,17 @@
 //  DanciAlbumTableViewController.h
 //  Danci
 //
-//  Created by HuHao on 13-9-20.
+//  Created by ShiYuming on 13-9-20.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreDataTableViewController.h"
 
-@interface DanciAlbumTableViewController : UITableViewController
+@interface DanciAlbumTableViewController : CoreDataTableViewController
 
-//albums
-//album的内容是：albumid albumName pointword words
-@property (nonatomic, strong) NSArray *albums;
+//单词数据库
+@property (strong,nonatomic) UIManagedDocument *danciDatabase;
 
 @property (strong, nonatomic) IBOutlet UITableView *tblAlbumIphone;
 @property (strong, nonatomic) IBOutlet UITableView *tblAlbumIpad;

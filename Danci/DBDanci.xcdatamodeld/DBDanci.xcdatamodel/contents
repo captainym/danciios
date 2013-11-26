@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Album" representedClassName="Album" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="point" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="words" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,8 +22,8 @@
         <attribute name="yin_biao" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Album" positionX="178" positionY="72" width="128" height="88"/>
-        <element name="Word" positionX="27" positionY="186" width="128" height="118"/>
+        <element name="Album" positionX="178" positionY="72" width="128" height="118"/>
         <element name="StudyOperation" positionX="394" positionY="192" width="128" height="118"/>
+        <element name="Word" positionX="27" positionY="186" width="128" height="118"/>
     </elements>
 </model>

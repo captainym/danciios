@@ -2,7 +2,7 @@
 //  DanciWordViewController.m
 //  Danci
 //
-//  Created by HuHao on 13-9-20.
+//  Created by ShiYuming on 13-9-20.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
@@ -833,53 +833,6 @@
         NSLog(@"all words of current album has Done!");
     }
 }
-
-//-(NSDictionary*) getWordInfoByCoredata:(NSString*) word {
-//    BIDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-//    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-//    
-//    
-//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-//    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Words" inManagedObjectContext:context];
-//    [request setEntity:entityDescription];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"word=%@", word];
-//    [request setPredicate:predicate];
-//    
-//    NSManagedObject *obj = nil;
-//    NSError* error = nil;
-//    NSArray *objects = [context executeFetchRequest:request error:&error];
-//    if(objects == nil) {
-//        NSLog(@"there was an error, %@", error);
-//        return nil;
-//    }
-//    
-//    NSLog(@"get all word:%@, count:%d", objects, [objects count]);
-//    
-//    if ([objects count] > 0) {
-//        obj = [objects objectAtIndex:0];
-//        NSDictionary* rs = [[NSDictionary alloc] init];
-//        
-//        NSString* meaning = [obj valueForKey:@"meaning"];
-//        NSString* yinbiao = [obj valueForKey:@"yinbiao"];
-//        NSString* wordStem = [obj valueForKey:@"word_stem"];
-//        NSString* txtTip = [obj valueForKey:@"txt_tip"];
-//        
-//        
-//        [rs setValue:word forKey:@"word"];
-//        [rs setValue:meaning forKey:@"meaning"];
-//        [rs setValue:yinbiao forKey:@"yinbiao"];
-//        [rs setValue:txtTip forKey:@"txtTip"];
-//        [rs setValue:wordStem forKey:@"wordStem"];
-//
-//        return rs;
-//    }
-//    
-//    return nil;
-//}
-
-
-
-
 
 @end
 

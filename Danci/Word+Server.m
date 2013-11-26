@@ -2,7 +2,7 @@
 //  Word+Server.m
 //  Danci
 //sunqx1984
-//  Created by HuHao on 13-11-24.
+//  Created by ShiYuming on 13-11-24.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
@@ -10,6 +10,24 @@
 #import "DanciServer.h"
 
 @implementation Word (Server)
+
++ (void) initStore:(NSString *)jsonFilePath inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSError *error = nil;
+    NSArray *objects = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:jsonFilePath] options:kNilOptions error:&error];
+    NSLog(@"jsong objects of word: %@",objects);
+    [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Word *aWord = [NSEntityDescription insertNewObjectForEntityForName:@"Word" inManagedObjectContext:context];
+        aWord.word = [obj objectForKey:@"word"];
+        aWord.yin_biao = [obj objectForKey:@"yin_biao"];
+        aWord.meaning = [obj objectForKey:@"meaning"];
+        aWord.stem = [obj objectForKey:@"stem"];
+        NSError *errorLoc = nil;
+        if(![context save:&errorLoc]){
+            NSLog(@"save word error:%@",[errorLoc localizedDescription]);
+        }
+    }];
+}
 
 + (Word *) getWord:(NSString *)paraWord inManagedObjectContext:(NSManagedObjectContext *)context
 {

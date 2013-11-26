@@ -35,12 +35,16 @@
 		79CF933A18374927005E41FA /* WordHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933918374927005E41FA /* WordHttpClient.m */; };
 		79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */; };
 		79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */; };
-		79CF93561841206C005E41FA /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF93551841206C005E41FA /* Album.m */; };
 		79CF93591841206C005E41FA /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF93581841206C005E41FA /* Word.m */; };
 		79CF935C1841206C005E41FA /* StudyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935B1841206C005E41FA /* StudyOperation.m */; };
 		79CF935F1841212D005E41FA /* Word+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935E1841212D005E41FA /* Word+Server.m */; };
 		79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF936118412159005E41FA /* StudyOperation+Server.m */; };
 		79CF9365184196E8005E41FA /* DanciServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9364184196E7005E41FA /* DanciServer.m */; };
+		79FC0AA318422FB2004DF41E /* Album+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC0AA218422FB2004DF41E /* Album+Server.m */; };
+		79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC0AA818433578004DF41E /* CoreDataTableViewController.m */; };
+		79FC0AAC18433DD8004DF41E /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC0AAB18433DD8004DF41E /* Album.m */; };
+		79FC0AB018435BCA004DF41E /* album.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AAF18435BCA004DF41E /* album.json */; };
+		79FC0AB218435BDC004DF41E /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AB118435BDC004DF41E /* words.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,8 +89,6 @@
 		79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciEditTipTxtViewController.h; sourceTree = SOURCE_ROOT; };
 		79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanciEditTipTxtViewController.m; sourceTree = SOURCE_ROOT; };
 		79CF935218411F11005E41FA /* DBDanci.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBDanci.xcdatamodel; sourceTree = "<group>"; };
-		79CF93541841206C005E41FA /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		79CF93551841206C005E41FA /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		79CF93571841206C005E41FA /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		79CF93581841206C005E41FA /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
 		79CF935A1841206C005E41FA /* StudyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyOperation.h; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 		79CF936118412159005E41FA /* StudyOperation+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StudyOperation+Server.m"; sourceTree = "<group>"; };
 		79CF9363184196E6005E41FA /* DanciServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciServer.h; sourceTree = "<group>"; };
 		79CF9364184196E7005E41FA /* DanciServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanciServer.m; sourceTree = "<group>"; };
+		79FC0AA118422FB2004DF41E /* Album+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Album+Server.h"; sourceTree = "<group>"; };
+		79FC0AA218422FB2004DF41E /* Album+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Album+Server.m"; sourceTree = "<group>"; };
+		79FC0AA718433578004DF41E /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		79FC0AA818433578004DF41E /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		79FC0AAA18433DD8004DF41E /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		79FC0AAB18433DD8004DF41E /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		79FC0AAF18435BCA004DF41E /* album.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = album.json; sourceTree = "<group>"; };
+		79FC0AB118435BDC004DF41E /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +194,8 @@
 				79859B1C17EC0E75008F8EFD /* Default.png */,
 				79859B1E17EC0E75008F8EFD /* Default@2x.png */,
 				79859B2017EC0E75008F8EFD /* Default-568h@2x.png */,
+				79FC0AAF18435BCA004DF41E /* album.json */,
+				79FC0AB118435BDC004DF41E /* words.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -224,17 +236,21 @@
 		79CF9341183CEBAC005E41FA /* coredata */ = {
 			isa = PBXGroup;
 			children = (
+				79FC0AAA18433DD8004DF41E /* Album.h */,
+				79FC0AAB18433DD8004DF41E /* Album.m */,
 				79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */,
 				79CF935A1841206C005E41FA /* StudyOperation.h */,
 				79CF935B1841206C005E41FA /* StudyOperation.m */,
 				79CF93571841206C005E41FA /* Word.h */,
 				79CF93581841206C005E41FA /* Word.m */,
-				79CF93541841206C005E41FA /* Album.h */,
-				79CF93551841206C005E41FA /* Album.m */,
 				79CF935D1841212D005E41FA /* Word+Server.h */,
 				79CF935E1841212D005E41FA /* Word+Server.m */,
 				79CF936018412159005E41FA /* StudyOperation+Server.h */,
 				79CF936118412159005E41FA /* StudyOperation+Server.m */,
+				79FC0AA118422FB2004DF41E /* Album+Server.h */,
+				79FC0AA218422FB2004DF41E /* Album+Server.m */,
+				79FC0AA718433578004DF41E /* CoreDataTableViewController.h */,
+				79FC0AA818433578004DF41E /* CoreDataTableViewController.m */,
 			);
 			name = coredata;
 			sourceTree = "<group>";
@@ -295,10 +311,12 @@
 				79859B1D17EC0E75008F8EFD /* Default.png in Resources */,
 				79859B1F17EC0E75008F8EFD /* Default@2x.png in Resources */,
 				79859B2117EC0E75008F8EFD /* Default-568h@2x.png in Resources */,
+				79FC0AB018435BCA004DF41E /* album.json in Resources */,
 				79859B2417EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard in Resources */,
 				79859B2717EC0E75008F8EFD /* MainStoryboard_iPad.storyboard in Resources */,
 				79CF932D1823E3F5005E41FA /* addImg.jpg in Resources */,
 				79CF932E1823E3F5005E41FA /* addImg2.jpg in Resources */,
+				79FC0AB218435BDC004DF41E /* words.json in Resources */,
 				79CF932F1823E3F5005E41FA /* addImg3.png in Resources */,
 				79CF93301823E3F5005E41FA /* addImg4.jpg in Resources */,
 			);
@@ -314,16 +332,18 @@
 				79859B1717EC0E75008F8EFD /* main.m in Sources */,
 				79859B1B17EC0E75008F8EFD /* DanciAppDelegate.m in Sources */,
 				79859B3217EC54EB008F8EFD /* DanciAlbumTableViewController.m in Sources */,
+				79FC0AAC18433DD8004DF41E /* Album.m in Sources */,
 				79859B4117EC7551008F8EFD /* DanciWordViewController.m in Sources */,
 				79859B5317ED9E65008F8EFD /* PPCollectionViewCell.m in Sources */,
 				79859B5417ED9E65008F8EFD /* PPImageScrollingCellView.m in Sources */,
 				79859B5517ED9E65008F8EFD /* PPImageScrollingTableViewCell.m in Sources */,
+				79FC0AA318422FB2004DF41E /* Album+Server.m in Sources */,
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,
 				79CF933A18374927005E41FA /* WordHttpClient.m in Sources */,
 				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
 				79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */,
-				79CF93561841206C005E41FA /* Album.m in Sources */,
+				79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */,
 				79CF93591841206C005E41FA /* Word.m in Sources */,
 				79CF935C1841206C005E41FA /* StudyOperation.m in Sources */,
 				79CF935F1841212D005E41FA /* Word+Server.m in Sources */,

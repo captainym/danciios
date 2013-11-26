@@ -2,7 +2,7 @@
 //  DanciEditTipTxtViewController.h
 //  Danci
 //
-//  Created by HuHao on 13-11-16.
+//  Created by ShiYuming on 13-11-16.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
