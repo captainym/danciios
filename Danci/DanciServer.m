@@ -31,8 +31,8 @@
 //通用的query
 + (NSDictionary *)executeServerFetch:(NSString *) query
 {
-    NSString *code = [self generateDynamicCode];
-    query = [NSString stringWithFormat:@"%@&api_key=%@&code=%@", query, API_KEY, code];
+//    NSString *code = [self generateDynamicCode];
+//    query = [NSString stringWithFormat:@"%@&api_key=%@&code=%@", query, API_KEY, code];
     NSLog(@"query is[%@]",query);
     query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"query added percentEscapeUsingEncoding[%@]",query);
@@ -42,7 +42,7 @@
     if(error){
         NSLog(@"[%@ %@] JSON error:%@",NSStringFromClass([self class]), NSStringFromSelector(_cmd),error.localizedDescription);
     }
-    if(results && [[results objectForKey:RETURN_CODE] intValue] != ServerFeedbackTypeQueryOk){
+    if(results && [[results objectForKey:RETURN_CODE] intValue] != ServerFeedbackTypeOk){
         NSLog(@"query failed! retcode[%d] retValu[%@]",[[results objectForKey:RETURN_CODE] intValue], [results objectForKey:RETURN_VALUE]);
     }else if(!results){
         NSLog(@"query failed! result is nil. net failed");
@@ -58,8 +58,8 @@
 + (NSDictionary *)executeServerPost:(NSString *) query
                            postData:(NSDictionary *) data
 {
-    NSString *code = [self generateDynamicCode];
-    query = [NSString stringWithFormat:@"%@&api_key=%@&code=%@", query, API_KEY, code];
+//    NSString *code = [self generateDynamicCode];
+//    query = [NSString stringWithFormat:@"%@&api_key=%@&code=%@", query, API_KEY, code];
     query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -83,7 +83,7 @@
     if(error){
         NSLog(@"[%@ %@] JSON error:%@",NSStringFromClass([self class]), NSStringFromSelector(_cmd),error.localizedDescription);
     }
-    if(results && [[results objectForKey:RETURN_CODE] intValue] != ServerFeedbackTypeQueryOk){
+    if(results && [[results objectForKey:RETURN_CODE] intValue] != ServerFeedbackTypeOk){
         NSLog(@"query failed! retcode[%d] retValu[%@]",[[results objectForKey:RETURN_CODE] intValue], [results objectForKey:RETURN_VALUE]);
     }else if(!results){
         NSLog(@"query failed! result is nil. net failed");
@@ -95,18 +95,25 @@
     return results;
 }
 
-+ (NSDictionary *) getWordInfo:(NSString *)word
++ (NSArray *) getWordInfo:(NSString *)word
 {
     NSString *format = FORMAT_QUERY_WORD_INFO;
     NSString *query = [NSString stringWithFormat: format,word];
-    return [self executeServerFetch:query];
+    return [[self executeServerFetch:query] objectForKey:RETURN_DATA];
 }
 
-+ (NSDictionary *) getWordTipsImg:(NSString *)word atBegin:(int)begin requestCount:(int)count
++ (NSArray *) getWordTipsImg:(NSString *)word atBegin:(int)begin requestCount:(int)count
 {
     NSString *format = FORMAT_QUERY_TIPS_IMG;
     NSString *query = [NSString stringWithFormat:format, word, begin, count];
-    return [self executeServerFetch:query];
+    return [[self executeServerFetch:query] objectForKey:RETURN_DATA];
+}
+
++ (NSArray *) getWordTipsSentence:(NSString *)word
+{
+    NSString *format = FORMAT_QUERY_TIPS_SENTENCE;
+    NSString *query = [NSString stringWithFormat:format, word, 0, 5];
+    return [[self executeServerFetch:query] objectForKey:RETURN_DATA];
 }
 
 + (NSDictionary *) getWordTipsTxt:(NSString *)word atBegin:(int)begin requestCount:(int)count

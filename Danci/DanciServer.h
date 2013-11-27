@@ -17,6 +17,8 @@
 #define WORD_TIPS_TXT @"tips_txt"
 #define WORD_TIPS_IMG @"tips_img"
 #define WORD_TIPS_SENTENCE @"tips_sentence"
+#define TIPS_IMG_NAME @"img_key"
+#define TIPS_IMG_URL @"img_url"
 
 typedef enum
 {
@@ -31,24 +33,22 @@ typedef enum
 
 typedef enum
 {
-    ServerFeedbackTypePostStudyOTypeOk = 1,
-    ServerFeedbackTypePostStudyOTypeFailForIllegal = 2,
-    ServerFeedbackTypePostStudyOTypeFailForServerError = 3,
-    ServerFeedbackTypePostStudyOTypeFailForNetError = 4,
+    ServerFeedbackTypeOk = 0,
     
-    ServerFeedbackTypePostLoginOk = 11,
-    ServerFeedbackTypePostLoginFailForPwd = 12,
-    ServerFeedbackTypePostLoginFailForServerError = 13,
-    ServerFeedbackTypePostLoginFailForNetError = 14,
+    ServerFeedbackTypePostStudyOTypeFailForIllegal = 1,
+    ServerFeedbackTypePostStudyOTypeFailForServerError = 2,
+    ServerFeedbackTypePostStudyOTypeFailForNetError = 3,
     
-    ServerFeedbackTypePostRegistOk = 21,
-    ServerFeedbackTypePostRegistFailForUsernameNagative = 22,
-    ServerFeedbackTypePostRegistFailForServerError  = 23,
-    ServerFeedbackTypePostRegistFailForNetError = 24,
+    ServerFeedbackTypePostLoginFailForPwd = 11,
+    ServerFeedbackTypePostLoginFailForServerError = 12,
+    ServerFeedbackTypePostLoginFailForNetError = 13,
     
-    ServerFeedbackTypeQueryOk = 31,
-    ServerFeedbackTypeQueryFailed = 32,
-    ServerFeedbackTypeQueryFailForNetError = 33,
+    ServerFeedbackTypePostRegistFailForUsernameNagative = 21,
+    ServerFeedbackTypePostRegistFailForServerError  = 22,
+    ServerFeedbackTypePostRegistFailForNetError = 23,
+    
+    ServerFeedbackTypeQueryFailed = 31,
+    ServerFeedbackTypeQueryFailForNetError = 32,
 } ServerFeedbackType;
 
 @interface DanciServer : NSObject
@@ -57,10 +57,13 @@ typedef enum
 + (NSDictionary *) getWordInfo:(NSString *) word;
 
 //从server请求img tips。 指定起止 
-+ (NSDictionary *) getWordTipsImg:(NSString *) word atBegin:(int) begin requestCount:(int) count;
++ (NSArray *) getWordTipsImg:(NSString *) word atBegin:(int) begin requestCount:(int) count;
 
 //从server请求txt tip。指定起止
-+ (NSDictionary *) getWordTipsTxt:(NSString *) word atBegin:(int) begin requestCount:(int) count;
++ (NSArray *) getWordTipsTxt:(NSString *) word atBegin:(int) begin requestCount:(int) count;
+
+//下载例句
++ (NSArray *) getWordTipsSentence:(NSString *) word;
 
 //将学习信息上传到server 反馈状态是枚举 ServeFeedbackType
 + (int) postStudyOperation:(NSDictionary *) studyData;

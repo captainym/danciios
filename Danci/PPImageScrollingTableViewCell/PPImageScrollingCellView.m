@@ -7,6 +7,7 @@
 //
 
 #import "PPImageScrollingCellView.h"
+#import "DanciServer.h"
 
 @interface  PPImageScrollingCellView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -86,7 +87,7 @@
     PPCollectionViewCell *cell = (PPCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"PPCollectionCell" forIndexPath:indexPath];
     NSDictionary *imageDic = [self.collectionImageData objectAtIndex:[indexPath row]];
     
-    NSString *imgurl = [imageDic objectForKey:@"url"];
+    NSString *imgurl = [imageDic objectForKey:TIPS_IMG_URL];
     NSLog(@"now load img with url:[%@]",imgurl);
     dispatch_queue_t downloadImg = dispatch_queue_create("download one img", NULL);
     dispatch_async(downloadImg, ^{

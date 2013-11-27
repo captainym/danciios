@@ -7,7 +7,7 @@
 //
 
 #import "Word+Server.h"
-#import "DanciServer.h"
+//#import "DanciServer.h"
 
 @implementation Word (Server)
 
@@ -24,7 +24,9 @@
         aWord.stem = [obj objectForKey:@"stem"];
         NSError *errorLoc = nil;
         if(![context save:&errorLoc]){
-            NSLog(@"save word error:%@",[errorLoc localizedDescription]);
+            NSLog(@"init save word error:%@",[errorLoc localizedDescription]);
+        }else{
+            NSLog(@"init save a word:%@",aWord);
         }
     }];
 }
@@ -33,8 +35,8 @@
 {
     Word *word = nil;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Word"];
-    request.predicate = [NSPredicate predicateWithFormat:@"%@ = %@", WORD_WORD, paraWord];
-    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: WORD_WORD ascending:YES];
+    request.predicate = [NSPredicate predicateWithFormat:@"word = %@", paraWord];
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: @"word" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDesc];
     
     NSError *error = nil;
@@ -46,8 +48,8 @@
             NSLog(@"warning 还没实现的:出现重复单词！ 这不应该的 删掉一个 word[%@]",paraWord);
         }
     }else if ([matches count] == 0){
-        //新的word 数据库里还木有 擅入一个吧
-        word = [NSEntityDescription insertNewObjectForEntityForName:@"Word" inManagedObjectContext:context];
+        //word不不存在
+        NSLog(@"word[%@] not exist! predicate[%@]",paraWord, request.predicate);
     }else{
         word = [matches lastObject];
     }
@@ -58,7 +60,7 @@
 + (Word *) getWordWithInfo:(NSDictionary *)wordinfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Word *word = nil;
-    NSString *paraWord = [wordinfo objectForKey:WORD_WORD];
+    NSString *paraWord = [wordinfo objectForKey:@"word"];
     word = [self getWord:paraWord inManagedObjectContext:context];
     
     //填充word：字段在wordinfo里存在，就用wordinfo里的字段来更新word

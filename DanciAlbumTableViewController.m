@@ -161,15 +161,16 @@
     NSLog(@"now albumSelected. albumName[%@] wordPoint[%d] wordNum[%d]", self.albumSelected.name,[self.albumSelected.point intValue],[[self.albumSelected count] intValue]);
     
     //执行segua
-    [self performSegueWithIdentifier:@"gotoStudy" sender:self];
+    [self performSegueWithIdentifier:@"sgGotoStudy" sender:self];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //要把managedObject、album传递过去
-    if([segue.identifier isEqualToString:@"gotoStudy"]){
-        [segue.destinationViewController setAlbum:self.albumSelected];
+    if([segue.identifier isEqualToString:@"sgGotoStudy"]){
+        [segue.destinationViewController setDanciDatabase:self.danciDatabase];
         [segue.destinationViewController setIsNewStudy:TRUE];
+        [segue.destinationViewController setAlbum:self.albumSelected];
     }
 }
 
