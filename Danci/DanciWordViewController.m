@@ -31,8 +31,8 @@
 @synthesize tipImgs = _tipImgs;
 @synthesize tipSentences = _tipSentences;
 @synthesize player = _player;
-@synthesize svExpFrame = _svExpFrame;
-@synthesize svNormFrame = _svNormFrame;
+//@synthesize svExpFrame = _svExpFrame;
+//@synthesize svNormFrame = _svNormFrame;
 @synthesize fontDetail = _fontDetail;
 @synthesize wordTerm = _wordTerm;
 
@@ -79,23 +79,23 @@
     return _tipImgFilepath;
 }
 
--(CGRect) svExpFrame
-{
-    if(_svExpFrame.origin.x < 1){
-        _svExpFrame = CGRectMake(3.0, 166, 314, 350);
-        NSLog(@"after _svExpFrame. x[%f] y[%f] height[%f] width[%f]",_svExpFrame.origin.x,_svExpFrame.origin.y,_svExpFrame.size.height,_svExpFrame.size.width);
-    }
-    return _svExpFrame;
-}
-
--(CGRect) svNormFrame
-{
-    if(_svNormFrame.origin.x < 1){
-        _svNormFrame = CGRectMake(3.0, 269, 314, 250);
-        NSLog(@"after _svNormFrame. x[%f] y[%f] height[%f] width[%f]",_svNormFrame.origin.x,_svNormFrame.origin.y,_svNormFrame.size.height,_svNormFrame.size.width);
-    }
-    return _svNormFrame;
-}
+//-(CGRect) svExpFrame
+//{
+//    if(_svExpFrame.origin.x < 1){
+//        _svExpFrame = CGRectMake(3.0, 166, 314, 350);
+//        NSLog(@"after _svExpFrame. x[%f] y[%f] height[%f] width[%f]",_svExpFrame.origin.x,_svExpFrame.origin.y,_svExpFrame.size.height,_svExpFrame.size.width);
+//    }
+//    return _svExpFrame;
+//}
+//
+//-(CGRect) svNormFrame
+//{
+//    if(_svNormFrame.origin.x < 1){
+//        _svNormFrame = CGRectMake(3.0, 269, 314, 250);
+//        NSLog(@"after _svNormFrame. x[%f] y[%f] height[%f] width[%f]",_svNormFrame.origin.x,_svNormFrame.origin.y,_svNormFrame.size.height,_svNormFrame.size.width);
+//    }
+//    return _svNormFrame;
+//}
 
 -(NSString *) userMid
 {
@@ -228,21 +228,7 @@
     [btnTitle setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     [self.navigationItem setTitleView:btnTitle];
     
-    NSString *content = self.word.meaning;
-    CGSize contentSize = [content sizeWithFont:self.fontDetail constrainedToSize:CGSizeMake(180, 400)  lineBreakMode:NSLineBreakByWordWrapping];//求文本的大小
-    UILabel *lbltmp = [[UILabel alloc] init];
-    lbltmp.font = self.fontDetail;
-    lbltmp.text = content;
-    lbltmp.frame = CGRectMake(0, 0, contentSize.width, contentSize.height);
-    lbltmp.lineBreakMode = NSLineBreakByWordWrapping;
-    lbltmp.numberOfLines = 0;
-    lbltmp.backgroundColor = [UIColor clearColor];
-    self.svMeaningStem.frame = CGRectMake(0, 0, 200, 400);
-    self.svMeaningStem.contentSize = contentSize;//self.lblMeaningStemIphone.frame.size;
-    for( UIView *subview in self.svMeaningStem.subviews){
-        [subview removeFromSuperview];
-    }
-    [self.svMeaningStem addSubview:lbltmp];
+    self.lblMeaning.text = self.word.meaning;
     
     NSString *tip = @"";
     if([self.word.stem length] > 1){
@@ -264,8 +250,8 @@
     }
         
     //iphone－tip sentence 的multisagetableview
-    self.tblTipimgsIphone.hidden = TRUE;
-    self.vtip.frame = self.svExpFrame;
+//    self.tblTipimgsIphone.hidden = TRUE;
+//    self.vtip.frame = self.svExpFrame;
 }
 
 -(void) popLoginView:(int)popType
@@ -380,14 +366,14 @@
 //关闭图片选择 放大tip内容
 - (void)closeTipsimgAndMaxTipsentence
 {
-    CATransition *animation = [CATransition animation];
-    animation.type = kCATransitionFade;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.4];
-    [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
-    self.tblTipimgsIphone.hidden = TRUE;
-    self.vtip.frame = self.svExpFrame;
-    [UIView commitAnimations];
+//    CATransition *animation = [CATransition animation];
+//    animation.type = kCATransitionFade;
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:0.4];
+//    [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
+//    self.tblTipimgsIphone.hidden = TRUE;
+//    self.vtip.frame = self.svExpFrame;
+//    [UIView commitAnimations];
     
 //    NSLog(@"header展开 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
 //    NSLog(@"header展开 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
@@ -471,17 +457,17 @@
 
 - (IBAction)showImgTips:(id)sender {
     //show the tbl
-    if(self.tblTipimgsIphone.hidden){
-        CATransition *animation = [CATransition animation];
-        animation.type = kCATransitionFade;
-        animation.duration = 0.5;
-        [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
-        self.tblTipimgsIphone.hidden = FALSE;
-        self.vtip.frame = self.svNormFrame;
-//        CGRect mFrame = CGRectMake(0.0, 0.0, self.svNormFrame.size.width, self.svNormFrame.size.height - self.svExpFrame.origin.y);
-//        self.tblMultipsIphone.frame = mFrame;
-        NSLog(@"showImgTips frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
-    }
+//    if(self.tblTipimgsIphone.hidden){
+//        CATransition *animation = [CATransition animation];
+//        animation.type = kCATransitionFade;
+//        animation.duration = 0.5;
+//        [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
+//        self.tblTipimgsIphone.hidden = FALSE;
+//        self.vtip.frame = self.svNormFrame;
+////        CGRect mFrame = CGRectMake(0.0, 0.0, self.svNormFrame.size.width, self.svNormFrame.size.height - self.svExpFrame.origin.y);
+////        self.tblMultipsIphone.frame = mFrame;
+//        NSLog(@"showImgTips frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
+//    }
 }
 
 - (IBAction)showNextWord:(UIButton *)sender {
