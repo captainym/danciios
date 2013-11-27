@@ -19,6 +19,9 @@
 #define WORD_TIPS_SENTENCE @"tips_sentence"
 #define TIPS_IMG_NAME @"img_key"
 #define TIPS_IMG_URL @"img_url"
+#define TIPS_SENTENCE_MP3 @"voice"
+#define TIPS_SENTENCE_SENTENCE @"sentence"
+#define TIPS_SENTENCE_MEANING @"meaning"
 
 typedef enum
 {

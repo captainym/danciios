@@ -21,9 +21,6 @@
 #define HEIGHT_SENTENCE_ROW 60
 
 #define SEGUE_EDIT @"sgEditTipTxt"
-#define KEY_TIPS_SENTENCE_ENGLISH @"sentence"
-#define KEY_TIPS_SENTENCE_CHINESE @"meaning"
-#define KEY_TIPS_SENTENCE_MP3 @"mp3"
 #define DEFAULT_REQUEST_COUNT_IMG 20
 
 @interface DanciWordViewController : UIViewController{

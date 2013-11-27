@@ -307,10 +307,11 @@
         return customCell;
     }else if(tableView == self.tblTipSentence){
         cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID_TIPSENTENCE forIndexPath:indexPath];
-        NSString *english = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:KEY_TIPS_SENTENCE_ENGLISH];
-        NSString *chinese = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:KEY_TIPS_SENTENCE_CHINESE];
+        NSString *sentence = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:TIPS_SENTENCE_SENTENCE];
+        NSString *meaning = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:TIPS_SENTENCE_MEANING];
         cell.textLabel.font = self.fontDetail;
-        cell.textLabel.text = [[english stringByAppendingString:@"\n"] stringByAppendingString:chinese];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.text = [[sentence stringByAppendingString:@"\n"] stringByAppendingString:meaning];
     }
     
     return cell;
@@ -382,32 +383,30 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.tblTipSentence){
-        if(indexPath.section == 1){
-            //播放例句发音
-            NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:KEY_TIPS_SENTENCE_MP3];
-            dispatch_queue_t play_q = dispatch_queue_create("playmp3", NULL);
-            dispatch_async(play_q, ^{
-                NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
-                NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
-                NSError *myerror = nil;
-                self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
-                [self.player setDelegate:self];
-                if(self.player){
-                    if ([self.player prepareToPlay]) {
-                        [self.player setVolume:0.5f];
-                        if([self.player play]){
-                            NSLog(@"play successed. mp3url[%@]", mp3url);
-                        }else{
-                            NSLog(@"play failed! mp3url[%@]", mp3url);
-                        }
+        //播放例句发音
+        NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:TIPS_SENTENCE_MP3];
+        dispatch_queue_t play_q = dispatch_queue_create("playmp3", NULL);
+        dispatch_async(play_q, ^{
+            NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
+            NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
+            NSError *myerror = nil;
+            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
+            [self.player setDelegate:self];
+            if(self.player){
+                if ([self.player prepareToPlay]) {
+                    [self.player setVolume:0.5f];
+                    if([self.player play]){
+                        NSLog(@"play successed. mp3url[%@]", mp3url);
                     }else{
-                        NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
+                        NSLog(@"play failed! mp3url[%@]", mp3url);
                     }
                 }else{
-                    NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
+                    NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
                 }
-            });
-        }
+            }else{
+                NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
+            }
+        });
     }
 }
 
