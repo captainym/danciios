@@ -101,7 +101,7 @@
 {
     if([_userMid length] < 1 ){
         //core data 取值
-//        _userMid = @"18601920512";
+        _userMid = @"18601920512";
     }
     return _userMid;
 }
@@ -118,7 +118,6 @@
 {
     _tipSentences = tipSentences;
     //完成后 通知tblsentence更新
-    [self.tblTipSentence reloadData];
 }
 
 #pragma mark -  methods
@@ -131,6 +130,7 @@
         [self.tipImgs addObjectsFromArray:tmpimgs];
         //完成后通知tblimg更新
         [self.tblTipimgsIphone reloadData];
+        NSLog(@"query get [%d] imgs. now total img num[%d]", [tmpimgs count], [self.tipImgs count]);
     });
 }
 
@@ -139,6 +139,7 @@
     dispatch_queue_t queueSentence = dispatch_queue_create("downloadSentence", NULL);
     dispatch_async(queueSentence, ^{
         self.tipSentences = [DanciServer getWordTipsSentence:wordTerm];
+        NSLog(@"query get [%d] sentence.", [self.tipSentences count]);
     });
 }
 
@@ -146,7 +147,7 @@
 - (void) getWordInfo
 {
     self.word = [Word getWord:self.wordTerm inManagedObjectContext:self.danciDatabase.managedObjectContext];
-    NSLog(@"word:[%@]", self.word);
+    NSLog(@"get word:[%@] word term[%@]", self.word, self.word.word);
     [self reloadTipimgsForWord:self.word.word atBegin:0 requestCount:DEFAULT_REQUEST_COUNT_IMG];
     [self reloadTipsentenceForWord:self.word.word];
 }
@@ -176,7 +177,7 @@
 
 - (void) playWordMp3
 {
-    NSLog(@"title button has been touch");
+    NSLog(@"navigation title click. play word mp3[%@]",self.fayinMp3Url);
     NSError *myerror = nil;
     NSData *mp3data = [[NSData alloc] initWithContentsOfFile:self.fayinMp3Url];
     if(!mp3data){
@@ -204,7 +205,7 @@
 - (void) drawMyView
 {
     _btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
-    _btnCover.frame = CGRectMake(0, 0, 320, 540);
+    _btnCover.frame = CGRectMake(0, 0, 320, 620);
     [_btnCover setTitle:[self.word.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
     [_btnCover setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _btnCover.backgroundColor = [UIColor whiteColor];
@@ -249,7 +250,8 @@
         [self.btnTipImgIphone setImage:wordImg forState:UIControlStateHighlighted];
         [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
     }
-        
+    [self.tblTipimgsIphone reloadData];
+    [self.tblTipSentence reloadData];
     //iphone－tip sentence 的multisagetableview
 //    self.tblTipimgsIphone.hidden = TRUE;
 //    self.vtip.frame = self.svExpFrame;
@@ -298,6 +300,7 @@
     UITableViewCell *cell = nil;
     if(tableView == self.tblTipimgsIphone){
         //显示图片
+        NSLog(@"load tip imgs in tblTipimgsIphone. img count[%d]",[self.tipImgs count]);
         static NSString *CellIdentifier = CELL_ID_TIPIMG;
         PPImageScrollingTableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         NSArray *cellData = self.tipImgs;
@@ -307,6 +310,7 @@
         [customCell setCollectionViewBackgroundColor:[UIColor darkGrayColor]];
         return customCell;
     }else if(tableView == self.tblTipSentence){
+        NSLog(@"load data for tblTipSentence at row[%d]", indexPath.row);
         cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID_TIPSENTENCE forIndexPath:indexPath];
         NSString *sentence = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:TIPS_SENTENCE_SENTENCE];
         NSString *meaning = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:TIPS_SENTENCE_MEANING];
@@ -470,7 +474,16 @@
 //    }
 }
 
-- (IBAction)showNextWord:(UIButton *)sender {
+
+- (IBAction)showNextWord:(id)sender {
+    if(sender == self.btnFeedbackOk){
+        
+    }else if(sender == self.btnFeedbackFuzz){
+        
+    }else if(sender == self.btnFeedbackNo){
+        
+    }
+    
     self.album.point = [NSNumber numberWithInt:([self.album.point intValue] + 1)];
     NSLog(@"reflush .. now wordPoint[%d] album length[%d]", [self.album.point intValue], [self.words count]);
     if([self.album.point intValue] != [self.words count]){

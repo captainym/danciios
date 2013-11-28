@@ -76,4 +76,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbltips;
 
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackNo;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackFuzz;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackOk;
+
 @end

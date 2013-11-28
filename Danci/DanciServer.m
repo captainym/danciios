@@ -35,22 +35,22 @@
 //    query = [NSString stringWithFormat:@"%@&api_key=%@&code=%@", query, API_KEY, code];
     NSLog(@"query is[%@]",query);
     query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"query added percentEscapeUsingEncoding[%@]",query);
+//    NSLog(@"query added percentEscapeUsingEncoding[%@]",query);
     NSData *jsondata = [[NSString stringWithContentsOfURL:[NSURL URLWithString:query] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     NSDictionary *results = jsondata ? [NSJSONSerialization JSONObjectWithData:jsondata options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error] : nil;
     if(error){
         NSLog(@"[%@ %@] JSON error:%@",NSStringFromClass([self class]), NSStringFromSelector(_cmd),error.localizedDescription);
     }
+    NSLog(@"query result is: retcode[%d] retValue[%@]",[[results objectForKey:RETURN_CODE] intValue], [results objectForKey:RETURN_VALUE]);
     if(results && [[results objectForKey:RETURN_CODE] intValue] != ServerFeedbackTypeOk){
-        NSLog(@"query failed! retcode[%d] retValu[%@]",[[results objectForKey:RETURN_CODE] intValue], [results objectForKey:RETURN_VALUE]);
+        NSLog(@"query failed!");
     }else if(!results){
         NSLog(@"query failed! result is nil. net failed");
         results = @{RETURN_CODE:[NSNumber numberWithInt:ServerFeedbackTypeQueryFailForNetError],
                     RETURN_VALUE:@"internet is nagative"};
     }
     
-    NSLog(@"results:%@",results);
     return results;
 }
 

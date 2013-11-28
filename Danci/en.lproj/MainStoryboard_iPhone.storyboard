@@ -124,9 +124,21 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" width="87" id="71U-iU-GQ9"/>
-                                    <barButtonItem title="Item" width="89" id="otD-54-LiO"/>
-                                    <barButtonItem title="Item" width="65" id="zxb-N7-v7q"/>
+                                    <barButtonItem title="已掌握" width="87" id="71U-iU-GQ9">
+                                        <connections>
+                                            <action selector="showNextWord:" destination="mjP-vE-xCc" id="AAU-Nz-A5S"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="模糊" width="89" id="otD-54-LiO">
+                                        <connections>
+                                            <action selector="showNextWord:" destination="mjP-vE-xCc" id="odP-p4-ekA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="不认识" width="65" id="zxb-N7-v7q">
+                                        <connections>
+                                            <action selector="showNextWord:" destination="mjP-vE-xCc" id="KFX-41-ZlT"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="195" translatesAutoresizingMaskIntoConstraints="NO" id="6DT-Uh-rzg">
@@ -163,6 +175,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="OYq-89-cg2"/>
                     <connections>
+                        <outlet property="btnFeedbackFuzz" destination="otD-54-LiO" id="FFM-yP-JpG"/>
+                        <outlet property="btnFeedbackNo" destination="zxb-N7-v7q" id="Pcx-Ol-cjN"/>
+                        <outlet property="btnFeedbackOk" destination="71U-iU-GQ9" id="hxA-Fj-zvJ"/>
                         <outlet property="btnTipImgIphone" destination="Jod-NU-44h" id="qRr-Ue-Wwg"/>
                         <outlet property="lblMeaning" destination="6DT-Uh-rzg" id="qxb-4g-qCA"/>
                         <outlet property="lbltips" destination="Mmv-Tc-x05" id="0VO-k1-THt"/>
