@@ -110,15 +110,12 @@
                                     </tableView>
                                 </subviews>
                             </scrollView>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jod-NU-44h">
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jod-NU-44h">
                                 <rect key="frame" x="197" y="68" width="120" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="IN9-pf-PNM"/>
                                 </constraints>
-                                <state key="normal" image="addImg3.png" backgroundImage="addImg3.png">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <connections>
                                     <action selector="showImgTips:" destination="mjP-vE-xCc" eventType="touchUpInside" id="nyI-Lx-cbP"/>
                                 </connections>
@@ -295,9 +292,6 @@
             <point key="canvasLocation" x="-574" y="-453"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="addImg3.png" width="256" height="256"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

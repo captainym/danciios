@@ -238,6 +238,7 @@
         tip = [tip stringByAppendingString:@"\n助记："];
         tip = [tip stringByAppendingString:self.word.txt_tip];
     }
+    self.lbltips.text = tip;
     
     //读图片
     NSLog(@"load filepath[%@]", self.tipImgFilepath);
