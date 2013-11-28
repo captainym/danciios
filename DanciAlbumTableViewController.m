@@ -149,7 +149,9 @@
     
     Album *album = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = album.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"总量%d。 学习到第%d个单词", [album.count intValue], [album.point intValue]];
+    int curPoint = [album.point intValue] % [album.count intValue];
+    int cycleNum = [album.point intValue] / [album.count intValue] + 1;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"总量%d。学习到第%d个单词。第[%d]遍", [album.count intValue], curPoint, cycleNum];
     return cell;
 }
 
@@ -158,7 +160,9 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *albumName = cell.textLabel.text;
     self.albumSelected = [Album getAlbum:albumName inManagedObjectContext:self.danciDatabase.managedObjectContext];
-    NSLog(@"now albumSelected. albumName[%@] wordPoint[%d] wordNum[%d]", self.albumSelected.name,[self.albumSelected.point intValue],[[self.albumSelected count] intValue]);
+    int curPoint = [self.albumSelected.point intValue] % [self.albumSelected.count intValue];
+    int cycleNum = [self.albumSelected.point intValue] / [self.albumSelected.count intValue];
+    NSLog(@"now albumSelected. albumName[%@] wordPoint[%d] wordNum[%d]。第[%d]遍", self.albumSelected.name,curPoint,[[self.albumSelected count] intValue], cycleNum);
     
     //执行segua
     [self performSegueWithIdentifier:@"sgGotoStudy" sender:self];
