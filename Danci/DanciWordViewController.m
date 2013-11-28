@@ -51,6 +51,8 @@
 - (void) setWordTerm:(NSString *)wordTerm
 {
     _wordTerm = wordTerm;
+    [_tipImgs removeAllObjects];
+    _tipSentences = nil;
     [self getWordInfo];
 }
 
@@ -359,9 +361,9 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *fileName = [[[paths objectAtIndex:0] stringByAppendingString:@"/" ] stringByAppendingString:self.word.word];
     if([imgData length] > 0 && [imgData writeToFile:fileName atomically:YES]){
-        NSLog(@"write img ok. word[%@] filename[%@]", self.word, fileName);
+        NSLog(@"write img ok. word[%@] filename[%@]", self.wordTerm, fileName);
     }else{
-        NSLog(@"write img failed! word[%@] filename[%@]", self.word, fileName);
+        NSLog(@"write img failed! word[%@] filename[%@]", self.wordTerm, fileName);
     }
     //将采纳发送到server
 #pragma warning - not compliment
