@@ -116,11 +116,11 @@
     return [[self executeServerFetch:query] objectForKey:RETURN_DATA];
 }
 
-+ (NSDictionary *) getWordTipsTxt:(NSString *)word atBegin:(int)begin requestCount:(int)count
++ (NSArray *) getWordTipsTxt:(NSString *)word atBegin:(int)begin requestCount:(int)count
 {
     NSString *format = FORMAT_QUERY_TIPS_TXT;
     NSString *query = [NSString stringWithFormat:format,word,begin,count];
-    return [self executeServerFetch:query];
+    return [[self executeServerFetch:query] objectForKey:RETURN_DATA];
 }
 
 + (int) postLogin:(NSDictionary *)loginData

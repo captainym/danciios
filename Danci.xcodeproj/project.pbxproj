@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67E981184078B800510FA7 /* CoreData.framework */; };
+		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
+		7947499F1849865300A1B8E2 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499E1849865300A1B8E2 /* UserInfo.m */; };
 		79859B0B17EC0E75008F8EFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79859B0A17EC0E75008F8EFD /* UIKit.framework */; };
 		79859B0D17EC0E75008F8EFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79859B0C17EC0E75008F8EFD /* Foundation.framework */; };
 		79859B0F17EC0E75008F8EFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79859B0E17EC0E75008F8EFD /* CoreGraphics.framework */; };
@@ -49,6 +51,10 @@
 
 /* Begin PBXFileReference section */
 		1C67E981184078B800510FA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7947499A184985CB00A1B8E2 /* UserInfo+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserInfo+Server.h"; sourceTree = "<group>"; };
+		7947499B184985CB00A1B8E2 /* UserInfo+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+Server.m"; sourceTree = "<group>"; };
+		7947499D1849865300A1B8E2 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		7947499E1849865300A1B8E2 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		79859B0717EC0E75008F8EFD /* Danci.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Danci.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79859B0A17EC0E75008F8EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		79859B0C17EC0E75008F8EFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -238,17 +244,21 @@
 			children = (
 				79FC0AAA18433DD8004DF41E /* Album.h */,
 				79FC0AAB18433DD8004DF41E /* Album.m */,
+				7947499D1849865300A1B8E2 /* UserInfo.h */,
+				7947499E1849865300A1B8E2 /* UserInfo.m */,
 				79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */,
+				7947499A184985CB00A1B8E2 /* UserInfo+Server.h */,
+				7947499B184985CB00A1B8E2 /* UserInfo+Server.m */,
 				79CF935A1841206C005E41FA /* StudyOperation.h */,
 				79CF935B1841206C005E41FA /* StudyOperation.m */,
 				79CF93571841206C005E41FA /* Word.h */,
 				79CF93581841206C005E41FA /* Word.m */,
 				79CF935D1841212D005E41FA /* Word+Server.h */,
 				79CF935E1841212D005E41FA /* Word+Server.m */,
-				79CF936018412159005E41FA /* StudyOperation+Server.h */,
 				79CF936118412159005E41FA /* StudyOperation+Server.m */,
 				79FC0AA118422FB2004DF41E /* Album+Server.h */,
 				79FC0AA218422FB2004DF41E /* Album+Server.m */,
+				79CF936018412159005E41FA /* StudyOperation+Server.h */,
 				79FC0AA718433578004DF41E /* CoreDataTableViewController.h */,
 				79FC0AA818433578004DF41E /* CoreDataTableViewController.m */,
 			);
@@ -330,12 +340,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				79859B1717EC0E75008F8EFD /* main.m in Sources */,
+				7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */,
 				79859B1B17EC0E75008F8EFD /* DanciAppDelegate.m in Sources */,
 				79859B3217EC54EB008F8EFD /* DanciAlbumTableViewController.m in Sources */,
 				79FC0AAC18433DD8004DF41E /* Album.m in Sources */,
 				79859B4117EC7551008F8EFD /* DanciWordViewController.m in Sources */,
 				79859B5317ED9E65008F8EFD /* PPCollectionViewCell.m in Sources */,
 				79859B5417ED9E65008F8EFD /* PPImageScrollingCellView.m in Sources */,
+				7947499F1849865300A1B8E2 /* UserInfo.m in Sources */,
 				79859B5517ED9E65008F8EFD /* PPImageScrollingTableViewCell.m in Sources */,
 				79FC0AA318422FB2004DF41E /* Album+Server.m in Sources */,
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,

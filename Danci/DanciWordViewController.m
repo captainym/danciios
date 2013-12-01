@@ -16,6 +16,8 @@
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate>
 
+@property (nonatomic, strong) NSString *tips;
+
 @end
 
 @implementation DanciWordViewController
@@ -23,6 +25,7 @@
 #pragma mark - properties synthesize
 @synthesize isNewStudy = _isNewStudy;
 @synthesize userMid = _userMid;
+@synthesize tips = _tips;
 
 @synthesize words = _words;
 @synthesize wordsReviewNow = _wordsReviewNow;
@@ -46,6 +49,17 @@
     //设置第一个word
     int curPoint = [self.album.point intValue] % [self.album.count intValue];
     self.wordTerm = [self.words objectAtIndex:curPoint];
+}
+
+- (NSString *) tips
+{
+    if([self.word.stem length] > 1){
+        _tips = [@"词根：" stringByAppendingString:self.word.stem];
+    }
+    if([self.word.txt_tip length] > 1){
+        _tips = [[_tips stringByAppendingString:@"\n助记："] stringByAppendingString:self.word.txt_tip];
+    }
+    return _tips;
 }
 
 - (void) setWordTerm:(NSString *)wordTerm
@@ -120,6 +134,7 @@
 {
     _tipSentences = tipSentences;
     //完成后 通知tblsentence更新
+    [self.tblTipimgsIphone reloadData];
 }
 
 #pragma mark -  methods
@@ -232,16 +247,7 @@
     [self.navigationItem setTitleView:btnTitle];
     
     self.lblMeaning.text = self.word.meaning;
-    
-    NSString *tip = @"";
-    if([self.word.stem length] > 1){
-        tip = [@"词根：" stringByAppendingString:self.word.stem];
-    }
-    if([self.word.txt_tip length] > 1){
-        tip = [tip stringByAppendingString:@"\n助记："];
-        tip = [tip stringByAppendingString:self.word.txt_tip];
-    }
-    self.lbltips.text = tip;
+    self.lbltips.text = self.tips;
     
     //读图片
     NSLog(@"load filepath[%@]", self.tipImgFilepath);
@@ -275,6 +281,9 @@
     if([segue.identifier isEqualToString:SEGUE_EDIT])
     {
         //传递参数有是word
+        [segue.destinationViewController setCurWord:self.word];
+        [segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setDanciDatabase:self.danciDatabase];
     }
 }
 
@@ -439,18 +448,14 @@
 
 #pragma mark - DanciEditTipTxtDelegate
 
--(void) eidtTipTxt:(DanciEditTipTxtViewController *)sender didEditTipTxtOk:(NSString *)tipTxt
+-(void) eidtTipTxt:(DanciEditTipTxtViewController *)sender didEditTipTxtOk:(NSDictionary *)callbackdata operationType:(StudyOperationType)otype
 {
-    self.word.txt_tip = tipTxt;
+    if(otype == StudyOperationTypeDrop){
+        return;
+    }
+    self.word.txt_tip = [callbackdata objectForKey:@"ovalue"];
     //设置view的相关控件
-    NSString *tip = @"";
-    if([self.word.stem length] > 1){
-        tip = [@"词根：" stringByAppendingString:self.word.stem];
-    }
-    if([self.word.txt_tip length] > 1){
-        tip = [tip stringByAppendingString:@"\n助记："];
-        tip = [tip stringByAppendingString:self.word.txt_tip];
-    }
+    self.lbltips.text = self.tips;
 }
 
 #pragma mark - videoplaydelegate

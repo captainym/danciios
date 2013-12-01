@@ -14,6 +14,14 @@
         <attribute name="ovalue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="UserInfo" representedClassName="UserInfo" syncable="YES">
+        <attribute name="comsumeWordNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxWordNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="mid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recommendStudyNo" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="regTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="studyNo" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Word" representedClassName="Word" syncable="YES">
         <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stem" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,5 +33,6 @@
         <element name="Album" positionX="178" positionY="72" width="128" height="118"/>
         <element name="StudyOperation" positionX="394" positionY="192" width="128" height="118"/>
         <element name="Word" positionX="27" positionY="186" width="128" height="118"/>
+        <element name="UserInfo" positionX="189" positionY="171" width="128" height="133"/>
     </elements>
 </model>

@@ -20,7 +20,7 @@
 #define HEIGHT_IMG_ROW 100.0
 #define HEIGHT_SENTENCE_ROW 60
 
-#define SEGUE_EDIT @"sgEditTipTxt"
+#define SEGUE_EDIT @"sgTipsTxt"
 #define DEFAULT_REQUEST_COUNT_IMG 20
 
 @interface DanciWordViewController : UIViewController{

@@ -22,9 +22,13 @@
 #define TIPS_SENTENCE_MP3 @"voice"
 #define TIPS_SENTENCE_SENTENCE @"sentence"
 #define TIPS_SENTENCE_MEANING @"meaning"
+#define TIPS_TXT_TIP @"tip"
+#define TIPS_TXT_ID @"id"
 
 typedef enum
 {
+    StudyOperationTypeDrop = 0,
+    
     StudyOperationTypeSeletTipImg = 1,
     StudyOperationTypeSelectTipTxt = 2,
     StudyOperationTypeEditTip = 3,
@@ -32,6 +36,7 @@ typedef enum
     StudyOperationTypeFeedbackOk = 10,
     StudyOperationTypeFeedbackFuzzy = 11,
     StudyOperationTypeFeedbackNagative = 12,
+    
 } StudyOperationType;
 
 typedef enum
