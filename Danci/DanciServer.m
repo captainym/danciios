@@ -105,14 +105,17 @@
 + (NSDictionary *)executeServerPost:(NSString *) query
                            postData:(NSDictionary *) data
 {
-//    [self test];
-    
-    
-    
     NSString *queryNew = @"";
     for(NSString* key in data) {
         NSLog(@"start to get key %@", key);
-        NSString* value = (NSString*)[data objectForKey:key];
+        NSString* value = @"";
+        if([[data objectForKey:key] isKindOfClass:[NSString class]]){
+            value = [data objectForKey:key];
+        }else if([[data objectForKey:key] isKindOfClass:[NSDate class]]){
+            value = [value stringByAppendingFormat:@"%f",[[data objectForKey:key] timeIntervalSince1970]];
+        }else{
+            value = [[data objectForKey:key] stringValue];
+        }
         NSLog(@"start to transfrom value %@", value);
         //需要对value做一些url编码
         NSString * escapedUrlString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
@@ -125,8 +128,6 @@
         queryNew = [NSString stringWithFormat:@"%@%@=%@&", queryNew, key, escapedUrlString];
     }
     NSData *pdata = [queryNew dataUsingEncoding:NSUTF8StringEncoding];
-    
-    
     
 //    NSString *code = [self generateDynamicCode];
 //    query = [NSString stringWithFormat:@"%@&api_key=%@&code=%@", query, API_KEY, code];
@@ -155,8 +156,8 @@
     }
     if(results && [[results objectForKey:RETURN_CODE] intValue] != ServerFeedbackTypeOk){
         NSLog(@"query failed! retcode[%d] retValu[%@]",[[results objectForKey:RETURN_CODE] intValue], [results objectForKey:RETURN_VALUE]);
-    }else if(!results){
-        NSLog(@"query failed! result is nil. net failed");
+    }else if(!results || ![results objectForKey:RETURN_CODE]){
+        NSLog(@"query failed! result is nil or not valid[%@]. net failed", results);
         results = @{RETURN_CODE:[NSNumber numberWithInt:ServerFeedbackTypeQueryFailForNetError],
                     RETURN_VALUE:@"internet is nagative"};
     }

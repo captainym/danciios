@@ -30,7 +30,7 @@
         NSLog(@"create a user of empty");
     }else{
         user = [matches lastObject];
-        NSLog(@"load a user from coredata. the user is[%@]",user);
+        NSLog(@"load a user from coredata. the user is[%@]  mid[%@]",user,user.mid);
     }
     
     return user;

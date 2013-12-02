@@ -12,12 +12,15 @@
 
 + (StudyOperation *) saveStudyOperationWithInfoAfterUploadFailed:(NSDictionary *)info inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    StudyOperation *operation = [NSEntityDescription insertNewObjectForEntityForName:@"StudyOpetation" inManagedObjectContext:context];
+    StudyOperation *operation = [NSEntityDescription insertNewObjectForEntityForName:@"StudyOperation" inManagedObjectContext:context];
     operation.word = [info objectForKey:@"word"];
     operation.otype = [info objectForKey:@"otype"];
     operation.ovalue = [info objectForKey:@"ovalue"];
-    operation.opt_time = [[NSDate date] initWithTimeIntervalSince1970:[[info objectForKey:@"opt_time"] doubleValue]];
-    
+    operation.opt_time = [info objectForKey:@"opt_time"];
+    NSError *error = nil;
+    if(![context save: &error]){
+        NSLog(@"save studyOperation failed! msg:%@", [error localizedDescription]);
+    }
     return operation;
 }
 
