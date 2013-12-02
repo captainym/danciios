@@ -12,6 +12,7 @@
 #import "TQMultistageTableView.h"
 #import "Album+Server.h"
 #import "Word+Server.h"
+#import "UserInfo+Server.h"
 
 #define CELL_ID_TIPIMG @"CellTipImg"
 #define CELL_ID_TIPSENTENCE @"CellTipSentence"
@@ -27,8 +28,8 @@
     UIButton *_btnCover;
 }
 
-//用户帐户信息
-@property (nonatomic, strong) NSString *userMid;
+//用户信息 包括其基本信息、帐户信息。考虑包含其学习信息
+@property (nonatomic, strong) UserInfo *user;
 
 //指示当前页面是新学习还是复习；
 @property BOOL isNewStudy;

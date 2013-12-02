@@ -12,7 +12,7 @@
 #import "PPCollectionViewCell.h"
 #import "DanciEditTipTxtViewController.h"
 #import "DanciServer.h"
-
+#import "StudyOperation+Server.h"
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate>
 
@@ -24,7 +24,7 @@
 
 #pragma mark - properties synthesize
 @synthesize isNewStudy = _isNewStudy;
-@synthesize userMid = _userMid;
+@synthesize user = _user;
 @synthesize tips = _tips;
 
 @synthesize words = _words;
@@ -40,6 +40,14 @@
 @synthesize wordTerm = _wordTerm;
 
 #pragma mark- properties lazy load
+
+- (UserInfo *) user
+{
+    if(_user == nil){
+        _user = [UserInfo getUser:self.danciDatabase.managedObjectContext];
+    }
+    return _user;
+}
 
 - (void) setAlbum:(Album *)album
 {
@@ -66,6 +74,7 @@
 {
     _wordTerm = wordTerm;
     [_tipImgs removeAllObjects];
+    [self.tblTipimgsIphone reloadData];
     _tipSentences = nil;
     [self getWordInfo];
 }
@@ -112,15 +121,6 @@
 //    }
 //    return _svNormFrame;
 //}
-
--(NSString *) userMid
-{
-    if([_userMid length] < 1 ){
-        //core data 取值
-        _userMid = @"18601920512";
-    }
-    return _userMid;
-}
 
 -(UIFont *) fontDetail
 {
@@ -282,6 +282,7 @@
     {
         //传递参数有是word
         [segue.destinationViewController setCurWord:self.word];
+        [segue.destinationViewController setCurUser:self.user];
         [segue.destinationViewController setDelegate:self];
         [segue.destinationViewController setDanciDatabase:self.danciDatabase];
     }
@@ -353,12 +354,18 @@
 - (void)scrollingTableViewCell:(PPImageScrollingTableViewCell *)sender didSelectImageAtIndexPath:(NSIndexPath*)indexPathOfImage
 {
     //判断是否登陆
-    if(self.userMid == nil){
+    if(self.user.mid == nil || [self.user.mid length] < 2){
         [self popLoginView:TYPE_LOGIN];
+        return;
+    }
+    if([self.user.maxWordNum intValue] - [self.user.comsumeWordNum intValue] < 1){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"充值提醒" message:@"亲，学习上限使用完毕，请到设置界面充值吧。" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
         return;
     }
     NSString *imgName = [[self.tipImgs objectAtIndex:indexPathOfImage.row]objectForKey:TIPS_IMG_NAME];
     NSString *imgUrl = [[self.tipImgs objectAtIndex:indexPathOfImage.row] objectForKey:TIPS_IMG_URL];
+    NSString *imgKey = [[self.tipImgs objectAtIndex:indexPathOfImage.row] objectForKey:TIPS_IMG_KEY];
     PPCollectionViewCell *cell = (PPCollectionViewCell *) [sender.imageScrollingView.myCollectionView cellForItemAtIndexPath:indexPathOfImage];
     NSData *imgData = UIImageJPEGRepresentation(cell.imageView.image, 0.0f);
     UIImage *img = [UIImage imageWithData:imgData];
@@ -374,10 +381,24 @@
     }else{
         NSLog(@"write img failed! word[%@] filename[%@]", self.wordTerm, fileName);
     }
+    
     //将采纳发送到server
-#pragma warning - not compliment
-    //发送失败则写入本地
-#pragma warning - not compliment
+    NSDictionary *postData = @{@"studyNo":self.user.studyNo,
+                               @"word":self.word.word,
+                               @"otype":[NSNumber numberWithInt:StudyOperationTypeSeletTipImg],
+                               @"ovalue":imgKey,
+                               @"opt_time":[NSDate date],
+                               };
+    dispatch_queue_t queue = dispatch_queue_create("postImgSel", NULL);
+    dispatch_async(queue, ^{
+        if(![DanciServer postStudyOperation:postData] == ServerFeedbackTypeOk){
+            //发送失败则写入本地
+            [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:postData inManagedObjectContext:self.danciDatabase.managedObjectContext];
+            NSLog(@"post img select study operation data to Server failed. save it to DB");
+        }else{
+            NSLog(@"post img select study operation data to Server OK.");
+        }
+    });
 }
 
 //关闭图片选择 放大tip内容
@@ -434,16 +455,25 @@
     NSLog(@"user do not want to reg or login");
 }
 
+- (void)pushDataToUser:(NSDictionary *)userInfo
+{
+    self.user.mid = [userInfo objectForKey:@"mid"];
+    self.user.studyNo = [NSNumber numberWithInt:[[userInfo objectForKey:@"studyNo"] intValue]];
+    self.user.maxWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"maxWordNum"] intValue]];
+    self.user.comsumeWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"comsumeWordNum"]intValue]];
+    self.user.regTime = [NSDate dateWithTimeIntervalSince1970:[[userInfo objectForKey:@"regTime"] intValue]];
+}
+
 -(void) popoverListViewLogin:(UIPopoverListView *)popoverListView oldUser:(NSDictionary *)userInfo
 {
-    self.userMid = [userInfo objectForKey:@"userMid"];
-    NSLog(@"user login in");
+    [self pushDataToUser:userInfo];
+    NSLog(@"user login in. user:%@", self.user);
 }
 
 -(void) popoverListViewRegist:(UIPopoverListView *)popoverListView newUser:(NSDictionary *)userInfo
 {
-    self.userMid = [userInfo objectForKey:@"userMid"];
-    NSLog(@"user regist. ");
+    [self pushDataToUser:userInfo];
+    NSLog(@"user regist. user:%@", self.user);
 }
 
 #pragma mark - DanciEditTipTxtDelegate
@@ -453,9 +483,20 @@
     if(otype == StudyOperationTypeDrop){
         return;
     }
-    self.word.txt_tip = [callbackdata objectForKey:@"ovalue"];
     //设置view的相关控件
     self.lbltips.text = self.tips;
+    
+    //将采纳发送到server
+    dispatch_queue_t queue = dispatch_queue_create("postTiptxtSel", NULL);
+    dispatch_async(queue, ^{
+        if(![DanciServer postStudyOperation:callbackdata] == ServerFeedbackTypeOk){
+            //发送失败则写入本地
+            [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:callbackdata inManagedObjectContext:self.danciDatabase.managedObjectContext];
+            NSLog(@"post study tiptxt select operation data to Server failed. save it to DB");
+        }else{
+            NSLog(@"post study tiptxt select operation data to Server OK.");
+        }
+    });
 }
 
 #pragma mark - videoplaydelegate
@@ -481,6 +522,21 @@
 //    }
 }
 
+- (IBAction)showTipstxt:(id)sender {
+    //判断是否登陆
+    NSLog(@"user [%@]", self.user);
+    if(self.user.mid == nil || [self.user.mid length] < 2){
+        [self popLoginView:TYPE_LOGIN];
+        return;
+    }
+    if([self.user.maxWordNum intValue] - [self.user.comsumeWordNum intValue] < 1){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"充值提醒" message:@"亲，学习上限使用完毕，请到设置界面充值吧。" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    [self performSegueWithIdentifier:SEGUE_EDIT sender:self];
+}
 
 - (IBAction)showNextWord:(id)sender {
     if(sender == self.btnFeedbackOk){

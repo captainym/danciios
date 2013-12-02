@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DanciServer.h"
 #import "Word.h"
+#import "UserInfo.h"
 
 @class DanciEditTipTxtViewController;
 
@@ -39,6 +40,7 @@
 
 @property (nonatomic, strong) UIManagedDocument *danciDatabase;
 @property (nonatomic, strong) Word *curWord;
+@property (nonatomic, strong) UserInfo *curUser;
 
 //控件
 @property (weak, nonatomic) IBOutlet UIButton *btnAdopTip;

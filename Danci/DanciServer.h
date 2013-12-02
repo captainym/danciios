@@ -19,11 +19,15 @@
 #define WORD_TIPS_SENTENCE @"tips_sentence"
 #define TIPS_IMG_NAME @"img_key"
 #define TIPS_IMG_URL @"img_url"
+#define TIPS_IMG_KEY @"img_key"
 #define TIPS_SENTENCE_MP3 @"voice"
 #define TIPS_SENTENCE_SENTENCE @"sentence"
 #define TIPS_SENTENCE_MEANING @"meaning"
 #define TIPS_TXT_TIP @"tip"
 #define TIPS_TXT_ID @"id"
+#define RETURN_CODE @"status"
+#define RETURN_VALUE @"msg"
+#define RETURN_DATA @"data"
 
 typedef enum
 {
@@ -77,10 +81,10 @@ typedef enum
 + (int) postStudyOperation:(NSDictionary *) studyData;
 
 //登陆校验 反馈状态是枚举 ServeFeedbackType
-+ (int) postLogin:(NSDictionary *)loginData;
++ (NSDictionary *) postLogin:(NSDictionary *)loginData;
 
 //注册校验 反馈状态是枚举 ServeFeedbackType
-+ (int) postRegist:(NSDictionary *)regData;
++ (NSDictionary *) postRegist:(NSDictionary *)regData;
 
 @end
 

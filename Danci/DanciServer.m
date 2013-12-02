@@ -10,9 +10,6 @@
 //#import "JSONKit.h"
 
 #define API_KEY @"testapikey"
-#define RETURN_CODE @"status"
-#define RETURN_VALUE @"msg"
-#define RETURN_DATA @"data"
 #define FORMAT_QUERY_TIPS_IMG @"http://acodingfarmer.com/bdc/query/tips/type/img/word/%@/start/%d/count/%d"
 #define FORMAT_QUERY_TIPS_TXT @"http://acodingfarmer.com/bdc/query/tips/type/txt/word/%@/start/%d/count/%d"
 #define FORMAT_QUERY_TIPS_SENTENCE @"http://acodingfarmer.com/bdc/query/Sentence/word/%@/start/%d/count/%d"
@@ -48,29 +45,102 @@
     }else if(!results){
         NSLog(@"query failed! result is nil. net failed");
         results = @{RETURN_CODE:[NSNumber numberWithInt:ServerFeedbackTypeQueryFailForNetError],
-                    RETURN_VALUE:@"internet is nagative"};
+                    RETURN_VALUE:@{}};
     }
     
     return results;
+}
+
++ (void) test
+{
+//    NSArray *objects = [NSArray arrayWithObjects:[[NSUserDefaults standardUserDefaults]valueForKey:@"StoreNickName"],
+//                        [[UIDevice currentDevice] uniqueIdentifier], [dict objectForKey:@"user_question"],     nil];
+//    NSArray *keys = [NSArray arrayWithObjects:@"nick_name", @"UDID", @"user_question", nil];
+//    NSDictionary *questionDict = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+//    
+//    NSDictionary *jsonDict = [NSDictionary dictionaryWithObject:questionDict forKey:@"question"];
+//    
+//    NSString *jsonRequest = [jsonDict JSONRepresentation];
+//    
+//    NSLog(@"jsonRequest is %@", jsonRequest);
+//    
+//    NSURL *url = [NSURL URLWithString:@"https://xxxxxxx.com/questions"];
+//    
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+//    
+//    
+//    NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest length]];
+//    
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+//    [request setHTTPBody: requestData];
+//    
+//    NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+//    if (connection) {
+//        receivedData = [[NSMutableData data] retain];
+//    }
+//    
+    NSString *jsonRequest = [NSString stringWithFormat:@"{\"mid\":\"1345134\",\"pwd\":\"1345134\"}"];
+    NSLog(@"Request: %@", jsonRequest);
+    
+    NSURL *url = [NSURL URLWithString:FORMAT_POST_LOGIN];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest length]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody: requestData];
+    
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
 }
 
 //通用的response
 + (NSDictionary *)executeServerPost:(NSString *) query
                            postData:(NSDictionary *) data
 {
+//    [self test];
+    
+    
+    
+    NSString *queryNew = @"";
+    for(NSString* key in data) {
+        NSLog(@"start to get key %@", key);
+        NSString* value = (NSString*)[data objectForKey:key];
+        NSLog(@"start to transfrom value %@", value);
+        //需要对value做一些url编码
+        NSString * escapedUrlString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                            NULL,
+                                                                                                            (CFStringRef)value,
+                                                                                                            NULL,
+                                                                                                            (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                            kCFStringEncodingUTF8 ));
+        NSLog(@"end to transfrom value %@", escapedUrlString);
+        queryNew = [NSString stringWithFormat:@"%@%@=%@&", queryNew, key, escapedUrlString];
+    }
+    NSData *pdata = [queryNew dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    
 //    NSString *code = [self generateDynamicCode];
 //    query = [NSString stringWithFormat:@"%@&api_key=%@&code=%@", query, API_KEY, code];
     query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:query]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:query]];
     [request setHTTPMethod:@"POST"];
-    [request addValue:@"text/json" forHTTPHeaderField:@"Content-Type"];
-//    NSString *strBody = [data JSONString];
-//    [request setHTTPBody:[strBody dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:true]];
-    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
-    NSLog(@"data with json[%@]", [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding]);
-    [request setHTTPBody:bodyData];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
+//    [request setValue:[NSString stringWithFormat:@"%d", [bodyData length]] forHTTPHeaderField:@"Content-Length"];
+//    NSLog(@"data with json[%@]", [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding]);
+//    [request setHTTPBody:bodyData];
+    [request setHTTPBody:pdata];
     
     NSHTTPURLResponse *response = nil;
     NSError *error = nil;
@@ -123,16 +193,16 @@
     return [[self executeServerFetch:query] objectForKey:RETURN_DATA];
 }
 
-+ (int) postLogin:(NSDictionary *)loginData
++ (NSDictionary *) postLogin:(NSDictionary *)loginData
 {
     NSString *query = FORMAT_POST_LOGIN;
-    return [[[self executeServerPost:query postData:loginData] objectForKey:RETURN_CODE] intValue];
+    return [[self executeServerPost:query postData:loginData] objectForKey:RETURN_DATA];
 }
 
-+ (int) postRegist:(NSDictionary *)regData
++ (NSDictionary *) postRegist:(NSDictionary *)regData
 {
     NSString *query = FORMAT_POST_REGIST;
-    return [[[self executeServerPost:query postData:regData] objectForKey:RETURN_CODE] intValue];
+    return [[self executeServerPost:query postData:regData] objectForKey:RETURN_DATA];
 }
 
 + (int) postStudyOperation:(NSDictionary *)studyData

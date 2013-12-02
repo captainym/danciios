@@ -8,6 +8,7 @@
 
 #import "UIPopoverListView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "DanciServer.h"
 
 //#define FRAME_X_INSET 20.0f
 //#define FRAME_Y_INSET 40.0f
@@ -23,6 +24,12 @@
 @implementation UIPopoverListView
 
 @synthesize delegate = _delegate;
+@synthesize imei = _imei;
+
+- (NSString *)imei
+{
+    return @"imei";
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -109,9 +116,9 @@
         self.frame = frameLogin;
         NSLog(@"frame of login");
     }else{
-        CGRect frameLogin = CGRectMake(self.frame.origin.x, self.frame.origin.y,
+        CGRect frameReg = CGRectMake(self.frame.origin.x, self.frame.origin.y,
                                        self.frame.size.width, HEIGHT_REG);
-        self.frame = frameLogin;
+        self.frame = frameReg;
         NSLog(@"frame of register");
     }
     
@@ -220,32 +227,69 @@
 
 - (void) login
 {
-    NSString *userMid = _txtMid.text;
-    
+    NSString *mid = _txtMid.text;
+    NSString *pwd = _txtPwd.text;
     //校验
-    
+    if([mid length] < 2 || [pwd length] < 2){
+        _lblTip.text = @"帐户校验失败：用户名或密码错误，再试一下？";
+        return;
+    }
+    //加菊花
     //登陆验证
-    
-    //通过检验后 回调主页面
-    NSDictionary *userInfo = @{@"userMid":userMid};
-    [self.delegate popoverListViewLogin:self oldUser:userInfo];
-    [self dismiss];
+    dispatch_queue_t queue = dispatch_queue_create("post login", NULL);
+    dispatch_async(queue, ^{
+        //通过检验后 回调主页面
+        NSDictionary *userInfo = @{@"mid":mid,
+                                   @"pwd":pwd,
+                                   @"imei":self.imei
+                                   };
+        NSDictionary *retVal = [DanciServer postLogin:userInfo];
+        //回到主线程
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([[retVal objectForKey:RETURN_CODE] intValue] == ServerFeedbackTypeOk){
+                [self.delegate popoverListViewLogin:self oldUser:retVal];
+                [self dismiss];
+            }else{
+                _lblTip.text = [retVal objectForKey:RETURN_VALUE];
+            }
+        });
+    });
 }
 
 - (void) regist
 {
-    NSString *userMid = _txtMid.text;
-    NSString *userPwd = _txtPwd.text;
+    NSString *mid = _txtMid.text;
+    NSString *pwd = _txtPwd.text;
     NSString *tuijian = _txtTuijian.text;
     //校验
+    if([mid length] < 4){
+        _lblTip.text = @"用户名不能小于4位的，亲 :)";
+        return;
+    }
+    if([pwd length] < 6){
+        _lblTip.text = @"密码小于6位，太不靠谱了，亲 :(";
+        return;
+    }
     
     //注册验证
-    
-    //通过检验后 持久化保存用户信息在本地
-    //回调主页面
-    NSDictionary *userInfo = @{@"userMid": userMid};
-    [self.delegate popoverListViewRegist:self newUser:userInfo];
-    [self dismiss];
+    dispatch_queue_t queue = dispatch_queue_create("post reg", NULL);
+    dispatch_async(queue, ^{
+        //server校验
+        NSDictionary *userInfo = @{@"mid":mid,
+                                   @"pwd":pwd,
+                                   @"tuijian":tuijian,
+                                   @"imei":self.imei};
+        NSDictionary *retVal = [DanciServer postRegist:userInfo];
+        //回调主页面
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([[retVal objectForKey:RETURN_CODE] intValue] == ServerFeedbackTypeOk){
+                [self.delegate popoverListViewRegist:self newUser:retVal];
+                [self dismiss];
+            }else{
+                _lblTip.text = [retVal objectForKey:RETURN_VALUE];
+            }
+        });
+    });
 }
 
 #pragma mark - animations

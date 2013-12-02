@@ -2,7 +2,7 @@
 //  Word.m
 //  Danci
 //
-//  Created by ShiYuming on 13-11-24.
+//  Created by HuHao on 13-12-2.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
@@ -11,10 +11,10 @@
 
 @implementation Word
 
-@dynamic word;
-@dynamic yin_biao;
 @dynamic meaning;
 @dynamic stem;
 @dynamic txt_tip;
+@dynamic word;
+@dynamic yin_biao;
 
 @end

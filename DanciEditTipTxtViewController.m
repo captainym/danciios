@@ -39,6 +39,7 @@
 @synthesize danciDatabase = _danciDatabase;
 @synthesize curWord = _curWord;
 @synthesize tipstxt = _tipstxt;
+@synthesize curUser = _curUser;
 
 -(NSMutableArray *) tipstxt
 {
@@ -227,7 +228,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *tip = [[self.tipstxt objectAtIndex:indexPath.row] objectForKey:TIPS_TXT_TIP];
-    [self saveTipTxt:tip forOperationType:StudyOperationTypeSelectTipTxt];
+    self.curWord.txt_tip = tip;
+    NSString *tipId = [[self.tipstxt objectAtIndex:indexPath.row] objectForKey:TIPS_TXT_ID];
+    [self saveTipTxt:tipId forOperationType:StudyOperationTypeSelectTipTxt];
 }
 
 #pragma mark - UITableViewDataSource
@@ -255,8 +258,8 @@
 - (void)saveTipTxt:(NSString *)tip forOperationType:(StudyOperationType) otpye
 {
     
-    self.curWord.txt_tip = tip;
-    NSDictionary *retdata = @{@"word":self.curWord.word,
+    NSDictionary *retdata = @{@"studyNo":self.curUser.studyNo,
+                              @"word":self.curWord.word,
                               @"otype":[NSNumber numberWithInt:otpye],
                               @"ovalue":tip,
                               @"opt_time":[NSDate date]};
@@ -266,6 +269,7 @@
 - (void)saveTipTxt:(UIButton *)sender {
     //验证是否合格
     NSString *editTip = txtEditTip.text;
+    self.curWord.txt_tip = editTip;
     [self saveTipTxt:editTip forOperationType:StudyOperationTypeEditTip];
 }
 
