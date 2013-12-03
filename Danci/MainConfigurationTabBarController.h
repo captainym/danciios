@@ -10,4 +10,7 @@
 
 @interface MainConfigurationTabBarController : UITabBarController
 
+// database
+@property (nonatomic, strong) UIManagedDocument *danciDatabase;
+
 @end

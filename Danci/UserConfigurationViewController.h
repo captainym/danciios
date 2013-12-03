@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo+Server.h"
+
 
 @interface UserConfigurationViewController : UITableViewController
+
+//database
+@property (nonatomic, strong) UIManagedDocument *danciDatabase;
+
+// user
+@property (nonatomic, strong) UserInfo *user;
+
+
+
 
 @end

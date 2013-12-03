@@ -176,8 +176,12 @@
         [segue.destinationViewController setIsNewStudy:TRUE];
         [segue.destinationViewController setAlbum:self.albumSelected];
     }
+    else if([segue.identifier isEqualToString:@"segueGotoConfiguragion"]) {
+        [segue.destinationViewController setDanciDatabase:self.danciDatabase];
+    }
 }
 
 #pragma mark - Table view delegate
+
 
 @end

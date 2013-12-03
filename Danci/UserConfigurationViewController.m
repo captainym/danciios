@@ -13,6 +13,17 @@
 @end
 
 @implementation UserConfigurationViewController
+@synthesize danciDatabase = _danciDatabase;
+@synthesize user = _user;
+
+
+- (UserInfo *) user
+{
+    if(_user == nil){
+        _user = [UserInfo getUser:self.danciDatabase.managedObjectContext];
+    }
+    return _user;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +43,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.title = @"用户信息";
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,24 +57,62 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"tableCellUser";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    NSString *abstractInfo = @"";
+    NSString *detailInfo = @"";
+    
+    switch (indexPath.row) {
+        case 0:
+        abstractInfo = @"当前用户";
+        detailInfo = self.user.mid;
+        break;
+        
+        case 1:
+        abstractInfo = @"学号";
+        detailInfo = [NSString stringWithFormat:@"%@", self.user.studyNo];
+        break;
+        
+        case 2:
+        abstractInfo = @"单词上限";
+        detailInfo = [NSString stringWithFormat:@"%@", self.user.maxWordNum];
+        break;
+        
+        case 3:
+        abstractInfo = @"已背单词";
+        detailInfo = [NSString stringWithFormat:@"%@", self.user.comsumeWordNum];
+        break;
+        
+        case 4:
+        abstractInfo = @"注册时间";
+        detailInfo = [NSString stringWithFormat:@"%@", self.user.regTime];
+        break;
+        
+        case 5:
+        abstractInfo = @"推荐者学号";
+        detailInfo = [NSString stringWithFormat:@"%@", self.user.recommendStudyNo];
+        break;
+        
+        default:
+        break;
+    }
+    
+    cell.textLabel.text = abstractInfo;
+    cell.detailTextLabel.text = detailInfo;
     
     return cell;
 }

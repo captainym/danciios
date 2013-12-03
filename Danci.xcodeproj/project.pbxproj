@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67E981184078B800510FA7 /* CoreData.framework */; };
+		71A5AEF3184DC4B9008139B8 /* MainConfigurationTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5AEF2184DC4B9008139B8 /* MainConfigurationTabBarController.m */; };
+		71A5AEF6184DCAA9008139B8 /* UserConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5AEF5184DCAA9008139B8 /* UserConfigurationViewController.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
 		7947499F1849865300A1B8E2 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499E1849865300A1B8E2 /* UserInfo.m */; };
 		794749A5184C307600A1B8E2 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 794749A4184C307600A1B8E2 /* Word.m */; };
@@ -51,6 +53,10 @@
 
 /* Begin PBXFileReference section */
 		1C67E981184078B800510FA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		71A5AEF1184DC4B9008139B8 /* MainConfigurationTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainConfigurationTabBarController.h; sourceTree = "<group>"; };
+		71A5AEF2184DC4B9008139B8 /* MainConfigurationTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainConfigurationTabBarController.m; sourceTree = "<group>"; };
+		71A5AEF4184DCAA9008139B8 /* UserConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConfigurationViewController.h; sourceTree = "<group>"; };
+		71A5AEF5184DCAA9008139B8 /* UserConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConfigurationViewController.m; sourceTree = "<group>"; };
 		7947499A184985CB00A1B8E2 /* UserInfo+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserInfo+Server.h"; sourceTree = "<group>"; };
 		7947499B184985CB00A1B8E2 /* UserInfo+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+Server.m"; sourceTree = "<group>"; };
 		7947499D1849865300A1B8E2 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -172,6 +178,10 @@
 				79859B4C17ED9E65008F8EFD /* PPImageScrollingTableViewCell */,
 				79859B3017EC54EA008F8EFD /* DanciAlbumTableViewController.h */,
 				79859B3117EC54EB008F8EFD /* DanciAlbumTableViewController.m */,
+				71A5AEF1184DC4B9008139B8 /* MainConfigurationTabBarController.h */,
+				71A5AEF2184DC4B9008139B8 /* MainConfigurationTabBarController.m */,
+				71A5AEF4184DCAA9008139B8 /* UserConfigurationViewController.h */,
+				71A5AEF5184DCAA9008139B8 /* UserConfigurationViewController.m */,
 				79859B2217EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard */,
 				79859B2517EC0E75008F8EFD /* MainStoryboard_iPad.storyboard */,
 				79859B3F17EC7551008F8EFD /* DanciWordViewController.h */,
@@ -352,11 +362,13 @@
 				79FC0AA318422FB2004DF41E /* Album+Server.m in Sources */,
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,
+				71A5AEF6184DCAA9008139B8 /* UserConfigurationViewController.m in Sources */,
 				794749A5184C307600A1B8E2 /* Word.m in Sources */,
 				79CF933A18374927005E41FA /* WordHttpClient.m in Sources */,
 				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
 				79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */,
 				79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */,
+				71A5AEF3184DC4B9008139B8 /* MainConfigurationTabBarController.m in Sources */,
 				79CF935C1841206C005E41FA /* StudyOperation.m in Sources */,
 				79CF935F1841212D005E41FA /* Word+Server.m in Sources */,
 				79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */,
