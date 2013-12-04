@@ -8,20 +8,20 @@
 
 #import "HelpConfigurationViewController.h"
 
-@interface HelpConfigurationViewController ()
+@interface HelpConfigurationViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation HelpConfigurationViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
@@ -32,6 +32,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.title = @"帮助";
 }
 
 - (void)didReceiveMemoryWarning

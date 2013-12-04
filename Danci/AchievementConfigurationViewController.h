@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo+Server.h"
 
-@interface AchievementConfigurationViewController : UITableViewController
+@interface AchievementConfigurationViewController : UIViewController
+
+//database
+@property (nonatomic, strong) UIManagedDocument *danciDatabase;
+
+// user
+@property (nonatomic, strong) UserInfo *user;
+
+@property (strong, nonatomic) IBOutlet UITableView *tableViewUserAchievement;
 
 @end

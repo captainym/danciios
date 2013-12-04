@@ -8,31 +8,34 @@
 
 #import "UserConfigurationViewController.h"
 
-@interface UserConfigurationViewController ()
+@interface UserConfigurationViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation UserConfigurationViewController
+
 @synthesize danciDatabase = _danciDatabase;
 @synthesize user = _user;
 
+@synthesize tableViewUserInfo;
 
-- (UserInfo *) user
-{
-    if(_user == nil){
-        _user = [UserInfo getUser:self.danciDatabase.managedObjectContext];
-    }
-    return _user;
-}
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+//- (UserInfo *) user
+//{
+//    if(_user == nil){
+//        _user = [UserInfo getUser:self.danciDatabase.managedObjectContext];
+//    }
+//    return _user;
+//}
+
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
@@ -45,6 +48,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.title = @"用户信息";
+    
+    [tableViewUserInfo setDelegate:self];
+    [tableViewUserInfo setDataSource:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,7 +75,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"tableCellUser";
+    static NSString *CellIdentifier = @"tableCellUserInfo";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
@@ -93,7 +99,7 @@
         break;
         
         case 3:
-        abstractInfo = @"已背单词";
+        abstractInfo = @"已学习单词";
         detailInfo = [NSString stringWithFormat:@"%@", self.user.comsumeWordNum];
         break;
         

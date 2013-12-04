@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo+Server.h"
 
 @interface MainConfigurationTabBarController : UITabBarController
 
 // database
 @property (nonatomic, strong) UIManagedDocument *danciDatabase;
+
+// user
+@property (nonatomic, strong) UserInfo *user;
 
 @end

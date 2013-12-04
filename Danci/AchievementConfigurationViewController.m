@@ -8,20 +8,26 @@
 
 #import "AchievementConfigurationViewController.h"
 
-@interface AchievementConfigurationViewController ()
+@interface AchievementConfigurationViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation AchievementConfigurationViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize danciDatabase = _danciDatabase;
+@synthesize user = _user;
+
+@synthesize tableViewUserAchievement;
+
+
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
@@ -32,6 +38,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.title = @"用户成就";
+    
+    [tableViewUserAchievement setDelegate:self];
+    [tableViewUserAchievement setDataSource:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,24 +55,43 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"tableCellAchievement";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    NSString *abstractInfo = @"";
+    NSString *detailInfo = @"";
+    
+    switch (indexPath.row) {
+        case 0:
+        abstractInfo = @"当前总学习上限:";
+        detailInfo = [NSString stringWithFormat:@"%@", self.user.maxWordNum];
+        break;
+        
+        case 1:
+        abstractInfo = @"已学习单词数:";
+        detailInfo = [NSString stringWithFormat:@"%@", self.user.comsumeWordNum];
+        break;
+
+        
+        default:
+        break;
+    }
+
+    cell.textLabel.text = abstractInfo;
+    cell.detailTextLabel.text = detailInfo;
     
     return cell;
 }

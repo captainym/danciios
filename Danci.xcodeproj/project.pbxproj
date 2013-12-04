@@ -10,6 +10,9 @@
 		1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67E981184078B800510FA7 /* CoreData.framework */; };
 		71A5AEF3184DC4B9008139B8 /* MainConfigurationTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5AEF2184DC4B9008139B8 /* MainConfigurationTabBarController.m */; };
 		71A5AEF6184DCAA9008139B8 /* UserConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5AEF5184DCAA9008139B8 /* UserConfigurationViewController.m */; };
+		71A5AEF9184F0A6C008139B8 /* AchievementConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5AEF8184F0A6C008139B8 /* AchievementConfigurationViewController.m */; };
+		71A5AEFC184F2165008139B8 /* SettingsConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5AEFB184F2165008139B8 /* SettingsConfigurationViewController.m */; };
+		71A5AEFF184F21BF008139B8 /* HelpConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5AEFE184F21BF008139B8 /* HelpConfigurationViewController.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
 		7947499F1849865300A1B8E2 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499E1849865300A1B8E2 /* UserInfo.m */; };
 		794749A5184C307600A1B8E2 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 794749A4184C307600A1B8E2 /* Word.m */; };
@@ -57,6 +60,12 @@
 		71A5AEF2184DC4B9008139B8 /* MainConfigurationTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainConfigurationTabBarController.m; sourceTree = "<group>"; };
 		71A5AEF4184DCAA9008139B8 /* UserConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConfigurationViewController.h; sourceTree = "<group>"; };
 		71A5AEF5184DCAA9008139B8 /* UserConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConfigurationViewController.m; sourceTree = "<group>"; };
+		71A5AEF7184F0A6C008139B8 /* AchievementConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementConfigurationViewController.h; sourceTree = "<group>"; };
+		71A5AEF8184F0A6C008139B8 /* AchievementConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementConfigurationViewController.m; sourceTree = "<group>"; };
+		71A5AEFA184F2165008139B8 /* SettingsConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsConfigurationViewController.h; sourceTree = "<group>"; };
+		71A5AEFB184F2165008139B8 /* SettingsConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsConfigurationViewController.m; sourceTree = "<group>"; };
+		71A5AEFD184F21BF008139B8 /* HelpConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpConfigurationViewController.h; sourceTree = "<group>"; };
+		71A5AEFE184F21BF008139B8 /* HelpConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpConfigurationViewController.m; sourceTree = "<group>"; };
 		7947499A184985CB00A1B8E2 /* UserInfo+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserInfo+Server.h"; sourceTree = "<group>"; };
 		7947499B184985CB00A1B8E2 /* UserInfo+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+Server.m"; sourceTree = "<group>"; };
 		7947499D1849865300A1B8E2 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -182,6 +191,12 @@
 				71A5AEF2184DC4B9008139B8 /* MainConfigurationTabBarController.m */,
 				71A5AEF4184DCAA9008139B8 /* UserConfigurationViewController.h */,
 				71A5AEF5184DCAA9008139B8 /* UserConfigurationViewController.m */,
+				71A5AEF7184F0A6C008139B8 /* AchievementConfigurationViewController.h */,
+				71A5AEF8184F0A6C008139B8 /* AchievementConfigurationViewController.m */,
+				71A5AEFA184F2165008139B8 /* SettingsConfigurationViewController.h */,
+				71A5AEFB184F2165008139B8 /* SettingsConfigurationViewController.m */,
+				71A5AEFD184F21BF008139B8 /* HelpConfigurationViewController.h */,
+				71A5AEFE184F21BF008139B8 /* HelpConfigurationViewController.m */,
 				79859B2217EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard */,
 				79859B2517EC0E75008F8EFD /* MainStoryboard_iPad.storyboard */,
 				79859B3F17EC7551008F8EFD /* DanciWordViewController.h */,
@@ -363,6 +378,7 @@
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,
 				71A5AEF6184DCAA9008139B8 /* UserConfigurationViewController.m in Sources */,
+				71A5AEF9184F0A6C008139B8 /* AchievementConfigurationViewController.m in Sources */,
 				794749A5184C307600A1B8E2 /* Word.m in Sources */,
 				79CF933A18374927005E41FA /* WordHttpClient.m in Sources */,
 				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
@@ -370,7 +386,9 @@
 				79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */,
 				71A5AEF3184DC4B9008139B8 /* MainConfigurationTabBarController.m in Sources */,
 				79CF935C1841206C005E41FA /* StudyOperation.m in Sources */,
+				71A5AEFC184F2165008139B8 /* SettingsConfigurationViewController.m in Sources */,
 				79CF935F1841212D005E41FA /* Word+Server.m in Sources */,
+				71A5AEFF184F21BF008139B8 /* HelpConfigurationViewController.m in Sources */,
 				79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */,
 				79CF9365184196E8005E41FA /* DanciServer.m in Sources */,
 			);
