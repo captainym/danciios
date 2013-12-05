@@ -2,7 +2,7 @@
 //  UserInfo.m
 //  Danci
 //
-//  Created by ShiYuming on 13-11-30.
+//  Created by HuHao on 13-12-6.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
@@ -11,11 +11,12 @@
 
 @implementation UserInfo
 
-@dynamic mid;
-@dynamic studyNo;
-@dynamic maxWordNum;
 @dynamic comsumeWordNum;
-@dynamic regTime;
+@dynamic maxWordNum;
+@dynamic mid;
 @dynamic recommendStudyNo;
+@dynamic regTime;
+@dynamic studyNo;
+@dynamic words;
 
 @end

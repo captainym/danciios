@@ -30,6 +30,8 @@
 
 //用户信息 包括其基本信息、帐户信息。考虑包含其学习信息
 @property (nonatomic, strong) UserInfo *user;
+//已经学习过的单词
+@property (nonatomic, strong) NSMutableSet *wordsHasStudied;
 
 //指示当前页面是新学习还是复习；
 @property BOOL isNewStudy;

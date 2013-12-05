@@ -21,6 +21,7 @@
         <attribute name="recommendStudyNo" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="regTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="studyNo" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="words" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Word" representedClassName="Word" syncable="YES">
         <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,9 +31,9 @@
         <attribute name="yin_biao" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Album" positionX="178" positionY="72" width="128" height="118"/>
-        <element name="StudyOperation" positionX="394" positionY="192" width="128" height="118"/>
-        <element name="Word" positionX="27" positionY="186" width="128" height="118"/>
-        <element name="UserInfo" positionX="189" positionY="171" width="128" height="133"/>
+        <element name="Album" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="StudyOperation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="UserInfo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Word" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

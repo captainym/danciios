@@ -14,6 +14,8 @@
 #import "DanciServer.h"
 #import "StudyOperation+Server.h"
 
+#define WORD_SEPARATED @"|"
+
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate>
 
 @property (nonatomic, strong) NSString *tips;
@@ -25,6 +27,7 @@
 #pragma mark - properties synthesize
 @synthesize isNewStudy = _isNewStudy;
 @synthesize user = _user;
+@synthesize wordsHasStudied = _wordsHasStudied;
 @synthesize tips = _tips;
 
 @synthesize words = _words;
@@ -139,6 +142,26 @@
 
 #pragma mark -  methods
 
+//判断单词是否学习过。如果没有 则学习并消耗单词上限，同时更新user信息
+- (BOOL) isWordStudiedOtherwiseAdd:(NSString *)wordTerm
+{
+    if(_wordsHasStudied == nil){
+        _wordsHasStudied = [[NSMutableSet alloc] initWithArray:[self.user.words componentsSeparatedByString:WORD_SEPARATED]];
+        NSLog(@"init wordStudied. count[%d], words[%@]",[_wordsHasStudied count],self.user.words);
+    }
+    
+    if([self.wordsHasStudied containsObject:wordTerm]){
+        NSLog(@"word has studied before. word[%@]",wordTerm);
+        return TRUE;
+    }else{
+        NSLog(@"word has not been studied. word[%@]",wordTerm);
+        [self.wordsHasStudied addObject:wordTerm];
+        self.user.words = [self.user.words stringByAppendingFormat:@"%@%@",WORD_SEPARATED,wordTerm];
+        self.user.comsumeWordNum = [NSNumber numberWithInt:[self.user.comsumeWordNum intValue] + 1];
+        return FALSE;
+    }
+}
+
 - (void) reloadTipimgsForWord:(NSString *) wordTerm atBegin:(int) begin requestCount:(int) count
 {
     dispatch_queue_t queueImg = dispatch_queue_create("downloadTipimg", NULL);
@@ -178,6 +201,7 @@
     [self.tblTipimgsIphone registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:cellIdTipimg];
     [self.tblTipimgsIphone setDelegate:self];
     [self.tblTipimgsIphone setDataSource:self];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self.tblTipSentence setDelegate:self];
     [self.tblTipSentence setDataSource:self];
