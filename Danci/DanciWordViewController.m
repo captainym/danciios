@@ -194,12 +194,12 @@
     
     
     //先用假数据
-    NSDictionary *wordInfo = [self getWordInfoByCoredata:_word];
-    if(wordInfo != nil) {
-        self.fayin = [wordInfo valueForKey:WORD_FAYIN];
-        self.comment = [wordInfo valueForKey:WORD_COMMENT];
-        self.wordGern = [wordInfo valueForKey:WORD_GERN];
-    }
+//    NSDictionary *wordInfo = [self getWordInfoByCoredata:_word];
+//    if(wordInfo != nil) {
+//        self.fayin = [wordInfo valueForKey:WORD_FAYIN];
+//        self.comment = [wordInfo valueForKey:WORD_COMMENT];
+//        self.wordGern = [wordInfo valueForKey:WORD_GERN];
+//    }
     self.fayin = @"[saɪˈkɒlədʒɪ]";
     self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
     self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思； cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 psy-cho-logy连起来就是“知道心的学说”。";
