@@ -10,4 +10,12 @@
 
 @interface SettingsConfigurationViewController : UIViewController
 
+- (void) checkValue: (UITextField *)textField;
+
+
+@property (strong, nonatomic) UIActionSheet *actionSheet;
+@property (strong, nonatomic) UITextField *studyTime;
+
+@property (strong, nonatomic) IBOutlet UITableView *tableViewSettings;
+
 @end
