@@ -33,6 +33,9 @@
 @synthesize danciDatabase = _danciDatabase;
 @synthesize albumSelected = _albumSelected;
 
+@synthesize btnSettings;
+
+
 //初始化coredata的内容 第一次
 -(void) dumpDataIntoDocument:(UIManagedDocument *)document
 {

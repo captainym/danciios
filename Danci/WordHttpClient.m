@@ -46,7 +46,7 @@
 }
 
 - (NSDictionary*) getWordInfo:(NSString *)word {
-    NSString* wordQueryUrl = [NSString stringWithFormat:@"%@/query/word/", SERVER_URL, word];
+    NSString* wordQueryUrl = [NSString stringWithFormat:@"%@/query/word/?word=%@", SERVER_URL, word];
     
     NSDictionary* res = [self getDictDataByHttp:wordQueryUrl requestMethod:@"get" requestData:@{@"name":word}];
 

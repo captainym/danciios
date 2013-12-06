@@ -43,7 +43,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="单词本" id="xnp-ta-uJw">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="GEr-5X-3X2">
+                        <barButtonItem key="rightBarButtonItem" id="GEr-5X-3X2">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dUK-ZZ-dcl">
                                 <rect key="frame" x="233" y="5" width="71" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

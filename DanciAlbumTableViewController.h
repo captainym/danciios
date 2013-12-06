@@ -12,9 +12,6 @@
 @interface DanciAlbumTableViewController : CoreDataTableViewController
 
 
-- (IBAction)onBtnSettings:(id)sender;
-
-
 //单词数据库
 @property (strong,nonatomic) UIManagedDocument *danciDatabase;
 
