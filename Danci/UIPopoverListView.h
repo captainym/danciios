@@ -49,6 +49,7 @@
 }
 
 @property (nonatomic, assign) id<UIPopoverListViewDelegate>   delegate;
+@property (nonatomic, strong) NSString *imei;
 
 - (id)initWithFrameType:(CGRect)frame popType:(int)pType;
 - (void)setTitle:(NSString *)title;
