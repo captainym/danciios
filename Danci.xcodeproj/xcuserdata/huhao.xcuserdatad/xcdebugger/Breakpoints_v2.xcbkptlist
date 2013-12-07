@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DanciEditTipTxtViewController.m"
-            timestampString = "407958773.707964"
+            timestampString = "408006027.383522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-showEditTipsView"
             landmarkType = "5">
          </BreakpointContent>
