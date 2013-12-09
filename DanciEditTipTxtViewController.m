@@ -67,7 +67,9 @@
         NSArray *getTips = [DanciServer getWordTipsTxt:self.curWord.word atBegin:0 requestCount:DEFAULT_REQUEST_COUNT_TIPS];
         [self.tipstxt addObjectsFromArray:getTips];
         NSLog(@"request get tips num[%d]", [getTips count]);
-        [tblTipstxt reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [tblTipstxt reloadData];
+        });
     });
 }
 

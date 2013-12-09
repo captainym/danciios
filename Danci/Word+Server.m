@@ -15,18 +15,19 @@
 {
     NSError *error = nil;
     NSArray *objects = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:jsonFilePath] options:kNilOptions error:&error];
-    NSLog(@"jsong objects of word: %@",objects);
+//    NSLog(@"jsong objects of word: %@",objects);
     [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@"idx[%d]",idx);
         Word *aWord = [NSEntityDescription insertNewObjectForEntityForName:@"Word" inManagedObjectContext:context];
-        aWord.word = [obj objectForKey:@"word"];
-        aWord.yin_biao = [obj objectForKey:@"yin_biao"];
-        aWord.meaning = [obj objectForKey:@"meaning"];
-        aWord.stem = [obj objectForKey:@"stem"];
+        aWord.word = [obj objectForKey:@"word"]==nil ? @"":[obj objectForKey:@"word"];
+        aWord.yin_biao = [obj objectForKey:@"yinbiao"]==nil ? @"":[obj objectForKey:@"yinbiao"];;
+        aWord.meaning = [obj objectForKey:@"meaning"]==nil ? @"":[obj objectForKey:@"meaning"];;
+        aWord.stem = [obj objectForKey:@"stem"]==nil ? @"":[obj objectForKey:@"stem"];;
         NSError *errorLoc = nil;
         if(![context save:&errorLoc]){
             NSLog(@"init save word error:%@",[errorLoc localizedDescription]);
         }else{
-            NSLog(@"init save a word:%@",aWord);
+//            NSLog(@"init save a word:%@",aWord);
         }
     }];
 }

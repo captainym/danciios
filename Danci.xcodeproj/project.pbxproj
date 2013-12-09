@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67E981184078B800510FA7 /* CoreData.framework */; };
+		793F8F321854782500209430 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 793F8F311854782500209430 /* Album.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
 		794749A5184C307600A1B8E2 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 794749A4184C307600A1B8E2 /* Word.m */; };
 		79548D261850E5C200598C70 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 79548D251850E5C200598C70 /* UserInfo.m */; };
@@ -35,7 +36,6 @@
 		79CF932F1823E3F5005E41FA /* addImg3.png in Resources */ = {isa = PBXBuildFile; fileRef = 79CF932B1823E3F5005E41FA /* addImg3.png */; };
 		79CF93301823E3F5005E41FA /* addImg4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79CF932C1823E3F5005E41FA /* addImg4.jpg */; };
 		79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9335182E9DC2005E41FA /* UIPopoverListView.m */; };
-		79CF933A18374927005E41FA /* WordHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933918374927005E41FA /* WordHttpClient.m */; };
 		79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */; };
 		79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */; };
 		79CF935C1841206C005E41FA /* StudyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935B1841206C005E41FA /* StudyOperation.m */; };
@@ -44,13 +44,14 @@
 		79CF9365184196E8005E41FA /* DanciServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9364184196E7005E41FA /* DanciServer.m */; };
 		79FC0AA318422FB2004DF41E /* Album+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC0AA218422FB2004DF41E /* Album+Server.m */; };
 		79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC0AA818433578004DF41E /* CoreDataTableViewController.m */; };
-		79FC0AAC18433DD8004DF41E /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC0AAB18433DD8004DF41E /* Album.m */; };
 		79FC0AB018435BCA004DF41E /* album.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AAF18435BCA004DF41E /* album.json */; };
 		79FC0AB218435BDC004DF41E /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AB118435BDC004DF41E /* words.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1C67E981184078B800510FA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		793F8F301854782500209430 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		793F8F311854782500209430 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		7947499A184985CB00A1B8E2 /* UserInfo+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserInfo+Server.h"; sourceTree = "<group>"; };
 		7947499B184985CB00A1B8E2 /* UserInfo+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+Server.m"; sourceTree = "<group>"; };
 		794749A3184C307600A1B8E2 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
@@ -92,8 +93,6 @@
 		79CF932C1823E3F5005E41FA /* addImg4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImg4.jpg; sourceTree = "<group>"; };
 		79CF9334182E9DC2005E41FA /* UIPopoverListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverListView.h; sourceTree = "<group>"; };
 		79CF9335182E9DC2005E41FA /* UIPopoverListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverListView.m; sourceTree = "<group>"; };
-		79CF933818374927005E41FA /* WordHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordHttpClient.h; sourceTree = "<group>"; };
-		79CF933918374927005E41FA /* WordHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordHttpClient.m; sourceTree = "<group>"; };
 		79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciEditTipTxtViewController.h; sourceTree = SOURCE_ROOT; };
 		79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanciEditTipTxtViewController.m; sourceTree = SOURCE_ROOT; };
 		79CF935218411F11005E41FA /* DBDanci.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBDanci.xcdatamodel; sourceTree = "<group>"; };
@@ -109,8 +108,6 @@
 		79FC0AA218422FB2004DF41E /* Album+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Album+Server.m"; sourceTree = "<group>"; };
 		79FC0AA718433578004DF41E /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		79FC0AA818433578004DF41E /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
-		79FC0AAA18433DD8004DF41E /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		79FC0AAB18433DD8004DF41E /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		79FC0AAF18435BCA004DF41E /* album.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = album.json; sourceTree = "<group>"; };
 		79FC0AB118435BDC004DF41E /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,8 +175,6 @@
 				79859B4017EC7551008F8EFD /* DanciWordViewController.m */,
 				79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */,
 				79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */,
-				79CF933818374927005E41FA /* WordHttpClient.h */,
-				79CF933918374927005E41FA /* WordHttpClient.m */,
 				79CF9363184196E6005E41FA /* DanciServer.h */,
 				79CF9364184196E7005E41FA /* DanciServer.m */,
 				79859B1117EC0E75008F8EFD /* Supporting Files */,
@@ -242,13 +237,13 @@
 		79CF9341183CEBAC005E41FA /* coredata */ = {
 			isa = PBXGroup;
 			children = (
-				79FC0AAA18433DD8004DF41E /* Album.h */,
-				79FC0AAB18433DD8004DF41E /* Album.m */,
 				794749A3184C307600A1B8E2 /* Word.h */,
 				794749A4184C307600A1B8E2 /* Word.m */,
 				79548D241850E5C200598C70 /* UserInfo.h */,
 				79548D251850E5C200598C70 /* UserInfo.m */,
 				79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */,
+				793F8F301854782500209430 /* Album.h */,
+				793F8F311854782500209430 /* Album.m */,
 				7947499A184985CB00A1B8E2 /* UserInfo+Server.h */,
 				7947499B184985CB00A1B8E2 /* UserInfo+Server.m */,
 				79CF935A1841206C005E41FA /* StudyOperation.h */,
@@ -343,7 +338,6 @@
 				7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */,
 				79859B1B17EC0E75008F8EFD /* DanciAppDelegate.m in Sources */,
 				79859B3217EC54EB008F8EFD /* DanciAlbumTableViewController.m in Sources */,
-				79FC0AAC18433DD8004DF41E /* Album.m in Sources */,
 				79859B4117EC7551008F8EFD /* DanciWordViewController.m in Sources */,
 				79859B5317ED9E65008F8EFD /* PPCollectionViewCell.m in Sources */,
 				79859B5417ED9E65008F8EFD /* PPImageScrollingCellView.m in Sources */,
@@ -353,7 +347,6 @@
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,
 				794749A5184C307600A1B8E2 /* Word.m in Sources */,
-				79CF933A18374927005E41FA /* WordHttpClient.m in Sources */,
 				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
 				79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */,
 				79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */,
@@ -361,6 +354,7 @@
 				79CF935F1841212D005E41FA /* Word+Server.m in Sources */,
 				79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */,
 				79CF9365184196E8005E41FA /* DanciServer.m in Sources */,
+				793F8F321854782500209430 /* Album.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

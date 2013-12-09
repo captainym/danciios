@@ -10,6 +10,7 @@
 #import "DanciWordViewController.h"
 #import "Album+Server.h"
 #import "Word+Server.h"
+#import "UserInfo+Server.h"
 
 #define ALBUM_CATEGORY @"category"
 #define ALBUM_LIST @"albums"
@@ -20,6 +21,7 @@
 #define DATABASE_VERSION @"Danci1.0"
 #define DATABASE_ALBUM_INIT_FILE @"album"
 #define DATABASE_WORD_INIT_FILE @"words"
+#define CATEGORY_MY @"    我选择的单词本";
 
 @interface DanciAlbumTableViewController ()
 
@@ -85,6 +87,11 @@
         //db存在但未打开 打开
         [self.danciDatabase openWithCompletionHandler:^(BOOL success) {
             [self setupFetchedResultsController];
+            //同步user信息
+            dispatch_queue_t queue = dispatch_queue_create("merge user", NULL);
+            dispatch_async(queue, ^{
+                [UserInfo mergerUserWithServer:self.danciDatabase.managedObjectContext];
+            });
         }];
     }else if(self.danciDatabase.documentState == UIDocumentStateNormal){
         [self setupFetchedResultsController];
@@ -151,7 +158,7 @@
     cell.textLabel.text = album.name;
     int curPoint = [album.point intValue] % [album.count intValue];
     int cycleNum = [album.point intValue] / [album.count intValue] + 1;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"总量%d。学习到第%d个单词。第[%d]遍", [album.count intValue], curPoint, cycleNum];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"总量%d 进度[%d/%d] 第[%d]遍", [album.count intValue], curPoint, [album.count intValue], cycleNum];
     return cell;
 }
 
@@ -160,6 +167,8 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *albumName = cell.textLabel.text;
     self.albumSelected = [Album getAlbum:albumName inManagedObjectContext:self.danciDatabase.managedObjectContext];
+    self.albumSelected.category = CATEGORY_MY;
+    self.albumSelected.opt_time = [NSDate date];
     int curPoint = [self.albumSelected.point intValue] % [self.albumSelected.count intValue];
     int cycleNum = [self.albumSelected.point intValue] / [self.albumSelected.count intValue];
     NSLog(@"now albumSelected. albumName[%@] wordPoint[%d] wordNum[%d]。第[%d]遍", self.albumSelected.name,curPoint,[[self.albumSelected count] intValue], cycleNum);

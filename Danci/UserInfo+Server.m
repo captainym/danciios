@@ -7,6 +7,7 @@
 //
 
 #import "UserInfo+Server.h"
+#import "DanciServer.h"
 
 @implementation UserInfo (Server)
 
@@ -31,6 +32,30 @@
     }else{
         user = [matches lastObject];
         NSLog(@"load a user from coredata. the user is[%@]  mid[%@]",user,user.mid);
+    }
+    
+    return user;
+}
+
++ (UserInfo *) mergerUserWithServer:(NSManagedObjectContext *) context
+{
+    UserInfo *user = [self getUser:context];
+    if([user.maxWordNum intValue] > 1 && [user.studyNo intValue] > 1){
+        NSLog(@"user:%@",user);
+        NSDictionary *userinfo = @{@"studyNo":user.studyNo,
+                                   @"word_used":user.comsumeWordNum,
+                                   @"word_list":user.words ? user.words:@""};
+        NSDictionary *mergerData = [DanciServer mergerUserInfo:userinfo];
+        if([[mergerData objectForKey:RETURN_CODE] intValue] == ServerFeedbackTypeOk){
+            user.maxWordNum = [NSNumber numberWithInt:[[mergerData objectForKey:@"maxWordNum"] intValue]];
+            if([user.comsumeWordNum intValue] < [[mergerData objectForKey:@"comsumeWordNum"]intValue]){
+                user.comsumeWordNum = [NSNumber numberWithInt:[[mergerData objectForKey:@"comsumeWordNum"]intValue]];
+            }
+        }else{
+            NSLog(@"merger user info faild. msg[%@]",[mergerData objectForKey:RETURN_VALUE]);
+        }
+    }else{
+        NSLog(@"user not exist. no need to merge user");
     }
     
     return user;

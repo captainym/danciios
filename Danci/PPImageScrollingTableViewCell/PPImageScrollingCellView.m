@@ -88,7 +88,7 @@
     NSDictionary *imageDic = [self.collectionImageData objectAtIndex:[indexPath row]];
     
     NSString *imgurl = [imageDic objectForKey:TIPS_IMG_URL];
-    NSLog(@"now load img with url:[%@]",imgurl);
+//    NSLog(@"now load img with url:[%@]",imgurl);
     dispatch_queue_t downloadImg = dispatch_queue_create("download one img", NULL);
     dispatch_async(downloadImg, ^{
         NSURL *imgurlnet = [NSURL URLWithString:imgurl];

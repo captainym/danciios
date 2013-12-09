@@ -164,7 +164,8 @@
         _btnEnter = [[UIButton alloc] initWithFrame:CGRectZero];
         [_btnEnter setTitle:@"登  陆" forState:UIControlStateNormal];
         _btnEnter.frame = CGRectMake((self.bounds.size.width - 80.0f)/2,self.bounds.size.height - 35.0f, 80.0f, 32.0f);
-        _btnEnter.backgroundColor = colorLblBackGroud;
+        _btnEnter.backgroundColor = [UIColor darkGrayColor];
+        _btnEnter.showsTouchWhenHighlighted = YES;
         [_btnEnter addTarget:self
                       action:@selector(login)
             forControlEvents:UIControlEventTouchUpInside];

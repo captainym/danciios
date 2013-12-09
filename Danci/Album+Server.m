@@ -14,9 +14,9 @@
 {
     NSError *error = nil;
     NSData *jsondata = [NSData dataWithContentsOfFile:jsonFilePath];
-    NSLog(@"raw:%@",jsondata);
+//    NSLog(@"raw:%@",jsondata);
     NSArray *objects = [NSJSONSerialization JSONObjectWithData:jsondata options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error];
-    NSLog(@"jsong objects of word: %@ . error[%@]",objects,error.localizedDescription);
+//    NSLog(@"jsong objects of word: %@ . error[%@]",objects,error.localizedDescription);
     [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:context];
         album.category = [obj objectForKey:@"category"];
@@ -24,7 +24,8 @@
         album.words = [obj objectForKey:@"words"];
         album.point = [NSNumber numberWithInt:[[obj objectForKey:@"point"] intValue]];
         album.count = [NSNumber numberWithInt:[[obj objectForKey:@"count"] intValue]];
-        NSLog(@"insert a album:[%@] ",album);
+        album.opt_time = [NSDate date];
+        NSLog(@"insert a album: name[%@] ",album.name);
         NSError *errorLoc = nil;
         if(![context save:&errorLoc]){
             NSLog(@"save album error:%@",[errorLoc localizedDescription]);

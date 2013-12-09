@@ -16,4 +16,7 @@
 //用户登出则删除其帐户信息
 + (void) dropUser:(NSManagedObjectContext *) context;
 
+//同步用户信息
++ (UserInfo *) mergerUserWithServer:(NSManagedObjectContext *) context;
+
 @end

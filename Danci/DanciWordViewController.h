@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "WordHttpClient.h"
 #import "TQMultistageTableView.h"
 #import "Album+Server.h"
 #import "Word+Server.h"
@@ -75,12 +74,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnTipImgIphone;
 @property (weak, nonatomic) IBOutlet UITableView *tblTipimgsIphone;
 @property (weak, nonatomic) IBOutlet UITableView *tblTipSentence;
-@property (weak, nonatomic) IBOutlet UIView *vtip;
 @property (weak, nonatomic) IBOutlet UILabel *lbltips;
-
+@property (weak, nonatomic) IBOutlet UIView *svTipSentence;
+@property (weak, nonatomic) IBOutlet UILabel *lblTipStem;
+@property (weak, nonatomic) IBOutlet UIButton *btnShowTip;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackNo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackFuzz;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackOk;
+
 
 @end

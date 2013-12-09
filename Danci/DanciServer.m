@@ -14,9 +14,10 @@
 #define FORMAT_QUERY_TIPS_TXT @"http://acodingfarmer.com/bdc/query/tips/type/txt/word/%@/start/%d/count/%d"
 #define FORMAT_QUERY_TIPS_SENTENCE @"http://acodingfarmer.com/bdc/query/Sentence/word/%@/start/%d/count/%d"
 #define FORMAT_QUERY_WORD_INFO @""
-#define FORMAT_POST_STUDY_OPERATION @"http://acodingfarmer.com/bdc/action/auth"
+#define FORMAT_POST_STUDY_OPERATION @"http://acodingfarmer.com/bdc/action/op"
 #define FORMAT_POST_LOGIN @"http://acodingfarmer.com/bdc/action/auth"
 #define FORMAT_POST_REGIST @"http://acodingfarmer.com/bdc/action/register"
+#define FORMAT_MERGER_USER @"http://acodingfarmer.com/bdc/action/syncUser"
 
 @implementation DanciServer
 
@@ -107,7 +108,7 @@
 {
     NSString *queryNew = @"";
     for(NSString* key in data) {
-        NSLog(@"start to get key %@", key);
+//        NSLog(@"start to get key %@", key);
         NSString* value = @"";
         if([[data objectForKey:key] isKindOfClass:[NSString class]]){
             value = [data objectForKey:key];
@@ -116,7 +117,7 @@
         }else{
             value = [[data objectForKey:key] stringValue];
         }
-        NSLog(@"start to transfrom value %@", value);
+//        NSLog(@"start to transfrom value %@", value);
         //需要对value做一些url编码
         NSString * escapedUrlString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                                                                                                             NULL,
@@ -124,7 +125,7 @@
                                                                                                             NULL,
                                                                                                             (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                                             kCFStringEncodingUTF8 ));
-        NSLog(@"end to transfrom value %@", escapedUrlString);
+//        NSLog(@"end to transfrom value %@", escapedUrlString);
         queryNew = [NSString stringWithFormat:@"%@%@=%@&", queryNew, key, escapedUrlString];
     }
     NSData *pdata = [queryNew dataUsingEncoding:NSUTF8StringEncoding];
@@ -210,6 +211,12 @@
 {
     NSString *query = FORMAT_POST_STUDY_OPERATION;
     return [[[self executeServerPost:query postData:studyData] objectForKey:RETURN_CODE] intValue];
+}
+
++ (NSDictionary *) mergerUserInfo:(NSDictionary *)userInfo
+{
+    NSString *query = FORMAT_MERGER_USER;
+    return [[self executeServerPost:query postData:userInfo] objectForKey:RETURN_DATA];
 }
 
 @end

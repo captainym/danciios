@@ -86,6 +86,10 @@ typedef enum
 //注册校验 反馈状态是枚举 ServeFeedbackType
 + (NSDictionary *) postRegist:(NSDictionary *)regData;
 
+//与server同步userinfo
++ (NSDictionary *) mergerUserInfo:(NSDictionary *)userInfo;
+
 @end
+
 
 

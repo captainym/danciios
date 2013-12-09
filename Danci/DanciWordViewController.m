@@ -15,10 +15,17 @@
 #import "StudyOperation+Server.h"
 
 #define WORD_SEPARATED @"|"
+#define NUM_REVIEW_INTERVAL 2
+#define NUM_LEANING_GROUP 20
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate>
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSString *tips;
+//新单词学习计数器
+@property int counter;
+//单词复习队列1和2 确保每个单词都有3次复习机会（包括第一次学习）
+@property (nonatomic, strong) NSMutableArray *review1;
+@property (nonatomic, strong) NSMutableArray *review2;
 
 @end
 
@@ -37,12 +44,27 @@
 @synthesize tipImgs = _tipImgs;
 @synthesize tipSentences = _tipSentences;
 @synthesize player = _player;
-//@synthesize svExpFrame = _svExpFrame;
-//@synthesize svNormFrame = _svNormFrame;
 @synthesize fontDetail = _fontDetail;
 @synthesize wordTerm = _wordTerm;
 
 #pragma mark- properties lazy load
+
+- (NSMutableArray *) review1
+{
+    if(_review1 == nil){
+        _review1 = [[NSMutableArray alloc] init];
+    }
+    return _review1;
+}
+
+- (NSMutableArray *) review2
+{
+    if(_review2 == nil){
+        _review2 = [[NSMutableArray alloc] init];
+    }
+    return _review2;
+}
+
 
 - (UserInfo *) user
 {
@@ -64,11 +86,15 @@
 
 - (NSString *) tips
 {
+    _tips = @"";
     if([self.word.stem length] > 1){
         _tips = [@"词根：" stringByAppendingString:self.word.stem];
     }
     if([self.word.txt_tip length] > 1){
         _tips = [[_tips stringByAppendingString:@"\n助记："] stringByAppendingString:self.word.txt_tip];
+    }
+    if([_tips length] < 1){
+        _tips = @"可选择或编辑助记：轻戳右边的“...”";
     }
     return _tips;
 }
@@ -107,24 +133,6 @@
     return _tipImgFilepath;
 }
 
-//-(CGRect) svExpFrame
-//{
-//    if(_svExpFrame.origin.x < 1){
-//        _svExpFrame = CGRectMake(3.0, 166, 314, 350);
-//        NSLog(@"after _svExpFrame. x[%f] y[%f] height[%f] width[%f]",_svExpFrame.origin.x,_svExpFrame.origin.y,_svExpFrame.size.height,_svExpFrame.size.width);
-//    }
-//    return _svExpFrame;
-//}
-//
-//-(CGRect) svNormFrame
-//{
-//    if(_svNormFrame.origin.x < 1){
-//        _svNormFrame = CGRectMake(3.0, 269, 314, 250);
-//        NSLog(@"after _svNormFrame. x[%f] y[%f] height[%f] width[%f]",_svNormFrame.origin.x,_svNormFrame.origin.y,_svNormFrame.size.height,_svNormFrame.size.width);
-//    }
-//    return _svNormFrame;
-//}
-
 -(UIFont *) fontDetail
 {
     if(!_fontDetail){
@@ -158,6 +166,9 @@
         [self.wordsHasStudied addObject:wordTerm];
         self.user.words = [self.user.words stringByAppendingFormat:@"%@%@",WORD_SEPARATED,wordTerm];
         self.user.comsumeWordNum = [NSNumber numberWithInt:[self.user.comsumeWordNum intValue] + 1];
+        NSLog(@"now user:[%@]", self.user);
+//        NSError *error = nil;
+//        [self.danciDatabase.managedObjectContext save:&error];
         return FALSE;
     }
 }
@@ -247,18 +258,41 @@
 {
     _btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
     _btnCover.frame = CGRectMake(0, 0, 320, 620);
+    [self.navigationItem.titleView removeFromSuperview];
     [_btnCover setTitle:[self.word.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
     [_btnCover setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _btnCover.backgroundColor = [UIColor whiteColor];
     [_btnCover addTarget:self action:@selector(drawMyViewReal:) forControlEvents:UIControlEventTouchUpInside];
-    
     _btnCover.tintColor = [UIColor whiteColor];
     
     [self.view addSubview:_btnCover];
 }
 
+- (void) printFrame:(CGRect)frame
+{
+    NSLog(@"x[%f] y[%f] width[%f] height[%f]",frame.origin.x, frame.origin.y, frame.size.width,frame.size.height);
+}
+
+- (void) showExpandTipinfo
+{
+    //hidder the imgtableview
+    self.tblTipimgsIphone.hidden = TRUE;
+    CGRect svExpandFrame = CGRectMake(3, 167, self.svTipSentence.frame.size.width, 357);
+    [self.svTipSentence setFrame:svExpandFrame];
+}
+
+- (void) showNormalTipinfo
+{
+    //hidder the imgtableview
+    self.tblTipimgsIphone.hidden = FALSE;
+    CGRect svNormal = CGRectMake(3, 267, self.svTipSentence.frame.size.width, 257);
+    self.svTipSentence.frame = svNormal;
+}
+
 - (void)drawMyViewReal:(UIButton *)sender {
     [sender removeFromSuperview];
+    
+    [self showExpandTipinfo];
     
     //title显示当前正在学习或复习的单词
     NSString *title = [[self.word.word stringByAppendingString:@" "] stringByAppendingString:self.word.yin_biao];
@@ -267,7 +301,7 @@
     [btnTitle addTarget:self
                  action:@selector(playWordMp3)
        forControlEvents:UIControlEventTouchDown];
-    [btnTitle setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [btnTitle setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.navigationItem setTitleView:btnTitle];
     
     self.lblMeaning.text = self.word.meaning;
@@ -281,12 +315,11 @@
         UIImage *wordImg = [UIImage imageWithData:imagedata];
         [self.btnTipImgIphone setImage:wordImg forState:UIControlStateHighlighted];
         [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
+    }else{
+        [self.btnTipImgIphone setImage:nil forState:UIControlStateNormal];
     }
     [self.tblTipimgsIphone reloadData];
     [self.tblTipSentence reloadData];
-    //iphone－tip sentence 的multisagetableview
-//    self.tblTipimgsIphone.hidden = TRUE;
-//    self.vtip.frame = self.svExpFrame;
 }
 
 -(void) popLoginView:(int)popType
@@ -336,7 +369,7 @@
     UITableViewCell *cell = nil;
     if(tableView == self.tblTipimgsIphone){
         //显示图片
-        NSLog(@"load tip imgs in tblTipimgsIphone. img count[%d]",[self.tipImgs count]);
+//        NSLog(@"load tip imgs in tblTipimgsIphone. img count[%d]",[self.tipImgs count]);
         static NSString *CellIdentifier = CELL_ID_TIPIMG;
         PPImageScrollingTableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         NSArray *cellData = self.tipImgs;
@@ -346,7 +379,7 @@
         [customCell setCollectionViewBackgroundColor:[UIColor darkGrayColor]];
         return customCell;
     }else if(tableView == self.tblTipSentence){
-        NSLog(@"load data for tblTipSentence at row[%d]", indexPath.row);
+//        NSLog(@"load data for tblTipSentence at row[%d]", indexPath.row);
         cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID_TIPSENTENCE forIndexPath:indexPath];
         NSString *sentence = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:TIPS_SENTENCE_SENTENCE];
         NSString *meaning = [[self.tipSentences objectAtIndex:indexPath.row] objectForKey:TIPS_SENTENCE_MEANING];
@@ -383,7 +416,7 @@
         return;
     }
     if([self.user.maxWordNum intValue] - [self.user.comsumeWordNum intValue] < 1){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"充值提醒" message:@"亲，学习上限使用完毕，请到设置界面充值吧。" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"充值提醒" message:@"亲，学习上限耗尽，请到充值后到设置刷新帐户吧:)" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
         return;
     }
@@ -423,22 +456,6 @@
             NSLog(@"post img select study operation data to Server OK.");
         }
     });
-}
-
-//关闭图片选择 放大tip内容
-- (void)closeTipsimgAndMaxTipsentence
-{
-//    CATransition *animation = [CATransition animation];
-//    animation.type = kCATransitionFade;
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:0.4];
-//    [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
-//    self.tblTipimgsIphone.hidden = TRUE;
-//    self.vtip.frame = self.svExpFrame;
-//    [UIView commitAnimations];
-    
-//    NSLog(@"header展开 frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
-//    NSLog(@"header展开 frame of tblMultipsIphone: x:[%f] y[%f] width[%f] height[%f]",self.tblMultipsIphone.frame.origin.x, self.tblMultipsIphone.frame.origin.y,self.tblMultipsIphone.frame.size.width,self.tblMultipsIphone.frame.size.height);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -533,17 +550,9 @@
 
 - (IBAction)showImgTips:(id)sender {
     //show the tbl
-//    if(self.tblTipimgsIphone.hidden){
-//        CATransition *animation = [CATransition animation];
-//        animation.type = kCATransitionFade;
-//        animation.duration = 0.5;
-//        [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
-//        self.tblTipimgsIphone.hidden = FALSE;
-//        self.vtip.frame = self.svNormFrame;
-////        CGRect mFrame = CGRectMake(0.0, 0.0, self.svNormFrame.size.width, self.svNormFrame.size.height - self.svExpFrame.origin.y);
-////        self.tblMultipsIphone.frame = mFrame;
-//        NSLog(@"showImgTips frame of vtip: x:[%f] y[%f] width[%f] height[%f]",self.vtip.frame.origin.x, self.vtip.frame.origin.y,self.vtip.frame.size.width,self.vtip.frame.size.height);
-//    }
+    if(self.tblTipimgsIphone.hidden){
+        [self showNormalTipinfo];
+    }
 }
 
 - (IBAction)showTipstxt:(id)sender {
@@ -563,24 +572,91 @@
 }
 
 - (IBAction)showNextWord:(id)sender {
+    //用户的帐户消耗
+    if(![self isWordStudiedOtherwiseAdd:self.wordTerm]){
+        self.counter += 1;
+    }
+    NSLog(@"user maxWordNum[%d] comsumeWordNum[%d]",[self.user.maxWordNum intValue], [self.user.comsumeWordNum intValue]);
+    if([self.user.maxWordNum intValue] > 0 && [self.user.maxWordNum intValue] - [self.user.comsumeWordNum intValue] < 1){
+        dispatch_queue_t que = dispatch_queue_create("merger user", NULL);
+        dispatch_async(que, ^{
+            self.user = [UserInfo mergerUserWithServer:self.danciDatabase.managedObjectContext];
+        });
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"充值提醒" message:@"亲，学习上限耗尽，请到充值后到设置刷新帐户吧:)" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    int feedback = StudyOperationTypeFeedbackOk;
     if(sender == self.btnFeedbackOk){
         
     }else if(sender == self.btnFeedbackFuzz){
-        
+        feedback = StudyOperationTypeFeedbackFuzzy;
+        [self.review2 addObject:self.wordTerm];
     }else if(sender == self.btnFeedbackNo){
-        
+        feedback = StudyOperationTypeFeedbackNagative;
+        [self.review1 addObject:self.wordTerm];
+    }
+    
+    //反馈发送到server
+    dispatch_queue_t queue = dispatch_queue_create("postWordFeedback", NULL);
+    dispatch_async(queue, ^{
+        NSDictionary *postData = @{@"studyNo":self.user.studyNo,
+                                   @"word":self.wordTerm,
+                                   @"otype":[NSNumber numberWithInt:feedback],
+                                   @"ovalue":[@"" stringByAppendingFormat:@"%d",feedback],
+                                   @"opt_time":[NSDate date]};
+        [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:postData inManagedObjectContext:self.danciDatabase.managedObjectContext];
+        if(![DanciServer postStudyOperation:postData] == ServerFeedbackTypeOk){
+            NSLog(@"post img select study operation data to Server failed. save it to DB");
+        }else{
+            NSLog(@"post img select study operation data to Server OK.");
+        }
+    });
+    
+    //判断从及时复习队列取还是从单词本取
+    //学习了2个新单词、单词本学习完成了、学习了20个新单词了
+    int curPoint = [self.album.point intValue] % [self.album.count intValue];
+    if((self.counter % NUM_REVIEW_INTERVAL == 0 && self.counter > 0) || self.counter == NUM_LEANING_GROUP || [self.album.point intValue] % [self.album.count intValue] == 0){
+        self.counter += 1;
+        if([self.review1 count] > 0){
+            self.wordTerm = [self.review1 objectAtIndex:0];
+            [self.review1 removeObjectAtIndex:0];
+            [self.review2 addObject:self.wordTerm];
+            [self drawMyView];
+            return;
+        }else if ([self.review2 count] > 0){
+            self.wordTerm = [self.review2 objectAtIndex:0];
+            [self.review2 removeObjectAtIndex:0];
+            [self drawMyView];
+            return;
+        }
+    }
+    if(self.counter == NUM_LEANING_GROUP){
+        self.counter = 0;
     }
     
     self.album.point = [NSNumber numberWithInt:([self.album.point intValue] + 1)];
     NSLog(@"reflush .. now wordPoint[%d] album length[%d]", [self.album.point intValue], [self.words count]);
     if([self.album.point intValue] != [self.words count]){
-        int curPoint = [self.album.point intValue] % [self.album.count intValue];
         self.wordTerm = [self.words objectAtIndex:curPoint];
         [self.view setNeedsDisplay];
         [self drawMyView];
     }else{
-        NSLog(@"all words of current album has Done! You can just begin next cycle!");
+        NSString *msg = [@"" stringByAppendingFormat:@"赞！同学，你学完了[%@]！真棒！我们去挑战新的吧:)", self.album.name];
+        //vip 7777 答应阿眠同学的惊喜
+        if([self.user.studyNo intValue] == 7777){
+            msg = [@"" stringByAppendingFormat:@"赞！阿眠MM，你学完了[%@]！btw：谢谢你的糖果哦，如果能吃到就更好了。我们去挑战新的吧:)", self.album.name];
+        }
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"学成!" message:msg delegate:self cancelButtonTitle:@"走你！" otherButtonTitles:nil];
+        [alertView show];
     }
+}
+
+#pragma mark UIActionSheetDelegate
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
