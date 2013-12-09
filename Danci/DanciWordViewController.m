@@ -175,45 +175,6 @@
 
 - (void) reloadTipimgsForWord:(NSString *) wordTerm atBegin:(int) begin requestCount:(int) count
 {
-    NSDictionary *infoDict = [self.wordClient getWordInfo:self.word];
-    if(infoDict == nil || [infoDict count] < 1)
-    {
-        NSLog(@"get word info Failed!");
-        return -1;
-    }
-    if ([[infoDict objectForKey:@"status"] intValue] != 0) {
-        NSLog(@"get word info Failed!");
-        return -1;
-    }
-    
-    infoDict = [infoDict objectForKey:@"data"];
-    
-    //填充wordinfo
-    self.fayin = [infoDict objectForKey:WORD_FAYIN];
-    self.comment = [infoDict objectForKey:WORD_COMMENT];
-    self.fayinMp3Url = [infoDict objectForKey:WORD_FAYIN_MP3URL];
-    self.tipTxt = [infoDict objectForKey:WORD_TIP_TXT];
-    self.wordGern = [infoDict objectForKey:WORD_GERN];
-    self.tipImgs = [infoDict objectForKey:WORD_TIP_IMGS];
-    self.tipTxts = [infoDict objectForKey:WORD_TIP_TXTS];
-    self.tipSentences = [infoDict objectForKey:WORD_TIP_SENTENCES];
-    
-    
-    //先用假数据
-//    NSDictionary *wordInfo = [self getWordInfoByCoredata:_word];
-//    if(wordInfo != nil) {
-//        self.fayin = [wordInfo valueForKey:WORD_FAYIN];
-//        self.comment = [wordInfo valueForKey:WORD_COMMENT];
-//        self.wordGern = [wordInfo valueForKey:WORD_GERN];
-//    }
-    self.fayin = @"[saɪˈkɒlədʒɪ]";
-    self.comment = @"n.【心】心理学；心理特征；〈非正式〉【心】看穿别人心理的能力";
-    self.wordGern = @"psy=sci，是一个偏旁部首，是“知道”的意思； cho是一个偏旁部首，是“心”的意思； lo是一个偏旁部首，是“说”的意思； gy是一个偏旁部首，是“学”的意思，logy合起来是“学说”的意思。 psy-cho-logy连起来就是“知道心的学说”。";
-
-    //    self.fayinMp3Url = @"wordmp3/p/psychology.arm";
-    self.fayinMp3Url = @"/Users/huhao/Developer/psychology.mp3";
-    
-    return 0;
     dispatch_queue_t queueImg = dispatch_queue_create("downloadTipimg", NULL);
     dispatch_async(queueImg, ^{
         NSArray *tmpimgs = [DanciServer getWordTipsImg:wordTerm atBegin:begin requestCount:count];
