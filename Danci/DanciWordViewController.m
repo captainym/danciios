@@ -105,6 +105,7 @@
     [_tipImgs removeAllObjects];
     [self.tblTipimgsIphone reloadData];
     _tipSentences = nil;
+    [self.tblTipSentence reloadData];
     [self getWordInfo];
 }
 
@@ -144,8 +145,6 @@
 -(void) setTipSentences:(NSArray *)tipSentences
 {
     _tipSentences = tipSentences;
-    //完成后 通知tblsentence更新
-    [self.tblTipimgsIphone reloadData];
 }
 
 #pragma mark -  methods
@@ -180,8 +179,10 @@
         NSArray *tmpimgs = [DanciServer getWordTipsImg:wordTerm atBegin:begin requestCount:count];
         [self.tipImgs addObjectsFromArray:tmpimgs];
         //完成后通知tblimg更新
-        [self.tblTipimgsIphone reloadData];
-        NSLog(@"query get [%d] imgs. now total img num[%d]", [tmpimgs count], [self.tipImgs count]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tblTipimgsIphone reloadData];
+            NSLog(@"query get [%d] imgs. now total img num[%d]", [tmpimgs count], [self.tipImgs count]);
+        });
     });
 }
 
@@ -189,8 +190,13 @@
 {
     dispatch_queue_t queueSentence = dispatch_queue_create("downloadSentence", NULL);
     dispatch_async(queueSentence, ^{
-        self.tipSentences = [DanciServer getWordTipsSentence:wordTerm];
-        NSLog(@"query get [%d] sentence.", [self.tipSentences count]);
+        NSArray *sentences = [DanciServer getWordTipsSentence:wordTerm];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.tipSentences = sentences;
+            //完成后 通知tblsentence更新
+            [self.tblTipSentence reloadData];
+            NSLog(@"query get [%d] sentence.", [self.tipSentences count]);
+        });
     });
 }
 
@@ -199,6 +205,7 @@
 {
     self.word = [Word getWord:self.wordTerm inManagedObjectContext:self.danciDatabase.managedObjectContext];
     NSLog(@"get word:[%@] word term[%@]", self.word, self.word.word);
+    //清楚上一个单词的数据
     [self reloadTipimgsForWord:self.word.word atBegin:0 requestCount:DEFAULT_REQUEST_COUNT_IMG];
     [self reloadTipsentenceForWord:self.word.word];
 }
@@ -284,9 +291,17 @@
 - (void) showNormalTipinfo
 {
     //hidder the imgtableview
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.4];
+    
+    [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
     self.tblTipimgsIphone.hidden = FALSE;
     CGRect svNormal = CGRectMake(3, 267, self.svTipSentence.frame.size.width, 257);
     self.svTipSentence.frame = svNormal;
+    
+    [UIView commitAnimations];
 }
 
 - (void)drawMyViewReal:(UIButton *)sender {
@@ -318,8 +333,6 @@
     }else{
         [self.btnTipImgIphone setImage:nil forState:UIControlStateNormal];
     }
-    [self.tblTipimgsIphone reloadData];
-    [self.tblTipSentence reloadData];
 }
 
 -(void) popLoginView:(int)popType
