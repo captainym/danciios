@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67E981184078B800510FA7 /* CoreData.framework */; };
+		71BA403D1855F0E9001B1196 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */; };
 		793F8F321854782500209430 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 793F8F311854782500209430 /* Album.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
 		794749A5184C307600A1B8E2 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 794749A4184C307600A1B8E2 /* Word.m */; };
@@ -50,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		1C67E981184078B800510FA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		71BA403B1855F0E9001B1196 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewController.h; sourceTree = "<group>"; };
+		71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewController.m; sourceTree = "<group>"; };
 		793F8F301854782500209430 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
 		793F8F311854782500209430 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		7947499A184985CB00A1B8E2 /* UserInfo+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserInfo+Server.h"; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				79859B4C17ED9E65008F8EFD /* PPImageScrollingTableViewCell */,
 				79859B3017EC54EA008F8EFD /* DanciAlbumTableViewController.h */,
 				79859B3117EC54EB008F8EFD /* DanciAlbumTableViewController.m */,
+				71BA403B1855F0E9001B1196 /* ConfigurationViewController.h */,
+				71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */,
 				79859B2217EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard */,
 				79859B2517EC0E75008F8EFD /* MainStoryboard_iPad.storyboard */,
 				79859B3F17EC7551008F8EFD /* DanciWordViewController.h */,
@@ -347,6 +352,7 @@
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,
 				794749A5184C307600A1B8E2 /* Word.m in Sources */,
+				71BA403D1855F0E9001B1196 /* ConfigurationViewController.m in Sources */,
 				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
 				79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */,
 				79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */,
