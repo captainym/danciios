@@ -51,6 +51,7 @@
             if([user.comsumeWordNum intValue] < [[mergerData objectForKey:@"comsumeWordNum"]intValue]){
                 user.comsumeWordNum = [NSNumber numberWithInt:[[mergerData objectForKey:@"comsumeWordNum"]intValue]];
             }
+            //words也要同步 ： server的words数量比本地的多则同步一下
         }else{
             NSLog(@"merger user info faild. msg[%@]",[mergerData objectForKey:RETURN_VALUE]);
         }
