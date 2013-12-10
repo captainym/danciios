@@ -28,9 +28,13 @@
     }else if([matches count] == 0){
         //新建一个
         user = [NSEntityDescription insertNewObjectForEntityForName:@"UserInfo" inManagedObjectContext:context];
+        user.words = @"";
         NSLog(@"create a user of empty");
     }else{
         user = [matches lastObject];
+        if(user.words == nil){
+            user.words = @"";
+        }
         NSLog(@"load a user from coredata. the user is[%@]  mid[%@]",user,user.mid);
     }
     

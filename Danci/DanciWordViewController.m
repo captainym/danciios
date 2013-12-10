@@ -24,8 +24,8 @@
 //新单词学习计数器
 @property int counter;
 //单词复习队列1和2 确保每个单词都有3次复习机会（包括第一次学习）
-@property (nonatomic, strong) NSMutableArray *review1;
-@property (nonatomic, strong) NSMutableArray *review2;
+@property (nonatomic, strong) NSMutableArray *reviewNo;
+@property (nonatomic, strong) NSMutableArray *reviewFuzze;
 
 @end
 
@@ -46,23 +46,25 @@
 @synthesize player = _player;
 @synthesize fontDetail = _fontDetail;
 @synthesize wordTerm = _wordTerm;
+@synthesize reviewNo = _reviewNo;
+@synthesize reviewFuzze = _reviewFuzze;
 
 #pragma mark- properties lazy load
 
-- (NSMutableArray *) review1
+- (NSMutableArray *) reviewNo
 {
-    if(_review1 == nil){
-        _review1 = [[NSMutableArray alloc] init];
+    if(_reviewNo == nil){
+        _reviewNo = [[NSMutableArray alloc] init];
     }
-    return _review1;
+    return _reviewNo;
 }
 
-- (NSMutableArray *) review2
+- (NSMutableArray *) reviewFuzze
 {
-    if(_review2 == nil){
-        _review2 = [[NSMutableArray alloc] init];
+    if(_reviewFuzze == nil){
+        _reviewFuzze = [[NSMutableArray alloc] init];
     }
-    return _review2;
+    return _reviewFuzze;
 }
 
 
@@ -165,6 +167,9 @@
         [self.wordsHasStudied addObject:wordTerm];
         self.user.words = [self.user.words stringByAppendingFormat:@"%@%@",WORD_SEPARATED,wordTerm];
         self.user.comsumeWordNum = [NSNumber numberWithInt:[self.user.comsumeWordNum intValue] + 1];
+        [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+            NSLog(@"save data in scram.");
+        }];
         NSLog(@"now user:[%@]", self.user);
 //        NSError *error = nil;
 //        [self.danciDatabase.managedObjectContext save:&error];
@@ -586,7 +591,7 @@
 
 - (IBAction)showNextWord:(id)sender {
     //用户的帐户消耗
-    if(![self isWordStudiedOtherwiseAdd:self.wordTerm]){
+    if(![self isWordStudiedOtherwiseAdd:self.wordTerm] && sender != self.btnFeedbackOk && self.counter != NUM_LEANING_GROUP){
         self.counter += 1;
     }
     NSLog(@"user maxWordNum[%d] comsumeWordNum[%d]",[self.user.maxWordNum intValue], [self.user.comsumeWordNum intValue]);
@@ -605,10 +610,14 @@
         
     }else if(sender == self.btnFeedbackFuzz){
         feedback = StudyOperationTypeFeedbackFuzzy;
-        [self.review2 addObject:self.wordTerm];
+        if(![self.reviewFuzze containsObject:self.wordTerm]){
+            [self.reviewFuzze addObject:self.wordTerm];
+        }
     }else if(sender == self.btnFeedbackNo){
         feedback = StudyOperationTypeFeedbackNagative;
-        [self.review1 addObject:self.wordTerm];
+        if(![self.reviewNo containsObject:self.wordTerm]){
+            [self.reviewNo addObject:self.wordTerm];
+        }
     }
     
     //反馈发送到server
@@ -628,19 +637,17 @@
     });
     
     //判断从及时复习队列取还是从单词本取
-    //学习了2个新单词、单词本学习完成了、学习了20个新单词了
-    int curPoint = [self.album.point intValue] % [self.album.count intValue];
-    if((self.counter % NUM_REVIEW_INTERVAL == 0 && self.counter > 0) || self.counter == NUM_LEANING_GROUP || [self.album.point intValue] % [self.album.count intValue] == 0){
-        self.counter += 1;
-        if([self.review1 count] > 0){
-            self.wordTerm = [self.review1 objectAtIndex:0];
-            [self.review1 removeObjectAtIndex:0];
-            [self.review2 addObject:self.wordTerm];
+    //未掌握单词超过了3个、模糊单词数超过5个、单词本学习完成了、学习了20个新单词了
+    if([self.reviewNo count] >= 3 || [self.reviewFuzze count] >=5 || self.counter == NUM_LEANING_GROUP || [self.album.point intValue] % [self.album.count intValue] == 0){
+        if([self.reviewNo count] > 0){
+            self.wordTerm = [self.reviewNo objectAtIndex:0];
+            [self.reviewNo removeObjectAtIndex:0];
+            [self.reviewFuzze addObject:self.wordTerm];
             [self drawMyView];
             return;
-        }else if ([self.review2 count] > 0){
-            self.wordTerm = [self.review2 objectAtIndex:0];
-            [self.review2 removeObjectAtIndex:0];
+        }else if ([self.reviewFuzze count] > 0){
+            self.wordTerm = [self.reviewFuzze objectAtIndex:0];
+            [self.reviewFuzze removeObjectAtIndex:0];
             [self drawMyView];
             return;
         }
@@ -649,9 +656,10 @@
         self.counter = 0;
     }
     
+    int curPoint = [self.album.point intValue] % [self.album.count intValue] + 1;
     self.album.point = [NSNumber numberWithInt:([self.album.point intValue] + 1)];
     NSLog(@"reflush .. now wordPoint[%d] album length[%d]", [self.album.point intValue], [self.words count]);
-    if([self.album.point intValue] != [self.words count]){
+    if(curPoint != [self.words count]){
         self.wordTerm = [self.words objectAtIndex:curPoint];
         [self.view setNeedsDisplay];
         [self drawMyView];
