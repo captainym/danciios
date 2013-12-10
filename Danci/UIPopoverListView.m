@@ -342,7 +342,7 @@
 //    NSLog(@"frame:x[%f] y[%f] width[%f] height[%f]",self.frame.origin.x, self.frame.origin.y,self.frame.size.width,self.frame.size.height);
     // tell the delegate the cancellation
     if (self.delegate && [self.delegate respondsToSelector:@selector(popoverListViewCancel:)]) {
-        [self.delegate popoverListViewCancel:self];
+//        [self.delegate popoverListViewCancel:self];
     }
     [self fadeOut];
 }
