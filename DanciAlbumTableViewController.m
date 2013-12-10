@@ -186,7 +186,7 @@
         [segue.destinationViewController setAlbum:self.albumSelected];
     }
     else if ([segue.identifier isEqualToString:@"segueConfiguration"]) {
-//        [segue.destinationViewController setDanciDatabase:self.danciDatabase];
+        [segue.destinationViewController setDanciDatabase:self.danciDatabase];
     }
 }
 

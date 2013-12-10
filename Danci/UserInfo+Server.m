@@ -44,7 +44,12 @@
 + (UserInfo *) mergerUserWithServer:(NSManagedObjectContext *) context
 {
     UserInfo *user = [self getUser:context];
-    if([user.maxWordNum intValue] > 1 && [user.studyNo intValue] > 1){
+    return [UserInfo mergerUserToServer:user];
+}
+
++ (UserInfo *) mergerUserToServer:(UserInfo *) user
+{
+    if(user != nil && [user.maxWordNum intValue] > 1 && [user.studyNo intValue] > 1){
         NSLog(@"user:%@",user);
         NSDictionary *userinfo = @{@"studyNo":user.studyNo,
                                    @"word_used":user.comsumeWordNum,
@@ -59,7 +64,7 @@
         }else{
             NSLog(@"merger user info faild. msg[%@]",[mergerData objectForKey:RETURN_VALUE]);
         }
-    }else{
+    } else{
         NSLog(@"user not exist. no need to merge user");
     }
     

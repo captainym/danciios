@@ -18,5 +18,6 @@
 
 //同步用户信息
 + (UserInfo *) mergerUserWithServer:(NSManagedObjectContext *) context;
++ (UserInfo *) mergerUserToServer:(UserInfo *) user;
 
 @end

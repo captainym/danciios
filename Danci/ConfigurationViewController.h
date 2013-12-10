@@ -14,7 +14,9 @@
     //// 数据控件
     // 用户信息相关
     UILabel *labelUserInfo;
-    UIButton *btnLogin;
+//    UITableView *tableUserInfo;
+    UIButton *btnUserLogin;
+    UIButton *btnUserSync;
     
     // 帮助相关
     UILabel *labelHelp;
@@ -33,5 +35,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnHelp;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UILabel *labelForCurPage;
+
 
 @end
