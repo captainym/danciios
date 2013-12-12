@@ -17,6 +17,7 @@
 #define WORD_SEPARATED @"|"
 #define NUM_REVIEW_INTERVAL 2
 #define NUM_LEANING_GROUP 20
+#define FILE_TIP_IMG_DEFAULT @"./addImg4.jpg"
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate, UIActionSheetDelegate>
 
@@ -26,6 +27,8 @@
 //单词复习队列1和2 确保每个单词都有3次复习机会（包括第一次学习）
 @property (nonatomic, strong) NSMutableArray *reviewNo;
 @property (nonatomic, strong) NSMutableArray *reviewFuzze;
+//默认的tip图片
+@property (nonatomic, strong) UIImage *defaultTipImg;
 
 @end
 
@@ -49,7 +52,19 @@
 @synthesize reviewNo = _reviewNo;
 @synthesize reviewFuzze = _reviewFuzze;
 
+@synthesize defaultTipImg = _defaultTipImg;
+
 #pragma mark- properties lazy load
+
+-(UIImage *) defaultTipImg
+{
+    if(_defaultTipImg == nil){
+        NSData *imgData = [[NSData alloc] initWithContentsOfFile:FILE_TIP_IMG_DEFAULT];
+        _defaultTipImg = [[UIImage alloc] initWithData:imgData];
+    }
+    
+    return _defaultTipImg;
+}
 
 - (NSMutableArray *) reviewNo
 {
@@ -122,8 +137,8 @@
 
 - (NSString *) fayinMp3Url
 {
-    //假数据 实际是按照一定规则生成
-    _fayinMp3Url = @"/Users/huhao/Developer/psychology.mp3";
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"words_voices" ofType:nil];
+    _fayinMp3Url = [bundlePath stringByAppendingFormat:@"/%@/%@.mp3", [self.wordTerm substringToIndex:1] , self.wordTerm];
     return _fayinMp3Url;
 }
 
@@ -228,6 +243,11 @@
 
     [self.tblTipSentence setDelegate:self];
     [self.tblTipSentence setDataSource:self];
+    
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+//    backItem.title = @"<";
+//    self.navigationItem.leftBarButtonItem = backItem;
+//    [self.navigationItem.leftBarButtonItem setTitle:@"x"];
 
     [self drawMyView];
 }
@@ -254,7 +274,7 @@
         if ([self.player prepareToPlay]) {
             [self.player setVolume:0.5f];
             if([self.player play]){
-                NSLog(@"play successed. mp3url[%@]", self.fayinMp3Url);
+//                NSLog(@"play successed. mp3url[%@]", self.fayinMp3Url);
             }else{
                 NSLog(@"play failed! mp3url[%@]", self.fayinMp3Url);
             }
@@ -315,6 +335,7 @@
     [self showExpandTipinfo];
     
     //title显示当前正在学习或复习的单词
+    self.title = @"主界面";
     NSString *title = [[self.word.word stringByAppendingString:@" "] stringByAppendingString:self.word.yin_biao];
     UIButton *btnTitle = [[UIButton alloc] init];
     [btnTitle setTitle:title forState:UIControlStateNormal];
@@ -333,10 +354,12 @@
     if([filemanager fileExistsAtPath: self.tipImgFilepath]){
         NSData *imagedata = [NSData dataWithContentsOfFile:self.tipImgFilepath];
         UIImage *wordImg = [UIImage imageWithData:imagedata];
-        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateHighlighted];
-        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
+        [self.btnTipImgIphone setBackgroundImage:wordImg forState:UIControlStateNormal];
+//        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateHighlighted];
+//        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
     }else{
-        [self.btnTipImgIphone setImage:nil forState:UIControlStateNormal];
+//        [self.btnTipImgIphone setImage:nil forState:UIControlStateNormal];
+        [self.btnTipImgIphone setBackgroundImage:self.defaultTipImg forState:UIControlStateNormal];
     }
 }
 
@@ -444,8 +467,9 @@
     PPCollectionViewCell *cell = (PPCollectionViewCell *) [sender.imageScrollingView.myCollectionView cellForItemAtIndexPath:indexPathOfImage];
     NSData *imgData = UIImageJPEGRepresentation(cell.imageView.image, 0.0f);
     UIImage *img = [UIImage imageWithData:imgData];
-    [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
-    [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
+    [self.btnTipImgIphone setBackgroundImage:img forState:UIControlStateNormal];
+//    [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
+//    [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
     NSLog(@"selected img info: imgName:[%@] imgUrl:[%@]", imgName, imgUrl);
     
     //图片保存到本地

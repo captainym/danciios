@@ -21,7 +21,7 @@
 #define HEIGHT_SENTENCE_ROW 60
 
 #define SEGUE_EDIT @"sgTipsTxt"
-#define DEFAULT_REQUEST_COUNT_IMG 20
+#define DEFAULT_REQUEST_COUNT_IMG 50
 
 @interface DanciWordViewController : UIViewController{
     UIButton *_btnCover;

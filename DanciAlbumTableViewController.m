@@ -127,11 +127,12 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //为了使学习主界面的返回按钮没有文字只有图标，在这里去掉title
+    self.title = @"";
+    UIButton *btnTitle = [[UIButton alloc] init];
+    [btnTitle setTitle:@"单词本" forState:UIControlStateNormal];
+    [btnTitle setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.navigationItem setTitleView: btnTitle];
 }
 
 - (void)didReceiveMemoryWarning
@@ -184,6 +185,7 @@
         [segue.destinationViewController setDanciDatabase:self.danciDatabase];
         [segue.destinationViewController setIsNewStudy:TRUE];
         [segue.destinationViewController setAlbum:self.albumSelected];
+//        [segue.destinationViewController setNavigationBarHidden:YES];
     }
     else if ([segue.identifier isEqualToString:@"segueConfiguration"]) {
         [segue.destinationViewController setDanciDatabase:self.danciDatabase];

@@ -47,6 +47,7 @@
 		79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC0AA818433578004DF41E /* CoreDataTableViewController.m */; };
 		79FC0AB018435BCA004DF41E /* album.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AAF18435BCA004DF41E /* album.json */; };
 		79FC0AB218435BDC004DF41E /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AB118435BDC004DF41E /* words.json */; };
+		EB14488B1859DA8D00011A83 /* words_voices in Resources */ = {isa = PBXBuildFile; fileRef = EB14488A1859DA8D00011A83 /* words_voices */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,7 @@
 		79FC0AA818433578004DF41E /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		79FC0AAF18435BCA004DF41E /* album.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = album.json; sourceTree = "<group>"; };
 		79FC0AB118435BDC004DF41E /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
+		EB14488A1859DA8D00011A83 /* words_voices */ = {isa = PBXFileReference; lastKnownFileType = folder; path = words_voices; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 		79859B1117EC0E75008F8EFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EB14488A1859DA8D00011A83 /* words_voices */,
 				79859B5617ED9E8D008F8EFD /* images */,
 				79859B1917EC0E75008F8EFD /* DanciAppDelegate.h */,
 				79859B1A17EC0E75008F8EFD /* DanciAppDelegate.m */,
@@ -317,6 +320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB14488B1859DA8D00011A83 /* words_voices in Resources */,
 				79859B1517EC0E75008F8EFD /* InfoPlist.strings in Resources */,
 				79859B1D17EC0E75008F8EFD /* Default.png in Resources */,
 				79859B1F17EC0E75008F8EFD /* Default@2x.png in Resources */,
