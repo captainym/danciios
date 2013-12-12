@@ -2,7 +2,7 @@
 //  UserInfo.m
 //  Danci
 //
-//  Created by HuHao on 13-12-6.
+//  Created by ShiYuming on 13-12-6.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
