@@ -9,8 +9,9 @@
 #import "ConfigurationViewController.h"
 #import "UIPopoverListView.h"
 
+#define TABLE_CELL_FOR_USER_INFO @"tableCellForUserInfo"
 
-@interface ConfigurationViewController () <UIScrollViewDelegate, UIPopoverListViewDelegate>
+@interface ConfigurationViewController () <UIScrollViewDelegate, UIPopoverListViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (void) initScrollView;
 - (void) createEmptyPagesForScrollView;
@@ -54,8 +55,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
+	// Do any additional setup after loading the view.
     self.title = @"配置";
     
     // Init controls
@@ -106,9 +107,6 @@
     [self.scrollView setContentOffset:CGPointMake(320 * 0, 0)]; // 页面滑动
     
     [UIView commitAnimations];
-    
-    //// 显示用户信息
-    [self showCurUserDetails];
 }
 
 - (void) showHelpView
@@ -125,36 +123,6 @@
     [self.scrollView setContentOffset:CGPointMake(320 * 1, 0)]; // 页面滑动
     
     [UIView commitAnimations];
-    
-    //// 显示帮助信息
-}
-
-- (void) showCurUserDetails
-{
-//    labelUserInfo.lineBreakMode = UILineBreakModeMiddleTruncation;
-    labelUserInfo.numberOfLines = 6;
-    
-    NSString *userDetail = [NSString stringWithFormat:
-                                 @"用户名: %@\n学号: %@\n注册时间: %@\n推荐人学号: %@\n最高可记单词数: %@\n已记单词数: %@"
-                                 , self.curUser.mid
-                                 , self.curUser.studyNo
-                                 , self.curUser.regTime
-                                 , self.curUser.recommendStudyNo
-                                 , self.curUser.maxWordNum
-                                 , self.curUser.comsumeWordNum];
-    
-    labelUserInfo.text = userDetail;
-    
-    // 顶端对齐显示
-    CGSize maximumSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height - 40);
-
-    UIFont *userDetailFont = [UIFont fontWithName:@"Helvetica" size:14];
-    CGSize userDetailStringSize = [userDetail sizeWithFont:userDetailFont
-                                             constrainedToSize:maximumSize
-                                             lineBreakMode:labelUserInfo.lineBreakMode];
-    
-    CGRect userDetailFrame = CGRectMake(10, 10, self.scrollView.frame.size.width, userDetailStringSize.height);
-    labelUserInfo.frame = userDetailFrame;
 }
 
 #pragma mark - switch views by scroll
@@ -190,19 +158,18 @@
     
     NSInteger labelUserInfoHeight = self.scrollView.frame.size.height - btnUserLogInHeight - btnUserSyncHeight - 40;
     
-    // 用户信息label
-    labelUserInfo = [[UILabel alloc] init];
-    labelUserInfo.frame = CGRectMake(320 * 0, 0, 320, labelUserInfoHeight);
+    // 用户信息table
+    tableUserInfo = [[UITableView alloc] init];
+    tableUserInfo.frame = CGRectMake(320 * 0, 0, 320, labelUserInfoHeight);
+    [tableUserInfo registerClass:[UITableViewCell class] forCellReuseIdentifier:TABLE_CELL_FOR_USER_INFO];
+    [tableUserInfo setDelegate:self];
+    [tableUserInfo setDataSource:self];
     
-//    [labelUserInfo registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID_TIPS_TXT];
-//    [labelUserInfo setDelegate:self];
-//    [labelUserInfo setDataSource:self];
-//
     
     // 登录按钮
     btnUserLogin = [UIButton buttonWithType:UIButtonTypeSystem];
+    
     //判断是否登陆
-//    NSLog(@"user [%@]", self.curUser);
     if(self.curUser.mid == nil || [self.curUser.mid length] < 2) {
         [btnUserLogin setTitle:@"登录" forState:UIControlStateNormal];
     }
@@ -230,39 +197,36 @@
     UIView *userView = [[UIView alloc] init];
     userView.frame = CGRectMake(0, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     
-    [userView addSubview:labelUserInfo];
+    [userView addSubview:tableUserInfo];
     [userView addSubview:btnUserLogin];
     [userView addSubview:btnUserSync];
     
     [self.scrollView addSubview:userView];
     
     //// page for help
+    labelAppDescription = [[UILabel alloc] init];
+    labelAppDescription.frame = CGRectMake(320 * 1, 10, 320, 45);
+    labelAppDescription.numberOfLines = 2;
+    labelAppDescription.text = @"记单词\n科学记单词 高效学英语";
+    labelAppDescription.font = [UIFont fontWithName:@"Verdana" size:12];
+    [self.scrollView addSubview:labelAppDescription];
+
+    labelTeamIntruction = [[UILabel alloc] init];
+    labelTeamIntruction.frame = CGRectMake(320 * 1, 60, 320, 80);
+    labelTeamIntruction.numberOfLines = 6;
+    labelTeamIntruction.text = @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
+    labelTeamIntruction.font = [UIFont fontWithName:@"Verdana" size:12];
+    [self.scrollView addSubview:labelTeamIntruction];
+
+    
     labelHelp = [[UILabel alloc] init];
-    labelHelp.frame = CGRectMake(320 * 1, 0, 320, 45);
-    labelHelp.numberOfLines = 0;
-    labelHelp.text = @"官网: http://www.danci.com";
+    labelHelp.frame = CGRectMake(320 * 1, 140, 320, 45);
+    labelHelp.numberOfLines = 1;
+    labelHelp.text = @"官网:    http://www.danci.com";
     labelHelp.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelHelp];
     
-    
-
-    
-//    txtEditTip = [[UITextView alloc] init];
-//    txtEditTip.frame = CGRectMake(320 * 1, 50, 320, 100);
-//    txtEditTip.delegate = self;
-//    [txtEditTip setText:self.curWord.txt_tip];
-//    txtEditTip.layer.borderColor = [UIColor grayColor].CGColor;
-//    txtEditTip.layer.borderWidth = 0.5;
-//    txtEditTip.layer.cornerRadius = 5.0;
-//    [self.mScrollView addSubview:txtEditTip];
-//    btnOK = [[UIButton alloc] init];
-//    btnOK.frame = CGRectMake(320 * 1.2, 154, 320*0.6, 30);
-//    [btnOK setTitle:@"OK 这样就记住啦" forState:UIControlStateNormal];
-//    btnOK.backgroundColor = [UIColor darkGrayColor];
-//    btnOK.showsTouchWhenHighlighted = YES;
-//    [btnOK addTarget:self action:@selector(saveTipTxt:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.mScrollView addSubview:btnOK];
-    
+    // 默认显示用户信息页面
     [self showUserInfoView];
 }
 
@@ -279,7 +243,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    //暂不处理 - 其实左右滑动还有包含开始等等操作
+    // 暂不处理 - 其实左右滑动还有包含开始等等操作
 }
 
 - (IBAction)showUserInfo:(id)sender {
@@ -314,10 +278,10 @@
 
 - (void) onBtnUserLogin
 {
-    if(![self userLoggedIn]) {
+    if(![self userLoggedIn]) { // 未登录==>弹出登录框
         [self popLoginView:TYPE_LOGIN];
     }
-    else {
+    else { // 已登录==>注销
         self.curUser.mid = @"";
         self.curUser.comsumeWordNum = 0;
         self.curUser.maxWordNum = 0;
@@ -326,12 +290,15 @@
         self.curUser.studyNo = 0;
         self.curUser.words = @"";
         
-        // 显式地save
+        // 更新用户信息至CoreData
         [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
+        
+        // 更新按钮标题
+        [btnUserLogin setTitle:@"登录" forState:UIControlStateNormal];
+        
+        // 更新页面显示
+        [tableUserInfo reloadData];
     }
-    
-    NSString *title = [NSString stringWithFormat:@"%@", ([self userLoggedIn] ? @"注销" : @"登录")];
-    [btnUserLogin setTitle:title forState:UIControlStateNormal];
 }
 
 - (void) onBtnUserSync
@@ -340,9 +307,11 @@
     dispatch_queue_t queue = dispatch_queue_create("merge user", NULL);
     dispatch_async(queue, ^{
         self.curUser = [UserInfo mergerUserToServer:self.curUser];
+        
+        // 在主线程中完成UI更新
         dispatch_async(dispatch_get_main_queue(), ^{
             // update UI
-            [self showCurUserDetails];
+            [tableUserInfo reloadData];
         });
     });
 }
@@ -352,34 +321,133 @@
 
 -(void) popoverListViewCancel:(UIPopoverListView *)popoverListView
 {
-    //应该纪录下来 计算流失率
+    // 应该纪录下来 计算流失率
     [btnUserLogin setTitle:@"登录" forState:UIControlStateNormal];
     
-    NSLog(@"user do not want to reg or login");
+//    NSLog(@"user do not want to reg or login");
 }
 
 - (void)pushDataToUser:(NSDictionary *)userInfo
 {
     self.curUser.mid = [userInfo objectForKey:@"mid"];
+//    self.curUser.studyNo = [NSNumber numberWithInteger: [[userInfo objectForKey:@"studyNo"] integerValue]];
     self.curUser.studyNo = [NSNumber numberWithInt:[[userInfo objectForKey:@"studyNo"] intValue]];
     self.curUser.maxWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"maxWordNum"] intValue]];
     self.curUser.comsumeWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"comsumeWordNum"]intValue]];
     self.curUser.regTime = [NSDate dateWithTimeIntervalSince1970:[[userInfo objectForKey:@"regTime"] intValue]];
+    
+    // 显式地save
+    [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
+    
+    NSLog(@"++++++++user login in. user:%@, real study no: %d, got studo no: %@", self.curUser, [[userInfo objectForKey:@"studyNo"] intValue], self.curUser.studyNo);
 }
 
 -(void) popoverListViewLogin:(UIPopoverListView *)popoverListView oldUser:(NSDictionary *)userInfo
 {
+    // 更新按钮标题
     NSString *title = [NSString stringWithFormat:@"%@", ((userInfo != nil) ? @"注销" : @"登录")];
     [btnUserLogin setTitle:title forState:UIControlStateNormal];
     
+    // 保存数据
     [self pushDataToUser:userInfo];
-    NSLog(@"user login in. user:%@", self.curUser);
+    
+    // 更新页面显示
+    [tableUserInfo reloadData];
+    
+//    NSLog(@"user login in. user:%@", self.curUser);
 }
 
 -(void) popoverListViewRegist:(UIPopoverListView *)popoverListView newUser:(NSDictionary *)userInfo
 {
+    // 更新按钮标题
+    NSString *title = [NSString stringWithFormat:@"%@", ((userInfo != nil) ? @"注销" : @"登录")];
+    [btnUserLogin setTitle:title forState:UIControlStateNormal];
+    
+    // 保存数据
     [self pushDataToUser:userInfo];
-    NSLog(@"user regist. user:%@", self.curUser);
+    
+    // 更新页面显示
+    [tableUserInfo reloadData];
+    
+//    NSLog(@"user regist. user:%@", self.curUser);
+}
+
+#pragma mark - Table view delegate
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.0f;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 6;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = TABLE_CELL_FOR_USER_INFO;
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    
+    NSString *title = @"";
+    NSString *detail = @"";
+    
+    switch (indexPath.row) {
+        case 0:
+            title = @"用户名:";
+            detail = ([self userLoggedIn] ? self.curUser.mid : @"");
+            break;
+            
+        case 1:
+            title = @"学号:";
+            detail = ([self userLoggedIn] ? [NSString stringWithFormat:@"%d", [self.curUser.studyNo intValue]] : @"");
+            break;
+            
+        case 2:
+        {
+            title = @"注册时间:";
+            if ([self userLoggedIn]) {
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"YYYY-MM-DD HH:mm:SS"];
+                detail = [dateFormatter stringFromDate:self.curUser.regTime];
+            }
+            else {
+                detail = @"";
+            }
+        }
+            break;
+
+        case 3:
+            title = @"推荐人学号:";
+            detail = ([self userLoggedIn] && self.curUser.recommendStudyNo != nil ? [NSString stringWithFormat:@"%@", self.curUser.recommendStudyNo] : @"");
+            break;
+
+        case 4:
+            title = @"可记单词数上限:";
+            detail = ([self userLoggedIn] ? [NSString stringWithFormat:@"%@", self.curUser.maxWordNum] : @"");
+            break;
+
+        case 5:
+            title = @"已记单词数:";
+            detail = ([self userLoggedIn] ? [NSString stringWithFormat:@"%@", self.curUser.comsumeWordNum] : @"");
+            break;
+
+        default:
+            break;
+    }
+    
+    cell.textLabel.text = title;
+    cell.detailTextLabel.text = detail;
+    
+    return cell;
 }
 
 

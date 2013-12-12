@@ -13,12 +13,13 @@
 {
     //// 数据控件
     // 用户信息相关
-    UILabel *labelUserInfo;
-//    UITableView *tableUserInfo;
+    UITableView *tableUserInfo;
     UIButton *btnUserLogin;
     UIButton *btnUserSync;
     
     // 帮助相关
+    UILabel *labelAppDescription;
+    UILabel *labelTeamIntruction;
     UILabel *labelHelp;
     
     //// 滑动控件

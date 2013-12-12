@@ -2,8 +2,8 @@
 //  UserInfo.m
 //  Danci
 //
-//  Created by ShiYuming on 13-12-6.
-//  Copyright (c) 2013年 mx. All rights reserved.
+//  Created by zhenghao on 12/12/13.
+//  Copyright (c) 2013 mx. All rights reserved.
 //
 
 #import "UserInfo.h"
