@@ -12,6 +12,7 @@
 
 + (void) initStore:(NSString *)jsonFilePath inManagedObjectContext:(NSManagedObjectContext *)context
 {
+    NSDate *begin = [NSDate date];
     NSError *error = nil;
     NSData *jsondata = [NSData dataWithContentsOfFile:jsonFilePath];
 //    NSLog(@"raw:%@",jsondata);
@@ -31,6 +32,9 @@
             NSLog(@"save album error:%@",[errorLoc localizedDescription]);
         }
     }];
+    NSDate *end = [NSDate date];
+    NSLog(@"+++++++++++++init album used[%f]", [end timeIntervalSinceDate:begin]);
+    
 }
 
 + (Album *) getAlbum:(NSString *)albumName inManagedObjectContext:(NSManagedObjectContext *)context;

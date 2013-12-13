@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1C67E982184078B800510FA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67E981184078B800510FA7 /* CoreData.framework */; };
 		71BA403D1855F0E9001B1196 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */; };
-		71BA40431859E9C5001B1196 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA40421859E9C5001B1196 /* UserInfo.m */; };
 		793F8F321854782500209430 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 793F8F311854782500209430 /* Album.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
 		794749A5184C307600A1B8E2 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 794749A4184C307600A1B8E2 /* Word.m */; };
@@ -48,14 +47,13 @@
 		79FC0AB018435BCA004DF41E /* album.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AAF18435BCA004DF41E /* album.json */; };
 		79FC0AB218435BDC004DF41E /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AB118435BDC004DF41E /* words.json */; };
 		EB14488B1859DA8D00011A83 /* words_voices in Resources */ = {isa = PBXBuildFile; fileRef = EB14488A1859DA8D00011A83 /* words_voices */; };
+		EB14488E185B248800011A83 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EB14488D185B248800011A83 /* UserInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1C67E981184078B800510FA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		71BA403B1855F0E9001B1196 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewController.h; sourceTree = "<group>"; };
 		71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewController.m; sourceTree = "<group>"; };
-		71BA40411859E9C5001B1196 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
-		71BA40421859E9C5001B1196 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		793F8F301854782500209430 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
 		793F8F311854782500209430 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		7947499A184985CB00A1B8E2 /* UserInfo+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserInfo+Server.h"; sourceTree = "<group>"; };
@@ -115,6 +113,8 @@
 		79FC0AAF18435BCA004DF41E /* album.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = album.json; sourceTree = "<group>"; };
 		79FC0AB118435BDC004DF41E /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
 		EB14488A1859DA8D00011A83 /* words_voices */ = {isa = PBXFileReference; lastKnownFileType = folder; path = words_voices; sourceTree = "<group>"; };
+		EB14488C185B248800011A83 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		EB14488D185B248800011A83 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,9 +247,9 @@
 			children = (
 				794749A3184C307600A1B8E2 /* Word.h */,
 				794749A4184C307600A1B8E2 /* Word.m */,
-				71BA40411859E9C5001B1196 /* UserInfo.h */,
-				71BA40421859E9C5001B1196 /* UserInfo.m */,
 				79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */,
+				EB14488C185B248800011A83 /* UserInfo.h */,
+				EB14488D185B248800011A83 /* UserInfo.m */,
 				793F8F301854782500209430 /* Album.h */,
 				793F8F311854782500209430 /* Album.m */,
 				7947499A184985CB00A1B8E2 /* UserInfo+Server.h */,
@@ -351,7 +351,7 @@
 				79859B5317ED9E65008F8EFD /* PPCollectionViewCell.m in Sources */,
 				79859B5417ED9E65008F8EFD /* PPImageScrollingCellView.m in Sources */,
 				79859B5517ED9E65008F8EFD /* PPImageScrollingTableViewCell.m in Sources */,
-				71BA40431859E9C5001B1196 /* UserInfo.m in Sources */,
+				EB14488E185B248800011A83 /* UserInfo.m in Sources */,
 				79FC0AA318422FB2004DF41E /* Album+Server.m in Sources */,
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */,

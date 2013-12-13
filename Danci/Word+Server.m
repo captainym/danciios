@@ -13,11 +13,12 @@
 
 + (void) initStore:(NSString *)jsonFilePath inManagedObjectContext:(NSManagedObjectContext *)context
 {
+    NSDate *begin = [NSDate date];
     NSError *error = nil;
     NSArray *objects = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:jsonFilePath] options:kNilOptions error:&error];
 //    NSLog(@"jsong objects of word: %@",objects);
     [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSLog(@"idx[%d]",idx);
+//        NSLog(@"idx[%d]",idx);
         Word *aWord = [NSEntityDescription insertNewObjectForEntityForName:@"Word" inManagedObjectContext:context];
         aWord.word = [obj objectForKey:@"word"]==nil ? @"":[obj objectForKey:@"word"];
         aWord.yin_biao = [obj objectForKey:@"yinbiao"]==nil ? @"":[obj objectForKey:@"yinbiao"];;
@@ -30,6 +31,8 @@
 //            NSLog(@"init save a word:%@",aWord);
         }
     }];
+    NSDate *end = [NSDate date];
+    NSLog(@"+++++++++++++init words used[%f]", [end timeIntervalSinceDate:begin]);
 }
 
 + (Word *) getWord:(NSString *)paraWord inManagedObjectContext:(NSManagedObjectContext *)context

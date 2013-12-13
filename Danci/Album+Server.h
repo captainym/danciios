@@ -16,4 +16,6 @@
 
 + (Album *) getAlbum:(NSString *)albumName inManagedObjectContext:(NSManagedObjectContext *)context;
 
+//+ (Album *) getReviewAlbum:(NSManagedObjectContext *)context;
+
 @end
