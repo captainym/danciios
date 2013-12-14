@@ -10,7 +10,7 @@
 #import "Album.h"
 
 #define FILE_INIT_ALBUM @"initfile_album"
-#define ALBUM_NAME_REVIEW @"温故而知新"
+#define ALBUM_NAME_REVIEW @"  温故而知新"
 #define ALBUM_NAME_MY @" 我查过的单词"
 #define CATEGORY_MY @"    我选择的单词本"
 #define NUM_MAX_REVIEW_ALBUM_LEN 100

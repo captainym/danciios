@@ -51,7 +51,7 @@
              studyOperationType:(StudyOperationType) otype
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"StudyOperation"];
-    request.predicate = [NSPredicate predicateWithFormat:@"(opt_time >= %@) AND (opt_time <= %@) ", optBegin, optEnd];
+    request.predicate = [NSPredicate predicateWithFormat:@"(opt_time >= %@) AND (opt_time <= %@) AND (otype == %d OR %d == %d) ", optBegin, optEnd, otype, otype, StudyOperationTypeNone];
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     return matches;

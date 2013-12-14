@@ -57,13 +57,13 @@
 }
 
 //merge wordLists
-+ (void) mergeArrayList:(NSMutableArray *) wordsList candidateList:(NSArray *) candidates isNeedMergeFuzzeWords:(BOOL) needFuzze
++ (void) mergeArrayList:(NSMutableArray *) wordsList candidateList:(NSArray *) candidates isNeedMergeFuzzeWords:(BOOL) needFuzze subSet:(NSArray *) wordsOk
 {
     [candidates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         StudyOperation *curObj = obj;
         switch ([curObj.otype intValue]) {
             case StudyOperationTypeFeedbackNagative:
-                if(![wordsList containsObject:curObj.word]){
+                if(![wordsList containsObject:curObj.word] && ![wordsOk containsObject:curObj.word]){
                     [wordsList addObject:curObj.word];
                 }
                 break;
@@ -77,7 +77,7 @@
             StudyOperation *curObj = obj;
             switch ([curObj.otype intValue]) {
                 case StudyOperationTypeFeedbackFuzzy:
-                    if(![wordsList containsObject:curObj.word]){
+                    if(![wordsList containsObject:curObj.word] && ![wordsOk containsObject:curObj.word]){
                         [wordsList addObject:curObj.word];
                     }
                     break;
@@ -109,11 +109,25 @@
         album = [matches lastObject];
     }
     album.words = @"";
+    album.count = [NSNumber numberWithInt:0];
+    album.point = [NSNumber numberWithInt:1];
+    
+    //12小时内已经掌握的单词
+    NSDate *begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 12)];
+    NSDate *end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 0)];
+    NSArray *wordsOkWithdaySO = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeFeedbackOk];
+    NSMutableArray *wordsOkWithday = [[NSMutableArray alloc] init];
+    [wordsOkWithdaySO enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        StudyOperation *curObj = obj;
+        if(![wordsOkWithday containsObject:curObj.word]){
+            [wordsOkWithday addObject:curObj.word];
+        }
+    }];
     
     //从studyOperation那里找需要复习的单词
     //1天前
-    NSDate *begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24)];
-    NSDate *end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 1)];
+    begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24)];
+    end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 12)];
     NSArray *review1 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
     NSLog(@"get words within 24 hours. num[%d]: [%@]", [review1 count], review1);
     //2天前
@@ -137,20 +151,26 @@
     NSArray * review15 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
     NSLog(@"get words 15 days ago. num[%d]: [%@]", [review15 count], review15);
     
+    //把需要复习的都加入复习album，但要和24小时内已经掌握的单词做差集。这个实现方法太优雅了！我给自己点个赞！近乎完美地处理了和正常album、studyOperation的关系。
     NSMutableArray *words = [[NSMutableArray alloc] init];
-    [self mergeArrayList:words candidateList:review1 isNeedMergeFuzzeWords:TRUE];
-    [self mergeArrayList:words candidateList:review2 isNeedMergeFuzzeWords:TRUE];
-    [self mergeArrayList:words candidateList:review4 isNeedMergeFuzzeWords:FALSE];
-    [self mergeArrayList:words candidateList:review7 isNeedMergeFuzzeWords:FALSE];
-    [self mergeArrayList:words candidateList:review15 isNeedMergeFuzzeWords:FALSE];
-    NSString *albumWords = @"";
+    [self mergeArrayList:words candidateList:review1 isNeedMergeFuzzeWords:TRUE subSet:wordsOkWithday];
+    [self mergeArrayList:words candidateList:review2 isNeedMergeFuzzeWords:TRUE subSet:wordsOkWithday];
+    [self mergeArrayList:words candidateList:review4 isNeedMergeFuzzeWords:FALSE subSet:wordsOkWithday];
+    [self mergeArrayList:words candidateList:review7 isNeedMergeFuzzeWords:FALSE subSet:wordsOkWithday];
+    [self mergeArrayList:words candidateList:review15 isNeedMergeFuzzeWords:FALSE subSet:wordsOkWithday];
     NSRange range;
-    range.location = 0;
-    range.length = NUM_MAX_REVIEW_ALBUM_LEN < [words count] ? NUM_MAX_REVIEW_ALBUM_LEN : ([words count] - 1);
+    range.location = 1;
+    range.length = NUM_MAX_REVIEW_ALBUM_LEN < [words count] ? NUM_MAX_REVIEW_ALBUM_LEN : [words count];
+    if(range.location >= range.length){
+        return album;
+    }
+    NSString *albumWords = [words firstObject];
+    range.length = range.length - 1;
     for (NSString *word in [words subarrayWithRange:range]) {
         albumWords = [albumWords stringByAppendingFormat:@"|%@", word];
     }
     album.words = albumWords;
+    album.count = [NSNumber numberWithInt:range.length + 1];
     
     return album;
 }

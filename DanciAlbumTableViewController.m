@@ -26,6 +26,7 @@
 
 //用户选中的album
 @property (nonatomic, strong) Album *albumSelected;
+@property (nonatomic, strong) Album *albumReview;
 
 @end
 
@@ -33,6 +34,7 @@
 
 @synthesize danciDatabase = _danciDatabase;
 @synthesize albumSelected = _albumSelected;
+@synthesize albumReview = _albumReview;
 
 //初始化coredata的内容 第一次
 -(void) dumpDataIntoDocument:(UIManagedDocument *)document
@@ -60,7 +62,7 @@
 {
     //配置section、查询内容（不要把words列表搞出来了）
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Album"];
-    request.predicate = [NSPredicate predicateWithFormat:@"name != %@", ALBUM_NAME_REVIEW];
+    request.predicate = [NSPredicate predicateWithFormat:@"count >= 2"];
     NSSortDescriptor *sortCategory = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
     NSSortDescriptor *sortName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObjects:sortCategory,sortName, nil];
@@ -87,6 +89,9 @@
         //db存在但未打开 打开
         [self.danciDatabase openWithCompletionHandler:^(BOOL success) {
             [self setupFetchedResultsController];
+            //提取待复习的album
+            self.albumReview = [Album getReviewAlbum:self.danciDatabase.managedObjectContext];
+            NSLog(@"albumReview:%@",self.albumReview);
             //同步user信息
             dispatch_queue_t queue = dispatch_queue_create("merge user", NULL);
             dispatch_async(queue, ^{
@@ -159,7 +164,12 @@
     cell.textLabel.text = album.name;
     int curPoint = [album.point intValue] % [album.count intValue];
     int cycleNum = [album.point intValue] / [album.count intValue] + 1;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"总量%d 进度[%d/%d] 第[%d]遍", [album.count intValue], curPoint, [album.count intValue], cycleNum];
+    if([album.name isEqualToString:ALBUM_NAME_REVIEW]){
+        [cell.textLabel setTextColor:[UIColor blueColor]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"亲 [%d]个单词处于遗忘零界点",[album.count intValue]];
+    }else{
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"总量%d 进度[%d/%d] 第[%d]遍", [album.count intValue], curPoint, [album.count intValue], cycleNum];
+    }
     return cell;
 }
 

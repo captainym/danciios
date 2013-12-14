@@ -1,4 +1,4 @@
-//
+    //
 //  DanciWordViewController.m
 //  Danci
 //
@@ -19,7 +19,7 @@
 #define NUM_LEANING_GROUP 20
 #define FILE_TIP_IMG_DEFAULT @"./addImg4.jpg"
 
-@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate, UIActionSheetDelegate>
+@interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSString *tips;
 //新单词学习计数器
@@ -699,15 +699,23 @@
         if([self.user.studyNo intValue] == 7777){
             msg = [@"" stringByAppendingFormat:@"赞！阿眠MM，你学完了[%@]！btw：谢谢你的糖果哦，如果能吃到就更好了。我们去挑战新的吧:)", self.album.name];
         }
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"学成!" message:msg delegate:self cancelButtonTitle:@"走你！" otherButtonTitles:nil];
+        if([self.album.name isEqualToString:ALBUM_NAME_REVIEW]){
+            msg = @"赞！复习完成！在遗忘零界点复习绝对的事半半、公背背！继续学习吧 :)";
+        }
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"学成!" message:msg delegate:self cancelButtonTitle:@"OK 走起！" otherButtonTitles:nil];
         [alertView show];
     }
 }
 
 #pragma mark UIActionSheetDelegate
-- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self.navigationController popViewControllerAnimated:YES];
+    if([self.album.name isEqualToString:ALBUM_NAME_REVIEW]){
+        self.album.count = [NSNumber numberWithInt:0];
+        self.album.point = [NSNumber numberWithInt:1];
+        NSLog(@"now the review album can go out of the albums.[%@]",self.album.count);
+    }
 }
 
 @end
