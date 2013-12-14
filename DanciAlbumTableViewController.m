@@ -21,7 +21,6 @@
 #define DATABASE_VERSION @"Danci1.0"
 #define DATABASE_ALBUM_INIT_FILE @"album"
 #define DATABASE_WORD_INIT_FILE @"words"
-#define CATEGORY_MY @"    我选择的单词本";
 
 @interface DanciAlbumTableViewController ()
 
@@ -61,6 +60,7 @@
 {
     //配置section、查询内容（不要把words列表搞出来了）
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Album"];
+    request.predicate = [NSPredicate predicateWithFormat:@"name != %@", ALBUM_NAME_REVIEW];
     NSSortDescriptor *sortCategory = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
     NSSortDescriptor *sortName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObjects:sortCategory,sortName, nil];

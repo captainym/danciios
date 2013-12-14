@@ -8,6 +8,7 @@
 
 #import "UserInfo+Server.h"
 #import "DanciServer.h"
+#import "StudyOperation+Server.h"
 
 @implementation UserInfo (Server)
 
@@ -61,6 +62,10 @@
                 user.comsumeWordNum = [NSNumber numberWithInt:[[mergerData objectForKey:@"comsumeWordNum"]intValue]];
             }
             //words也要同步 ： server的words数量比本地的多则同步一下
+            NSString *wordsServer = [mergerData objectForKey:@"word_list"];
+            if([wordsServer length] > [user.words length] + 5){
+                user.words = wordsServer;
+            }
         }else{
             NSLog(@"merger user info faild. msg[%@]",[mergerData objectForKey:RETURN_VALUE]);
         }
@@ -72,9 +77,24 @@
 }
 
 //用户登出则删除其帐户信息
-+ (void) dropUser:(NSManagedObjectContext *)context
++ (void) dropUser:(UserInfo *) user inUIManagedDocument:(UIManagedDocument *) danciDatabase
 {
+    //清空user全部信息
+    user.comsumeWordNum = [NSNumber numberWithInt:0];
+    user.maxWordNum = [NSNumber numberWithInt:0];
+    user.mid = @"";
+    user.recommendStudyNo = [NSNumber numberWithInt:0];
+    user.regTime = [[NSDate alloc] initWithTimeIntervalSince1970:0.0];
+    user.studyNo = [NSNumber numberWithInt:0];
+    user.words = @"";
     
+    //删除StudyOperation所有记录
+    [StudyOperation deleteAllStudyOperations:danciDatabase.managedObjectContext];
+    
+    //触发数据库save
+    [danciDatabase saveToURL:danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+        NSLog(@"drop user OK. and save changes to DB complete.");
+    }];
 }
 
 @end

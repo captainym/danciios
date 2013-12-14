@@ -34,4 +34,27 @@
     return matches;
 }
 
++(void) deleteAllStudyOperations:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *requestOpt = [[NSFetchRequest alloc] initWithEntityName:@"StudyOperation"];
+    NSError *error = nil;
+    NSArray *allStudyOperations = [context executeFetchRequest:requestOpt error:&error];
+    [allStudyOperations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@"debug: now delete [%d] studyOperate:%@", idx, obj);
+        [context deleteObject:obj];
+    }];
+}
+
++(NSArray *) getStudyOperations:(NSManagedObjectContext *)context
+            OpratetionBeginTime:(NSDate *) optBegin
+               OperationEndTime:(NSDate *)optEnd
+             studyOperationType:(StudyOperationType) otype
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"StudyOperation"];
+    request.predicate = [NSPredicate predicateWithFormat:@"(opt_time >= %@) AND (opt_time <= %@) ", optBegin, optEnd];
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    return matches;
+}
+
 @end

@@ -113,6 +113,8 @@
     if([_tips length] < 1){
         _tips = @"可选择或编辑助记：轻戳右边的“...”";
     }
+    //trim
+    _tips = [_tips stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     return _tips;
 }
 
@@ -492,7 +494,7 @@
     dispatch_async(queue, ^{
         if(![DanciServer postStudyOperation:postData] == ServerFeedbackTypeOk){
             //发送失败则写入本地
-            [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:postData inManagedObjectContext:self.danciDatabase.managedObjectContext];
+//            [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:postData inManagedObjectContext:self.danciDatabase.managedObjectContext];
             NSLog(@"post img select study operation data to Server failed. save it to DB");
         }else{
             NSLog(@"post img select study operation data to Server OK.");
@@ -563,7 +565,7 @@
 
 -(void) eidtTipTxt:(DanciEditTipTxtViewController *)sender didEditTipTxtOk:(NSDictionary *)callbackdata operationType:(StudyOperationType)otype
 {
-    if(otype == StudyOperationTypeDrop){
+    if(otype == StudyOperationTypeNone){
         return;
     }
     //设置view的相关控件
@@ -573,8 +575,8 @@
     dispatch_queue_t queue = dispatch_queue_create("postTiptxtSel", NULL);
     dispatch_async(queue, ^{
         if(![DanciServer postStudyOperation:callbackdata] == ServerFeedbackTypeOk){
-            //发送失败则写入本地
-            [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:callbackdata inManagedObjectContext:self.danciDatabase.managedObjectContext];
+            //发送失败则写入本地 -- 第一版只保存单词信息反馈
+//            [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:callbackdata inManagedObjectContext:self.danciDatabase.managedObjectContext];
             NSLog(@"post study tiptxt select operation data to Server failed. save it to DB");
         }else{
             NSLog(@"post study tiptxt select operation data to Server OK.");
@@ -629,9 +631,12 @@
         return;
     }
     
+    //5+-2及时复习策略的数据队列的更新
     int feedback = StudyOperationTypeFeedbackOk;
     if(sender == self.btnFeedbackOk){
-        
+        //把该word从不认识和模糊队列删除
+        [self.reviewNo removeObject:self.wordTerm];
+        [self.reviewFuzze removeObject:self.wordTerm];
     }else if(sender == self.btnFeedbackFuzz){
         feedback = StudyOperationTypeFeedbackFuzzy;
         if(![self.reviewFuzze containsObject:self.wordTerm]){
@@ -680,6 +685,7 @@
         self.counter = 0;
     }
     
+    //取下一个单词，redraw view
     int curPoint = [self.album.point intValue] % [self.album.count intValue] + 1;
     self.album.point = [NSNumber numberWithInt:([self.album.point intValue] + 1)];
     NSLog(@"reflush .. now wordPoint[%d] album length[%d]", [self.album.point intValue], [self.words count]);

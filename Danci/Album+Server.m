@@ -7,6 +7,7 @@
 //
 
 #import "Album+Server.h"
+#import "StudyOperation+Server.h"
 
 @implementation Album (Server)
 
@@ -51,6 +52,105 @@
     }else{
         album = [matches lastObject];
     }
+    
+    return album;
+}
+
+//merge wordLists
++ (void) mergeArrayList:(NSMutableArray *) wordsList candidateList:(NSArray *) candidates isNeedMergeFuzzeWords:(BOOL) needFuzze
+{
+    [candidates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        StudyOperation *curObj = obj;
+        switch ([curObj.otype intValue]) {
+            case StudyOperationTypeFeedbackNagative:
+                if(![wordsList containsObject:curObj.word]){
+                    [wordsList addObject:curObj.word];
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }];
+    if(needFuzze){
+        [candidates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            StudyOperation *curObj = obj;
+            switch ([curObj.otype intValue]) {
+                case StudyOperationTypeFeedbackFuzzy:
+                    if(![wordsList containsObject:curObj.word]){
+                        [wordsList addObject:curObj.word];
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }];
+    }
+}
+
++ (Album *) getReviewAlbum:(NSManagedObjectContext *)context
+{
+    Album *album = nil;
+    
+    //加载album。第一次木有，要创建一个
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Album"];
+    request.predicate = [NSPredicate predicateWithFormat:@"name = %@", ALBUM_NAME_REVIEW];
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    if(!matches || [matches count] > 1){
+        NSLog(@"！！！！！！！！！居然有两个抗遗忘");
+    }else if([matches count] == 0){
+        //create a new one
+        album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:context];
+        album.name = ALBUM_NAME_REVIEW;
+        album.category = CATEGORY_MY;
+    }else{
+        album = [matches lastObject];
+    }
+    album.words = @"";
+    
+    //从studyOperation那里找需要复习的单词
+    //1天前
+    NSDate *begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24)];
+    NSDate *end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 1)];
+    NSArray *review1 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSLog(@"get words within 24 hours. num[%d]: [%@]", [review1 count], review1);
+    //2天前
+    begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 2)];
+    end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 1)];
+    NSArray *review2 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSLog(@"get words 2 days ago. num[%d]: [%@]", [review2 count], review2);
+    //4天前
+    begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 4)];
+    end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 3)];
+    NSArray *review4 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSLog(@"get words 4 days ago. num[%d]: [%@]", [review4 count], review4);
+    //7天前
+    begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 7)];
+    end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 6)];
+    NSArray *review7 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSLog(@"get words 7 days ago. num[%d]: [%@]", [review7 count], review7);
+    //15天前
+    begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 15)];
+    end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 14)];
+    NSArray * review15 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSLog(@"get words 15 days ago. num[%d]: [%@]", [review15 count], review15);
+    
+    NSMutableArray *words = [[NSMutableArray alloc] init];
+    [self mergeArrayList:words candidateList:review1 isNeedMergeFuzzeWords:TRUE];
+    [self mergeArrayList:words candidateList:review2 isNeedMergeFuzzeWords:TRUE];
+    [self mergeArrayList:words candidateList:review4 isNeedMergeFuzzeWords:FALSE];
+    [self mergeArrayList:words candidateList:review7 isNeedMergeFuzzeWords:FALSE];
+    [self mergeArrayList:words candidateList:review15 isNeedMergeFuzzeWords:FALSE];
+    NSString *albumWords = @"";
+    NSRange range;
+    range.location = 0;
+    range.length = NUM_MAX_REVIEW_ALBUM_LEN < [words count] ? NUM_MAX_REVIEW_ALBUM_LEN : ([words count] - 1);
+    for (NSString *word in [words subarrayWithRange:range]) {
+        albumWords = [albumWords stringByAppendingFormat:@"|%@", word];
+    }
+    album.words = albumWords;
     
     return album;
 }

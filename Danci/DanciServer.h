@@ -31,7 +31,7 @@
 
 typedef enum
 {
-    StudyOperationTypeDrop = 0,
+    StudyOperationTypeNone = 0,
     
     StudyOperationTypeSeletTipImg = 1,
     StudyOperationTypeSelectTipTxt = 2,
