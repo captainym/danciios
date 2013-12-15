@@ -48,6 +48,7 @@
 		79FC0AB218435BDC004DF41E /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0AB118435BDC004DF41E /* words.json */; };
 		EB14488B1859DA8D00011A83 /* words_voices in Resources */ = {isa = PBXBuildFile; fileRef = EB14488A1859DA8D00011A83 /* words_voices */; };
 		EB14488E185B248800011A83 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EB14488D185B248800011A83 /* UserInfo.m */; };
+		EB144890185DBB0700011A83 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB14488F185DBB0600011A83 /* default.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +116,7 @@
 		EB14488A1859DA8D00011A83 /* words_voices */ = {isa = PBXFileReference; lastKnownFileType = folder; path = words_voices; sourceTree = "<group>"; };
 		EB14488C185B248800011A83 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		EB14488D185B248800011A83 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		EB14488F185DBB0600011A83 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 		79859B1117EC0E75008F8EFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EB14488F185DBB0600011A83 /* default.jpg */,
 				EB14488A1859DA8D00011A83 /* words_voices */,
 				79859B5617ED9E8D008F8EFD /* images */,
 				79859B1917EC0E75008F8EFD /* DanciAppDelegate.h */,
@@ -329,6 +332,7 @@
 				79859B2417EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard in Resources */,
 				79859B2717EC0E75008F8EFD /* MainStoryboard_iPad.storyboard in Resources */,
 				79CF932D1823E3F5005E41FA /* addImg.jpg in Resources */,
+				EB144890185DBB0700011A83 /* default.jpg in Resources */,
 				79CF932E1823E3F5005E41FA /* addImg2.jpg in Resources */,
 				79FC0AB218435BDC004DF41E /* words.json in Resources */,
 				79CF932F1823E3F5005E41FA /* addImg3.png in Resources */,

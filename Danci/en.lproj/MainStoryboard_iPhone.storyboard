@@ -149,7 +149,7 @@
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="Jod-NU-44h">
                                 <rect key="frame" x="197" y="68" width="120" height="90"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" backgroundImage="addImg3.png"/>
+                                <state key="normal" backgroundImage="default.jpg"/>
                                 <connections>
                                     <action selector="showImgTips:" destination="mjP-vE-xCc" eventType="touchUpInside" id="nyI-Lx-cbP"/>
                                 </connections>
@@ -176,7 +176,7 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6DT-Uh-rzg">
-                                <rect key="frame" x="3" y="68" width="195" height="85"/>
+                                <rect key="frame" x="3" y="68" width="193" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -335,7 +335,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="addImg3.png" width="256" height="256"/>
+        <image name="default.jpg" width="150" height="99"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

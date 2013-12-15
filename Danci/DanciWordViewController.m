@@ -17,7 +17,7 @@
 #define WORD_SEPARATED @"|"
 #define NUM_REVIEW_INTERVAL 2
 #define NUM_LEANING_GROUP 20
-#define FILE_TIP_IMG_DEFAULT @"./addImg4.jpg"
+#define FILE_TIP_IMG_DEFAULT @"default"
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate, UIAlertViewDelegate>
 
@@ -59,7 +59,8 @@
 -(UIImage *) defaultTipImg
 {
     if(_defaultTipImg == nil){
-        NSData *imgData = [[NSData alloc] initWithContentsOfFile:FILE_TIP_IMG_DEFAULT];
+        NSString *defaultImgFile = [[NSBundle mainBundle] pathForResource:FILE_TIP_IMG_DEFAULT ofType:@"jpg"];
+        NSData *imgData = [[NSData alloc] initWithContentsOfFile:defaultImgFile];
         _defaultTipImg = [[UIImage alloc] initWithData:imgData];
     }
     
