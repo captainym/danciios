@@ -97,7 +97,7 @@
     self.words = [self.album.words componentsSeparatedByString:@"|"];
     NSLog(@"setAlbum 从album中分离出[%d]个word wordsList[%@]", [_words count], self.album.words);
     //设置第一个word
-    int curPoint = [self.album.point intValue] % [self.album.count intValue];
+    int curPoint = ([self.album.point intValue] - 1) % [self.album.count intValue];
     self.wordTerm = [self.words objectAtIndex:curPoint];
 }
 
@@ -686,7 +686,7 @@
     }
     
     //取下一个单词，redraw view
-    int curPoint = [self.album.point intValue] % [self.album.count intValue] + 1;
+    int curPoint = ([self.album.point intValue] - 1) % [self.album.count intValue] + 1;
     self.album.point = [NSNumber numberWithInt:([self.album.point intValue] + 1)];
     NSLog(@"reflush .. now wordPoint[%d] album length[%d]", [self.album.point intValue], [self.words count]);
     if(curPoint != [self.words count]){
