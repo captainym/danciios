@@ -1,72 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A3017" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ShM-Tp-Htp">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Danci Album Table View Controller - 单词本-->
-        <scene sceneID="dMT-Ge-VW3">
-            <objects>
-                <tableViewController id="X7F-8a-pC4" customClass="DanciAlbumTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AXq-17-w1s">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="theAlbum" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="theAlbum" textLabel="U0u-YZ-81i" detailTextLabel="Wu0-Vd-ZRO" style="IBUITableViewCellStyleSubtitle" id="8Jq-qt-88W">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Jq-qt-88W" id="hZG-lc-CQn">
-                                    <rect key="frame" x="0.0" y="0.0" width="253" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U0u-YZ-81i">
-                                            <rect key="frame" x="15" y="2" width="36" height="22"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wu0-Vd-ZRO">
-                                            <rect key="frame" x="15" y="24" width="50" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="X7F-8a-pC4" id="LNB-qi-HBk"/>
-                            <outlet property="delegate" destination="X7F-8a-pC4" id="HF2-qM-Yoi"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="单词本" id="xnp-ta-uJw">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="P0i-x7-vvZ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cBu-hU-eVh">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="设置">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="gotoConfiguration:" destination="X7F-8a-pC4" eventType="touchUpInside" id="Kyv-9k-4vn"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tblAlbumIphone" destination="AXq-17-w1s" id="fJi-gt-KFh"/>
-                        <segue destination="mjP-vE-xCc" kind="push" identifier="sgGotoStudy" id="RhZ-Db-AQS"/>
-                        <segue destination="85R-8R-Xje" kind="push" identifier="segueConfiguration" id="a7S-AU-gX7"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J7g-wg-Xr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-104" y="-453"/>
-        </scene>
         <!--Configuration View Controller - 配置-->
         <scene sceneID="2vd-Dq-E6c">
             <objects>
@@ -122,7 +60,62 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3YP-Ci-Cht" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="377" y="254"/>
+            <point key="canvasLocation" x="506" y="215"/>
+        </scene>
+        <!--Danci Album Table View Controller - 单词本-->
+        <scene sceneID="uKX-TH-Acm">
+            <objects>
+                <tableViewController id="NKc-Qq-OdS" customClass="DanciAlbumTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Sog-9q-AUg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="theAlbum" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="theAlbum" textLabel="u7g-Rf-dkD" detailTextLabel="XsJ-51-TAx" style="IBUITableViewCellStyleSubtitle" id="lnJ-Bq-8k0">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lnJ-Bq-8k0" id="dOg-gV-WFD">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u7g-Rf-dkD">
+                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XsJ-51-TAx">
+                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="NKc-Qq-OdS" id="om6-Uj-1Qm"/>
+                            <outlet property="delegate" destination="NKc-Qq-OdS" id="aFh-f8-xT3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="单词本" id="LGh-B2-Vp4">
+                        <barButtonItem key="rightBarButtonItem" title="设置>" id="kn1-a8-ZSi">
+                            <connections>
+                                <segue destination="85R-8R-Xje" kind="push" id="FSQ-hj-74a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tblAlbumIphone" destination="Sog-9q-AUg" id="upH-67-MIk"/>
+                        <segue destination="mjP-vE-xCc" kind="push" identifier="sgGotoStudy" id="NIu-5s-iub"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ni-d8-TDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-139" y="-67"/>
         </scene>
         <!--Danci Word View Controller-->
         <scene sceneID="vKy-ar-mwD">
@@ -158,17 +151,17 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="已掌握" width="87" id="71U-iU-GQ9">
+                                    <barButtonItem title="早已掌握" width="83" id="71U-iU-GQ9">
                                         <connections>
                                             <action selector="showNextWord:" destination="mjP-vE-xCc" id="AAU-Nz-A5S"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="模糊" width="89" id="otD-54-LiO">
+                                    <barButtonItem title="模糊" width="94" id="otD-54-LiO">
                                         <connections>
                                             <action selector="showNextWord:" destination="mjP-vE-xCc" id="odP-p4-ekA"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="不认识" width="65" id="zxb-N7-v7q">
+                                    <barButtonItem title="此前不认识" id="zxb-N7-v7q">
                                         <connections>
                                             <action selector="showNextWord:" destination="mjP-vE-xCc" id="KFX-41-ZlT"/>
                                         </connections>
@@ -245,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8z-63-1Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="377" y="-453"/>
+            <point key="canvasLocation" x="499" y="-453"/>
         </scene>
         <!--Danci Edit Tip Txt View Controller-->
         <scene sceneID="ohY-6j-CLe">
@@ -313,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ux-RW-HZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830" y="-453"/>
+            <point key="canvasLocation" x="1054" y="-459"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nRu-sO-GGS">
@@ -326,12 +319,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="X7F-8a-pC4" kind="relationship" relationship="rootViewController" id="iz2-Gc-Ux4"/>
+                        <segue destination="NKc-Qq-OdS" kind="relationship" relationship="rootViewController" id="JzN-ut-aF4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5L7-oI-rw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-574" y="-453"/>
+            <point key="canvasLocation" x="-656" y="-67"/>
         </scene>
     </scenes>
     <resources>

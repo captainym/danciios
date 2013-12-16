@@ -14,7 +14,7 @@
 //单词数据库
 @property (strong,nonatomic) UIManagedDocument *danciDatabase;
 
+//@property (strong, nonatomic) IBOutlet UITableView *tblAlbumIpad;
 @property (strong, nonatomic) IBOutlet UITableView *tblAlbumIphone;
-@property (strong, nonatomic) IBOutlet UITableView *tblAlbumIpad;
 
 @end

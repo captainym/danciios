@@ -31,10 +31,6 @@
 		798D36D31813FDF300260FC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798D36D21813FDF300260FC6 /* AVFoundation.framework */; };
 		798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D36D6181BE1B800260FC6 /* TQMultistageTableView.m */; };
 		798D370C1822979500260FC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798D370B1822979400260FC6 /* QuartzCore.framework */; };
-		79CF932D1823E3F5005E41FA /* addImg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79CF93291823E3F5005E41FA /* addImg.jpg */; };
-		79CF932E1823E3F5005E41FA /* addImg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79CF932A1823E3F5005E41FA /* addImg2.jpg */; };
-		79CF932F1823E3F5005E41FA /* addImg3.png in Resources */ = {isa = PBXBuildFile; fileRef = 79CF932B1823E3F5005E41FA /* addImg3.png */; };
-		79CF93301823E3F5005E41FA /* addImg4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79CF932C1823E3F5005E41FA /* addImg4.jpg */; };
 		79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9335182E9DC2005E41FA /* UIPopoverListView.m */; };
 		79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */; };
 		79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */; };
@@ -49,6 +45,12 @@
 		EB14488B1859DA8D00011A83 /* words_voices in Resources */ = {isa = PBXBuildFile; fileRef = EB14488A1859DA8D00011A83 /* words_voices */; };
 		EB14488E185B248800011A83 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EB14488D185B248800011A83 /* UserInfo.m */; };
 		EB144890185DBB0700011A83 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB14488F185DBB0600011A83 /* default.jpg */; };
+		EB144894185DC0DA00011A83 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB144893185DC0DA00011A83 /* Images.xcassets */; };
+		EBF8ECAD185F1FCE005F21F4 /* icon29X29.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECAC185F1FCE005F21F4 /* icon29X29.png */; };
+		EBF8ECB2185F1FE8005F21F4 /* icon57X57.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECAE185F1FE6005F21F4 /* icon57X57.png */; };
+		EBF8ECB3185F1FE8005F21F4 /* icon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECAF185F1FE7005F21F4 /* icon58X58.png */; };
+		EBF8ECB4185F1FE8005F21F4 /* icon72X72.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECB0185F1FE7005F21F4 /* icon72X72.png */; };
+		EBF8ECB5185F1FE8005F21F4 /* icon114X114.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECB1185F1FE8005F21F4 /* icon114X114.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +63,7 @@
 		7947499B184985CB00A1B8E2 /* UserInfo+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserInfo+Server.m"; sourceTree = "<group>"; };
 		794749A3184C307600A1B8E2 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		794749A4184C307600A1B8E2 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
-		79859B0717EC0E75008F8EFD /* Danci.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Danci.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79859B0717EC0E75008F8EFD /* 学好单词.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "学好单词.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79859B0A17EC0E75008F8EFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		79859B0C17EC0E75008F8EFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		79859B0E17EC0E75008F8EFD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,10 +92,6 @@
 		798D36D5181BE1B800260FC6 /* TQMultistageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQMultistageTableView.h; sourceTree = "<group>"; };
 		798D36D6181BE1B800260FC6 /* TQMultistageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQMultistageTableView.m; sourceTree = "<group>"; };
 		798D370B1822979400260FC6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		79CF93291823E3F5005E41FA /* addImg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImg.jpg; sourceTree = "<group>"; };
-		79CF932A1823E3F5005E41FA /* addImg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImg2.jpg; sourceTree = "<group>"; };
-		79CF932B1823E3F5005E41FA /* addImg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImg3.png; sourceTree = "<group>"; };
-		79CF932C1823E3F5005E41FA /* addImg4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addImg4.jpg; sourceTree = "<group>"; };
 		79CF9334182E9DC2005E41FA /* UIPopoverListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverListView.h; sourceTree = "<group>"; };
 		79CF9335182E9DC2005E41FA /* UIPopoverListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverListView.m; sourceTree = "<group>"; };
 		79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciEditTipTxtViewController.h; sourceTree = SOURCE_ROOT; };
@@ -117,6 +115,12 @@
 		EB14488C185B248800011A83 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		EB14488D185B248800011A83 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		EB14488F185DBB0600011A83 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
+		EB144893185DC0DA00011A83 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EBF8ECAC185F1FCE005F21F4 /* icon29X29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon29X29.png; sourceTree = "<group>"; };
+		EBF8ECAE185F1FE6005F21F4 /* icon57X57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57X57.png; sourceTree = "<group>"; };
+		EBF8ECAF185F1FE7005F21F4 /* icon58X58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon58X58.png; sourceTree = "<group>"; };
+		EBF8ECB0185F1FE7005F21F4 /* icon72X72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72X72.png; sourceTree = "<group>"; };
+		EBF8ECB1185F1FE8005F21F4 /* icon114X114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114X114.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +154,7 @@
 		79859B0817EC0E75008F8EFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				79859B0717EC0E75008F8EFD /* Danci.app */,
+				79859B0717EC0E75008F8EFD /* 学好单词.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,6 +190,7 @@
 				79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */,
 				79CF9363184196E6005E41FA /* DanciServer.h */,
 				79CF9364184196E7005E41FA /* DanciServer.m */,
+				EB144893185DC0DA00011A83 /* Images.xcassets */,
 				79859B1117EC0E75008F8EFD /* Supporting Files */,
 			);
 			path = Danci;
@@ -194,9 +199,13 @@
 		79859B1117EC0E75008F8EFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EBF8ECAE185F1FE6005F21F4 /* icon57X57.png */,
+				EBF8ECAF185F1FE7005F21F4 /* icon58X58.png */,
+				EBF8ECB0185F1FE7005F21F4 /* icon72X72.png */,
+				EBF8ECB1185F1FE8005F21F4 /* icon114X114.png */,
+				EBF8ECAC185F1FCE005F21F4 /* icon29X29.png */,
 				EB14488F185DBB0600011A83 /* default.jpg */,
 				EB14488A1859DA8D00011A83 /* words_voices */,
-				79859B5617ED9E8D008F8EFD /* images */,
 				79859B1917EC0E75008F8EFD /* DanciAppDelegate.h */,
 				79859B1A17EC0E75008F8EFD /* DanciAppDelegate.m */,
 				79859B1217EC0E75008F8EFD /* Danci-Info.plist */,
@@ -223,17 +232,6 @@
 				79859B5217ED9E65008F8EFD /* PPImageScrollingTableViewCell.m */,
 			);
 			path = PPImageScrollingTableViewCell;
-			sourceTree = "<group>";
-		};
-		79859B5617ED9E8D008F8EFD /* images */ = {
-			isa = PBXGroup;
-			children = (
-				79CF93291823E3F5005E41FA /* addImg.jpg */,
-				79CF932A1823E3F5005E41FA /* addImg2.jpg */,
-				79CF932B1823E3F5005E41FA /* addImg3.png */,
-				79CF932C1823E3F5005E41FA /* addImg4.jpg */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		798D36D4181BE1B700260FC6 /* TQMultistageTableView */ = {
@@ -288,7 +286,7 @@
 			);
 			name = Danci;
 			productName = Danci;
-			productReference = 79859B0717EC0E75008F8EFD /* Danci.app */;
+			productReference = 79859B0717EC0E75008F8EFD /* 学好单词.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -300,6 +298,11 @@
 				CLASSPREFIX = Danci;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = mx;
+				TargetAttributes = {
+					79859B0617EC0E74008F8EFD = {
+						DevelopmentTeam = 563JV4Z7QY;
+					};
+				};
 			};
 			buildConfigurationList = 79859B0217EC0E74008F8EFD /* Build configuration list for PBXProject "Danci" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -323,20 +326,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBF8ECB2185F1FE8005F21F4 /* icon57X57.png in Resources */,
 				EB14488B1859DA8D00011A83 /* words_voices in Resources */,
+				EB144894185DC0DA00011A83 /* Images.xcassets in Resources */,
+				EBF8ECB4185F1FE8005F21F4 /* icon72X72.png in Resources */,
 				79859B1517EC0E75008F8EFD /* InfoPlist.strings in Resources */,
 				79859B1D17EC0E75008F8EFD /* Default.png in Resources */,
+				EBF8ECB3185F1FE8005F21F4 /* icon58X58.png in Resources */,
 				79859B1F17EC0E75008F8EFD /* Default@2x.png in Resources */,
 				79859B2117EC0E75008F8EFD /* Default-568h@2x.png in Resources */,
 				79FC0AB018435BCA004DF41E /* album.json in Resources */,
 				79859B2417EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard in Resources */,
 				79859B2717EC0E75008F8EFD /* MainStoryboard_iPad.storyboard in Resources */,
-				79CF932D1823E3F5005E41FA /* addImg.jpg in Resources */,
 				EB144890185DBB0700011A83 /* default.jpg in Resources */,
-				79CF932E1823E3F5005E41FA /* addImg2.jpg in Resources */,
 				79FC0AB218435BDC004DF41E /* words.json in Resources */,
-				79CF932F1823E3F5005E41FA /* addImg3.png in Resources */,
-				79CF93301823E3F5005E41FA /* addImg4.jpg in Resources */,
+				EBF8ECAD185F1FCE005F21F4 /* icon29X29.png in Resources */,
+				EBF8ECB5185F1FE8005F21F4 /* icon114X114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,12 +468,17 @@
 		79859B2E17EC0E75008F8EFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Danci/Danci-Prefix.pch";
 				INFOPLIST_FILE = "Danci/Danci-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "学好单词";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -476,12 +486,17 @@
 		79859B2F17EC0E75008F8EFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Danci/Danci-Prefix.pch";
 				INFOPLIST_FILE = "Danci/Danci-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "学好单词";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -133,9 +133,10 @@
     [self addSubview:_lblMid];
     _txtMid = [[UITextField alloc] initWithFrame:CGRectZero];
     _txtMid.borderStyle = UITextBorderStyleLine;
-    _txtMid.placeholder = @"手机号/邮箱";
+    _txtMid.placeholder = @"推荐用手机号/邮箱";
     _txtMid.frame = CGRectMake(widthLeft + splitHeight, heightTitle + height * 0 + splitHeight * 1, xWidth - widthLeft - splitHeight * 2, height);
     _txtMid.delegate = self;
+    _txtMid.keyboardType = UIKeyboardTypeEmailAddress;
     [self addSubview:_txtMid];
     //pwd 密码
     _lblPwd = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -150,6 +151,8 @@
     _txtPwd.placeholder = @"不少于6位数字与字母";
     _txtPwd.frame = CGRectMake(widthLeft + splitHeight, heightTitle + height * 1 + splitHeight * 2, xWidth - widthLeft - splitHeight * 2, height);
     _txtPwd.delegate = self;
+    _txtPwd.keyboardType = UIKeyboardTypeEmailAddress;
+    _txtPwd.secureTextEntry = YES;
     [self addSubview:_txtPwd];
     UIFont *fontTip = [UIFont fontWithName:@"Verdana" size:13];
     if(type == TYPE_LOGIN){
@@ -186,6 +189,7 @@
         _txtTuijian.placeholder = @"推荐人的学号(选填)";
         _txtTuijian.frame = CGRectMake(widthLeft + splitHeight, heightTitle + height * 2 + splitHeight * 3, xWidth - widthLeft - splitHeight * 2, height);
         _txtTuijian.delegate = self;
+        _txtTuijian.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [self addSubview:_txtTuijian];
         
         //tip

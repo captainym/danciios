@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="M3Y-n2-NLj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A3017" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="M3Y-n2-NLj">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
@@ -35,9 +35,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="l6B-W0-Nyh" kind="push" identifier="gotoStudy" trigger="accessoryAction" id="1E6-Pu-tm3"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -47,9 +44,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Album" id="azB-F1-9f3"/>
-                    <connections>
-                        <outlet property="tblAlbumIpad" destination="AfS-UJ-YHr" id="vYP-oP-KhT"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7J-BU-bcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
