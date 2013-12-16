@@ -367,6 +367,7 @@
 
 - (void)pushDataToUser:(NSDictionary *)userInfo
 {
+    // 更新user信息
     self.curUser.mid = [userInfo objectForKey:@"mid"];
     self.curUser.studyNo = [NSNumber numberWithInt:[[userInfo objectForKey:@"studyNo"] intValue]];
     self.curUser.maxWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"maxWordNum"] intValue]];
@@ -376,7 +377,7 @@
     // 显式地save
     [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
     
-    NSLog(@"++++++++user login in. user:%@, real study no: %d, got studo no: %@", self.curUser, [[userInfo objectForKey:@"studyNo"] intValue], self.curUser.studyNo);
+//    NSLog(@"++++++++user login in. user:%@, real study no: %d, got studo no: %@", self.curUser, [[userInfo objectForKey:@"studyNo"] intValue], self.curUser.studyNo);
 }
 
 -(void) popoverListViewLogin:(UIPopoverListView *)popoverListView oldUser:(NSDictionary *)userInfo
@@ -451,7 +452,7 @@
             title = @"注册时间:";
             if ([self userLoggedIn]) {
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"YYYY-MM-DD HH:mm:SS"];
+                [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:SS"];
                 detail = [dateFormatter stringFromDate:self.curUser.regTime];
             }
             else {
