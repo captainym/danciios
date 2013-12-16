@@ -11,7 +11,7 @@
 
 #define TABLE_CELL_FOR_USER_INFO @"tableCellForUserInfo"
 
-@interface ConfigurationViewController () <UIScrollViewDelegate, UIPopoverListViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface ConfigurationViewController () <UIScrollViewDelegate, UIPopoverListViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (void) initScrollView;
 - (void) createEmptyPagesForScrollView;
@@ -150,20 +150,13 @@
 - (void)createEmptyPagesForScrollView
 {
     //// page for user info
-    NSInteger btnUserLogInWidth = self.scrollView.frame.size.width / 4;
-    NSInteger btnUserLogInHeight = 40;
+    NSInteger btnUserLogInWidth = self.scrollView.frame.size.width / 2;
+    NSInteger btnUserLogInHeight = 20;
     
-    NSInteger btnUserSyncWidth = self.scrollView.frame.size.width / 4;
-    NSInteger btnUserSyncHeight = 40;
+    NSInteger btnUserSyncWidth = self.scrollView.frame.size.width / 2;
+    NSInteger btnUserSyncHeight = 20;
     
     NSInteger labelUserInfoHeight = self.scrollView.frame.size.height - btnUserLogInHeight - btnUserSyncHeight - 40;
-    
-    NSInteger btnUserLogInX = 320 * 0 + (self.scrollView.frame.size.width - btnUserLogInWidth - btnUserSyncWidth - 2) / 2;
-    NSInteger btnUserLogInY = labelUserInfoHeight + 20;
-    
-    NSInteger btnUserSyncX = 320 * 0 + (self.scrollView.frame.size.width - btnUserLogInWidth - btnUserSyncWidth - 2) / 2 + btnUserSyncWidth + 2;
-    NSInteger btnUserSyncY = labelUserInfoHeight + 20;
-    
     
     // 用户信息table
     tableUserInfo = [[UITableView alloc] init];
@@ -175,21 +168,29 @@
     
     // 登录按钮
     btnUserLogin = [UIButton buttonWithType:UIButtonTypeSystem];
-    btnUserLogin.frame = CGRectMake(btnUserLogInX, btnUserLogInY, btnUserLogInWidth, btnUserLogInHeight);
+    
+    //判断是否登陆
+    if(self.curUser.mid == nil || [self.curUser.mid length] < 2) {
+        [btnUserLogin setTitle:@"登录" forState:UIControlStateNormal];
+    }
+    else {
+        [btnUserLogin setTitle:@"注销" forState:UIControlStateNormal];
+    }
+    
+    btnUserLogin.frame = CGRectMake(320 * 0 + (self.scrollView.frame.size.width - btnUserLogInWidth) / 2, labelUserInfoHeight, btnUserLogInWidth, btnUserLogInHeight);
     btnUserLogin.showsTouchWhenHighlighted = YES;
     [btnUserLogin setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self updateBtnUserLogIn];
-    [btnUserLogin setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnUserLogin setBackgroundColor:[UIColor darkGrayColor]];
+    [btnUserLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnUserLogin addTarget:self action:@selector(onBtnUserLogin) forControlEvents:UIControlEventTouchUpInside];
     
     // 同步按钮
     btnUserSync = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnUserSync setTitle:@"同步" forState:UIControlStateNormal];
-    btnUserSync.frame = CGRectMake(btnUserSyncX, btnUserSyncY, btnUserSyncWidth, btnUserSyncHeight);
-
+    btnUserSync.frame = CGRectMake(320 * 0 + (self.scrollView.frame.size.width - btnUserLogInWidth) / 2, labelUserInfoHeight + btnUserLogInHeight + 2, btnUserSyncWidth, btnUserSyncHeight);
     btnUserSync.showsTouchWhenHighlighted = YES;
     [btnUserSync setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btnUserSync setBackgroundColor:[UIColor grayColor]];
+    [btnUserSync setBackgroundColor:[UIColor darkGrayColor]];
     [btnUserSync setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateNormal];
     [btnUserSync addTarget:self action:@selector(onBtnUserSync) forControlEvents:UIControlEventTouchUpInside];
     
@@ -281,7 +282,22 @@
         [self popLoginView:TYPE_LOGIN];
     }
     else { // 已登录==>注销
-        [[[UIAlertView alloc] initWithTitle:@"注销用户" message:@"确定要注销吗?" delegate:self cancelButtonTitle:@"不" otherButtonTitles:@"是", nil] show];
+        self.curUser.mid = @"";
+        self.curUser.comsumeWordNum = 0;
+        self.curUser.maxWordNum = 0;
+        self.curUser.recommendStudyNo = 0;
+        self.curUser.regTime = nil;
+        self.curUser.studyNo = 0;
+        self.curUser.words = @"";
+        
+        // 更新用户信息至CoreData
+        [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
+        
+        // 更新按钮标题
+        [btnUserLogin setTitle:@"登录" forState:UIControlStateNormal];
+        
+        // 更新页面显示
+        [tableUserInfo reloadData];
     }
 }
 
@@ -300,67 +316,13 @@
     });
 }
 
-#pragma mark - alertViewDelegate
-
-- (void) updateBtnUserLogIn
-{
-    NSLog(@"btnUserLogin.titleLabel.text: %@", btnUserLogin.titleLabel.text);
-    
-    NSString *title = ([self userLoggedIn] ? @"注销" : @"登录");
-    [btnUserLogin setTitle:title forState:UIControlStateNormal];
-    if (![self userLoggedIn]) {
-        [btnUserLogin setBackgroundColor:[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1]];
-    }
-    else {
-        [btnUserLogin setBackgroundColor:[UIColor colorWithRed:0.9 green:0.0 blue:0.0 alpha:1]];
-    }
-}
-
-- (void) doLogOut
-{
-    // 清除curUser
-    self.curUser.mid = @"";
-    self.curUser.comsumeWordNum = 0;
-    self.curUser.maxWordNum = 0;
-    self.curUser.recommendStudyNo = 0;
-    self.curUser.regTime = nil;
-    self.curUser.studyNo = 0;
-    self.curUser.words = @"";
-    
-    // 强制清除本地用户信息
-    [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
-    
-    // 更新按钮标题及背景色
-    [self updateBtnUserLogIn];
-
-    // 更新页面显示
-    [tableUserInfo reloadData];
-}
-
-// 处理UIAlertView中的按钮被单击的事件
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            // 用户取消了注销
-            break;
-            
-        case 1:
-            // 用户确认要注销
-            [self doLogOut];
-            break;
-            
-        default:
-            break;
-    }
-}
-
 
 #pragma mark - popListViewDelegate
 
 -(void) popoverListViewCancel:(UIPopoverListView *)popoverListView
 {
-    [self updateBtnUserLogIn];
+    // 应该纪录下来 计算流失率
+    [btnUserLogin setTitle:@"登录" forState:UIControlStateNormal];
     
 //    NSLog(@"user do not want to reg or login");
 }
@@ -368,6 +330,7 @@
 - (void)pushDataToUser:(NSDictionary *)userInfo
 {
     self.curUser.mid = [userInfo objectForKey:@"mid"];
+//    self.curUser.studyNo = [NSNumber numberWithInteger: [[userInfo objectForKey:@"studyNo"] integerValue]];
     self.curUser.studyNo = [NSNumber numberWithInt:[[userInfo objectForKey:@"studyNo"] intValue]];
     self.curUser.maxWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"maxWordNum"] intValue]];
     self.curUser.comsumeWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"comsumeWordNum"]intValue]];
@@ -381,11 +344,12 @@
 
 -(void) popoverListViewLogin:(UIPopoverListView *)popoverListView oldUser:(NSDictionary *)userInfo
 {
+    // 更新按钮标题
+    NSString *title = [NSString stringWithFormat:@"%@", ((userInfo != nil) ? @"注销" : @"登录")];
+    [btnUserLogin setTitle:title forState:UIControlStateNormal];
+    
     // 保存数据
     [self pushDataToUser:userInfo];
-    
-    // 更新按钮标题
-    [self updateBtnUserLogIn];
     
     // 更新页面显示
     [tableUserInfo reloadData];
@@ -395,11 +359,12 @@
 
 -(void) popoverListViewRegist:(UIPopoverListView *)popoverListView newUser:(NSDictionary *)userInfo
 {
+    // 更新按钮标题
+    NSString *title = [NSString stringWithFormat:@"%@", ((userInfo != nil) ? @"注销" : @"登录")];
+    [btnUserLogin setTitle:title forState:UIControlStateNormal];
+    
     // 保存数据
     [self pushDataToUser:userInfo];
-
-    // 更新按钮标题
-    [self updateBtnUserLogIn];
     
     // 更新页面显示
     [tableUserInfo reloadData];
