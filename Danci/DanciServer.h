@@ -89,6 +89,10 @@ typedef enum
 //与server同步userinfo
 + (NSDictionary *) mergerUserInfo:(NSDictionary *)userInfo;
 
+
+// 由服务器获取帮助信息
++ (NSDictionary *) getHelpInfoFromServer;
+
 @end
 
 

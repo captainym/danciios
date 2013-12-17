@@ -51,7 +51,6 @@
 }
 
 - (void) setBackgroundColor:(UIColor*)color{
-
     self.myCollectionView.backgroundColor = color;
     [_myCollectionView reloadData];
 }
@@ -71,12 +70,17 @@
     PPCollectionViewCell *cell = (PPCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"PPCollectionCell" forIndexPath:indexPath];
     NSDictionary *imageDic = [self.collectionImageData objectAtIndex:[indexPath row]];
     
+    // 首先清空cell中的image, 防止在未下载完成时仍显示旧的image
+    [cell setImage:nil];
+    
     NSString *imgurl = [imageDic objectForKey:TIPS_IMG_URL];
 //    NSLog(@"now load img with url:[%@]",imgurl);
     dispatch_queue_t downloadImg = dispatch_queue_create("download one img", NULL);
     dispatch_async(downloadImg, ^{
         NSURL *imgurlnet = [NSURL URLWithString:imgurl];
         NSData *imgData = [NSData dataWithContentsOfURL:imgurlnet];
+        
+        // 更新cell中的image
         dispatch_async(dispatch_get_main_queue(), ^{
             UIImage *image = [UIImage imageWithData:imgData];
             [cell setImage:image];

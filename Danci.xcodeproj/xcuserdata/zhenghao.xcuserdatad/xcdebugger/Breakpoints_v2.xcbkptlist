@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/DanciWordViewController.m"
-            timestampString = "408369752.89746"
+            timestampString = "408980919.141268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "514"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/DanciWordViewController.m"
-            timestampString = "408369757.357759"
+            timestampString = "408980919.141268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "523"
@@ -138,13 +138,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/DanciWordViewController.m"
-            timestampString = "408369761.02189"
+            timestampString = "408980919.141268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "509"
             endingLineNumber = "509"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkName = "-scrollingTableViewCell:didSelectImageAtIndexPath:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DanciWordViewController scrollingTableViewCell:didSelectImageAtIndexPath:]"
+                  moduleName = "&#23398;&#22909;&#21333;&#35789;"
+                  urlString = "file:///Mine/Data/Workspace/Product/app/danci-ios/danciios/Danci/DanciWordViewController.m"
+                  timestampString = "408981911.155251"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "509"
+                  endingLineNumber = "509"
+                  offsetFromSymbolStart = "3406">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DanciWordViewController scrollingTableViewCell:didSelectImageAtIndexPath:]"
+                  moduleName = "&#23398;&#22909;&#21333;&#35789;"
+                  urlString = "file:///Mine/Data/Workspace/Product/app/danci-ios/danciios/Danci/DanciWordViewController.m"
+                  timestampString = "408981911.155608"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "509"
+                  endingLineNumber = "509"
+                  offsetFromSymbolStart = "3830">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,7 +184,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/DanciWordViewController.m"
-            timestampString = "408369764.601916"
+            timestampString = "408980919.141268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "529"
@@ -186,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/ConfigurationViewController.m"
-            timestampString = "408973789.250945"
+            timestampString = "408978562.198736"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "458"
-            endingLineNumber = "458"
+            startingLineNumber = "497"
+            endingLineNumber = "497"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,7 +248,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/DanciWordViewController.m"
-            timestampString = "408545400.261061"
+            timestampString = "408980919.141268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "521"
@@ -234,7 +264,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/DanciWordViewController.m"
-            timestampString = "408545401.277307"
+            timestampString = "408980919.141268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "522"
