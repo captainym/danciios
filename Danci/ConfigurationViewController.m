@@ -8,14 +8,17 @@
 
 #import "ConfigurationViewController.h"
 #import "UIPopoverListView.h"
+#import "DanciServer.h"
 
 #define TABLE_CELL_FOR_USER_INFO @"tableCellForUserInfo"
 
 @interface ConfigurationViewController () <UIScrollViewDelegate, UIPopoverListViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     NSString *appDescription;
-    NSString *teamIntruction;
+    NSString *teamIntroduction;
     NSString *supportInfo;
+    
+    bool viewInited;
 }
 
 - (void) initScrollView;
@@ -71,11 +74,38 @@
     self.btnHelp.showsTouchWhenHighlighted = YES;
     [self.btnHelp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
    
-    appDescription = @"记单词\n科学记单词 高效学英语";
-    teamIntruction = @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
-    supportInfo = @"官网:    http://www.danci.com";
-
+    [self updateHelpInfo];
+    viewInited = false;
     [self initScrollView];
+}
+
+- (void)updateHelpInfo {
+    appDescription = @"记单词\n科学记单词 高效学英语";
+    teamIntroduction = @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
+    supportInfo = @"官网:    http://www.danci.com";
+    
+    dispatch_queue_t queue = dispatch_queue_create("queueGetHelpInfoFromServer", NULL);
+    dispatch_async(queue, ^{
+        NSDictionary *helpInfoDict = [DanciServer getHelpInfoFromServer];
+        [helpInfoDict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+            NSString *name = key;
+            if ([name isEqualToString: @"appDescription"]) {
+                appDescription = value;
+            }
+            else if ([name isEqualToString: @"teamIntroduction"]) {
+                teamIntroduction = value;
+            }
+            else if ([name isEqualToString: @"supportInfo"]) {
+                supportInfo = value;            }
+        }];
+        
+        // 在主线程中完成UI更新
+        if (curPage == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showView];
+            });
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +118,10 @@
 
 - (void) showView
 {
+    if (!viewInited) { // 防止在updateHelpInfo触发updateView时, view尚未init.
+        [self initScrollView];
+    }
+    
     switch (curPage) {
         case 0:
             [self showUserInfoView];
@@ -131,6 +165,10 @@
     self.labelForCurPage.frame = CGRectMake(161, labelForCurPageY, 159, 4);
     [self.scrollView setContentOffset:CGPointMake(320 * 1, 0)]; // 页面滑动
     
+    labelAppDescription.text = appDescription;
+    labelTeamIntruction.text = teamIntroduction;
+    labelSupport.text = supportInfo;
+    
     [UIView commitAnimations];
 }
 
@@ -153,7 +191,10 @@
     pageControl.numberOfPages = 2;
     pageControl.currentPage = curPage;
     pageControl.backgroundColor = [UIColor whiteColor];
+    
     [self createEmptyPagesForScrollView];
+    
+    viewInited = true;
 }
 
 - (void)createEmptyPagesForScrollView
@@ -222,10 +263,9 @@
     labelTeamIntruction = [[UILabel alloc] init];
     labelTeamIntruction.frame = CGRectMake(320 * 1, 60, 320, 80);
     labelTeamIntruction.numberOfLines = 6;
-    labelTeamIntruction.text = teamIntruction;// @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
+    labelTeamIntruction.text = teamIntroduction;// @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
     labelTeamIntruction.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelTeamIntruction];
-
     
     labelSupport = [[UILabel alloc] init];
     labelSupport.frame = CGRectMake(320 * 1, 140, 320, 45);
@@ -235,6 +275,7 @@
     [self.scrollView addSubview:labelSupport];
     
     // 默认显示用户信息页面
+    // 注: 此处不能调用showView, 否则会形成无穷嵌套(showView()->initScrollView()->createEmptyPagesForScrollView()->showView())
     [self showUserInfoView];
 }
 
@@ -313,8 +354,6 @@
 
 - (void) updateBtnUserLogIn
 {
-    NSLog(@"btnUserLogin.titleLabel.text: %@", btnUserLogin.titleLabel.text);
-    
     NSString *title = ([self userLoggedIn] ? @"注销" : @"登录");
     [btnUserLogin setTitle:title forState:UIControlStateNormal];
     if (![self userLoggedIn]) {

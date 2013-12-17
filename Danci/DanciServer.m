@@ -18,6 +18,7 @@
 #define FORMAT_POST_LOGIN @"http://acodingfarmer.com/bdc/action/auth"
 #define FORMAT_POST_REGIST @"http://acodingfarmer.com/bdc/action/register"
 #define FORMAT_MERGER_USER @"http://acodingfarmer.com/bdc/action/syncUser"
+#define FORMAT_GET_HELP_INFO @"http://acodingfarmer.com/bdc/action/getHelpInfo"
 
 @implementation DanciServer
 
@@ -217,6 +218,14 @@
 {
     NSString *query = FORMAT_MERGER_USER;
     return [[self executeServerPost:query postData:userInfo] objectForKey:RETURN_DATA];
+}
+
+
+// 由服务器获取帮助信息
++ (NSDictionary *) getHelpInfoFromServer
+{
+    NSString *query = FORMAT_GET_HELP_INFO;
+    return [[self executeServerFetch:query] objectForKey:RETURN_DATA];
 }
 
 @end
