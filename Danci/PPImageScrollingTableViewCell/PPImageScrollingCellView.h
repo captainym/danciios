@@ -25,8 +25,6 @@
 @property (strong, nonatomic) UICollectionView *myCollectionView;
 @property (strong, nonatomic) NSArray *collectionImageData;
 
-//- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;
-//- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor;
 - (void) setImageData:(NSArray*)images;
 - (void) setBackgroundColor:(UIColor*)color;
 

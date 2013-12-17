@@ -25,8 +25,5 @@
 
 - (void) setImageData:(NSArray *) image;
 - (void) setCollectionViewBackgroundColor:(UIColor*) color;
-//- (void) setCategoryLabelText:(NSString*)text withColor:(UIColor*)color;
-//- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height;
-//- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor;
 
 @end

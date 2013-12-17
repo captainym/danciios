@@ -38,42 +38,4 @@
     [self.contentView addSubview:self.imageView];
 }
 
-/*
-- (void)setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height
-{
-    self.imageTitle = [[UITextView alloc] initWithFrame:CGRectMake(0., _imageView.frame.size.height/2+5, width,height)];
-    self.imageTitle.contentInset = UIEdgeInsetsMake(1,1,1,1);
-    self.imageTitle.userInteractionEnabled = NO;
-}
-
-- (void)setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor
-{
-    self.imageTitle.textColor = textColor;
-    self.imageTitle.backgroundColor = bgColor;
-}
-
-- (void)setTitle:(NSString*)title ;
-{
-    if ([self.contentView subviews]){
-        for (UILabel *subview in [self.contentView subviews]) {
-            [subview removeFromSuperview];
-        }
-    }
-    [self.contentView addSubview:self.imageView];
-
-    self.imageTitle.text = title;
-    [self.contentView addSubview:self.imageTitle];
-    
-}
- */
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 @end

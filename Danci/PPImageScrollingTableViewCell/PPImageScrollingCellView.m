@@ -11,11 +11,6 @@
 
 @interface  PPImageScrollingCellView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-//@property (nonatomic) CGFloat imagetitleWidth;
-//@property (nonatomic) CGFloat imagetitleHeight;
-//@property (strong, nonatomic) UIColor *imageTilteBackgroundColor;
-//@property (strong, nonatomic) UIColor *imageTilteTextColor;
-
 @end
 
 @implementation PPImageScrollingCellView
@@ -61,17 +56,6 @@
     [_myCollectionView reloadData];
 }
 
-/*
-- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height{
-    _imagetitleWidth = width;
-    _imagetitleHeight = height;
-}
-- (void) setImageTitleTextColor:(UIColor*)textColor withBackgroundColor:(UIColor*)bgColor{
-    
-    _imageTilteTextColor = textColor;
-    _imageTilteBackgroundColor = bgColor;
-}*/
-
 #pragma mark - UICollectionViewDataSource methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -98,10 +82,6 @@
             [cell setImage:image];
         });
     });
-//    [cell setImage:[UIImage imageNamed:[imageDic objectForKey:@"url"]]];
-//    [cell setImageTitleLabelWitdh:_imagetitleWidth withHeight:_imagetitleHeight];
-//    [cell setImageTitleTextColor:_imageTilteTextColor withBackgroundColor:_imageTilteBackgroundColor];
-//    [cell setTitle:[imageDic objectForKey:@"title"]];
     return cell;
 }
 
@@ -109,14 +89,5 @@
     
     [self.delegate collectionView:self didSelectImageItemAtIndexPath:(NSIndexPath*)indexPath];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
