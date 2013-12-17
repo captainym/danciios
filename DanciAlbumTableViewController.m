@@ -143,7 +143,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view delegate
@@ -195,18 +194,10 @@
         [segue.destinationViewController setDanciDatabase:self.danciDatabase];
         [segue.destinationViewController setIsNewStudy:TRUE];
         [segue.destinationViewController setAlbum:self.albumSelected];
-//        [segue.destinationViewController setNavigationBarHidden:YES];
     }
     else if ([segue.identifier isEqualToString:@"segueConfiguration"]) {
         [segue.destinationViewController setDanciDatabase:self.danciDatabase];
     }
 }
-
-- (IBAction)gotoConfiguration:(id)sender {
-    [self performSegueWithIdentifier:@"segueConfiguration" sender:self];
-}
-
-
-#pragma mark - Table view delegate
 
 @end
