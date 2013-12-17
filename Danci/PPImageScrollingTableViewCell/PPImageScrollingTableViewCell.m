@@ -68,37 +68,8 @@
     //_categoryLabelText = [collectionImageData objectForKey:@"category"];
 }
 
-/*
-- (void)setCategoryLabelText:(NSString*)text withColor:(UIColor*)color{
-    
-    if ([self.contentView subviews]){
-        for (UIView *subview in [self.contentView subviews]) {
-            [subview removeFromSuperview];
-        }
-    }
-    UILabel *categoryTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, kCategoryLabelWidth, kCategoryLabelHieght)];
-    categoryTitle.textAlignment = NSTextAlignmentLeft;
-    categoryTitle.text = text;
-    categoryTitle.textColor = color;
-    categoryTitle.backgroundColor = [UIColor clearColor];
-    [self.contentView addSubview:categoryTitle];
-}*/
-
-/*
-- (void) setImageTitleLabelWitdh:(CGFloat)width withHeight:(CGFloat)height {
-
-    [_imageScrollingView setImageTitleLabelWitdh:width withHeight:height];
-}
-*/
-/*
-- (void) setImageTitleTextColor:(UIColor *)textColor withBackgroundColor:(UIColor *)bgColor{
-
-    [_imageScrollingView setImageTitleTextColor:textColor withBackgroundColor:bgColor];
-}*/
-
 - (void)setCollectionViewBackgroundColor:(UIColor *)color{
     self.imageScrollingView.backgroundColor = color;
-//    [self.contentView addSubview:_imageScrollingView];
 }
 
 #pragma mark - PPImageScrollingViewDelegate

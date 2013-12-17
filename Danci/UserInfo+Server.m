@@ -22,7 +22,7 @@
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
     if(!matches || [matches count] > 1){
-        NSLog(@"warning. user is more than one!");
+        NSLog(@"warning. user is more than one or NONE!");
         [matches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"dup user:[%@]", obj);
         }];

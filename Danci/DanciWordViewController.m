@@ -15,8 +15,10 @@
 #import "StudyOperation+Server.h"
 
 #define WORD_SEPARATED @"|"
-#define NUM_REVIEW_INTERVAL 2
-#define NUM_LEANING_GROUP 20
+#define NUM_LEANING_GROUP 5
+#define NUM_NEED_REVIEW_FUZZLE 3
+#define NUM_NEED_REVIEW_NO 3
+#define NUM_NEED_REVIEW_NOANDFUZZLE 4
 #define FILE_TIP_IMG_DEFAULT @"default"
 
 @interface DanciWordViewController () <PPImageScrollingTableViewCellDelegate, UITableViewDataSource,UITableViewDelegate,AVAudioPlayerDelegate , UIPopoverListViewDelegate, DanciEditTipTxtDelegate, UIAlertViewDelegate>
@@ -29,6 +31,7 @@
 @property (nonatomic, strong) NSMutableArray *reviewFuzze;
 //默认的tip图片
 @property (nonatomic, strong) UIImage *defaultTipImg;
+@property (nonatomic, strong) NSString *msgReview;
 
 @end
 
@@ -51,6 +54,7 @@
 @synthesize wordTerm = _wordTerm;
 @synthesize reviewNo = _reviewNo;
 @synthesize reviewFuzze = _reviewFuzze;
+@synthesize msgReview = _msgReview;
 
 @synthesize defaultTipImg = _defaultTipImg;
 
@@ -99,6 +103,7 @@
     NSLog(@"setAlbum 从album中分离出[%d]个word wordsList[%@]", [_words count], self.album.words);
     //设置第一个word
     int curPoint = ([self.album.point intValue] - 1) % [self.album.count intValue];
+    self.msgReview = @"";
     self.wordTerm = [self.words objectAtIndex:curPoint];
 }
 
@@ -294,7 +299,7 @@
     _btnCover = [[UIButton alloc] initWithFrame:CGRectZero];
     _btnCover.frame = CGRectMake(0, 0, 320, 620);
     [self.navigationItem.titleView removeFromSuperview];
-    [_btnCover setTitle:[self.word.word stringByAppendingString:@" 是什么意思？"] forState:UIControlStateNormal];
+    [_btnCover setTitle:[self.msgReview stringByAppendingFormat:@"%@ 是什么意思？", self.wordTerm] forState:UIControlStateNormal];
     [_btnCover setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _btnCover.backgroundColor = [UIColor whiteColor];
     [_btnCover addTarget:self action:@selector(drawMyViewReal:) forControlEvents:UIControlEventTouchUpInside];
@@ -618,7 +623,7 @@
 
 - (IBAction)showNextWord:(id)sender {
     //用户的帐户消耗
-    if(![self isWordStudiedOtherwiseAdd:self.wordTerm] && sender != self.btnFeedbackOk && self.counter != NUM_LEANING_GROUP){
+    if(![self isWordStudiedOtherwiseAdd:self.wordTerm] && self.counter != NUM_LEANING_GROUP){
         self.counter += 1;
     }
     NSLog(@"user maxWordNum[%d] comsumeWordNum[%d]",[self.user.maxWordNum intValue], [self.user.comsumeWordNum intValue]);
@@ -668,7 +673,8 @@
     
     //判断从及时复习队列取还是从单词本取
     //未掌握单词超过了3个、模糊单词数超过5个、单词本学习完成了、学习了20个新单词了
-    if([self.reviewNo count] >= 3 || [self.reviewFuzze count] >=5 || self.counter == NUM_LEANING_GROUP || [self.album.point intValue] % [self.album.count intValue] == 0){
+    if([self.reviewNo count] >= NUM_NEED_REVIEW_FUZZLE || [self.reviewFuzze count] >= NUM_NEED_REVIEW_NO || ([self.reviewNo count] + [self.reviewFuzze count]) >= NUM_NEED_REVIEW_NOANDFUZZLE || self.counter == NUM_LEANING_GROUP || [self.album.point intValue] % [self.album.count intValue] == 0){
+        self.msgReview = @"复习:";
         if([self.reviewNo count] > 0){
             self.wordTerm = [self.reviewNo objectAtIndex:0];
             [self.reviewNo removeObjectAtIndex:0];
@@ -682,6 +688,7 @@
             return;
         }
     }
+    self.msgReview = @"";
     if(self.counter == NUM_LEANING_GROUP){
         self.counter = 0;
     }
