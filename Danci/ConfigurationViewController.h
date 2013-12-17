@@ -20,7 +20,7 @@
     // 帮助相关
     UILabel *labelAppDescription;
     UILabel *labelTeamIntruction;
-    UILabel *labelHelp;
+    UILabel *labelSupport;
     
     //// 滑动控件
     UIPageControl *pageControl;
