@@ -708,7 +708,7 @@
             msg = [@"" stringByAppendingFormat:@"赞！阿眠MM，你学完了[%@]！btw：谢谢你的糖果哦，如果能吃到就更好了。我们去挑战新的吧:)", self.album.name];
         }
         if([self.album.name isEqualToString:ALBUM_NAME_REVIEW]){
-            msg = @"赞！复习完成！在遗忘零界点复习绝对的事半半、公背背！继续学习吧 :)";
+            msg = @"赞！复习完成！在遗忘零界点复习绝对的事半半、功倍倍！继续学习吧 :)";
         }
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"学成!" message:msg delegate:self cancelButtonTitle:@"OK 走起！" otherButtonTitles:nil];
         [alertView show];
