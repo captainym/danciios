@@ -12,6 +12,11 @@
 #define TABLE_CELL_FOR_USER_INFO @"tableCellForUserInfo"
 
 @interface ConfigurationViewController () <UIScrollViewDelegate, UIPopoverListViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+{
+    NSString *appDescription;
+    NSString *teamIntruction;
+    NSString *supportInfo;
+}
 
 - (void) initScrollView;
 - (void) createEmptyPagesForScrollView;
@@ -66,6 +71,10 @@
     self.btnHelp.showsTouchWhenHighlighted = YES;
     [self.btnHelp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
    
+    appDescription = @"记单词\n科学记单词 高效学英语";
+    teamIntruction = @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
+    supportInfo = @"官网:    http://www.danci.com";
+
     [self initScrollView];
 }
 
@@ -206,24 +215,24 @@
     labelAppDescription = [[UILabel alloc] init];
     labelAppDescription.frame = CGRectMake(320 * 1, 10, 320, 45);
     labelAppDescription.numberOfLines = 2;
-    labelAppDescription.text = @"记单词\n科学记单词 高效学英语";
+    labelAppDescription.text = appDescription;//@"记单词\n科学记单词 高效学英语";
     labelAppDescription.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelAppDescription];
 
     labelTeamIntruction = [[UILabel alloc] init];
     labelTeamIntruction.frame = CGRectMake(320 * 1, 60, 320, 80);
     labelTeamIntruction.numberOfLines = 6;
-    labelTeamIntruction.text = @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
+    labelTeamIntruction.text = teamIntruction;// @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
     labelTeamIntruction.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelTeamIntruction];
 
     
-    labelHelp = [[UILabel alloc] init];
-    labelHelp.frame = CGRectMake(320 * 1, 140, 320, 45);
-    labelHelp.numberOfLines = 1;
-    labelHelp.text = @"官网:    http://www.danci.com";
-    labelHelp.font = [UIFont fontWithName:@"Verdana" size:12];
-    [self.scrollView addSubview:labelHelp];
+    labelSupport = [[UILabel alloc] init];
+    labelSupport.frame = CGRectMake(320 * 1, 140, 320, 45);
+    labelSupport.numberOfLines = 1;
+    labelSupport.text = supportInfo;// @"官网:    http://www.danci.com";
+    labelSupport.font = [UIFont fontWithName:@"Verdana" size:12];
+    [self.scrollView addSubview:labelSupport];
     
     // 默认显示用户信息页面
     [self showUserInfoView];
@@ -309,7 +318,7 @@
     NSString *title = ([self userLoggedIn] ? @"注销" : @"登录");
     [btnUserLogin setTitle:title forState:UIControlStateNormal];
     if (![self userLoggedIn]) {
-        [btnUserLogin setBackgroundColor:[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1]];
+        [btnUserLogin setBackgroundColor:[UIColor colorWithRed:0.0 green:0.75 blue:0.0 alpha:1]];
     }
     else {
         [btnUserLogin setBackgroundColor:[UIColor colorWithRed:0.9 green:0.0 blue:0.0 alpha:1]];
@@ -367,6 +376,7 @@
 
 - (void)pushDataToUser:(NSDictionary *)userInfo
 {
+    // 更新user信息
     self.curUser.mid = [userInfo objectForKey:@"mid"];
     self.curUser.studyNo = [NSNumber numberWithInt:[[userInfo objectForKey:@"studyNo"] intValue]];
     self.curUser.maxWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"maxWordNum"] intValue]];
@@ -376,7 +386,7 @@
     // 显式地save
     [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
     
-    NSLog(@"++++++++user login in. user:%@, real study no: %d, got studo no: %@", self.curUser, [[userInfo objectForKey:@"studyNo"] intValue], self.curUser.studyNo);
+//    NSLog(@"++++++++user login in. user:%@, real study no: %d, got studo no: %@", self.curUser, [[userInfo objectForKey:@"studyNo"] intValue], self.curUser.studyNo);
 }
 
 -(void) popoverListViewLogin:(UIPopoverListView *)popoverListView oldUser:(NSDictionary *)userInfo
@@ -451,7 +461,7 @@
             title = @"注册时间:";
             if ([self userLoggedIn]) {
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"YYYY-MM-DD HH:mm:SS"];
+                [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:SS"];
                 detail = [dateFormatter stringFromDate:self.curUser.regTime];
             }
             else {
