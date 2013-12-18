@@ -17,4 +17,7 @@
 //@property (strong, nonatomic) IBOutlet UITableView *tblAlbumIpad;
 @property (strong, nonatomic) IBOutlet UITableView *tblAlbumIphone;
 
+//生成复习单词本
+-(void) generateReveiwAlbum;
+
 @end

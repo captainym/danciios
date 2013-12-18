@@ -112,6 +112,9 @@
     _tips = @"";
     if([self.word.stem length] > 1){
         _tips = [@"词根：" stringByAppendingString:self.word.stem];
+        if([[self.word.stem substringToIndex:3] isEqualToString:@" 词根"]){
+            _tips = self.word.stem;
+        }
     }
     if([self.word.txt_tip length] > 1){
         _tips = [[_tips stringByAppendingString:@"\n助记："] stringByAppendingString:self.word.txt_tip];
@@ -553,6 +556,9 @@
     self.user.maxWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"maxWordNum"] intValue]];
     self.user.comsumeWordNum = [NSNumber numberWithInt:[[userInfo objectForKey:@"comsumeWordNum"]intValue]];
     self.user.regTime = [NSDate dateWithTimeIntervalSince1970:[[userInfo objectForKey:@"regTime"] intValue]];
+    [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+        NSLog(@"push data to user ok");
+    }];
 }
 
 -(void) popoverListViewLogin:(UIPopoverListView *)popoverListView oldUser:(NSDictionary *)userInfo

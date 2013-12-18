@@ -138,6 +138,11 @@
     [btnTitle setTitle:@"单词本" forState:UIControlStateNormal];
     [btnTitle setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.navigationItem setTitleView: btnTitle];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(generateReveiwAlbum)
+                                                name:UIApplicationDidBecomeActiveNotification
+                                              object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -198,6 +203,11 @@
     else if ([segue.identifier isEqualToString:@"segueConfiguration"]) {
         [segue.destinationViewController setDanciDatabase:self.danciDatabase];
     }
+}
+
+-(void) generateReveiwAlbum
+{
+    self.albumReview = [Album getReviewAlbum: self.danciDatabase.managedObjectContext];
 }
 
 @end
