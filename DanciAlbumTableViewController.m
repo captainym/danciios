@@ -12,8 +12,6 @@
 #import "Word+Server.h"
 #import "UserInfo+Server.h"
 
-//#import "GuideViewController.h"
-//#import "UIGuideViewController.h"
 #import "MYCustomPanel.h"
 #import "MYBlurIntroductionView.h"
 
@@ -257,14 +255,16 @@
     //You can edit introduction view properties right from the delegate method!
     //If it is the first panel, change the color to green!
     if (panelIndex == 0) {
-        [introductionView setBackgroundColor:[UIColor colorWithRed:90.0f/255.0f green:175.0f/255.0f blue:113.0f/255.0f alpha:1]];    }
+        [introductionView setBackgroundColor:[UIColor colorWithRed:155.0f/255.0f green:231.0f/255.0f blue:104.0f/255.0f alpha:1]]; // 绿色
+    }
     //If it is the second panel, change the color to blue!
     else if (panelIndex == 1){
-        [introductionView setBackgroundColor:[UIColor colorWithRed:50.0f/255.0f green:79.0f/255.0f blue:133.0f/255.0f alpha:1]];
+        [introductionView setBackgroundColor:[UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:248.0f/255.0f alpha:1]]; // 蓝色
     }
     //If it is the third panel, change the color to blue!
     else if (panelIndex == 2){
-        [introductionView setBackgroundColor:[UIColor colorWithRed:133.0f/255.0f green:50.0f/255.0f blue:79.0f/255.0f alpha:1]];
+        //        [introductionView setBackgroundColor:[UIColor colorWithRed:247.0f/255.0f green:232.0f/255.0f blue:102.0f/255.0f alpha:1]]; // 黄色
+        [introductionView setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:108.0f/255.0f blue:108.0f/255.0f alpha:1]]; // 红色
     }
     
     NSString *buttonTitle = (panelIndex == 2 ? @"开始" : @"略过");
