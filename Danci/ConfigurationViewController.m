@@ -79,8 +79,18 @@
     [self initScrollView];
 }
 
+//- (void) viewWillAppear:(BOOL)animated
+//{
+//    UIButton *btnUserInfo = [self btnUserInfo];
+//    CGFloat btnUserInfoWidth = btnUserInfo.frame.size.width;
+//    CGFloat btnUserInfoHeight = btnUserInfo.frame.size.height;
+//    CGFloat btnUserInfoX = btnUserInfo.frame.origin.x;
+//    CGFloat btnUserInfoY = self.scrollView.frame.origin.y + self.scrollView.frame.size.height - btnUserInfoHeight;
+//    [btnUserInfo setFrame:CGRectMake(btnUserInfoX, btnUserInfoY, btnUserInfoWidth, btnUserInfoHeight)];
+//}
+
 - (void)updateHelpInfo {
-    appDescription = @"记单词\n科学记单词 高效学英语";
+    appDescription = @"学好单词\n科学记单词 高效学英语";
     teamIntroduction = @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
     supportInfo = @"官网:    http://www.danci.com";
     
@@ -179,12 +189,18 @@
     // 一个page是一个scollView
     self.scrollView.pagingEnabled = YES;
     self.scrollView.clipsToBounds = NO;
+    
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] < 7.0) {
+        self.scrollView.frame = CGRectMake(0.0, 0.0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    }
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 2, self.scrollView.frame.size.height);
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.scrollsToTop = NO;
     self.scrollView.delegate = self;
     [self.scrollView setContentOffset:CGPointMake(0, 0)];
+    
+//    NSLog(@"self.scrollView.frame's x: %f, y: %f, w: %f, h: %f", self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     
     self.labelForCurPage.text = @"";
     curPage = 0;
@@ -199,6 +215,12 @@
 
 - (void)createEmptyPagesForScrollView
 {
+    //// offset
+    NSInteger offsetYForAllPages = 0;
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] < 7.0) {
+        offsetYForAllPages = 40;
+    }
+    
     //// page for user info
     NSInteger btnUserLogInWidth = self.scrollView.frame.size.width / 4;
     NSInteger btnUserLogInHeight = 40;
@@ -217,7 +239,7 @@
     
     // 用户信息table
     tableUserInfo = [[UITableView alloc] init];
-    tableUserInfo.frame = CGRectMake(320 * 0, 0, 320, labelUserInfoHeight);
+    tableUserInfo.frame = CGRectMake(320 * 0, offsetYForAllPages, 320, labelUserInfoHeight);
     [tableUserInfo registerClass:[UITableViewCell class] forCellReuseIdentifier:TABLE_CELL_FOR_USER_INFO];
     [tableUserInfo setDelegate:self];
     [tableUserInfo setDataSource:self];
@@ -228,19 +250,19 @@
     btnUserLogin.frame = CGRectMake(btnUserLogInX, btnUserLogInY, btnUserLogInWidth, btnUserLogInHeight);
     btnUserLogin.showsTouchWhenHighlighted = YES;
     [btnUserLogin setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self updateBtnUserLogIn];
-    [btnUserLogin setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnUserSync setBackgroundColor:[UIColor grayColor]];
+//    [btnUserLogin setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateNormal];
     [btnUserLogin addTarget:self action:@selector(onBtnUserLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self updateBtnUserLogIn];
     
     // 同步按钮
     btnUserSync = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnUserSync setTitle:@"同步" forState:UIControlStateNormal];
     btnUserSync.frame = CGRectMake(btnUserSyncX, btnUserSyncY, btnUserSyncWidth, btnUserSyncHeight);
-
     btnUserSync.showsTouchWhenHighlighted = YES;
     [btnUserSync setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnUserSync setBackgroundColor:[UIColor grayColor]];
-    [btnUserSync setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateNormal];
+//    [btnUserSync setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateNormal];
     [btnUserSync addTarget:self action:@selector(onBtnUserSync) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *userView = [[UIView alloc] init];
@@ -254,23 +276,23 @@
     
     //// page for help
     labelAppDescription = [[UILabel alloc] init];
-    labelAppDescription.frame = CGRectMake(320 * 1, 10, 320, 45);
+    labelAppDescription.frame = CGRectMake(320 * 1, offsetYForAllPages + 10, 320, 45);
     labelAppDescription.numberOfLines = 2;
-    labelAppDescription.text = appDescription;//@"记单词\n科学记单词 高效学英语";
+    labelAppDescription.text = appDescription;
     labelAppDescription.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelAppDescription];
 
     labelTeamIntruction = [[UILabel alloc] init];
-    labelTeamIntruction.frame = CGRectMake(320 * 1, 60, 320, 80);
+    labelTeamIntruction.frame = CGRectMake(320 * 1,  offsetYForAllPages + 60, 320, 80);
     labelTeamIntruction.numberOfLines = 6;
-    labelTeamIntruction.text = teamIntroduction;// @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
+    labelTeamIntruction.text = teamIntroduction;
     labelTeamIntruction.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelTeamIntruction];
     
     labelSupport = [[UILabel alloc] init];
-    labelSupport.frame = CGRectMake(320 * 1, 140, 320, 45);
+    labelSupport.frame = CGRectMake(320 * 1,  offsetYForAllPages + 140, 320, 45);
     labelSupport.numberOfLines = 1;
-    labelSupport.text = supportInfo;// @"官网:    http://www.danci.com";
+    labelSupport.text = supportInfo;
     labelSupport.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelSupport];
     
