@@ -228,13 +228,13 @@
 
 -(void)showUserGuide{
     // 第一屏
-    MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"新手引导--选择单词本" description:@"丰富的单词本，创始人的墙裂推荐很有意思哦。点击进入单词学习" image:[UIImage imageNamed:@"HeaderImage.png"]];
+    MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"选择单词本" description:@"丰富的单词本，创始人的墙裂推荐很有意思哦。点击进入单词学习" image:[UIImage imageNamed:@"panel_1.png"]];
     
     // 第二屏
-    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"新手引导--开始学习" description:@"单击单词真人发音，单词例句也有真人朗读哦。图片助记、网友分享的优秀助记神马的，你肯定知道怎么玩的:)" image:[UIImage imageNamed:@"ForkImage.png"]];
+    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"开始学习" description:@"单击单词真人发音，单词例句也有真人朗读哦。图片助记、网友分享的优秀助记神马的，你肯定知道怎么玩的:)" image:[UIImage imageNamed:@"panel_2.png"]];
     
     // 第三屏
-    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"新手引导--温故知新" description:@"子曰 温故而知新，可以为师矣。日知其所亡，月无忘其所能，可谓好学也已矣。通过遗忘曲线计算出的处于遗忘零界点的单词，花一小点儿时间就满血满蓝啦!" image:[UIImage imageNamed:@"ForkImage.png"]];
+    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"温故知新" description:@"子曰 温故而知新，可以为师矣。日知其所亡，月无忘其所能，可谓好学也已矣。通过遗忘曲线计算出的处于遗忘零界点的单词，花一小点儿时间就满血满蓝啦!" image:[UIImage imageNamed:@"panel_3.png"]];
     
     // Add panels to an array
     NSArray *panels = @[panel1, panel2, panel3];

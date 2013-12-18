@@ -97,36 +97,6 @@
             endingLineNumber = "509"
             landmarkName = "-scrollingTableViewCell:didSelectImageAtIndexPath:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DanciWordViewController scrollingTableViewCell:didSelectImageAtIndexPath:]"
-                  moduleName = "&#23398;&#22909;&#21333;&#35789;"
-                  urlString = "file:///Mine/Data/Workspace/Product/app/danci-ios/danciios/Danci/DanciWordViewController.m"
-                  timestampString = "409074676.574856"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "509"
-                  endingLineNumber = "509"
-                  offsetFromSymbolStart = "3406">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DanciWordViewController scrollingTableViewCell:didSelectImageAtIndexPath:]"
-                  moduleName = "&#23398;&#22909;&#21333;&#35789;"
-                  urlString = "file:///Mine/Data/Workspace/Product/app/danci-ios/danciios/Danci/DanciWordViewController.m"
-                  timestampString = "409074676.575279"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "509"
-                  endingLineNumber = "509"
-                  offsetFromSymbolStart = "3830">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

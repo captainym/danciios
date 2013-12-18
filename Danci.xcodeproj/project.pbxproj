@@ -15,6 +15,9 @@
 		712F73511861E7FA0003624D /* MYBlurIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 712F73361861E7FA0003624D /* MYBlurIntroductionView.m */; };
 		712F73521861E7FA0003624D /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 712F73381861E7FA0003624D /* MYIntroductionPanel.m */; };
 		712F73531861E7FA0003624D /* MYCustomPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 712F733A1861E7FA0003624D /* MYCustomPanel.m */; };
+		712F7358186218410003624D /* panel_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F7357186218410003624D /* panel_2.png */; };
+		712F735E186223F60003624D /* panel_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F735D186223F60003624D /* panel_1.png */; };
+		712F73601862250D0003624D /* panel_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F735F1862250D0003624D /* panel_3.png */; };
 		71BA403D1855F0E9001B1196 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */; };
 		793F8F321854782500209430 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 793F8F311854782500209430 /* Album.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
@@ -76,6 +79,9 @@
 		712F73381861E7FA0003624D /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionPanel.m; sourceTree = "<group>"; };
 		712F73391861E7FA0003624D /* MYCustomPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MYCustomPanel.h; path = UserGuide/MYCustomPanel.h; sourceTree = "<group>"; };
 		712F733A1861E7FA0003624D /* MYCustomPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYCustomPanel.m; path = UserGuide/MYCustomPanel.m; sourceTree = "<group>"; };
+		712F7357186218410003624D /* panel_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_2.png; sourceTree = "<group>"; };
+		712F735D186223F60003624D /* panel_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_1.png; sourceTree = "<group>"; };
+		712F735F1862250D0003624D /* panel_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_3.png; sourceTree = "<group>"; };
 		71BA403B1855F0E9001B1196 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewController.h; sourceTree = "<group>"; };
 		71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewController.m; sourceTree = "<group>"; };
 		793F8F301854782500209430 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
@@ -178,6 +184,9 @@
 		712F731D1861E7FA0003624D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				712F735F1862250D0003624D /* panel_3.png */,
+				712F735D186223F60003624D /* panel_1.png */,
+				712F7357186218410003624D /* panel_2.png */,
 				712F731F1861E7FA0003624D /* ForkImage.png */,
 				712F73251861E7FA0003624D /* HeaderImage.png */,
 				712F73311861E7FA0003624D /* Toronto, ON.jpg */,
@@ -391,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBF8ECB2185F1FE8005F21F4 /* icon57X57.png in Resources */,
+				712F735E186223F60003624D /* panel_1.png in Resources */,
 				712F733F1861E7FA0003624D /* ForkImage.png in Resources */,
 				EB14488B1859DA8D00011A83 /* words_voices in Resources */,
 				EB144894185DC0DA00011A83 /* Images.xcassets in Resources */,
@@ -408,10 +418,12 @@
 				79859B2417EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard in Resources */,
 				79859B2717EC0E75008F8EFD /* MainStoryboard_iPad.storyboard in Resources */,
 				EB144890185DBB0700011A83 /* default.jpg in Resources */,
+				712F7358186218410003624D /* panel_2.png in Resources */,
 				79FC0AB218435BDC004DF41E /* words.json in Resources */,
 				EBF8ECAD185F1FCE005F21F4 /* icon29X29.png in Resources */,
 				EBF8ECB5185F1FE8005F21F4 /* icon114X114.png in Resources */,
 				712F73441861E7FA0003624D /* HeaderImage.png in Resources */,
+				712F73601862250D0003624D /* panel_3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
