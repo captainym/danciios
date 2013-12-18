@@ -718,6 +718,9 @@
         }
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"学成!" message:msg delegate:self cancelButtonTitle:@"OK 走起！" otherButtonTitles:nil];
         [alertView show];
+        [self.danciDatabase saveToURL:self.danciDatabase.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+            NSLog(@"save all data to coredata after kill an album.");
+        }];
     }
 }
 

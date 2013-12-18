@@ -283,7 +283,10 @@
 
 -(void) generateReveiwAlbum
 {
-    self.albumReview = [Album getReviewAlbum: self.danciDatabase.managedObjectContext];
+    NSLog(@"album:%@",self.albumReview);
+    if(self.albumReview && [self.albumReview.count intValue] < 2){
+        self.albumReview = [Album getReviewAlbum: self.danciDatabase.managedObjectContext];
+    }
 }
 
 @end

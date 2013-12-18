@@ -58,6 +58,9 @@
 		EBF8ECB3185F1FE8005F21F4 /* icon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECAF185F1FE7005F21F4 /* icon58X58.png */; };
 		EBF8ECB4185F1FE8005F21F4 /* icon72X72.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECB0185F1FE7005F21F4 /* icon72X72.png */; };
 		EBF8ECB5185F1FE8005F21F4 /* icon114X114.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECB1185F1FE8005F21F4 /* icon114X114.png */; };
+		EBF8ECB81862061D005F21F4 /* xuehaodanci_2.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECB61862061C005F21F4 /* xuehaodanci_2.png */; };
+		EBF8ECB91862061D005F21F4 /* xuehaodanci_r4_2.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECB71862061C005F21F4 /* xuehaodanci_r4_2.png */; };
+		EBF8ECBB18620A4C005F21F4 /* xuehaodanci_4inch.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECBA18620A4C005F21F4 /* xuehaodanci_4inch.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +142,9 @@
 		EBF8ECAF185F1FE7005F21F4 /* icon58X58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon58X58.png; sourceTree = "<group>"; };
 		EBF8ECB0185F1FE7005F21F4 /* icon72X72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72X72.png; sourceTree = "<group>"; };
 		EBF8ECB1185F1FE8005F21F4 /* icon114X114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114X114.png; sourceTree = "<group>"; };
+		EBF8ECB61862061C005F21F4 /* xuehaodanci_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuehaodanci_2.png; sourceTree = "<group>"; };
+		EBF8ECB71862061C005F21F4 /* xuehaodanci_r4_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuehaodanci_r4_2.png; sourceTree = "<group>"; };
+		EBF8ECBA18620A4C005F21F4 /* xuehaodanci_4inch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuehaodanci_4inch.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +260,9 @@
 		79859B1117EC0E75008F8EFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EBF8ECBA18620A4C005F21F4 /* xuehaodanci_4inch.png */,
+				EBF8ECB61862061C005F21F4 /* xuehaodanci_2.png */,
+				EBF8ECB71862061C005F21F4 /* xuehaodanci_r4_2.png */,
 				EBF8ECAE185F1FE6005F21F4 /* icon57X57.png */,
 				EBF8ECAF185F1FE7005F21F4 /* icon58X58.png */,
 				EBF8ECB0185F1FE7005F21F4 /* icon72X72.png */,
@@ -387,10 +396,13 @@
 				EB144894185DC0DA00011A83 /* Images.xcassets in Resources */,
 				EBF8ECB4185F1FE8005F21F4 /* icon72X72.png in Resources */,
 				79859B1517EC0E75008F8EFD /* InfoPlist.strings in Resources */,
+				EBF8ECB91862061D005F21F4 /* xuehaodanci_r4_2.png in Resources */,
 				79859B1D17EC0E75008F8EFD /* Default.png in Resources */,
+				EBF8ECBB18620A4C005F21F4 /* xuehaodanci_4inch.png in Resources */,
 				712F734F1861E7FA0003624D /* Toronto, ON.jpg in Resources */,
 				EBF8ECB3185F1FE8005F21F4 /* icon58X58.png in Resources */,
 				79859B1F17EC0E75008F8EFD /* Default@2x.png in Resources */,
+				EBF8ECB81862061D005F21F4 /* xuehaodanci_2.png in Resources */,
 				79859B2117EC0E75008F8EFD /* Default-568h@2x.png in Resources */,
 				79FC0AB018435BCA004DF41E /* album.json in Resources */,
 				79859B2417EC0E75008F8EFD /* MainStoryboard_iPhone.storyboard in Resources */,

@@ -100,6 +100,13 @@
     NSArray *matches = [context executeFetchRequest:request error:&error];
     if(!matches || [matches count] > 1){
         NSLog(@"！！！！！！！！！居然有两个抗遗忘");
+        for(Album *dupAlbum in matches){
+            [context deleteObject:dupAlbum];
+        }
+        //create a new one
+        album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:context];
+        album.name = ALBUM_NAME_REVIEW;
+        album.category = CATEGORY_MY;
     }else if([matches count] == 0){
         //create a new one
         album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:context];
