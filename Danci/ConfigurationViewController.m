@@ -90,9 +90,9 @@
 //}
 
 - (void)updateHelpInfo {
-    appDescription = @"学好单词\n科学记单词 高效学英语";
-    teamIntroduction = @"关于我们:\n我们是一支年轻的团队, 致力于提升基于智能平台上的英语学习体验.\n我们的宗旨是精益求精, 以专注的精神和科学的方法提供优质的学习体验.";
-    supportInfo = @"官网:    http://www.danci.com";
+    appDescription = @"学好单词\n拒绝死记硬背，通过图片、词根词缀、网友分享的优秀助记，理解单词，轻松记住；丰富的记忆提取线索，帮你记得更牢；即时复习策略、依据遗忘曲线计算遗忘零界点，有效减少重复学习的时间浪费；真人发音、真人读例句，同步提高英语综合能力！";
+    teamIntroduction = @"关于我们:\n我们都在持续地学习英语、背单词，我们想积累更多单词，学好英语，我们总结自己多年的学习经历，做出了这个APP。\n创始人：石玉明 袁锡杰 刘正浩 ";
+    supportInfo = @"官网:    http://www.xuehaodanci.com \n官网微博帐号:@学好单词";
     
     dispatch_queue_t queue = dispatch_queue_create("queueGetHelpInfoFromServer", NULL);
     dispatch_async(queue, ^{
@@ -276,21 +276,21 @@
     
     //// page for help
     labelAppDescription = [[UILabel alloc] init];
-    labelAppDescription.frame = CGRectMake(320 * 1, offsetYForAllPages + 10, 320, 45);
-    labelAppDescription.numberOfLines = 2;
+    labelAppDescription.frame = CGRectMake(320 * 1 + 20, offsetYForAllPages + 20, 300, 90);
+    labelAppDescription.numberOfLines = 0;
     labelAppDescription.text = appDescription;
     labelAppDescription.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelAppDescription];
 
     labelTeamIntruction = [[UILabel alloc] init];
-    labelTeamIntruction.frame = CGRectMake(320 * 1,  offsetYForAllPages + 60, 320, 80);
-    labelTeamIntruction.numberOfLines = 6;
+    labelTeamIntruction.frame = CGRectMake(320 * 1 + 20,  offsetYForAllPages + 110, 300, 100);
+    labelTeamIntruction.numberOfLines = 0;
     labelTeamIntruction.text = teamIntroduction;
     labelTeamIntruction.font = [UIFont fontWithName:@"Verdana" size:12];
     [self.scrollView addSubview:labelTeamIntruction];
     
     labelSupport = [[UILabel alloc] init];
-    labelSupport.frame = CGRectMake(320 * 1,  offsetYForAllPages + 140, 320, 45);
+    labelSupport.frame = CGRectMake(320 * 1 + 20,  offsetYForAllPages + 210, 300, 45);
     labelSupport.numberOfLines = 1;
     labelSupport.text = supportInfo;
     labelSupport.font = [UIFont fontWithName:@"Verdana" size:12];
