@@ -12,6 +12,10 @@
 #import "Word+Server.h"
 #import "UserInfo+Server.h"
 
+#import "MYCustomPanel.h"
+#import "MYBlurIntroductionView.h"
+
+
 #define ALBUM_CATEGORY @"category"
 #define ALBUM_LIST @"albums"
 #define ALBUM_NAME @"albumName"
@@ -22,9 +26,9 @@
 #define DATABASE_ALBUM_INIT_FILE @"album"
 #define DATABASE_WORD_INIT_FILE @"words"
 
-@interface DanciAlbumTableViewController ()
+@interface DanciAlbumTableViewController () <MYIntroductionDelegate>
 
-//用户选中的album
+// 用户选中的album
 @property (nonatomic, strong) Album *albumSelected;
 @property (nonatomic, strong) Album *albumReview;
 
@@ -36,7 +40,8 @@
 @synthesize albumSelected = _albumSelected;
 @synthesize albumReview = _albumReview;
 
-//初始化coredata的内容 第一次
+
+// 初始化coredata的内容 第一次
 -(void) dumpDataIntoDocument:(UIManagedDocument *)document
 {
     dispatch_queue_t dumpQ = dispatch_queue_create("dump", NULL);
@@ -119,8 +124,22 @@
 {
     [super viewWillAppear:animated];
     
-    if(!self.danciDatabase){
+    // 根据首次启动标识，判断是否显示用户引导画面
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        //        [[[UIAlertView alloc] initWithTitle:@"运行次数检测" message:@"第一次运行" delegate:self cancelButtonTitle:@"请多关照!" otherButtonTitles:nil] show];
+        NSLog(@"本程序第一次运行...");
         
+        // 更新首次启动的标识
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+        
+        [self showUserGuide];
+    } else {
+        //        [[[UIAlertView alloc] initWithTitle:@"运行次数检测" message:@"运行好多遍啦" delegate:self cancelButtonTitle:@"那又怎样？" otherButtonTitles:nil] show];
+        NSLog(@"本程序已运行多次...");
+    }
+    
+    // 加载单词本
+    if(!self.danciDatabase) {
         NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
         url = [url URLByAppendingPathComponent:DATABASE_VERSION];
         NSLog(@"url of database:[%@]", url);
@@ -132,7 +151,7 @@
 {
     [super viewDidLoad];
     
-    //为了使学习主界面的返回按钮没有文字只有图标，在这里去掉title
+    // 为了使学习主界面的返回按钮没有文字只有图标，在这里去掉title
     self.title = @"";
     UIButton *btnTitle = [[UIButton alloc] init];
     [btnTitle setTitle:@"单词本" forState:UIControlStateNormal];
@@ -203,6 +222,63 @@
     else if ([segue.identifier isEqualToString:@"segueConfiguration"]) {
         [segue.destinationViewController setDanciDatabase:self.danciDatabase];
     }
+}
+
+#pragma mark - Show user guide view
+
+-(void)showUserGuide{
+    // 第一屏
+    MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"新手引导--标题--1" description:@"内容--1" image:[UIImage imageNamed:@"HeaderImage.png"]];
+    
+    // 第二屏
+    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"新手引导--标题--2" description:@"内容--2" image:[UIImage imageNamed:@"ForkImage.png"]];
+    
+    // 第三屏
+    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"新手引导--标题--3" description:@"内容--3" image:[UIImage imageNamed:@"ForkImage.png"]];
+    
+    // Add panels to an array
+    NSArray *panels = @[panel1, panel2, panel3];
+    
+    //Create the introduction view and set its delegate
+    MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    introductionView.delegate = self;
+//    introductionView.BackgroundImageView.image = [UIImage imageNamed:@"Toronto, ON.jpg"];
+//    //introductionView.LanguageDirection = MYLanguageDirectionRightToLeft;
+    
+    //Build the introduction with desired panels
+    [introductionView buildIntroductionWithPanels:panels];
+    
+    //Add the introduction to your view
+    [self.parentViewController.view addSubview:introductionView];
+}
+
+#pragma mark - MYIntroduction Delegate
+
+-(void)introduction:(MYBlurIntroductionView *)introductionView didChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
+    NSLog(@"Introduction did change to panel %d", panelIndex);
+    
+    //You can edit introduction view properties right from the delegate method!
+    //If it is the first panel, change the color to green!
+    if (panelIndex == 0) {
+        [introductionView setBackgroundColor:[UIColor colorWithRed:155.0f/255.0f green:231.0f/255.0f blue:104.0f/255.0f alpha:1]]; // 绿色
+    }
+    //If it is the second panel, change the color to blue!
+    else if (panelIndex == 1){
+        [introductionView setBackgroundColor:[UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:248.0f/255.0f alpha:1]]; // 蓝色
+    }
+    //If it is the third panel, change the color to blue!
+    else if (panelIndex == 2){
+        //        [introductionView setBackgroundColor:[UIColor colorWithRed:247.0f/255.0f green:232.0f/255.0f blue:102.0f/255.0f alpha:1]]; // 黄色
+        [introductionView setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:108.0f/255.0f blue:108.0f/255.0f alpha:1]]; // 红色
+    }
+    
+    NSString *buttonTitle = (panelIndex == 2 ? @"开始" : @"略过");
+    introductionView.RightSkipButton.titleLabel.text = buttonTitle;
+}
+
+-(void)introduction:(MYBlurIntroductionView *)introductionView didFinishWithType:(MYFinishType)finishType {
+    NSLog(@"Introduction did finish");
+    [introductionView removeFromSuperview]; // 从父view中移除
 }
 
 -(void) generateReveiwAlbum

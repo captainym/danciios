@@ -9,22 +9,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DanciAlbumTableViewController.m"
-            timestampString = "408007275.165624"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Danci/AchievementConfigurationViewController.m"
             timestampString = "407836329.615645"
             startingColumnNumber = "9223372036854775807"
@@ -64,38 +48,6 @@
             startingLineNumber = "219"
             endingLineNumber = "219"
             landmarkName = "-updateStudyTime:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DanciAlbumTableViewController.m"
-            timestampString = "408288551.754444"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DanciAlbumTableViewController.m"
-            timestampString = "408288552.775089"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,7 +105,7 @@
                   symbolName = "-[DanciWordViewController scrollingTableViewCell:didSelectImageAtIndexPath:]"
                   moduleName = "&#23398;&#22909;&#21333;&#35789;"
                   urlString = "file:///Mine/Data/Workspace/Product/app/danci-ios/danciios/Danci/DanciWordViewController.m"
-                  timestampString = "408981911.155251"
+                  timestampString = "409074676.574856"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "509"
@@ -167,7 +119,7 @@
                   symbolName = "-[DanciWordViewController scrollingTableViewCell:didSelectImageAtIndexPath:]"
                   moduleName = "&#23398;&#22909;&#21333;&#35789;"
                   urlString = "file:///Mine/Data/Workspace/Product/app/danci-ios/danciios/Danci/DanciWordViewController.m"
-                  timestampString = "408981911.155608"
+                  timestampString = "409074676.575279"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "509"
@@ -216,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danci/ConfigurationViewController.m"
-            timestampString = "408978562.198736"
+            timestampString = "409055964.917531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "497"
-            endingLineNumber = "497"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
