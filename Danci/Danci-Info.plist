@@ -14,6 +14,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>icon120X120.png</string>
 				<string>icon29X29.png</string>
 				<string>icon57X57.png</string>
 				<string>icon58X58.png</string>
@@ -25,11 +26,11 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>mx.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.xuehaodanci.app</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>xuehaodanci</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

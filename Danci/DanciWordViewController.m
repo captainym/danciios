@@ -319,9 +319,16 @@
 - (void) showExpandTipinfo
 {
     //hidder the imgtableview
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    
+    [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
+    self.constrainsTipimgsHeight.constant = 0.0f;
     self.tblTipimgsIphone.hidden = TRUE;
-    CGRect svExpandFrame = CGRectMake(3, 167, self.svTipSentence.frame.size.width, 357);
-    [self.svTipSentence setFrame:svExpandFrame];
+    
+    [UIView commitAnimations];
 }
 
 - (void) showNormalTipinfo
@@ -330,12 +337,11 @@
     CATransition *animation = [CATransition animation];
     animation.type = kCATransitionFade;
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.4];
+    [UIView setAnimationDuration:0.5];
     
     [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
+    self.constrainsTipimgsHeight.constant = 100.0f;
     self.tblTipimgsIphone.hidden = FALSE;
-    CGRect svNormal = CGRectMake(3, 267, self.svTipSentence.frame.size.width, 257);
-    self.svTipSentence.frame = svNormal;
     
     [UIView commitAnimations];
 }
@@ -358,18 +364,19 @@
     
     self.lblMeaning.text = self.word.meaning;
     self.lbltips.text = self.tips;
+    self.lbltips.font = self.fontDetail;
     
     //读图片
     NSLog(@"load filepath[%@]", self.tipImgFilepath);
     NSFileManager *filemanager = [NSFileManager defaultManager];
+    self.btnTipImgIphone.imageView.contentMode = UIViewContentModeScaleAspectFit;
     if([filemanager fileExistsAtPath: self.tipImgFilepath]){
         NSData *imagedata = [NSData dataWithContentsOfFile:self.tipImgFilepath];
         UIImage *wordImg = [UIImage imageWithData:imagedata];
-        [self.btnTipImgIphone setBackgroundImage:wordImg forState:UIControlStateNormal];
-//        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateHighlighted];
-//        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
+        [self.btnTipImgIphone setBackgroundImage:nil forState:UIControlStateNormal];
+        [self.btnTipImgIphone setImage:wordImg forState:UIControlStateNormal];
     }else{
-//        [self.btnTipImgIphone setImage:nil forState:UIControlStateNormal];
+        [self.btnTipImgIphone setImage:nil forState:UIControlStateNormal];
         [self.btnTipImgIphone setBackgroundImage:self.defaultTipImg forState:UIControlStateNormal];
     }
 }
@@ -478,9 +485,8 @@
     PPCollectionViewCell *cell = (PPCollectionViewCell *) [sender.imageScrollingView.myCollectionView cellForItemAtIndexPath:indexPathOfImage];
     NSData *imgData = UIImageJPEGRepresentation(cell.imageView.image, 0.0f);
     UIImage *img = [UIImage imageWithData:imgData];
-    [self.btnTipImgIphone setBackgroundImage:img forState:UIControlStateNormal];
-//    [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
-//    [self.btnTipImgIphone setImage:img forState:UIControlStateHighlighted];
+    [self.btnTipImgIphone setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.btnTipImgIphone setImage:img forState:UIControlStateNormal];
     NSLog(@"selected img info: imgName:[%@] imgUrl:[%@]", imgName, imgUrl);
     
     //图片保存到本地
@@ -502,8 +508,6 @@
     dispatch_queue_t queue = dispatch_queue_create("postImgSel", NULL);
     dispatch_async(queue, ^{
         if(![DanciServer postStudyOperation:postData] == ServerFeedbackTypeOk){
-            //发送失败则写入本地
-//            [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:postData inManagedObjectContext:self.danciDatabase.managedObjectContext];
             NSLog(@"post img select study operation data to Server failed. save it to DB");
         }else{
             NSLog(@"post img select study operation data to Server OK.");
@@ -608,6 +612,8 @@
     //show the tbl
     if(self.tblTipimgsIphone.hidden){
         [self showNormalTipinfo];
+    }else{
+        [self showExpandTipinfo];
     }
 }
 

@@ -191,6 +191,7 @@
         [cell.textLabel setTextColor:[UIColor blueColor]];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"亲 [%d]个单词处于遗忘零界点",[album.count intValue]];
     }else{
+        [cell.textLabel setTextColor:[UIColor blackColor]];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"总量%d 进度[%d/%d] 第[%d]遍", [album.count intValue], curPoint, [album.count intValue], cycleNum];
     }
     return cell;

@@ -83,5 +83,6 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackFuzz;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFeedbackOk;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrainsTipimgsHeight;
 
 @end
