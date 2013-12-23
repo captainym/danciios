@@ -122,7 +122,7 @@
     //12小时内已经掌握的单词
     NSDate *begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 12)];
     NSDate *end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 0)];
-    NSArray *wordsOkWithdaySO = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeFeedbackOk];
+    NSArray *wordsOkWithdaySO = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeFeedbackOk studyOperationFlag:studyOperationFlagWordNewStudy];
     NSMutableArray *wordsOkWithday = [[NSMutableArray alloc] init];
     [wordsOkWithdaySO enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         StudyOperation *curObj = obj;
@@ -135,27 +135,27 @@
     //1天前
     begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24)];
     end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 12)];
-    NSArray *review1 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSArray *review1 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone studyOperationFlag:studyOperationFlagWordNewStudy];
     NSLog(@"get words within 24 hours. num[%d]: [%@]", [review1 count], review1);
     //2天前
     begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 2)];
     end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 1)];
-    NSArray *review2 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSArray *review2 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone studyOperationFlag:studyOperationFlagWordNewStudy];
     NSLog(@"get words 2 days ago. num[%d]: [%@]", [review2 count], review2);
     //4天前
     begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 4)];
     end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 3)];
-    NSArray *review4 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSArray *review4 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone studyOperationFlag:studyOperationFlagWordNewStudy];
     NSLog(@"get words 4 days ago. num[%d]: [%@]", [review4 count], review4);
     //7天前
     begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 7)];
     end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 6)];
-    NSArray *review7 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSArray *review7 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone studyOperationFlag:studyOperationFlagWordNewStudy];
     NSLog(@"get words 7 days ago. num[%d]: [%@]", [review7 count], review7);
     //15天前
     begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 15)];
     end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 24 * 14)];
-    NSArray * review15 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone];
+    NSArray * review15 = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeNone studyOperationFlag:studyOperationFlagWordNewStudy];
     NSLog(@"get words 15 days ago. num[%d]: [%@]", [review15 count], review15);
     
     //把需要复习的都加入复习album，但要和24小时内已经掌握的单词做差集。这个实现方法太优雅了！我给自己点个赞！近乎完美地处理了和正常album、studyOperation的关系。

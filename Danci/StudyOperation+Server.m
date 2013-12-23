@@ -17,6 +17,7 @@
     operation.otype = [info objectForKey:@"otype"];
     operation.ovalue = [info objectForKey:@"ovalue"];
     operation.opt_time = [info objectForKey:@"opt_time"];
+    operation.flag = [info objectForKey:@"flag"];
     NSError *error = nil;
     if(![context save: &error]){
         NSLog(@"save studyOperation failed! msg:%@", [error localizedDescription]);
@@ -49,9 +50,10 @@
             OpratetionBeginTime:(NSDate *) optBegin
                OperationEndTime:(NSDate *)optEnd
              studyOperationType:(StudyOperationType) otype
+             studyOperationFlag:(studyOperationFlag)flag
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"StudyOperation"];
-    request.predicate = [NSPredicate predicateWithFormat:@"(opt_time >= %@) AND (opt_time <= %@) AND (otype == %d OR %d == %d) ", optBegin, optEnd, otype, otype, StudyOperationTypeNone];
+    request.predicate = [NSPredicate predicateWithFormat:@"(opt_time >= %@) AND (opt_time <= %@) AND (otype == %d OR %d == %d) AND flag == %d", optBegin, optEnd, otype, otype, StudyOperationTypeNone,flag];
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     return matches;

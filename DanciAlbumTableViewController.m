@@ -58,6 +58,9 @@
             
             //显示地save
             [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
+            //提取待复习的album
+            self.albumReview = [Album getReviewAlbum:self.danciDatabase.managedObjectContext];
+            NSLog(@"generate albumReview:%@",self.albumReview);
         }];
     });
 }

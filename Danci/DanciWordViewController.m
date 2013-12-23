@@ -13,6 +13,7 @@
 #import "DanciEditTipTxtViewController.h"
 #import "DanciServer.h"
 #import "StudyOperation+Server.h"
+#import "StudyOperation+Server.h"
 
 #define WORD_SEPARATED @"|"
 #define NUM_LEANING_GROUP 5
@@ -635,8 +636,10 @@
 
 - (IBAction)showNextWord:(id)sender {
     //用户的帐户消耗
+    int wordStudyFlag = studyOperationFlagWordReview;
     if(![self isWordStudiedOtherwiseAdd:self.wordTerm] && self.counter != NUM_LEANING_GROUP){
         self.counter += 1;
+        wordStudyFlag = studyOperationFlagWordNewStudy;
     }
     NSLog(@"user maxWordNum[%d] comsumeWordNum[%d]",[self.user.maxWordNum intValue], [self.user.comsumeWordNum intValue]);
     if([self.user.maxWordNum intValue] > 0 && [self.user.maxWordNum intValue] - [self.user.comsumeWordNum intValue] < 1){
@@ -674,7 +677,8 @@
                                    @"word":self.wordTerm,
                                    @"otype":[NSNumber numberWithInt:feedback],
                                    @"ovalue":[@"" stringByAppendingFormat:@"%d",feedback],
-                                   @"opt_time":[NSDate date]};
+                                   @"opt_time":[NSDate date],
+                                   @"flag":[NSNumber numberWithInt:wordStudyFlag]};
         [StudyOperation saveStudyOperationWithInfoAfterUploadFailed:postData inManagedObjectContext:self.danciDatabase.managedObjectContext];
         if(![DanciServer postStudyOperation:postData] == ServerFeedbackTypeOk){
             NSLog(@"post img select study operation data to Server failed. save it to DB");

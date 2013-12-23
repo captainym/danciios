@@ -9,6 +9,14 @@
 #import "StudyOperation.h"
 #import "DanciServer.h"
 
+typedef enum
+{
+    studyOperationFlagNone = 0,
+    
+    studyOperationFlagWordNewStudy = 1,
+    studyOperationFlagWordReview = 2,
+} studyOperationFlag;
+
 @interface StudyOperation (Server)
 
 //上传opeation失败后，新建并保存用户的学习操作
@@ -25,6 +33,7 @@
 +(NSArray *) getStudyOperations:(NSManagedObjectContext *)context
                         OpratetionBeginTime:(NSDate *) optBegin
                OperationEndTime:(NSDate *)optEnd
-             studyOperationType:(StudyOperationType) otype;
+             studyOperationType:(StudyOperationType) otype
+             studyOperationFlag:(studyOperationFlag) flag;
 
 @end

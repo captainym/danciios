@@ -44,7 +44,6 @@
 		79CF9336182E9DC3005E41FA /* UIPopoverListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9335182E9DC2005E41FA /* UIPopoverListView.m */; };
 		79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */; };
 		79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */; };
-		79CF935C1841206C005E41FA /* StudyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935B1841206C005E41FA /* StudyOperation.m */; };
 		79CF935F1841212D005E41FA /* Word+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF935E1841212D005E41FA /* Word+Server.m */; };
 		79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF936118412159005E41FA /* StudyOperation+Server.m */; };
 		79CF9365184196E8005E41FA /* DanciServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CF9364184196E7005E41FA /* DanciServer.m */; };
@@ -56,6 +55,7 @@
 		EB14488E185B248800011A83 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EB14488D185B248800011A83 /* UserInfo.m */; };
 		EB144890185DBB0700011A83 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EB14488F185DBB0600011A83 /* default.jpg */; };
 		EB144894185DC0DA00011A83 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB144893185DC0DA00011A83 /* Images.xcassets */; };
+		EBA943D118680DCB00F76A6F /* StudyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA943D018680DCB00F76A6F /* StudyOperation.m */; };
 		EBF562B5186230F4006CD13E /* icon120X120.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF562B4186230F4006CD13E /* icon120X120.png */; };
 		EBF8ECAD185F1FCE005F21F4 /* icon29X29.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECAC185F1FCE005F21F4 /* icon29X29.png */; };
 		EBF8ECB2185F1FE8005F21F4 /* icon57X57.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF8ECAE185F1FE6005F21F4 /* icon57X57.png */; };
@@ -125,8 +125,6 @@
 		79CF933E18377510005E41FA /* DanciEditTipTxtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DanciEditTipTxtViewController.h; sourceTree = SOURCE_ROOT; };
 		79CF933F18377510005E41FA /* DanciEditTipTxtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DanciEditTipTxtViewController.m; sourceTree = SOURCE_ROOT; };
 		79CF935218411F11005E41FA /* DBDanci.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBDanci.xcdatamodel; sourceTree = "<group>"; };
-		79CF935A1841206C005E41FA /* StudyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyOperation.h; sourceTree = "<group>"; };
-		79CF935B1841206C005E41FA /* StudyOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyOperation.m; sourceTree = "<group>"; };
 		79CF935D1841212D005E41FA /* Word+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Word+Server.h"; sourceTree = "<group>"; };
 		79CF935E1841212D005E41FA /* Word+Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Word+Server.m"; sourceTree = "<group>"; };
 		79CF936018412159005E41FA /* StudyOperation+Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StudyOperation+Server.h"; sourceTree = "<group>"; };
@@ -144,6 +142,8 @@
 		EB14488D185B248800011A83 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		EB14488F185DBB0600011A83 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		EB144893185DC0DA00011A83 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EBA943CF18680DCB00F76A6F /* StudyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyOperation.h; sourceTree = "<group>"; };
+		EBA943D018680DCB00F76A6F /* StudyOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyOperation.m; sourceTree = "<group>"; };
 		EBF562B4186230F4006CD13E /* icon120X120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120X120.png; sourceTree = "<group>"; };
 		EBF8ECAC185F1FCE005F21F4 /* icon29X29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon29X29.png; sourceTree = "<group>"; };
 		EBF8ECAE185F1FE6005F21F4 /* icon57X57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57X57.png; sourceTree = "<group>"; };
@@ -325,14 +325,14 @@
 				794749A3184C307600A1B8E2 /* Word.h */,
 				794749A4184C307600A1B8E2 /* Word.m */,
 				79CF935118411F11005E41FA /* DBDanci.xcdatamodeld */,
+				EBA943CF18680DCB00F76A6F /* StudyOperation.h */,
+				EBA943D018680DCB00F76A6F /* StudyOperation.m */,
 				EB14488C185B248800011A83 /* UserInfo.h */,
 				EB14488D185B248800011A83 /* UserInfo.m */,
 				793F8F301854782500209430 /* Album.h */,
 				793F8F311854782500209430 /* Album.m */,
 				7947499A184985CB00A1B8E2 /* UserInfo+Server.h */,
 				7947499B184985CB00A1B8E2 /* UserInfo+Server.m */,
-				79CF935A1841206C005E41FA /* StudyOperation.h */,
-				79CF935B1841206C005E41FA /* StudyOperation.m */,
 				79CF935D1841212D005E41FA /* Word+Server.h */,
 				79CF935E1841212D005E41FA /* Word+Server.m */,
 				79CF936118412159005E41FA /* StudyOperation+Server.m */,
@@ -449,6 +449,7 @@
 				79859B5517ED9E65008F8EFD /* PPImageScrollingTableViewCell.m in Sources */,
 				EB14488E185B248800011A83 /* UserInfo.m in Sources */,
 				79FC0AA318422FB2004DF41E /* Album+Server.m in Sources */,
+				EBA943D118680DCB00F76A6F /* StudyOperation.m in Sources */,
 				798D36D7181BE1B800260FC6 /* TQMultistageTableView.m in Sources */,
 				712F73501861E7FA0003624D /* AMBlurView.m in Sources */,
 				712F73531861E7FA0003624D /* MYCustomPanel.m in Sources */,
@@ -458,7 +459,6 @@
 				79CF934018377510005E41FA /* DanciEditTipTxtViewController.m in Sources */,
 				79CF935318411F11005E41FA /* DBDanci.xcdatamodeld in Sources */,
 				79FC0AA918433578004DF41E /* CoreDataTableViewController.m in Sources */,
-				79CF935C1841206C005E41FA /* StudyOperation.m in Sources */,
 				712F73511861E7FA0003624D /* MYBlurIntroductionView.m in Sources */,
 				79CF935F1841212D005E41FA /* Word+Server.m in Sources */,
 				79CF936218412159005E41FA /* StudyOperation+Server.m in Sources */,
