@@ -2,7 +2,7 @@
 //  StudyOperation.m
 //  Danci
 //
-//  Created by ShiYuming on 13-11-24.
+//  Created by shiyuming on 13-12-23.
 //  Copyright (c) 2013年 mx. All rights reserved.
 //
 
@@ -11,10 +11,11 @@
 
 @implementation StudyOperation
 
-@dynamic word;
-@dynamic otype;
-@dynamic ovalue;
 @dynamic is_upload;
 @dynamic opt_time;
+@dynamic otype;
+@dynamic ovalue;
+@dynamic word;
+@dynamic flag;
 
 @end
