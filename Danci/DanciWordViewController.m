@@ -251,7 +251,10 @@
     [self.tblTipimgsIphone registerClass:[PPImageScrollingTableViewCell class] forCellReuseIdentifier:cellIdTipimg];
     [self.tblTipimgsIphone setDelegate:self];
     [self.tblTipimgsIphone setDataSource:self];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+
 
     [self.tblTipSentence setDelegate:self];
     [self.tblTipSentence setDataSource:self];
