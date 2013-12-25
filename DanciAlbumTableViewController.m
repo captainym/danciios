@@ -289,7 +289,10 @@
 {
     NSLog(@"album:%@",self.albumReview);
     if(self.albumReview && [self.albumReview.count intValue] < 2){
-        self.albumReview = [Album getReviewAlbum: self.danciDatabase.managedObjectContext];
+        dispatch_queue_t queue = dispatch_queue_create("generate album", NULL);
+        dispatch_async(queue, ^{
+            self.albumReview = [Album getReviewAlbum: self.danciDatabase.managedObjectContext];
+        });
     }
 }
 

@@ -53,7 +53,7 @@
              studyOperationFlag:(studyOperationFlag)flag
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"StudyOperation"];
-    request.predicate = [NSPredicate predicateWithFormat:@"(opt_time >= %@) AND (opt_time <= %@) AND (otype == %d OR %d == %d) AND flag == %d", optBegin, optEnd, otype, otype, StudyOperationTypeNone,flag];
+    request.predicate = [NSPredicate predicateWithFormat:@"(opt_time >= %@) AND (opt_time <= %@) AND (otype == %d OR %d == %d) AND (flag == %d OR %d == %d)", optBegin, optEnd, otype, otype, StudyOperationTypeNone,flag,flag,studyOperationFlagNone];
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     return matches;

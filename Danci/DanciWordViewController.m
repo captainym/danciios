@@ -326,7 +326,7 @@
     [UIView setAnimationDuration:0.5];
     
     [self.tblTipimgsIphone.layer addAnimation:animation forKey:nil];
-    self.constrainsTipimgsHeight.constant = 0.0f;
+    self.constrainsTipimgsHeight.constant = 0.1f;
     self.tblTipimgsIphone.hidden = TRUE;
     
     [UIView commitAnimations];

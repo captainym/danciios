@@ -122,7 +122,7 @@
     //12小时内已经掌握的单词
     NSDate *begin = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 12)];
     NSDate *end = [NSDate dateWithTimeIntervalSinceNow:(-3600.0 * 0)];
-    NSArray *wordsOkWithdaySO = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeFeedbackOk studyOperationFlag:studyOperationFlagWordNewStudy];
+    NSArray *wordsOkWithdaySO = [StudyOperation getStudyOperations:context OpratetionBeginTime:begin OperationEndTime:end studyOperationType:StudyOperationTypeFeedbackOk studyOperationFlag:studyOperationFlagNone];
     NSMutableArray *wordsOkWithday = [[NSMutableArray alloc] init];
     [wordsOkWithdaySO enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         StudyOperation *curObj = obj;
