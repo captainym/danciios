@@ -18,7 +18,7 @@
 		712F7358186218410003624D /* panel_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F7357186218410003624D /* panel_2.png */; };
 		712F735E186223F60003624D /* panel_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F735D186223F60003624D /* panel_1.png */; };
 		712F73601862250D0003624D /* panel_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F735F1862250D0003624D /* panel_3.png */; };
-		714C07FB18730AB500728966 /* todo_list_phrase_2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 714C07FA18730AB500728966 /* todo_list_phrase_2.txt */; };
+		714C07FB18730AB500728966 /* todo_list_phase_2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 714C07FA18730AB500728966 /* todo_list_phase_2.txt */; };
 		71BA403D1855F0E9001B1196 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */; };
 		793F8F321854782500209430 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 793F8F311854782500209430 /* Album.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
@@ -87,7 +87,7 @@
 		712F7357186218410003624D /* panel_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_2.png; sourceTree = "<group>"; };
 		712F735D186223F60003624D /* panel_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_1.png; sourceTree = "<group>"; };
 		712F735F1862250D0003624D /* panel_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_3.png; sourceTree = "<group>"; };
-		714C07FA18730AB500728966 /* todo_list_phrase_2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = todo_list_phrase_2.txt; path = Doc/todo_list_phrase_2.txt; sourceTree = "<group>"; };
+		714C07FA18730AB500728966 /* todo_list_phase_2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = todo_list_phase_2.txt; path = Doc/todo_list_phase_2.txt; sourceTree = "<group>"; };
 		71BA403B1855F0E9001B1196 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewController.h; sourceTree = "<group>"; };
 		71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewController.m; sourceTree = "<group>"; };
 		793F8F301854782500209430 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		714C07F918730A6D00728966 /* Doc */ = {
 			isa = PBXGroup;
 			children = (
-				714C07FA18730AB500728966 /* todo_list_phrase_2.txt */,
+				714C07FA18730AB500728966 /* todo_list_phase_2.txt */,
 			);
 			name = Doc;
 			sourceTree = "<group>";
@@ -448,7 +448,7 @@
 				EBF8ECAD185F1FCE005F21F4 /* icon29X29.png in Resources */,
 				EBF8ECB5185F1FE8005F21F4 /* icon114X114.png in Resources */,
 				EBA943D61869809D00F76A6F /* icon100X100.png in Resources */,
-				714C07FB18730AB500728966 /* todo_list_phrase_2.txt in Resources */,
+				714C07FB18730AB500728966 /* todo_list_phase_2.txt in Resources */,
 				EBA943D71869809D00F76A6F /* icon1024X1024.png in Resources */,
 				712F73441861E7FA0003624D /* HeaderImage.png in Resources */,
 				712F73601862250D0003624D /* panel_3.png in Resources */,
