@@ -18,6 +18,7 @@
 		712F7358186218410003624D /* panel_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F7357186218410003624D /* panel_2.png */; };
 		712F735E186223F60003624D /* panel_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F735D186223F60003624D /* panel_1.png */; };
 		712F73601862250D0003624D /* panel_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 712F735F1862250D0003624D /* panel_3.png */; };
+		714C07FB18730AB500728966 /* todo_list_phrase_2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 714C07FA18730AB500728966 /* todo_list_phrase_2.txt */; };
 		71BA403D1855F0E9001B1196 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */; };
 		793F8F321854782500209430 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 793F8F311854782500209430 /* Album.m */; };
 		7947499C184985CB00A1B8E2 /* UserInfo+Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947499B184985CB00A1B8E2 /* UserInfo+Server.m */; };
@@ -86,6 +87,7 @@
 		712F7357186218410003624D /* panel_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_2.png; sourceTree = "<group>"; };
 		712F735D186223F60003624D /* panel_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_1.png; sourceTree = "<group>"; };
 		712F735F1862250D0003624D /* panel_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel_3.png; sourceTree = "<group>"; };
+		714C07FA18730AB500728966 /* todo_list_phrase_2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = todo_list_phrase_2.txt; path = Doc/todo_list_phrase_2.txt; sourceTree = "<group>"; };
 		71BA403B1855F0E9001B1196 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewController.h; sourceTree = "<group>"; };
 		71BA403C1855F0E9001B1196 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewController.m; sourceTree = "<group>"; };
 		793F8F301854782500209430 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
@@ -217,11 +219,17 @@
 			path = UserGuide/MYBlurIntroductionView;
 			sourceTree = "<group>";
 		};
+		714C07F918730A6D00728966 /* Doc */ = {
+			isa = PBXGroup;
+			children = (
+				714C07FA18730AB500728966 /* todo_list_phrase_2.txt */,
+			);
+			name = Doc;
+			sourceTree = "<group>";
+		};
 		79859AFE17EC0E74008F8EFD = {
 			isa = PBXGroup;
 			children = (
-				798D370B1822979400260FC6 /* QuartzCore.framework */,
-				798D36D21813FDF300260FC6 /* AVFoundation.framework */,
 				79859B1017EC0E75008F8EFD /* Danci */,
 				79859B0917EC0E75008F8EFD /* Frameworks */,
 				79859B0817EC0E75008F8EFD /* Products */,
@@ -239,6 +247,8 @@
 		79859B0917EC0E75008F8EFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				798D370B1822979400260FC6 /* QuartzCore.framework */,
+				798D36D21813FDF300260FC6 /* AVFoundation.framework */,
 				1C67E981184078B800510FA7 /* CoreData.framework */,
 				79859B0A17EC0E75008F8EFD /* UIKit.framework */,
 				79859B0C17EC0E75008F8EFD /* Foundation.framework */,
@@ -250,6 +260,7 @@
 		79859B1017EC0E75008F8EFD /* Danci */ = {
 			isa = PBXGroup;
 			children = (
+				714C07F918730A6D00728966 /* Doc */,
 				712F72CA1861CBB20003624D /* UserGuide */,
 				79CF9341183CEBAC005E41FA /* coredata */,
 				79CF9334182E9DC2005E41FA /* UIPopoverListView.h */,
@@ -437,6 +448,7 @@
 				EBF8ECAD185F1FCE005F21F4 /* icon29X29.png in Resources */,
 				EBF8ECB5185F1FE8005F21F4 /* icon114X114.png in Resources */,
 				EBA943D61869809D00F76A6F /* icon100X100.png in Resources */,
+				714C07FB18730AB500728966 /* todo_list_phrase_2.txt in Resources */,
 				EBA943D71869809D00F76A6F /* icon1024X1024.png in Resources */,
 				712F73441861E7FA0003624D /* HeaderImage.png in Resources */,
 				712F73601862250D0003624D /* panel_3.png in Resources */,
@@ -573,14 +585,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yuming Shi (563JV4Z7QY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yuming Shi (563JV4Z7QY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Danci/Danci-Prefix.pch";
 				INFOPLIST_FILE = "Danci/Danci-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "学好单词";
-				PROVISIONING_PROFILE = "94CF7538-3C58-4EFC-93B7-FC94AB718E44";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -590,14 +602,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yuming Shi (563JV4Z7QY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yuming Shi (563JV4Z7QY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Danci/Danci-Prefix.pch";
 				INFOPLIST_FILE = "Danci/Danci-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "学好单词";
-				PROVISIONING_PROFILE = "94CF7538-3C58-4EFC-93B7-FC94AB718E44";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

@@ -244,7 +244,9 @@
     NSArray *panels = @[panel1, panel2, panel3];
     
     //Create the introduction view and set its delegate
-    MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    CGRect appRect = [[UIScreen mainScreen] applicationFrame];
+    MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:appRect];
     introductionView.delegate = self;
 //    introductionView.BackgroundImageView.image = [UIImage imageNamed:@"Toronto, ON.jpg"];
 //    //introductionView.LanguageDirection = MYLanguageDirectionRightToLeft;

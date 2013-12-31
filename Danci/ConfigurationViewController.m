@@ -67,6 +67,10 @@
 	// Do any additional setup after loading the view.
     self.title = @"配置";
     
+    // NavigationBar左侧按钮
+    UIBarButtonItem *buttonBack = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:self action:@selector(goBack)];
+    self.navigationItem.leftBarButtonItem = buttonBack;
+    
     // Init controls
     self.btnUserInfo.showsTouchWhenHighlighted = YES;
     [self.btnUserInfo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -77,6 +81,11 @@
     [self updateHelpInfo];
     viewInited = false;
     [self initScrollView];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //- (void) viewWillAppear:(BOOL)animated
@@ -218,7 +227,7 @@
     //// offset
     NSInteger offsetYForAllPages = 0;
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] < 7.0) {
-        offsetYForAllPages = 40;
+        offsetYForAllPages = -40;//40;
     }
     
     //// page for user info
@@ -231,10 +240,10 @@
     NSInteger labelUserInfoHeight = self.scrollView.frame.size.height - btnUserLogInHeight - btnUserSyncHeight - 40;
     
     NSInteger btnUserLogInX = 320 * 0 + (self.scrollView.frame.size.width - btnUserLogInWidth - btnUserSyncWidth - 2) / 2;
-    NSInteger btnUserLogInY = labelUserInfoHeight + 20;
+    NSInteger btnUserLogInY = offsetYForAllPages + labelUserInfoHeight + 20;
     
     NSInteger btnUserSyncX = 320 * 0 + (self.scrollView.frame.size.width - btnUserLogInWidth - btnUserSyncWidth - 2) / 2 + btnUserSyncWidth + 2;
-    NSInteger btnUserSyncY = labelUserInfoHeight + 20;
+    NSInteger btnUserSyncY = offsetYForAllPages + labelUserInfoHeight + 20;
     
     
     // 用户信息table

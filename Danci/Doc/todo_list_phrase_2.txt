@@ -1,0 +1,7 @@
+"学好单词"二期工作列表
+-------------------
+1. App
+  1.1 ios 6.1兼容性
+    (1) bug: "新手引导"没有能够遮住整个程序界面, 程序界面在下端露出.                     -- fixed by zhenghao. 2013.12.31
+    (2) bug: 进入"配置"页面后不能返回, 缺少返回按钮.                                  -- fixed by zhenghao. 2013.12.31
+    (3) bug: "配置"页面的TableView顶部与NavigationBar之间有大块空白.                  -- fixed by zhenghao. 2013.12.31
