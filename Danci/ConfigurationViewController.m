@@ -91,7 +91,7 @@
 
 - (void)updateHelpInfo {
     appDescription = @"学好单词\n拒绝死记硬背，通过图片、词根词缀、网友分享的优秀助记，理解单词，轻松记住；丰富的记忆提取线索，帮你记得更牢；即时复习策略、依据遗忘曲线计算遗忘零界点，有效减少重复学习的时间浪费；真人发音、真人读例句，同步提高英语综合能力！";
-    teamIntroduction = @"关于我们:\n我们都在持续地学习英语、背单词，我们想积累更多单词，学好英语，我们总结自己多年的学习经历，做出了这个APP。\n创始人：石玉明 袁锡杰 刘正浩 ";
+    teamIntroduction = @"关于我们:\n我们都在持续地学习英语、背单词，我们想积累更多单词，学好英语，我们总结自己多年的学习经历，做出了这个APP。\n创始人：石玉明 袁锡杰 刘正浩";
     supportInfo = @"官网:    http://www.xuehaodanci.com \n官网微博帐号:@学好单词";
     
     dispatch_queue_t queue = dispatch_queue_create("queueGetHelpInfoFromServer", NULL);

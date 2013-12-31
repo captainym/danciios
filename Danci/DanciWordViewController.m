@@ -33,6 +33,8 @@
 //默认的tip图片
 @property (nonatomic, strong) UIImage *defaultTipImg;
 @property (nonatomic, strong) NSString *msgReview;
+//mp3data for cached
+@property (nonatomic, strong) NSMutableDictionary *segmentMp3Datas;
 
 @end
 
@@ -58,6 +60,7 @@
 @synthesize msgReview = _msgReview;
 
 @synthesize defaultTipImg = _defaultTipImg;
+@synthesize segmentMp3Datas = _segmentMp3Datas;
 
 #pragma mark- properties lazy load
 
@@ -131,6 +134,7 @@
 - (void) setWordTerm:(NSString *)wordTerm
 {
     _wordTerm = wordTerm;
+    [self.segmentMp3Datas removeAllObjects];
     [_tipImgs removeAllObjects];
     [self.tblTipimgsIphone reloadData];
     _tipSentences = nil;
@@ -524,6 +528,8 @@
     if(tableView == self.tblTipSentence){
         //播放例句发音
         NSString *mp3url = [[self.tipSentences objectAtIndex:[indexPath row]] objectForKey:TIPS_SENTENCE_MP3];
+        //use cache mp3data
+//        NSString *mp3key = [@"" stringByAppendingFormat:@"%d",indexPath.row];
         dispatch_queue_t play_q = dispatch_queue_create("playmp3", NULL);
         dispatch_async(play_q, ^{
             NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
@@ -533,12 +539,9 @@
             [self.player setDelegate:self];
             if(self.player){
                 if ([self.player prepareToPlay]) {
-                    [self.player setVolume:0.5f];
-                    if([self.player play]){
-                        NSLog(@"play successed. mp3url[%@]", mp3url);
-                    }else{
-                        NSLog(@"play failed! mp3url[%@]", mp3url);
-                    }
+                    //                        [self.player setVolume:0.5f];
+                    //                        self.segmentMp3Datas
+                    [self.player play];
                 }else{
                     NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
                 }
@@ -546,6 +549,37 @@
                 NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
             }
         });
+//        if([self.segmentMp3Datas objectForKey:mp3key] != nil){
+//            NSData *mp3data = [self.segmentMp3Datas objectForKey:mp3key];
+//            NSError *error = nil;
+//            self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&error];
+//            [self.player setDelegate:self];
+//            if(self.player){
+//                if([self.player prepareToPlay]){
+//                    [self.player play];
+//                }
+//            }
+//        }else{
+//            dispatch_queue_t play_q = dispatch_queue_create("playmp3", NULL);
+//            dispatch_async(play_q, ^{
+//                NSURL *mp3urlNet = [NSURL URLWithString:mp3url];
+//                NSData *mp3data = [[NSData alloc] initWithContentsOfURL:mp3urlNet];
+//                NSError *myerror = nil;
+//                self.player = [[AVAudioPlayer alloc] initWithData:mp3data error:&myerror];
+//                [self.player setDelegate:self];
+//                if(self.player){
+//                    if ([self.player prepareToPlay]) {
+////                        [self.player setVolume:0.5f];
+////                        self.segmentMp3Datas
+//                        [self.player play];
+//                    }else{
+//                        NSLog(@"player prepareToPlay failed! mp3url[%@]", mp3url);
+//                    }
+//                }else{
+//                    NSLog(@"player init failed! mp3url[%@] msg:[%@]",mp3url,[myerror description]);
+//                }
+//            });
+//        }
     }
 }
 

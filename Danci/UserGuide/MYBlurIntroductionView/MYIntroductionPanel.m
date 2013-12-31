@@ -55,6 +55,7 @@
         self.PanelTitle = title;
         self.PanelDescription = description;
         self.PanelImageView = [[UIImageView alloc] initWithImage:image];
+        self.PanelImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self buildPanelWithFrame:frame];
     }
     return self;
@@ -70,6 +71,7 @@
         self.PanelTitle = title;
         self.PanelDescription = description;
         self.PanelImageView = [[UIImageView alloc] initWithImage:image];
+        self.PanelImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self buildPanelWithFrame:frame];
     }
     return self;
@@ -109,6 +111,7 @@
 -(void)buildPanelWithFrame:(CGRect)frame{
     CGFloat panelTitleHeight = 0;
     CGFloat panelDescriptionHeight = 0;
+    self.PanelImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     CGFloat runningYOffset = kTopPadding;
     
@@ -170,7 +173,6 @@
     //Add image, if there is room
     if (self.PanelImageView.image) {
         self.PanelImageView.frame = CGRectMake(kLeftRightMargins, runningYOffset, self.frame.size.width - 2*kLeftRightMargins, self.frame.size.height - runningYOffset - kBottomPadding);
-        self.PanelImageView.contentMode = UIViewContentModeCenter;
         self.PanelImageView.clipsToBounds = YES;
         [self addSubview:self.PanelImageView];
     }
